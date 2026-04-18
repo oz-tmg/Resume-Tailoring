@@ -1,0 +1,62 @@
+company: Kixeye Inc
+division: Mobile Games
+logo: icons/logos/kixeye_horse_logo.png
+
+roles:
+  - id: kixeye_product_analyst
+    title: Product Analyst, War Commander Rogue Assault Team
+    start: 2019-08
+    end: 2021-01
+    location: Vancouver, BC Canada
+    summary: >
+      Originally hired to support BI and ML engineering needs by maintaining
+      dashboards, ETLs, segmentation tools, recommendation systems, and user
+      acquisition analytics for a live mobile game.
+
+    bullets:
+      - id: kix_etl_repair
+        text: >
+          Repaired and optimized numerous legacy ETL pipelines and dashboards,
+          producing meaningful warehousing savings and improving trust in core
+          reporting during first three months.
+        families: [DE, AE, DA]
+        keywords: [ETL, pipelines, dashboards, optimization, data quality,
+                   warehousing]
+        tier: 2
+
+      - id: kix_ltv_forecast
+        text: >
+          Significantly improved revenue and LTV forecast accuracy used by
+          stakeholders to plan and evaluate product performance.
+        families: [DS, DA, ECON]
+        keywords: [LTV, forecasting, revenue, stakeholder, product analytics,
+                   accuracy]
+        tier: 2
+
+      - id: kix_domino_jenkins
+        text: >
+          Migrated analytics ETLs, ML pipelines, and data science applications
+          off Domino and onto Jenkins, reducing monthly platform costs by
+          roughly $27K.
+        families: [DE, MLE, AE]
+        keywords: [Jenkins, Domino, migration, ML pipelines, cost reduction,
+                   MLOps, orchestration]
+        tier: 1
+
+      - id: kix_spend_conversion
+        text: >
+          Managed experimentation and ML tooling in Python that improved spend
+          conversion by 0.6 percentage points while reducing operating cost.
+        families: [DS, MLE, DA]
+        keywords: [experimentation, A/B testing, Python, spend conversion,
+                   ML tooling, monetization]
+        tier: 1
+
+      - id: kix_ua_strategy
+        text: >
+          Proposed a revised user acquisition strategy that helped Facebook
+          campaigns become profitable in 90 days instead of 200.
+        families: [DA, DS, ECON]
+        keywords: [user acquisition, Facebook, UA strategy, campaign
+                   optimization, ROI, profitability]
+        tier: 2

@@ -1,0 +1,56 @@
+company: Pretio Interactive
+division: Ad Tech Startup
+logo: icons/logos/pretio-interactive.png
+
+roles:
+  - id: pretio_data_scientist
+    title: Data Scientist
+    start: 2015-07
+    end: 2016-02
+    location: Victoria, BC Canada
+    summary: >
+      Startup that developed an ad-network incorporating rewards into its
+      ad-serving algorithms to foster brand loyalty and incentivize engagement.
+      Responsible for statistical research on algorithm and reward performance,
+      ad-hoc analysis, and automating data reports for the sales team.
+
+    bullets:
+      - id: pretio_thompson_sampling
+        text: >
+          Successfully persuaded engineering team to adopt Thompson Sampling
+          over the original Epsilon Greedy approach, enabling faster and more
+          efficient identification of top-performing advertisements.
+        families: [DS, MLE, ECON]
+        keywords: [Thompson Sampling, Epsilon Greedy, multi-armed bandit,
+                   Bayesian, optimization, ad-serving, recommendation]
+        tier: 1
+
+      - id: pretio_mab_reporting
+        text: >
+          Extracted performance data from an Epsilon Greedy MAB recommendation
+          algorithm during exploration phase and showcased it in Mode reports
+          for the sales team.
+        families: [DS, DA]
+        keywords: [multi-armed bandit, MAB, reporting, Mode, ad performance,
+                   exploration, recommendation]
+        tier: 2
+
+      - id: pretio_conversion_model
+        text: >
+          Developed a probability model in R for predicting conversion
+          probability on adverts to better assess segmentation opportunities
+          and simulate algorithmic changes.
+        families: [DS, MLE, ECON]
+        keywords: [probability model, R, conversion prediction, segmentation,
+                   simulation, ad tech, modelling]
+        tier: 1
+
+      - id: pretio_simulation
+        text: >
+          Simulated in R how changes to the ad-serving algorithm would impact
+          campaign efficiency, providing evidence-based guidance for
+          engineering decisions.
+        families: [DS, ECON]
+        keywords: [simulation, R, algorithm evaluation, campaign efficiency,
+                   decision support, ad tech]
+        tier: 2

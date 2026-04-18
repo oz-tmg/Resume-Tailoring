@@ -1,0 +1,52 @@
+company: Kano Apps
+division: Casual Games
+logo: icons/logos/kano_logo.png
+
+roles:
+  - id: kano_senior_de_bi
+    title: Senior Game Data Engineer & BI Analyst
+    start: 2025-05
+    end: 2026-02
+    location: Victoria, BC Canada
+    summary: >
+      Hired to modernize the studio's analytics stack by migrating reporting
+      and transformation workflows from RShiny to a scalable Python- and
+      AWS-based platform.
+
+    bullets:
+      - id: kano_dbt
+        text: >
+          Added DBT to the platform to better model, scale, and optimize
+          transformations across the analytics stack.
+        families: [DE, AE]
+        keywords: [dbt, data modelling, transformations, analytics engineering]
+        tier: 2
+
+      - id: kano_rshiny_migration
+        text: >
+          Reworked, enhanced, and migrated numerous RShiny reports to AWS
+          Quicksight, improving reliability, accessibility, and maintainability.
+        families: [DE, AE, DA]
+        keywords: [RShiny, Quicksight, AWS, migration, dashboards, BI]
+        tier: 2
+
+      - id: kano_etl_performance
+        text: >
+          Reduced daily report refresh times from up to 14 hours to less than
+          1 hour while lowering EC2 and Athena costs by migrating expensive R
+          ETLs into optimized DBT-Athena SQL models on partitioned Parquet and
+          Iceberg tables.
+        families: [DE, AE]
+        keywords: [ETL, Athena, Parquet, Iceberg, DBT, SQL, cost reduction,
+                   performance, EC2, data latency]
+        tier: 1
+
+      - id: kano_analyst_adoption
+        text: >
+          Improved analyst adoption of the new stack by showcasing workflows,
+          onboarding teammates, and standardizing how reporting was produced
+          and maintained.
+        families: [DA, AE, DE]
+        keywords: [onboarding, documentation, standardization, collaboration,
+                   reporting, team enablement]
+        tier: 2

@@ -1,0 +1,224 @@
+# Master skills list — ordered within each category by proficiency/relevance.
+# families: lists which job families should surface this skill prominently.
+# tier: 1 = core/lead skill, 2 = solid working knowledge, 3 = familiar/supporting
+
+programming:
+  - name: Python
+    tier: 1
+    families: [DS, MLE, DE, AE, DA]
+    keywords: [Python]
+  - name: R
+    tier: 1
+    families: [DS, DA, ECON]
+    keywords: [R]
+  - name: SQL
+    tier: 1
+    families: [DA, AE, DE, DS, MLE, ECON]
+    keywords: [SQL]
+  - name: Bash
+    tier: 2
+    families: [DE, AE, MLE]
+    keywords: [Bash, shell scripting]
+  - name: Ruby
+    tier: 3
+    families: [MLE, DS]
+    keywords: [Ruby]
+
+data_science:
+  - name: A/B Testing & Experimentation
+    tier: 1
+    families: [DS, DA, ECON, MLE]
+    keywords: [A/B testing, experimentation, hypothesis testing, significance]
+  - name: Causal Inference
+    tier: 1
+    families: [DS, ECON, DA]
+    keywords: [causal inference, propensity score matching, quasi-experimental,
+               difference-in-differences]
+  - name: Predictive Modelling
+    tier: 1
+    families: [DS, MLE]
+    keywords: [predictive modelling, supervised learning, regression,
+               classification]
+  - name: Churn Prediction
+    tier: 1
+    families: [DS, MLE, DA]
+    keywords: [churn prediction, survival analysis, retention modelling]
+  - name: Recommendation Systems
+    tier: 1
+    families: [DS, MLE]
+    keywords: [recommendation systems, RecSys, collaborative filtering,
+               ranking, targeting]
+  - name: Forecasting
+    tier: 1
+    families: [DS, DA, ECON]
+    keywords: [forecasting, time series, revenue forecasting, LTV]
+  - name: Bayesian Analysis
+    tier: 2
+    families: [DS, ECON, MLE]
+    keywords: [Bayesian, Thompson Sampling, probabilistic modelling]
+  - name: NLP
+    tier: 3
+    families: [DS, MLE]
+    keywords: [NLP, natural language processing, text analysis]
+  - name: Uplift Modelling
+    tier: 2
+    families: [DS, MLE]
+    keywords: [uplift modelling, incremental value, treatment effect]
+  - name: Behavioral Clustering
+    tier: 2
+    families: [DS, MLE, DA]
+    keywords: [clustering, segmentation, GMM, k-means, behavioral analysis]
+  - name: Multi-Armed Bandit
+    tier: 2
+    families: [DS, MLE]
+    keywords: [multi-armed bandit, MAB, Thompson Sampling, Epsilon Greedy,
+               online learning]
+
+data_engineering:
+  streaming_and_ingestion:
+    - name: AWS Lambda
+      tier: 2
+      families: [DE, AE]
+      keywords: [Lambda, serverless, AWS]
+    - name: FastAPI
+      tier: 2
+      families: [DE, MLE]
+      keywords: [FastAPI, API, REST]
+
+  storage_and_warehousing:
+    - name: Snowflake
+      tier: 1
+      families: [DE, AE, DA]
+      keywords: [Snowflake, data warehouse]
+    - name: AWS Redshift
+      tier: 2
+      families: [DE, AE]
+      keywords: [Redshift, AWS]
+    - name: AWS S3
+      tier: 1
+      families: [DE, AE]
+      keywords: [S3, AWS, object storage]
+    - name: AWS Glue & Athena
+      tier: 2
+      families: [DE, AE]
+      keywords: [Glue, Athena, AWS, serverless SQL]
+    - name: Google BigQuery
+      tier: 2
+      families: [DE, AE]
+      keywords: [BigQuery, GCP]
+    - name: SQL Server
+      tier: 2
+      families: [DE, DA]
+      keywords: [SQL Server, MSSQL]
+    - name: PostgreSQL
+      tier: 2
+      families: [DE, AE, DA]
+      keywords: [Postgres, PostgreSQL, RDBMS]
+    - name: MySQL
+      tier: 2
+      families: [DE, DA]
+      keywords: [MySQL, RDBMS]
+    - name: Cassandra
+      tier: 3
+      families: [DE]
+      keywords: [Cassandra, NoSQL]
+    - name: MongoDB
+      tier: 3
+      families: [DE]
+      keywords: [MongoDB, NoSQL]
+    - name: Redis
+      tier: 3
+      families: [DE]
+      keywords: [Redis, cache, NoSQL]
+
+  data_processing:
+    - name: Apache Spark (PySpark, SparklyR)
+      tier: 2
+      families: [DE, DS, MLE]
+      keywords: [Spark, PySpark, SparklyR, distributed computing]
+    - name: HiveQL
+      tier: 2
+      families: [DE, AE]
+      keywords: [Hive, HiveQL, Hadoop]
+
+  modelling_and_transformation:
+    - name: dbt
+      tier: 1
+      families: [AE, DE, DA]
+      keywords: [dbt, data build tool, transformations, analytics engineering]
+    - name: Great Expectations
+      tier: 2
+      families: [AE, DE]
+      keywords: [Great Expectations, data quality, testing]
+    - name: MetricFlow
+      tier: 2
+      families: [AE]
+      keywords: [MetricFlow, metrics layer, semantic layer]
+
+  orchestration:
+    - name: Prefect
+      tier: 1
+      families: [DE, AE, MLE]
+      keywords: [Prefect, orchestration, workflow]
+    - name: Airflow
+      tier: 2
+      families: [DE, AE, MLE]
+      keywords: [Airflow, DAGs, orchestration]
+    - name: Jenkins
+      tier: 2
+      families: [DE, AE, MLE]
+      keywords: [Jenkins, CI/CD, pipeline]
+
+  bi_tools:
+    - name: Tableau
+      tier: 2
+      families: [DA, AE]
+      keywords: [Tableau, BI, dashboards, visualization]
+    - name: Looker
+      tier: 2
+      families: [DA, AE]
+      keywords: [Looker, LookML, BI, dashboards]
+    - name: Amplitude
+      tier: 2
+      families: [DA, DS]
+      keywords: [Amplitude, product analytics, event tracking]
+    - name: AWS Quicksight
+      tier: 2
+      families: [DA, AE, DE]
+      keywords: [Quicksight, AWS, BI, dashboards]
+    - name: RShiny
+      tier: 2
+      families: [DA, DS, ECON]
+      keywords: [RShiny, R, interactive reports]
+    - name: RMarkdown
+      tier: 2
+      families: [DA, DS, ECON]
+      keywords: [RMarkdown, R, reporting]
+    - name: Jupyter Notebooks
+      tier: 2
+      families: [DS, MLE, DA]
+      keywords: [Jupyter, notebooks, Python]
+    - name: Excel
+      tier: 2
+      families: [DA, ECON]
+      keywords: [Excel, spreadsheets]
+
+  hosting_and_infrastructure:
+    - name: Docker
+      tier: 2
+      families: [DE, MLE, AE]
+      keywords: [Docker, containers, containerization]
+    - name: AWS ECS & EC2
+      tier: 2
+      families: [DE, MLE]
+      keywords: [ECS, EC2, AWS, cloud infrastructure]
+
+  file_formats:
+    - name: Parquet
+      tier: 2
+      families: [DE, AE]
+      keywords: [Parquet, columnar storage]
+    - name: Apache Iceberg
+      tier: 2
+      families: [DE, AE]
+      keywords: [Iceberg, table format, data lakehouse]

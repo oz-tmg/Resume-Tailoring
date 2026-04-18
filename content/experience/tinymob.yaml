@@ -1,0 +1,74 @@
+company: TinyMob Games
+division: Indie Game Startup
+logo: icons/logos/tinymob_games_logo.png
+
+roles:
+  - id: tinymob_data_analyst
+    title: Data Analyst, TinyRealms
+    start: 2014-11
+    end: 2015-07
+    location: Victoria, BC Canada
+    summary: >
+      Brought on as a data analyst to conduct KPI reporting and data gathering
+      to investigate the studio's engagement and monetization difficulties in
+      its first game, Tiny Realms.
+
+    bullets:
+      - id: tinymob_kpi_monitoring
+        text: >
+          Monitored key marketing KPIs including search ranking, download
+          numbers, conversion rates, and retention rates among important player
+          segments.
+        families: [DA]
+        keywords: [KPI, monitoring, retention, conversion, marketing analytics,
+                   reporting]
+        tier: 2
+
+      - id: tinymob_aso
+        text: >
+          Used Facebook Advertising and Sensor Tower to assist Marketing and
+          UA leads with app store optimization (ASO).
+        families: [DA]
+        keywords: [ASO, Facebook Advertising, Sensor Tower, UA, marketing,
+                   app store, user acquisition]
+        tier: 2
+
+      - id: tinymob_database_investment
+        text: >
+          Persuaded the CEO to invest in additional database tooling to
+          undertake deeper in-house analysis, which proved highly beneficial
+          to subsequent discoveries.
+        families: [DA, ECON]
+        keywords: [stakeholder influence, data infrastructure, in-house
+                   analytics, business case]
+        tier: 2
+
+      - id: tinymob_churn_gameplay
+        text: >
+          Discovered a segment of players with elevated churn likelihood,
+          attributed it to unbalanced gameplay, and worked with game design
+          on solutions that improved early game (D7) retention from 11.3% to
+          14.2% for the affected cohort.
+        families: [DS, DA]
+        keywords: [churn analysis, retention, D7, segmentation, cohort
+                   analysis, gameplay balance, product analytics]
+        tier: 1
+
+      - id: tinymob_paywall_cannibalisation
+        text: >
+          Discovered that one game-mode cannibalized revenue by reducing the
+          impact of the game's soft paywall, leading to design changes that
+          remedied it.
+        families: [DA, DS, ECON]
+        keywords: [monetization, paywall, cannibalization, revenue analysis,
+                   product analytics, game design]
+        tier: 1
+
+      - id: tinymob_free_rider
+        text: >
+          Uncovered a free-rider problem and identified it as the primary
+          driver of the studio's monetization challenges.
+        families: [DA, ECON]
+        keywords: [free-rider, monetization, game economics, behavioral
+                   analysis, product diagnosis]
+        tier: 1

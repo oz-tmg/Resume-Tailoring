@@ -1,0 +1,116 @@
+# Base summaries for each job family.
+# These are used as the starting point for Claude to personalize per posting.
+# Each summary is written in the voice appropriate for that hiring audience.
+# Variables available for Jinja2 templating: {{ years_experience }}
+
+summaries:
+
+  data_analyst:
+    id: DA
+    label: Data Analyst
+    revoicing_persona: >
+      Emphasize clarity of insight, stakeholder communication, self-service
+      reporting, and translating data into business decisions. Use verbs like:
+      designed, built, delivered, identified, presented, monitored, automated.
+      Avoid heavy ML/engineering jargon — focus on outcomes and accessibility.
+    text: >
+      Customer-focused Senior Data Analyst with 10 years of experience turning
+      complex data into clear, actionable insights that drive product, growth,
+      and monetization decisions in digital products. Proven track record of
+      partnering with product, design, engineering, and executive stakeholders
+      to define KPIs, build reliable reporting, and deliver analysis that
+      changes how teams work. Hands-on with Python, R, SQL, Tableau, Looker,
+      Amplitude, and the full modern analytics stack.
+
+  analytics_engineer:
+    id: AE
+    label: Analytics Engineer
+    revoicing_persona: >
+      Emphasize the bridge between data engineering and analytics — data
+      modelling, transformation pipelines, semantic layers, and enabling
+      self-service. Use verbs like: modelled, built, migrated, standardized,
+      optimized, enabled. Highlight dbt, Snowflake, and the analytics
+      engineering craft specifically.
+    text: >
+      Analytics Engineer with 10 years of experience building the data
+      infrastructure that powers reliable reporting, experimentation, and
+      machine learning at scale. Deep hands-on expertise in dbt, Snowflake,
+      Airflow, and Prefect — with a strong track record of migrating legacy
+      pipelines onto modern stacks, reducing costs, improving data quality,
+      and enabling analyst self-service. Equally comfortable in Python, R,
+      and SQL, with a product mindset that keeps engineering work grounded
+      in business outcomes.
+
+  data_engineer:
+    id: DE
+    label: Data Engineer
+    revoicing_persona: >
+      Emphasize reliability, scale, infrastructure ownership, and pipeline
+      engineering. Use verbs like: built, engineered, architected, deployed,
+      orchestrated, migrated. Lead with cost savings, latency improvements,
+      and system robustness. Minimize soft stakeholder language.
+    text: >
+      Data Engineer with 10 years of experience designing and operating
+      scalable data pipelines, warehousing solutions, and ETL infrastructure
+      across cloud-native AWS environments. Strong track record of migrating
+      legacy systems onto modern stacks — cutting costs, improving latency,
+      and scaling data platforms to serve analytics and ML workloads. Hands-on
+      with dbt, Snowflake, Airflow, Prefect, Spark, Redshift, S3, Athena,
+      Parquet, and Iceberg. Grounded in Python, SQL, and Bash.
+
+  data_scientist:
+    id: DS
+    label: Data Scientist
+    revoicing_persona: >
+      Emphasize the full DS lifecycle — experimentation, modelling, causal
+      inference, and translating model outputs into product decisions. Balance
+      technical depth with business impact. Use verbs like: developed, modelled,
+      evaluated, designed, quantified, deployed, diagnosed.
+    text: >
+      Customer-focused Senior Data Scientist with 10 years of experience using
+      experimentation, causal inference, predictive modelling, and
+      recommendation systems to improve discovery, engagement, retention, and
+      monetization in digital products. Strong record of partnering with
+      product, design, engineering, and executive stakeholders to define
+      success metrics, build scalable analytics and ML workflows, and translate
+      complex results into decisions. Hands-on with Python, R, SQL, AWS, dbt,
+      Airflow, Prefect, and more.
+
+  ml_engineer:
+    id: MLE
+    label: ML Engineer
+    revoicing_persona: >
+      Emphasize model deployment, ML infrastructure, pipeline automation, and
+      production systems. Use verbs like: deployed, built, engineered,
+      automated, optimized, scaled. Highlight MLOps, model evaluation
+      frameworks, and system reliability. Minimize pure analytics framing.
+    text: >
+      ML Engineer and Data Scientist with 10 years of experience building,
+      deploying, and maintaining machine learning systems in production
+      digital environments. Strong background in recommendation engines,
+      churn and conversion models, and experimentation infrastructure — with
+      hands-on experience migrating ML pipelines onto scalable, cost-efficient
+      platforms. Proficient in Python, R, SQL, Spark, Jenkins, Docker, and
+      AWS. Brings a rigorous evaluation mindset: diagnosing when models cause
+      harm as readily as when they create value.
+
+  economist:
+    id: ECON
+    label: Economist
+    revoicing_persona: >
+      Emphasize causal reasoning, experimental design, behavioural economics,
+      market mechanisms, and evidence-based policy or product decisions.
+      Use verbs like: estimated, evaluated, designed, modelled, analyzed,
+      published. Connect work to economic concepts: incentives, market design,
+      valuation, welfare, externalities. Academic or research framing is
+      appropriate here.
+    text: >
+      Applied Economist and Senior Data Scientist with 10 years of experience
+      applying causal inference, experimental design, and behavioural
+      economics to measure and improve outcomes in digital markets. Graduate
+      training in auction theory, game theory, and experimental economics
+      (University of Victoria, M.A.), with published research in mechanism
+      design. Industry experience spans A/B experimentation, propensity score
+      methods, valuation modelling, and incentive design — translating
+      economic reasoning into product and investment decisions across gaming
+      and ad tech.

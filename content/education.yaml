@@ -1,0 +1,87 @@
+education:
+  - id: uvic_masters
+    institution: University of Victoria
+    institution_short: UVic
+    color_key: uvicblue
+    degree: M.A. Co-op Education in Economics
+    field: Economics
+    start: 2011
+    end: 2014
+    location: Victoria, BC Canada
+    relevant_families: [DS, ECON, DA, MLE]
+    focus: >
+      Auctions, game theory, experimental economics, and behavioural economics.
+    accomplishments:
+      - >
+          Taught Intermediate Microeconomics, Intermediate Macroeconomics,
+          Game Theory, and Natural Resource Economics as a Teaching Assistant
+          for two years.
+      - >
+          Worked as a Research Assistant researching second price auctions and
+          running experiments that would later help optimize timber lot auctions
+          in Quebec.
+      - >
+          Awarded Phillips, Hager and North Master Degree Scholarship for
+          Research in Environmental and Resource Economics.
+      - >
+          Published and coauthored Masters Thesis research on auction design
+          and optimization.
+    thesis_url: http://www.cirano.qc.ca/files/publications/2015RP-05.pdf
+    keywords: [game theory, experimental economics, behavioural economics,
+               auctions, causal inference, econometrics, research]
+
+  - id: isu_bachelors
+    institution: Illinois State University
+    institution_short: ISU
+    color_key: isured
+    degree: B.Sc. in Economics
+    minor: Mathematics
+    start: 2006
+    end: 2010
+    location: Normal, IL USA
+    relevant_families: [DS, ECON, DA, MLE]
+    accomplishments:
+      - >
+          Graduated with Honours in Economics.
+      - >
+          Awarded the F. Russel Glasenor-Economics Advisory Board Scholarship
+          for scholastic achievement.
+    keywords: [economics, mathematics, statistics, quantitative methods]
+
+  - id: bosphorus_abroad
+    institution: Bosphorus University
+    institution_short: Bogazici
+    color_key: bogazblue
+    degree: Independent Study Abroad
+    start: 2009
+    end: 2009
+    location: Istanbul, Turkey
+    relevant_families: [ECON]
+    accomplishments:
+      - >
+          Designed an independent study abroad program to further study of
+          international economics and global markets at Turkey's most
+          prestigious university.
+    keywords: [international economics, global markets, independent study]
+
+certifications:
+  - id: gcp_ml
+    name: Advanced Machine Learning on Google Cloud
+    issuer: Coursera
+    year: 2026
+    relevant_families: [DS, MLE, DE]
+    keywords: [GCP, machine learning, Google Cloud, deep learning]
+
+  - id: udacity_de
+    name: Data Engineering with AWS Nanodegree
+    issuer: Udacity
+    year: 2026
+    relevant_families: [DE, AE]
+    keywords: [AWS, data engineering, pipelines, cloud]
+
+  - id: udacity_ds
+    name: Data Scientist Nanodegree
+    issuer: Udacity
+    year: 2026
+    relevant_families: [DS, MLE]
+    keywords: [data science, machine learning, Python, modelling]

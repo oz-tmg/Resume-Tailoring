@@ -1,0 +1,142 @@
+company: Electronic Arts
+division: AAA Games
+logo: icons/logos/ea_sports.png
+
+roles:
+  - id: ea_data_scientist
+    title: Data Scientist, Dynamic Experiences Team
+    start: 2018-11
+    end: 2019-07
+    location: Burnaby, BC Canada
+    summary: >
+      Helped establish a Data Science team embedded within EA Sports live
+      teams to prototype and support machine learning systems that delivered
+      more personalized player experiences.
+
+    bullets:
+      - id: ea_ab_test_design
+        text: >
+          Proposed, designed, and evaluated A/B test messaging campaigns aimed
+          at delivering more personalized in-game experiences using R, SQL,
+          and HiveQL.
+        families: [DS, DA, ECON]
+        keywords: [A/B testing, experimentation, R, SQL, HiveQL, personalization,
+                   messaging, campaign design]
+        tier: 1
+
+      - id: ea_upsell_segmentation
+        text: >
+          Identified player segments most likely to respond positively to
+          upsell messaging, contributing to a 3% cohort spend increase.
+        families: [DS, DA, MLE]
+        keywords: [segmentation, targeting, upsell, spend, cohort analysis,
+                   personalization]
+        tier: 1
+
+      - id: ea_fifa19_revenue
+        text: >
+          Analysis and recommendations from in-game messaging experiments
+          generated an additional $2M in revenue for FIFA 19.
+        families: [DS, DA, ECON]
+        keywords: [experimentation, revenue impact, A/B testing, messaging,
+                   monetization, product analytics]
+        tier: 1
+
+      - id: ea_ab_automation
+        text: >
+          Automated A/B test analysis workflows using Hive, Jenkins, R, and
+          Redshift to make experimental readouts faster and more repeatable.
+        families: [DS, AE, DE, DA]
+        keywords: [A/B testing, automation, Hive, Jenkins, R, Redshift,
+                   experimentation, workflow]
+        tier: 1
+
+      - id: ea_mab_recsys
+        text: >
+          Built multi-armed bandit messaging recommendation engines in Ruby
+          for FIFA 20 personalization use cases.
+        families: [DS, MLE]
+        keywords: [multi-armed bandit, recommendation engine, Ruby,
+                   personalization, MAB, RecSys]
+        tier: 1
+
+      - id: ea_churn_reacquisition_models
+        text: >
+          Developed new-player churn, spend conversion, and reacquisition
+          prediction models in R to support recommendation systems and guide
+          user reactivation efforts.
+        families: [DS, MLE]
+        keywords: [churn prediction, spend conversion, reacquisition, R,
+                   predictive modelling, recommendation systems, retention]
+        tier: 1
+
+  - id: ea_business_analyst
+    title: Business Analyst, FIFA Player Analytics Team
+    start: 2016-06
+    end: 2018-11
+    location: Burnaby, BC Canada
+    summary: >
+      Supported executive reporting, player engagement and monetization
+      analysis, and licensing analytics for one of EA's largest franchises.
+
+    bullets:
+      - id: ea_exec_reporting
+        text: >
+          Managed game performance and insight delivery for monthly executive
+          board meetings for EA Sports titles, and became trusted with
+          reporting support for Motive, BioWare, and DICE studios.
+        families: [DA]
+        keywords: [executive reporting, stakeholder management, KPI, insights,
+                   product analytics]
+        tier: 2
+
+      - id: ea_licensing_automation
+        text: >
+          Owned analytics reporting for FIFA's strategic licensing partners and
+          automated large portions of the process using R and Talend, reducing
+          weeks of manual work assembling 550 slides to seconds.
+        families: [DA, AE, DE]
+        keywords: [automation, R, Talend, reporting, licensing, ETL,
+                   stakeholder, efficiency]
+        tier: 1
+
+      - id: ea_licensing_models
+        text: >
+          Built statistical models to assess the value each license created for
+          EA and the reciprocal value exposure provided to partners, helping
+          improve licensing decisions.
+        families: [DS, DA, ECON]
+        keywords: [statistical modelling, licensing valuation, partner
+                   analytics, causal inference, decision support]
+        tier: 2
+
+      - id: ea_companion_app
+        text: >
+          Used propensity score matching in R to estimate the incremental value
+          of FIFA's Companion App and Web App, producing evidence that helped
+          save the Web App and support greater investment in the companion app
+          ecosystem.
+        families: [DS, DA, ECON]
+        keywords: [propensity score matching, causal inference, incremental
+                   value, R, companion app, product valuation]
+        tier: 1
+
+      - id: ea_companion_app_revenue
+        text: >
+          Incremental spending gains of 4.2% for Web App users and 7.0% for
+          Mobile App users, leading to millions in incremental revenue across
+          the FIFA franchise.
+        families: [DS, DA, ECON]
+        keywords: [incremental revenue, spend uplift, causal inference,
+                   monetization, product impact]
+        tier: 1
+
+      - id: ea_analyticon
+        text: >
+          Presented companion app findings at EA's 2018 Analyticon internal
+          analytics conference, influencing the Madden team to develop a
+          companion app for Madden 19.
+        families: [DA, DS, ECON]
+        keywords: [presentation, stakeholder influence, conference, data
+                   storytelling, cross-team impact]
+        tier: 2
