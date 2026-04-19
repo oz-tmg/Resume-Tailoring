@@ -1,0 +1,172 @@
+id: AE
+label: Analytics Engineer
+summary_ref: analytics_engineer
+
+# ---------------------------------------------------------------------------
+# BULLET SELECTION RULES
+# ---------------------------------------------------------------------------
+bullet_selection:
+  max_bullets_per_role:
+    kano_senior_de_bi: 4          # This role is the strongest AE signal
+    kix_sfg_lead: 4
+    kix_sfg_senior: 3
+    kixeye_product_analyst: 3
+    ea_data_scientist: 2
+    ea_business_analyst: 3
+    pretio_data_scientist: 2
+    tinymob_data_analyst: 1
+
+  min_tier: 2
+
+  priority_bullets:
+    - kano_dbt                     # Core AE signal — dbt addition
+    - kano_etl_performance         # Strongest technical achievement at Kano
+    - kano_rshiny_migration        # Migration + modernization
+    - kano_analyst_adoption        # Enablement is core AE value prop
+    - kix_sfg_snowflake_cost       # Cost + orchestration optimization
+    - kix_sfg_looker_migration     # Cross-studio migration ownership
+    - kix_sfg_ab_automation        # Pipeline automation for analytics
+    - kix_etl_repair               # ETL ownership signal
+    - kix_domino_jenkins           # Pipeline migration — strong AE signal
+    - ea_ab_automation             # Workflow automation
+    - ea_licensing_automation      # Automation of high-value reporting
+
+  exclude_bullets:
+    - ea_mab_recsys                # Too ML engineering
+    - ea_churn_reacquisition_models  # Too DS
+    - ea_upsell_segmentation       # Too DS/targeting
+    - kix_sfg_alliance_recsys      # Too DS/RecSys
+    - kix_sfg_churn_model          # Too DS
+    - kix_sfg_matchmaking_churn    # Too DS
+    - pretio_thompson_sampling     # Too algorithmic
+    - pretio_simulation            # Too modelling
+    - tinymob_aso                  # Marketing noise
+    - tinymob_free_rider           # Economic framing, not AE
+    - ea_exec_reporting            # Soft reporting, not pipeline
+
+# ---------------------------------------------------------------------------
+# SKILLS ORDERING
+# ---------------------------------------------------------------------------
+skills_order:
+  programming:
+    - SQL
+    - Python
+    - R
+    - Bash
+
+  data_engineering:
+    modelling_and_transformation:
+      - dbt
+      - Great Expectations
+      - MetricFlow
+    storage_and_warehousing:
+      - Snowflake
+      - AWS S3
+      - AWS Glue & Athena
+      - AWS Redshift
+      - Google BigQuery
+      - PostgreSQL
+      - SQL Server
+    orchestration:
+      - Airflow
+      - Prefect
+      - Jenkins
+    bi_tools:
+      - Looker
+      - Tableau
+      - AWS Quicksight
+      - Amplitude
+      - RShiny
+      - Jupyter Notebooks
+    streaming_and_ingestion:
+      - AWS Lambda
+      - FastAPI
+    data_processing:
+      - Apache Spark (PySpark, SparklyR)
+      - HiveQL
+    hosting_and_infrastructure:
+      - Docker
+      - AWS ECS & EC2
+    file_formats:
+      - Parquet
+      - Apache Iceberg
+
+  data_science:
+    - A/B Testing & Experimentation
+    - Forecasting
+    - Predictive Modelling
+
+# ---------------------------------------------------------------------------
+# SECTION ORDERING
+# ---------------------------------------------------------------------------
+section_order:
+  - summary
+  - experience
+  - skills
+  - education
+  - certifications
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE ROLES
+# ---------------------------------------------------------------------------
+experience_roles_order:
+  - kano_senior_de_bi
+  - kix_sfg_lead
+  - kix_sfg_senior
+  - kixeye_product_analyst
+  - ea_data_scientist
+  - ea_business_analyst
+  - pretio_data_scientist
+  - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------------------------
+sidebar:
+  page1:
+    - experience_breakdown
+    - key_victories
+  page2:
+    skills_section: data_science_skillset
+  page3:
+    skills_section: data_engineering_toolkit
+
+# ---------------------------------------------------------------------------
+# TITLE & FRAMING
+# ---------------------------------------------------------------------------
+header_title: "Analytics Engineer | dbt, Snowflake, Pipeline Modernization"
+
+# ---------------------------------------------------------------------------
+# ATS KEYWORD WATCHLIST
+# ---------------------------------------------------------------------------
+ats_keyword_watchlist:
+  - dbt
+  - SQL
+  - Python
+  - Snowflake
+  - data modelling
+  - ETL
+  - ELT
+  - pipeline
+  - Airflow
+  - orchestration
+  - data warehouse
+  - analytics engineering
+  - transformation
+  - Looker
+  - LookML
+  - data quality
+
+# ---------------------------------------------------------------------------
+# REVOICING GUIDANCE
+# ---------------------------------------------------------------------------
+revoicing_persona: >
+  Translate bullets to emphasize the craft of analytics engineering: clean
+  data models, reliable pipelines, semantic layers, and enabling self-service
+  analytics. This audience cares about data quality, transformation logic,
+  warehouse performance, and the downstream trust that good modelling creates.
+  Use verbs like: modelled, built, migrated, standardized, optimized, enabled,
+  orchestrated, refactored. Highlight dbt, Snowflake, and warehouse-specific
+  work prominently. Frame cost savings and latency improvements as engineering
+  wins. Downplay soft stakeholder language — outcomes here are pipeline health,
+  data freshness, and analyst productivity.

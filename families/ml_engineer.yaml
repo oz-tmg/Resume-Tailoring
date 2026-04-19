@@ -1,0 +1,179 @@
+id: MLE
+label: ML Engineer
+summary_ref: ml_engineer
+
+# ---------------------------------------------------------------------------
+# BULLET SELECTION RULES
+# Note: MLE is your thinnest family — the portfolio skews DS and DE.
+# Strategy: emphasize production ML systems, pipeline ownership, model
+# deployment, and evaluation rigor. Avoid framing that reads as pure research.
+# ---------------------------------------------------------------------------
+bullet_selection:
+  max_bullets_per_role:
+    kano_senior_de_bi: 2          # Infrastructure wins only
+    kix_sfg_lead: 3
+    kix_sfg_senior: 4             # Best MLE signals here
+    kixeye_product_analyst: 3
+    ea_data_scientist: 4          # MAB + churn models in production
+    ea_business_analyst: 1        # Thin MLE signal — propensity model only
+    pretio_data_scientist: 2
+    tinymob_data_analyst: 0       # No meaningful MLE signal
+
+  min_tier: 1
+
+  priority_bullets:
+    - kix_sfg_alliance_recsys     # Production RecSys with revenue outcome
+    - kix_sfg_churn_model         # Model improvement with concrete AUC gains
+    - kix_sfg_matchmaking_churn   # System diagnosis + redesign
+    - kix_domino_jenkins          # ML pipeline migration — strongest MLOps signal
+    - kix_spend_conversion        # Production ML tooling + experimentation
+    - ea_mab_recsys               # Production MAB in Ruby — RecSys in prod
+    - ea_churn_reacquisition_models  # Multi-model production development
+    - ea_ab_automation            # ML workflow automation
+    - ea_upsell_segmentation      # Targeting model with spend outcome
+    - pretio_thompson_sampling    # Online learning algorithm swap
+    - pretio_conversion_model     # Probability model in production context
+    - kano_etl_performance        # Infrastructure / pipeline performance
+    - kix_sfg_ab_automation       # Automation of ML reporting pipelines
+
+  exclude_bullets:
+    - kano_rshiny_migration       # BI migration, not ML
+    - kano_analyst_adoption       # Team enablement, not MLE
+    - kano_dbt                    # AE signal, not MLE
+    - kix_sfg_looker_migration    # BI migration, not ML
+    - kix_sfg_cross_promo         # Business analytics, not MLE
+    - kix_sfg_content_cadence     # Analytics framing, not MLE
+    - kix_ua_strategy             # Business strategy, not MLE
+    - ea_exec_reporting           # Soft reporting
+    - ea_licensing_automation     # Talend/R automation, not ML
+    - ea_licensing_models         # Statistical, not ML production
+    - ea_analyticon               # Presentation, not MLE
+    - ea_companion_app_revenue    # Business outcome without ML framing
+    - pretio_mab_reporting        # Reporting, not model engineering
+    - pretio_simulation           # Modelling exploration, not production ML
+    - tinymob_kpi_monitoring      # Reporting
+    - tinymob_aso                 # Marketing
+    - tinymob_database_investment # Business case, not MLE
+
+# ---------------------------------------------------------------------------
+# SKILLS ORDERING
+# ---------------------------------------------------------------------------
+skills_order:
+  programming:
+    - Python
+    - SQL
+    - R
+    - Bash
+    - Ruby
+
+  data_science:
+    - Recommendation Systems
+    - Churn Prediction
+    - Predictive Modelling
+    - Multi-Armed Bandit
+    - Uplift Modelling
+    - A/B Testing & Experimentation
+    - Behavioral Clustering
+    - Bayesian Analysis
+    - Causal Inference
+    - Forecasting
+    - NLP
+
+  data_engineering:
+    orchestration:
+      - Jenkins
+      - Airflow
+      - Prefect
+    hosting_and_infrastructure:
+      - Docker
+      - AWS ECS & EC2
+    streaming_and_ingestion:
+      - FastAPI
+      - AWS Lambda
+    data_processing:
+      - Apache Spark (PySpark, SparklyR)
+    storage_and_warehousing:
+      - Snowflake
+      - AWS Redshift
+      - AWS S3
+      - PostgreSQL
+    modelling_and_transformation:
+      - dbt
+    bi_tools:
+      - Jupyter Notebooks
+      - Amplitude
+
+# ---------------------------------------------------------------------------
+# SECTION ORDERING
+# ---------------------------------------------------------------------------
+section_order:
+  - summary
+  - experience
+  - skills
+  - education
+  - certifications
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE ROLES
+# ---------------------------------------------------------------------------
+experience_roles_order:
+  - kano_senior_de_bi
+  - kix_sfg_senior              # Lead with strongest MLE role
+  - kix_sfg_lead
+  - kixeye_product_analyst
+  - ea_data_scientist
+  - ea_business_analyst
+  - pretio_data_scientist
+
+# ---------------------------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------------------------
+sidebar:
+  page1:
+    - experience_breakdown
+    - key_victories
+  page2:
+    skills_section: data_science_skillset
+  page3:
+    skills_section: data_engineering_toolkit
+
+# ---------------------------------------------------------------------------
+# TITLE & FRAMING
+# ---------------------------------------------------------------------------
+header_title: "ML Engineer | Recommendation Systems, Predictive Modeling & MLOps"
+
+# ---------------------------------------------------------------------------
+# ATS KEYWORD WATCHLIST
+# ---------------------------------------------------------------------------
+ats_keyword_watchlist:
+  - Python
+  - machine learning
+  - ML pipeline
+  - model deployment
+  - recommendation systems
+  - A/B testing
+  - feature engineering
+  - MLOps
+  - Docker
+  - AWS
+  - scikit-learn
+  - production ML
+  - model evaluation
+  - Airflow
+  - Jenkins
+  - churn prediction
+
+# ---------------------------------------------------------------------------
+# REVOICING GUIDANCE
+# ---------------------------------------------------------------------------
+revoicing_persona: >
+  Translate bullets to emphasize production ML systems, deployment ownership,
+  and model lifecycle management. MLE hiring managers want to know models
+  ship, run reliably, and get evaluated rigorously. Use verbs like: deployed,
+  built, engineered, optimized, automated, shipped, evaluated, monitored.
+  Lead with the system or pipeline, follow with the model technique, close
+  with the production outcome. Highlight MLOps signals: pipeline migration,
+  platform cost reduction, Jenkins/Airflow, Docker. Where possible, frame
+  DS work as "production model" work rather than research or analysis.
+  Evaluation and governance signals (catching model failures, diagnosing
+  cannibalization) are strong differentiators — highlight these explicitly.

@@ -1,0 +1,175 @@
+id: DS
+label: Data Scientist
+summary_ref: data_scientist
+
+# ---------------------------------------------------------------------------
+# BULLET SELECTION RULES
+# ---------------------------------------------------------------------------
+bullet_selection:
+  max_bullets_per_role:
+    kano_senior_de_bi: 2          # Weak DS signal — use only infrastructure wins
+    kix_sfg_lead: 4
+    kix_sfg_senior: 4             # Strongest DS role in the portfolio
+    kixeye_product_analyst: 3
+    ea_data_scientist: 4          # Strong DS signal
+    ea_business_analyst: 3
+    pretio_data_scientist: 3
+    tinymob_data_analyst: 2
+
+  min_tier: 1                     # DS roles are competitive — lean tier 1 first
+
+  priority_bullets:
+    - kix_sfg_forecasting_model   # $14M valuation finding — headline DS win
+    - kix_sfg_matchmaking_churn   # Diagnosis + RecSys redesign
+    - kix_sfg_churn_model         # AUC improvement — concrete model win
+    - kix_sfg_alliance_recsys     # RecSys + revenue outcome
+    - kix_sfg_content_cadence     # Funnel + time-series modelling
+    - kix_sfg_ab_automation       # Experimentation infrastructure
+    - kix_spend_conversion        # Experimentation + ML tooling
+    - kix_ltv_forecast            # Forecasting accuracy
+    - ea_ab_test_design           # Experimentation design
+    - ea_upsell_segmentation      # Targeting + spend outcome
+    - ea_fifa19_revenue           # Revenue impact from experimentation
+    - ea_mab_recsys               # Multi-armed bandit RecSys
+    - ea_churn_reacquisition_models  # Multi-model development
+    - ea_companion_app            # Causal inference / propensity matching
+    - ea_companion_app_revenue    # Incremental revenue outcome
+    - pretio_thompson_sampling    # Bayesian MAB — strong DS signal
+    - pretio_conversion_model     # Probability model
+    - tinymob_churn_gameplay      # Churn diagnosis + retention improvement
+
+  exclude_bullets:
+    - kano_rshiny_migration       # Too BI/reporting
+    - kano_analyst_adoption       # Team enablement, not DS
+    - ea_exec_reporting           # Soft reporting
+    - ea_licensing_automation     # Automation, not modelling
+    - ea_analyticon               # Presentation, not DS work
+    - tinymob_aso                 # Marketing, not DS
+    - tinymob_kpi_monitoring      # Reporting, not DS
+    - tinymob_database_investment # Stakeholder influence, not DS
+
+# ---------------------------------------------------------------------------
+# SKILLS ORDERING
+# ---------------------------------------------------------------------------
+skills_order:
+  programming:
+    - Python
+    - R
+    - SQL
+    - Bash
+    - Ruby
+
+  data_science:
+    - A/B Testing & Experimentation
+    - Causal Inference
+    - Predictive Modelling
+    - Recommendation Systems
+    - Churn Prediction
+    - Forecasting
+    - Uplift Modelling
+    - Behavioral Clustering
+    - Multi-Armed Bandit
+    - Bayesian Analysis
+    - NLP
+
+  data_engineering:
+    storage_and_warehousing:
+      - Snowflake
+      - AWS Redshift
+      - AWS S3
+      - Google BigQuery
+      - PostgreSQL
+    modelling_and_transformation:
+      - dbt
+    orchestration:
+      - Airflow
+      - Prefect
+      - Jenkins
+    data_processing:
+      - Apache Spark (PySpark, SparklyR)
+      - HiveQL
+    bi_tools:
+      - Amplitude
+      - Jupyter Notebooks
+      - RShiny
+      - RMarkdown
+      - Tableau
+      - Looker
+    hosting_and_infrastructure:
+      - Docker
+      - AWS ECS & EC2
+
+# ---------------------------------------------------------------------------
+# SECTION ORDERING
+# ---------------------------------------------------------------------------
+section_order:
+  - summary
+  - experience
+  - skills
+  - education
+  - certifications
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE ROLES
+# ---------------------------------------------------------------------------
+experience_roles_order:
+  - kano_senior_de_bi
+  - kix_sfg_lead
+  - kix_sfg_senior
+  - kixeye_product_analyst
+  - ea_data_scientist
+  - ea_business_analyst
+  - pretio_data_scientist
+  - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------------------------
+sidebar:
+  page1:
+    - experience_breakdown
+    - key_victories
+  page2:
+    skills_section: data_science_skillset
+  page3:
+    skills_section: data_engineering_toolkit
+
+# ---------------------------------------------------------------------------
+# TITLE & FRAMING
+# ---------------------------------------------------------------------------
+header_title: "Senior Data Scientist | Experimentation, Modeling, Targeting"
+
+# ---------------------------------------------------------------------------
+# ATS KEYWORD WATCHLIST
+# ---------------------------------------------------------------------------
+ats_keyword_watchlist:
+  - Python
+  - R
+  - SQL
+  - machine learning
+  - A/B testing
+  - experimentation
+  - causal inference
+  - predictive modelling
+  - recommendation systems
+  - churn
+  - forecasting
+  - statistical modelling
+  - Bayesian
+  - segmentation
+  - feature engineering
+  - model evaluation
+
+# ---------------------------------------------------------------------------
+# REVOICING GUIDANCE
+# ---------------------------------------------------------------------------
+revoicing_persona: >
+  Translate bullets to demonstrate the full data science lifecycle: problem
+  framing, data exploration, model development, evaluation, and translation
+  into product decisions. Balance technical depth with business impact — DS
+  hiring managers want both rigor and relevance. Use verbs like: developed,
+  modelled, designed, evaluated, deployed, diagnosed, quantified, estimated.
+  Lead with the problem or hypothesis, follow with the method, close with the
+  measurable outcome. Causal inference and experimental design are core
+  differentiators — highlight these explicitly. Where a bullet involves
+  a model, include the technique and the performance metric.

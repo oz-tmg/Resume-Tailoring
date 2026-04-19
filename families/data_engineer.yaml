@@ -1,0 +1,184 @@
+id: DE
+label: Data Engineer
+summary_ref: data_engineer
+
+# ---------------------------------------------------------------------------
+# BULLET SELECTION RULES
+# ---------------------------------------------------------------------------
+bullet_selection:
+  max_bullets_per_role:
+    kano_senior_de_bi: 4          # Strongest DE role by recency
+    kix_sfg_lead: 3
+    kix_sfg_senior: 2
+    kixeye_product_analyst: 3
+    ea_data_scientist: 2
+    ea_business_analyst: 2
+    pretio_data_scientist: 1
+    tinymob_data_analyst: 0       # Minimal DE signal — omit unless space
+
+  min_tier: 2
+
+  priority_bullets:
+    - kano_dbt
+    - kano_etl_performance         # Lead DE achievement — latency + cost
+    - kano_rshiny_migration
+    - kix_sfg_snowflake_cost       # 45% Snowflake cost reduction — strong signal
+    - kix_sfg_looker_migration     # Infrastructure migration ownership
+    - kix_domino_jenkins           # ML + analytics pipeline migration — $27K/mo
+    - kix_etl_repair
+    - kix_sfg_ab_automation        # Automation pipeline
+    - ea_ab_automation             # Hive/Jenkins/Redshift workflow
+    - ea_licensing_automation      # R + Talend pipeline
+
+  exclude_bullets:
+    - kix_sfg_forecasting_model    # DS framing, not infrastructure
+    - kix_sfg_matchmaking_churn    # DS diagnosis, not pipeline
+    - kix_sfg_alliance_recsys      # RecSys, not DE
+    - kix_sfg_churn_model          # ML model, not infrastructure
+    - kix_sfg_content_cadence      # Product analytics framing
+    - kix_ua_strategy              # Business strategy, not engineering
+    - kix_ltv_forecast             # Forecasting, not pipeline
+    - ea_mab_recsys                # RecSys, not DE
+    - ea_churn_reacquisition_models  # DS model, not DE
+    - ea_upsell_segmentation       # Analytics, not pipeline
+    - ea_companion_app             # Causal inference, not DE
+    - ea_companion_app_revenue     # Business outcome, not DE
+    - ea_analyticon                # Presentation, not DE
+    - ea_exec_reporting            # Soft reporting
+    - pretio_thompson_sampling     # Algorithmic, not infrastructure
+    - pretio_simulation            # Modelling, not infrastructure
+    - pretio_mab_reporting         # Analytics, not DE
+    - tinymob_kpi_monitoring       # DA work
+    - tinymob_aso                  # Marketing, not DE
+    - tinymob_free_rider           # Economics framing
+    - tinymob_churn_gameplay       # DA/DS, not DE
+
+# ---------------------------------------------------------------------------
+# SKILLS ORDERING
+# ---------------------------------------------------------------------------
+skills_order:
+  programming:
+    - Python
+    - SQL
+    - Bash
+    - R
+
+  data_engineering:
+    storage_and_warehousing:
+      - Snowflake
+      - AWS S3
+      - AWS Glue & Athena
+      - AWS Redshift
+      - Google BigQuery
+      - PostgreSQL
+      - MySQL
+      - SQL Server
+      - Cassandra
+      - MongoDB
+      - Redis
+    orchestration:
+      - Airflow
+      - Prefect
+      - Jenkins
+    modelling_and_transformation:
+      - dbt
+      - Great Expectations
+      - MetricFlow
+    data_processing:
+      - Apache Spark (PySpark, SparklyR)
+      - HiveQL
+    streaming_and_ingestion:
+      - AWS Lambda
+      - FastAPI
+    hosting_and_infrastructure:
+      - Docker
+      - AWS ECS & EC2
+    file_formats:
+      - Parquet
+      - Apache Iceberg
+    bi_tools:
+      - AWS Quicksight
+      - Looker
+      - Tableau
+      - Jupyter Notebooks
+
+  data_science:
+    - A/B Testing & Experimentation
+    - Forecasting
+
+# ---------------------------------------------------------------------------
+# SECTION ORDERING
+# ---------------------------------------------------------------------------
+section_order:
+  - summary
+  - experience
+  - skills
+  - education
+  - certifications
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE ROLES
+# ---------------------------------------------------------------------------
+experience_roles_order:
+  - kano_senior_de_bi
+  - kix_sfg_lead
+  - kix_sfg_senior
+  - kixeye_product_analyst
+  - ea_data_scientist
+  - ea_business_analyst
+  - pretio_data_scientist
+
+# ---------------------------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------------------------
+sidebar:
+  page1:
+    - experience_breakdown
+    - key_victories
+  page2:
+    skills_section: data_science_skillset
+  page3:
+    skills_section: data_engineering_toolkit
+
+# ---------------------------------------------------------------------------
+# TITLE & FRAMING
+# ---------------------------------------------------------------------------
+header_title: "Data Engineer | Cloud Pipelines, Warehousing & Analytics Infrastructure"
+
+# ---------------------------------------------------------------------------
+# ATS KEYWORD WATCHLIST
+# ---------------------------------------------------------------------------
+ats_keyword_watchlist:
+  - Python
+  - SQL
+  - ETL
+  - ELT
+  - pipeline
+  - Airflow
+  - Snowflake
+  - AWS
+  - S3
+  - dbt
+  - Spark
+  - data warehouse
+  - orchestration
+  - Parquet
+  - Docker
+  - data modelling
+  - data quality
+  - Redshift
+  - Athena
+
+# ---------------------------------------------------------------------------
+# REVOICING GUIDANCE
+# ---------------------------------------------------------------------------
+revoicing_persona: >
+  Translate bullets to emphasize system reliability, pipeline scale,
+  infrastructure ownership, and engineering craft. This audience wants to
+  know you can own a data platform end-to-end. Use verbs like: built,
+  engineered, architected, deployed, migrated, orchestrated, optimized,
+  reduced, scaled. Lead with concrete metrics: cost savings, latency
+  improvements, system uptime, data freshness. Minimize soft business
+  framing — "stakeholder" language should be replaced with "downstream
+  consumers" or "data consumers." Frame modeling work as transformation
+  pipeline work, not analytical work.

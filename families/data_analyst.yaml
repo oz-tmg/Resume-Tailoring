@@ -1,0 +1,184 @@
+id: DA
+label: Data Analyst
+summary_ref: data_analyst
+
+# ---------------------------------------------------------------------------
+# BULLET SELECTION RULES
+# ---------------------------------------------------------------------------
+bullet_selection:
+  # Maximum bullets to show per role. Older/less relevant roles get fewer.
+  max_bullets_per_role:
+    kano_senior_de_bi: 4
+    kix_sfg_lead: 4
+    kix_sfg_senior: 4
+    kixeye_product_analyst: 3
+    ea_data_scientist: 3
+    ea_business_analyst: 4
+    pretio_data_scientist: 2
+    tinymob_data_analyst: 3
+
+  # Only include bullets at or above this tier by default.
+  # Posting-specific tailoring can override downward to include tier 3.
+  min_tier: 2
+
+  # Bullets explicitly prioritized for this family (shown first within a role
+  # if they pass the tier filter). Reference bullet ids.
+  priority_bullets:
+    - kano_rshiny_migration
+    - kano_etl_performance
+    - kano_analyst_adoption
+    - kix_sfg_looker_migration
+    - kix_sfg_forecasting_model
+    - kix_sfg_content_cadence
+    - kix_sfg_ab_automation
+    - kix_etl_repair
+    - kix_ltv_forecast
+    - kix_ua_strategy
+    - ea_ab_test_design
+    - ea_upsell_segmentation
+    - ea_fifa19_revenue
+    - ea_exec_reporting
+    - ea_licensing_automation
+    - ea_companion_app
+    - ea_analyticon
+    - tinymob_churn_gameplay
+    - tinymob_paywall_cannibalisation
+    - tinymob_free_rider
+
+  # Bullets to suppress entirely for this family, regardless of tier.
+  # These would read as noise or signal the wrong identity.
+  exclude_bullets:
+    - kix_domino_jenkins       # Too MLOps/infra focused
+    - ea_mab_recsys            # Too ML engineering
+    - ea_churn_reacquisition_models  # Too DS/MLE
+    - pretio_thompson_sampling  # Too algorithmic/Bayesian
+    - pretio_simulation         # Too modelling-heavy
+    - kix_sfg_churn_model       # AUC framing is DS, not DA
+    - kix_sfg_alliance_recsys   # RecSys framing is DS, not DA
+    - kixeye_product_analyst    # Suppress whole role's MLOps bullets via exclude above
+
+# ---------------------------------------------------------------------------
+# SKILLS ORDERING
+# Controls the order skills appear in the resume skills section.
+# ATS systems weight earlier items more heavily.
+# Only skills tagged with this family ID will be shown.
+# ---------------------------------------------------------------------------
+skills_order:
+  programming:
+    - SQL
+    - Python
+    - R
+    - Bash
+
+  data_science:
+    - A/B Testing & Experimentation
+    - Causal Inference
+    - Forecasting
+    - Churn Prediction
+    - Behavioral Clustering
+    - Predictive Modelling
+
+  data_engineering:
+    bi_tools:
+      - Tableau
+      - Looker
+      - Amplitude
+      - AWS Quicksight
+      - RShiny
+      - RMarkdown
+      - Jupyter Notebooks
+      - Excel
+    storage_and_warehousing:
+      - Snowflake
+      - PostgreSQL
+      - SQL Server
+      - AWS Redshift
+      - AWS S3
+    modelling_and_transformation:
+      - dbt
+    orchestration:
+      - Airflow
+      - Prefect
+      - Jenkins
+    streaming_and_ingestion:
+      - AWS Lambda
+
+# ---------------------------------------------------------------------------
+# SECTION ORDERING
+# Controls which resume sections appear and in what order.
+# ---------------------------------------------------------------------------
+section_order:
+  - summary
+  - experience
+  - skills
+  - education
+  - certifications
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE SECTION
+# Controls which roles appear and their display order.
+# Roles not listed here are excluded entirely.
+# ---------------------------------------------------------------------------
+experience_roles_order:
+  - kano_senior_de_bi
+  - kix_sfg_lead
+  - kix_sfg_senior
+  - kixeye_product_analyst
+  - ea_data_scientist
+  - ea_business_analyst
+  - pretio_data_scientist
+  - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# SIDEBAR / ASIDE CONTENT
+# Controls what appears in the resume sidebar panels.
+# ---------------------------------------------------------------------------
+sidebar:
+  page1:
+    - experience_breakdown
+    - key_victories
+
+  page2:
+    skills_section: data_science_skillset
+
+  page3:
+    skills_section: data_engineering_toolkit
+
+# ---------------------------------------------------------------------------
+# TITLE & FRAMING
+# The job title shown in the resume header for this family.
+# ---------------------------------------------------------------------------
+header_title: "Senior Data Analyst | Product Analytics, Experimentation & Insights"
+
+# ---------------------------------------------------------------------------
+# KEYWORD COVERAGE REQUIREMENTS
+# Used by the build script to flag gaps after tailoring.
+# If a posting requires these and they're absent, the builder warns you.
+# ---------------------------------------------------------------------------
+ats_keyword_watchlist:
+  - SQL
+  - Python
+  - dashboards
+  - KPI
+  - A/B testing
+  - stakeholder
+  - reporting
+  - product analytics
+  - data visualization
+  - Tableau
+  - Looker
+  - experimentation
+
+# ---------------------------------------------------------------------------
+# REVOICING GUIDANCE FOR CLAUDE
+# Passed directly to the Claude API during the tailoring stage.
+# ---------------------------------------------------------------------------
+revoicing_persona: >
+  Translate bullets to emphasize clarity of insight, business impact, and
+  stakeholder accessibility. This audience values analysts who make data
+  understandable to non-technical partners and who own reporting end-to-end.
+  Use verbs like: identified, designed, built, delivered, automated, monitored,
+  presented, partnered. Lead with the business outcome, follow with the method.
+  Avoid heavy ML or infrastructure jargon — frame technical work in terms of
+  what it enabled for the team or product. If a bullet is about a model, lead
+  with what the model told you, not how it was built.

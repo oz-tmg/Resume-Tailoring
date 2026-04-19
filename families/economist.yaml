@@ -1,0 +1,190 @@
+id: ECON
+label: Economist
+summary_ref: economist
+
+# ---------------------------------------------------------------------------
+# BULLET SELECTION RULES
+# Note: This is the most selective family. The audience is academic-adjacent
+# or policy/research-oriented. Heavy ML infrastructure is noise here.
+# Lead with causal reasoning, experimental design, valuation, and evidence.
+# The MA Economics and published thesis are your biggest differentiators.
+# ---------------------------------------------------------------------------
+bullet_selection:
+  max_bullets_per_role:
+    kano_senior_de_bi: 0          # No meaningful ECON signal — omit entirely
+    kix_sfg_lead: 2
+    kix_sfg_senior: 2
+    kixeye_product_analyst: 2
+    ea_data_scientist: 3
+    ea_business_analyst: 4        # Strongest ECON role — propensity, licensing
+    pretio_data_scientist: 3
+    tinymob_data_analyst: 3
+
+  min_tier: 2
+
+  priority_bullets:
+    - ea_companion_app            # Propensity score matching — core econometrics
+    - ea_companion_app_revenue    # Incremental value estimation — economic framing
+    - ea_licensing_models         # Value estimation and market design
+    - ea_ab_test_design           # Experimental design
+    - ea_upsell_segmentation      # Behavioral targeting with evidence
+    - ea_fifa19_revenue           # Revenue impact from designed experiment
+    - kix_sfg_forecasting_model   # Valuation + $14M overestimation correction
+    - kix_sfg_content_cadence     # Market mechanism / incentive design framing
+    - kix_ua_strategy             # ROI / investment framing
+    - kix_ltv_forecast            # LTV / welfare estimation framing
+    - kix_spend_conversion        # Experimentation + behavioral response
+    - pretio_thompson_sampling    # Mechanism design — Bayesian optimal stopping
+    - pretio_conversion_model     # Demand/response modelling
+    - pretio_simulation           # Counterfactual simulation
+    - tinymob_churn_gameplay      # Behavioral diagnosis + intervention
+    - tinymob_paywall_cannibalisation  # Market structure / incentive analysis
+    - tinymob_free_rider          # Classic economic externality framing
+
+  exclude_bullets:
+    - kano_dbt                    # Engineering, not economics
+    - kano_etl_performance        # Infrastructure, not economics
+    - kano_rshiny_migration       # BI tooling, not economics
+    - kano_analyst_adoption       # Enablement, not economics
+    - kix_sfg_snowflake_cost      # Infrastructure cost, not economic analysis
+    - kix_sfg_looker_migration    # BI migration, not economics
+    - kix_sfg_ab_automation       # Pipeline automation, not economics
+    - kix_sfg_alliance_recsys     # RecSys framing, not economic
+    - kix_sfg_churn_model         # ML framing, too technical
+    - kix_sfg_matchmaking_churn   # ML/systems framing
+    - kix_domino_jenkins          # MLOps, not economics
+    - kix_etl_repair              # Engineering, not economics
+    - ea_mab_recsys               # ML engineering, not economics
+    - ea_churn_reacquisition_models  # ML models, too technical
+    - ea_ab_automation            # Pipeline automation, not economics
+    - ea_exec_reporting           # Reporting, not economics
+    - ea_licensing_automation     # Automation, not economic analysis
+    - ea_analyticon               # Presentation, not economics
+    - tinymob_kpi_monitoring      # Monitoring, not economic analysis
+    - tinymob_aso                 # Marketing, not economics
+    - tinymob_database_investment # Infrastructure decision, not economics
+    - pretio_mab_reporting        # Reporting, not economic analysis
+
+# ---------------------------------------------------------------------------
+# SKILLS ORDERING
+# ECON roles care more about methods than tools.
+# Lead with analytical and statistical skills, tools secondary.
+# ---------------------------------------------------------------------------
+skills_order:
+  programming:
+    - R
+    - Python
+    - SQL
+
+  data_science:
+    - Causal Inference
+    - A/B Testing & Experimentation
+    - Bayesian Analysis
+    - Forecasting
+    - Predictive Modelling
+    - Behavioral Clustering
+
+  data_engineering:
+    bi_tools:
+      - RShiny
+      - RMarkdown
+      - Jupyter Notebooks
+      - Tableau
+      - Excel
+    storage_and_warehousing:
+      - Snowflake
+      - PostgreSQL
+      - AWS Redshift
+    modelling_and_transformation:
+      - dbt
+    orchestration:
+      - Airflow
+      - Prefect
+
+# ---------------------------------------------------------------------------
+# SECTION ORDERING
+# Education leads for ECON roles — flip it to the top.
+# ---------------------------------------------------------------------------
+section_order:
+  - summary
+  - education         # Lead with graduate credentials for this family
+  - experience
+  - skills
+  - certifications
+
+# ---------------------------------------------------------------------------
+# EXPERIENCE ROLES
+# Kano omitted — no economic signal.
+# ---------------------------------------------------------------------------
+experience_roles_order:
+  - ea_business_analyst          # Strongest ECON role
+  - ea_data_scientist
+  - kix_sfg_lead
+  - kix_sfg_senior
+  - kixeye_product_analyst
+  - pretio_data_scientist
+  - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# EDUCATION DISPLAY
+# Show all accomplishments for ECON — thesis and scholarship matter here.
+# ---------------------------------------------------------------------------
+education:
+  show_thesis: true
+  show_scholarship: true
+  show_ta_details: true
+  certifications_to_show: []     # Certs are less relevant for ECON roles
+
+# ---------------------------------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------------------------------
+sidebar:
+  page1:
+    - experience_breakdown
+    - key_victories
+  page2:
+    skills_section: data_science_skillset
+  page3:
+    skills_section: data_engineering_toolkit
+
+# ---------------------------------------------------------------------------
+# TITLE & FRAMING
+# ---------------------------------------------------------------------------
+header_title: "Applied Economist & Data Scientist | Causal Inference, Experimentation & Valuation"
+
+# ---------------------------------------------------------------------------
+# ATS KEYWORD WATCHLIST
+# ---------------------------------------------------------------------------
+ats_keyword_watchlist:
+  - causal inference
+  - econometrics
+  - experimental design
+  - A/B testing
+  - propensity score
+  - regression
+  - forecasting
+  - behavioural economics
+  - game theory
+  - market design
+  - valuation
+  - R
+  - Python
+  - statistical modelling
+  - quasi-experimental
+  - randomized controlled trial
+
+# ---------------------------------------------------------------------------
+# REVOICING GUIDANCE
+# ---------------------------------------------------------------------------
+revoicing_persona: >
+  Translate bullets using the vocabulary of economics and applied social
+  science. This audience responds to causal language, mechanism design,
+  and evidence-based reasoning. Use verbs like: estimated, evaluated,
+  designed, identified, measured, modelled, published, analyzed, quantified.
+  Frame product work in economic terms: incentives, externalities, market
+  mechanisms, welfare effects, counterfactuals. Connect ML and statistical
+  work to econometric traditions — a propensity score model is causal
+  inference, not just a ML model. A recommendation engine is a matching
+  mechanism. Churn is demand attrition. Revenue impact is welfare or
+  surplus estimation. Lead with the research question, follow with method,
+  close with the economic interpretation of the finding.
