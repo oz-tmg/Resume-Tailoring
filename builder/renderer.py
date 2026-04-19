@@ -21,6 +21,7 @@ def render_tex(family: dict,
                skills: dict,
                education: dict,
                summary: dict,
+               personal: dict,
                output_dir: Path,
                template_dir: Path) -> Path:
     """
@@ -55,6 +56,7 @@ def render_tex(family: dict,
 
     context = {
         "family":          family,
+        "personal":        personal["personal"],
         "summary_text":    summary["text"],
         "experience":      resolved_experience,
         "skills":          ordered_skills,
