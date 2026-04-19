@@ -1,0 +1,32 @@
+# content/personal.yaml
+# ======================
+# Single source of truth for personal information.
+# Replaces info.tex — the Jinja2 template renders this directly
+# so \input{info} is no longer needed.
+#
+# Company fields are used for cover letter generation (future feature).
+# They are NOT used in resume rendering.
+
+personal:
+  first_name: Alexander
+  last_name: Oswald
+  email: alex.oswald@gmail.com
+  phone: "604.785.1356"
+  location: Victoria, BC
+  country: Canada
+
+  linkedin_handle: alex-oswald-0648a657
+  linkedin_url: https://www.linkedin.com/in/alex-oswald-0648a657
+
+  github_handle: oz-tmg
+  github_url: https://github.com/oz-tmg
+
+  # Wordpress / blog — update the slug when you publish a new featured post
+  blog_url: https://alexoswald.wordpress.com/2025/02/23/companion-apps-in-games/
+  blog_display: alexoswald.wordpress.com
+
+# Cover letter defaults — overridden per posting via overrides.yaml
+cover_letter:
+  recipient: Hiring Manager
+  greeting: Dear
+  closer: Kind Regards

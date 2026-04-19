@@ -1,0 +1,26 @@
+# content/personal.yaml
+# ======================
+# Copy this file to personal.yaml and fill in your real values.
+# personal.yaml is excluded from git — never commit it.
+
+personal:
+  first_name: Jane
+  last_name: Smith
+  email: jane.smith@gmail.com
+  phone: "555.123.4567"
+  location: City, Province/State
+  country: Canada
+
+  linkedin_handle: jane-smith-abc123
+  linkedin_url: https://www.linkedin.com/in/jane-smith-abc123
+
+  github_handle: janesmith
+  github_url: https://github.com/janesmith
+
+  blog_url: https://yourblog.com
+  blog_display: yourblog.com
+
+cover_letter:
+  recipient: Hiring Manager
+  greeting: Dear
+  closer: Kind Regards

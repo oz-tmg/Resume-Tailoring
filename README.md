@@ -17,22 +17,29 @@ targeting six job families with optional per-posting Claude API revoicing.
 ## Quick Start
 
 ```bash
-# Install dependencies
+# 1. Install dependencies
 pip install -r requirements.txt
 
-# Validate YAML content integrity
+# 2. Set up secrets and personal info (both are gitignored — never committed)
+cp .env.example .env
+# edit .env → add your ANTHROPIC_API_KEY
+
+cp content/personal.yaml.example content/personal.yaml
+# edit content/personal.yaml → add your real contact details
+
+# 3. Validate YAML content integrity
 make validate
 
-# Build a base resume for a family
+# 4. Build a base resume for a family
 make ds
 
-# Build a posting-tailored resume (uses Claude API)
+# 5. Build a posting-tailored resume (uses Claude API — requires ANTHROPIC_API_KEY)
 make posting F=data_scientist P=postings/acme_ds/posting.txt
 
-# Build + compile to PDF
+# 6. Build + compile to PDF
 make pdf F=data_scientist
 
-# Build all six base resumes
+# 7. Build all six base resumes
 make all
 ```
 

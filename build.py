@@ -25,8 +25,16 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Load .env before anything else so ANTHROPIC_API_KEY is available
+# to the anthropic client in ranker.py
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not installed — env vars must be set manually
+
 from builder.loader   import load_family, load_all_experience, load_skills, \
-                             load_education, load_summaries
+                             load_education, load_summaries, load_personal
 from builder.selector import select_bullets
 from builder.resolver import resolve_bullets
 from builder.ranker   import rank_and_revoice
@@ -59,6 +67,7 @@ def build(family_name: str, posting_path: Path | None = None,
     skills     = load_skills(ROOT / "content" / "skills.yaml")
     education  = load_education(ROOT / "content" / "education.yaml")
     summaries  = load_summaries(ROOT / "content" / "summaries.yaml")
+    personal   = load_personal(ROOT / "content" / "personal.yaml")
     summary    = summaries[family["summary_ref"]]
 
     # ------------------------------------------------------------------
@@ -102,6 +111,7 @@ def build(family_name: str, posting_path: Path | None = None,
         skills=skills,
         education=education,
         summary=summary,
+        personal=personal,
         output_dir=output_dir,
         template_dir=ROOT / "templates",
     )
@@ -146,6 +156,14 @@ def main():
     if args.validate:
         validate_all(ROOT)
         return
+
+    # Guard: personal.yaml must exist (it's gitignored — easy to forget)
+    personal_path = ROOT / "content" / "personal.yaml"
+    if not personal_path.exists():
+        print("\n  ✗ content/personal.yaml not found.")
+        print("    Copy content/personal.yaml.example → content/personal.yaml")
+        print("    and fill in your details.\n")
+        sys.exit(1)
 
     if args.all:
         for fam in FAMILIES:
