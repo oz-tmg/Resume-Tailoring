@@ -153,6 +153,23 @@ def load_education(path: Path) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Personal info loader
+# ---------------------------------------------------------------------------
+
+def load_personal(path: Path) -> dict:
+    """
+    Load content/personal.yaml.
+    Returns the 'personal' block — a flat dict of contact fields.
+    """
+    data = _load(path)
+    _require(data, ["personal"], str(path))
+    p = data["personal"]
+    _require(p, ["first_name", "last_name", "email", "phone",
+                 "location", "linkedin_url", "github_url"], str(path))
+    return data
+
+
+# ---------------------------------------------------------------------------
 # Summaries loader
 # ---------------------------------------------------------------------------
 
