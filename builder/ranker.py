@@ -25,7 +25,7 @@ from typing import Any
 import anthropic
 
 
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-4-6"
 client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY from env
 
 
