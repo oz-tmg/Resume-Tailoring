@@ -62,11 +62,11 @@ roles:
 
       - id: ea_churn_reacquisition_models
         text: >
-          Developed new-player churn, spend conversion, and reacquisition
+          Developed new-player churn, pack spend conversion, and reacquisition
           prediction models in R to support recommendation systems and guide
           user reactivation efforts.
         families: [DS, MLE]
-        keywords: [churn prediction, spend conversion, reacquisition, R,
+        keywords: [churn prediction, pack spend conversion, reacquisition, R,
                    predictive modelling, recommendation systems, retention]
         tier: 1
 
@@ -109,6 +109,23 @@ roles:
         keywords: [statistical modelling, licensing valuation, partner
                    analytics, causal inference, decision support]
         tier: 2
+        # --- VARIANTS ---
+        variants:
+          DA: >
+            Built statistical models measuring the revenue impact each sports
+            license generated for EA and the brand exposure value returned to
+            partners, informing smarter procurement and renewal decisions.
+          DS: >
+            Developed bilateral value estimation models for FIFA's licensing
+            portfolio — quantifying both EA-side revenue attribution per
+            license and the exposure value delivered to each partner — to
+            support data-driven procurement strategy.
+          ECON: >
+            Constructed a two-sided valuation framework to estimate the
+            economic value of EA's sports licenses: quantifying licence-
+            attributable demand effects for EA and measuring the advertising
+            externality (brand exposure and reach) provided to licensing
+            partners, improving contract pricing and renewal strategy.
 
       - id: ea_companion_app
         text: >
@@ -116,11 +133,50 @@ roles:
           of FIFA's Companion App and Web App, producing evidence that helped
           save the Web App and support greater investment in the companion app
           ecosystem.
+        sub_bullets:
+          - id: ea_companion_app_revenue
+            text: >
+              Incremental spending gains among spenders of 4.2% for Web App
+              users and 7.0% for Mobile App users, leading to millions in
+              incremental revenue.
+            families: [DS, DA, ECON]
+          - id: ea_companion_app_analyticon
+            text: >
+              Presented findings at EA's 2018 Analyticon conference.
+            families: [DS, DA, ECON]
+          - id: ea_companion_app_madden
+            text: >
+              Findings and follow-on performance helped influence the Madden
+              team to develop a companion app for Madden 19.
+            families: [DA, ECON]
         families: [DS, DA, ECON]
         keywords: [propensity score matching, causal inference, incremental
-                   value, R, companion app, product valuation]
+                   value, R, companion app, product valuation, Analyticon]
         tier: 1
+        # --- VARIANTS: strongest causal inference story in the portfolio ---
+        variants:
+          DA: >
+            Applied propensity score matching in R to measure the true
+            engagement and spend lift from FIFA's Companion and Web Apps,
+            providing the evidence base that saved the Web App from
+            discontinuation and secured ongoing investment in both platforms.
+          DS: >
+            Used propensity score matching on player cohorts in R to estimate
+            the causal incremental value of FIFA's Companion App and Web App;
+            results demonstrated significant lift in spending behavior and
+            directly influenced platform investment decisions.
+          ECON: >
+            Applied quasi-experimental propensity score matching to construct
+            comparable treatment and control cohorts and estimate the
+            incremental consumer surplus and revenue impact of FIFA's digital
+            companion platforms; causal estimates showed 4.2% incremental
+            spend lift (Web App) and 7.0% (Mobile App), reversing a planned
+            discontinuation and reallocating investment toward higher-return
+            platform development.
 
+      # ea_companion_app_revenue and ea_analyticon are now sub_bullets above.
+      # Kept as standalone fallbacks below (tier 3) for families or postings
+      # where sub_bullets are suppressed and the detail still needs to surface.
       - id: ea_companion_app_revenue
         text: >
           Incremental spending gains of 4.2% for Web App users and 7.0% for
@@ -129,14 +185,4 @@ roles:
         families: [DS, DA, ECON]
         keywords: [incremental revenue, spend uplift, causal inference,
                    monetization, product impact]
-        tier: 1
-
-      - id: ea_analyticon
-        text: >
-          Presented companion app findings at EA's 2018 Analyticon internal
-          analytics conference, influencing the Madden team to develop a
-          companion app for Madden 19.
-        families: [DA, DS, ECON]
-        keywords: [presentation, stakeholder influence, conference, data
-                   storytelling, cross-team impact]
-        tier: 2
+        tier: 3
