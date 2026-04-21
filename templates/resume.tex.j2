@@ -99,6 +99,13 @@ acquisition assessment.
   \begin{itemize}
 <% for bullet in role.bullets %>
     \item << bullet.resolved_text | latex_escape >>
+<% if bullet.resolved_subs is defined and bullet.resolved_subs %>
+    \begin{itemize}
+<% for sub in bullet.resolved_subs %>
+      \item << sub.resolved_text | latex_escape >>
+<% endfor %>
+    \end{itemize}
+<% endif %>
 <% endfor %>
   \end{itemize}}
 \end{entrylist}
