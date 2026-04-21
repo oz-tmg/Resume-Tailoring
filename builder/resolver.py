@@ -22,11 +22,13 @@ def resolve_bullets(selected_companies: list[dict],
     Walk the selected company/role/bullet structure and swap in
     pre-written variants where available.
 
-    Mutates a copy — does not modify the original loader output.
+    Also filters sub_bullets by family_id so only relevant sub-bullets
+    are passed to the renderer.
 
     Returns the same nested structure with each bullet enriched by:
-      - "resolved_text":  str   — the text to use downstream
-      - "resolved":       bool  — True if a variant was found
+      - "resolved_text":  str        — the text to use downstream
+      - "resolved":       bool       — True if a variant was found
+      - "resolved_subs":  list[dict] — filtered, resolved sub-bullets
     """
     result = []
 
@@ -45,10 +47,21 @@ def resolve_bullets(selected_companies: list[dict],
                     resolved_text = bullet["text"].strip()
                     resolved      = False
 
+                # Resolve sub_bullets — filter by family, resolve text
+                raw_subs = bullet.get("sub_bullets", [])
+                resolved_subs = []
+                for sub in raw_subs:
+                    if family_id in sub.get("families", [family_id]):
+                        resolved_subs.append({
+                            **sub,
+                            "resolved_text": sub["text"].strip(),
+                        })
+
                 role_copy["bullets"].append({
                     **bullet,
                     "resolved_text": resolved_text,
                     "resolved":      resolved,
+                    "resolved_subs": resolved_subs,
                 })
 
             company_copy["roles"].append(role_copy)
