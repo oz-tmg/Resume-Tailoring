@@ -1,0 +1,72 @@
+About Tailscale
+
+Tailscale is building the new Internet by delivering software that makes it easy to securely interconnect people and their devices, no matter where they are. From hobbyists to multinational corporations, teams of every size use Tailscale each day to protect their networks, share access to internal tools, and more. We're building a future for the Internet that's easy, sensible, and safe, like it used to be. Founded in 2019 and fully distributed, we're backed by Accel, CRV, Insight, Heavybit, and Uncork Capital.
+
+Job Description
+
+We’re looking for a hands-on Analytics Engineer who thrives in fast-moving, high-complexity environments and enjoys bringing clarity to ambiguity. You’ll join a growing data team with many open, high-impact challenges across billing, finance, product, GTM, and business operations.
+
+You’re someone who asks thoughtful questions, goes deep to understand how things work, and loves transforming loosely defined user problems into scalable, reliable data solutions. You’re not afraid to challenge assumptions, rethink processes, or dive into complex systems. You help teams work better through clean models, automated workflows, and simple, trustworthy data.
+
+This role is ideal for someone with solid experience delivering production grade analytics engineering work who is excited to take on broader ownership and grow their scope over time as the team expands.
+
+Key Responsibilities
+
+    Partner with teams across Finance, Engineering, Sales, Product, Marketing, and Customer Success to uncover their workflows, challenges, and data needs. 
+    Design, build, and maintain scalable dbt models and data pipelines supporting financial reporting (ARR, billing, revenue recognition) as well as operational, product, and GTM analytics. 
+    Tackle ambiguous, high-complexity problems, untangling systems, manual processes, and unclear logic to produce clear, durable data solutions. 
+    Translate user challenges and incomplete requirements into structured data models, automated workflows, and end-to-end solutions. 
+    While building towards automation, understanding the user needs to process manual tasks. 
+    Own solutions from ingestion to transformation to data quality, documentation, and stakeholder enablement. 
+    Connect data and logic across domains, identifying how systems relate and surfacing opportunities to simplify, standardize, or automate. 
+    Advocate for high standards in data quality, clarity, documentation, and maintainability. 
+
+What We Are Looking For
+
+    You have delivered production data models and pipelines that power real business decisions. 
+    You operate autonomously and make thoughtful tradeoffs in a fast-paced environment. 
+    You’re skilled in SQL and modern data modeling, and you write clean, maintainable, well-organized code. 
+    A track record of converting manual, ad hoc workflows into automated, durable pipelines or self-service solutions. 
+    You can take a vague problem, ask the right questions, and turn it into a clear technical plan and high-quality solution. 
+    You work well with both technical and non-technical partners, helping teams clarify their needs, understand tradeoffs, and driving alignment. 
+    You’re a generalist who enjoys learning new domains and solving a wide range of challenges from Finance to Product to GTM. 
+    You are curious, resourceful, and comfortable challenging assumptions thoughtfully and advocating for approaches that improve scalability and data quality. 
+    You enjoy untangling complexity and turning chaos into clarity. 
+    You care about building simple, transparent, robust data foundations. 
+    You think in terms of systems and scalability, not one-off fixes, and are able to weigh in trade-offs and build systems to solve problems as needed. 
+    You’re motivated by helping teams work more effectively through data. 
+    You’re team-oriented, collaborative, and communicate with clarity. 
+    You’re excited to grow your impact and take on increasing ownership as the team expands. 
+
+Nice to Have
+
+    Experience in a high-growth product-led SaaS company
+    Familiarity with billing systems, revenue recognition, GAAP accounting, or financial operations
+    Experience partnering with Finance and accounting during month-end/quarter-end cycles
+    Exposure to Stripe, Salesforce, Looker, or other financial and GTM systems
+
+Our Tech Stack
+
+Snowflake, dbt, Fivetran, Hightouch, Looker, Prefect, Stripe, Orb, Salesforce
+
+As a company, we strive to maintain fair and equitable compensation practices within our team across all roles and all levels. Tailscale's compensation package includes base salary, equity, and comprehensive benefits. The salary range displayed on each job posting represents the target range for a new hire's base salary. Individual offers may vary based on experience and skill set.
+
+US Pay Range
+
+$136,000—$170,000 USD
+
+Frequently cited statistics show that people who identify with historically marginalized groups are likely to apply to jobs only if they meet 100% of the qualifications. We encourage you to help us break that statistic!
+
+What We Offer
+
+    An inclusive, flexible environment where you can be your authentic self. We recognize the impact of diverse voices and backgrounds on the growth of our people, product, and company. And that flexibility in how and when you work empowers our team to integrate work and life. 
+    A competitive total compensation package. This includes a base salary, an equity incentive plan and variable commission (for quota-based roles). 
+    Comprehensive group benefits with no waiting period. Take advantage of coverage for health, vision, dental, and more for you and your family!
+    Remote first company—most of our teams work fully remotely. Enjoy a change of scenery wherever you can get wifi, participate in virtual and in-person social events, and leverage our corporate co-working program to visit WeWork (or other similar spaces near you). Some roles require in-office collaboration depending on team needs, which will be clearly noted in the job description. 
+    Connect with other Tailscalars IRL. Attend our annual company retreat, participate in team off-sites, and collaborate in person with teammates across Canada, the United States, and the United Kingdom. We support intentional in-person connection through team travel and distributed collaboration. 
+    Support for your personal and professional development. Grow your career thoughtfully with $1500 USD annually for professional development, or take advantage of mentorship, coaching, and internal promotion opportunities. 
+    Paid time off and a healthy work-life integration. Our flexible, paid time off program supports you for any situation life throws your way, whether moving homes or travelling the world! 
+    A build-your-own home office setup. You choose your own company-owned laptop (Mac or PC), receive a monthly home internet reimbursement, and $1000 USD to customize your workstation to make it your own. 
+    Generous parental leave program from your first day. We care about your life outside of work and encourage new parents to take advantage of parental leave top-ups for up to 26 weeks. 
+
+Please be aware that legitimate emails from Tailscale's talent team will only originate from @tailscale.com, @greenhouse.io, and @interviews.modernloop.io email addresses. For more information about protecting yourself from impersonators and scams, please visit https://tailscale.com/scam-awareness.

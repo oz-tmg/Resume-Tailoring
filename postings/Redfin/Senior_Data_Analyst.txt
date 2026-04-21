@@ -1,0 +1,42 @@
+About the job
+
+This position is a hybrid role requiring employees to work from our headquarters location in Seattle, WA every Tuesday and Wednesday, and remote all other days.
+
+Redfin is revolutionizing the $75 billion real estate industry. We use data, beautiful software, and innovative design to put customers first at every step in the home-buying and selling process. Get ready to dive headfirst into our award-winning website and mobile apps, solving complex business problems in a highly visible, customer-centric way. If you value doing impactful work in a collaborative environment, join our team!
+
+As a Senior Data Analyst within Partner Analytics, you’ll work closely with product, program, and sales leadership to develop metrics, design strategies, and track the success or failure of our efforts. You’ll draw on a wide variety of data sources, including some of the most complete and robust real estate data in the world, synthesizing insights which guide some of the most important decisions in our business.
+
+The Role
+
+    Be a subject matter expert on Redfin’s Partner Business Funnel
+    Leverage your analytical expertise to deliver simple answers to complex, ambiguous questions. 
+    Excel at stakeholder communication and translating analytics findings into strategic action.
+    Collaborate with team members across Brokerage and Partner analytics to review analyses, code, and dashboards to ensure high fidelity deliverables that answer the right questions.
+
+Skills & Experience
+
+    You have 5+ years of experience in building reports, tables, and performing multi-faceted business analysis and presentations
+    You have 5+ years of SQL experience at a complex level
+    Advanced Skillset with Tableau, R and/or Python
+    You are a natural story teller. You know how to connect the dots and deliver concise messages (both written and verbal) to stakeholders that drive business decisions
+    You understand the complexities and interactions between data sets, reports, tables, business groups, and how they impact the business objectives and outcomes
+    You have a background in breaking down complex problems into simplified narratives for non-technical audiences
+    Bachelor’s degree or equivalent in statistics, computer science, or a related field
+    Expertise using AI code generation tools tools such as Snowflake Intelligence and GitHub CoPilot highly desired
+    Real Estate industry experience is highly desired
+
+Illinois, Maryland, Minnesota, Massachusetts, Colorado, New York City, New Jersey, Jersey City, California, D.C. and Washington candidates only:
+
+Base Pay Range: $98,700.00 - 147,800.00.
+
+The position may also be eligible for an annual bonus, incentives, and other employment-related benefits including, but not limited to, medical, dental, and vision benefits, 401K retirement plan, and paid time off. More information regarding these benefits and others can be found here. The information regarding compensation and other benefits included in this paragraph is only an estimate and is subject to revision from time to time as the Company, in its sole and exclusive discretion, deems appropriate. The Company may determine during its review of the proposed compensation and benefits provided for this position that the compensation and benefits for such position should be reduced. In no event will the Company reduce the compensation for the position to a level below the applicable jurisdictional minimum wage rate for the position.
+
+Redfin is an equal opportunity employer committed to an inclusive workforce.
+
+An inclusive culture is vital to Redfin's mission of making real estate better for people from all walks of life. We’re proud that Redfin is a place where different points of view and backgrounds are encouraged and respected. We constantly strive to build a company that reflects the world around us, based on our conviction that pursuing and developing talent of all types is the right way for a business to thrive over the long haul.
+
+Redfin provides equal employment opportunities to all employees and applicants for employment and prohibit discrimination based on race, color, religion, age, sex, national origin, disability status, genetics, protected veteran status, sexual orientation, gender identity or expression, and any other characteristic protected by applicable federal, state or local law. If you need accommodation in the application or recruitment process because of a disability or special need, please contact recruitingteam@redfin.com
+
+Redfin encourages individuals with criminal record histories to apply for employment and considers such individuals for employment consistent with the requirements of any applicable fair chance acts, including but not limited to the California, San Francisco and Los Angeles County Fair Chance Acts. Philadelphia applicants can access a copy of Philadelphia Fair Criminal Records Screening Standards ordinance poster here.
+
+Redfin accepts applications on an ongoing basis.

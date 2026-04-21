@@ -1,0 +1,63 @@
+About the job
+
+Reddit is a community of communities. It’s built on shared interests, passion, and trust, and is home to the most open and authentic conversations on the internet. Every day, Reddit users submit, vote, and comment on the topics they care most about. With 100,000+ active communities and approximately 121 million daily active unique visitors, Reddit is one of the internet’s largest sources of information. For more information, visit www.redditinc.com.
+
+Reddit has a flexible first workforce. At Reddit we continue to grow our teams with the best talent. We're completely remote friendly and will continue to be after the pandemic.
+
+Advertising is Reddit’s primary revenue driver and we have an ambitious goal to turn it into a massive business. Although several large digital ad platforms already exist, advertisers are being increasingly drawn to Reddit because of our passionate communities. We believe our community-centric platform has created the opportunity for Reddit to build a highly differentiated ads business.
+
+About The Ads Data Science Team
+
+The Ads Data Science team at Reddit leverages data to maximize advertiser value on Reddit through robust data foundations, metrics, and strategic insights generated through experimentation and cutting-edge DS methods.
+
+We work on a wide range of challenging problems in the areas of ads targeting, relevance modeling, auction optimization, measurement, and user experience. We are a highly collaborative team of passionate data scientists and engineers who are constantly pushing the boundaries of what's possible with machine learning and statistical modeling.
+
+About The Role
+
+We are looking for a highly motivated and experienced Data Scientist to join our growing Ads Data Science team. As a Data Scientist, you will play a key role in developing as well as applying cutting-edge DS models/methods to improve our understanding of the dynamics that drive the success of our advertising platform, and identify opportunities to accelerate that success. You will work closely with stakeholders across product, engineering, sales, marketing, and data to identify opportunities, define metrics, and build solutions that drive significant impact for Reddit.
+
+Responsibilities
+
+    Analyze large-scale datasets to identify trends, patterns, and insights that can be used to improve the effectiveness of our advertising platform
+    Develop ML models & DS methods to for improved anomaly detection, prediction, pattern recognition
+    Communicate findings and recommendations to stakeholders across the organization
+    Collaborate with product, engineering, sales, and marketing partners to define product and program requirements and translate them into data science solutions
+    Stay up-to-date on the latest advancements in machine learning and data science
+
+
+Qualifications
+
+    Advanced degree (Masters or Ph.D.) in a quantitative field such as: Statistics, Mathematics, Physics, Economics, or Operations Research
+    For M.S. holders: 3+ years of industry experience in applied science or data science roles
+    For Ph.D. holders: 2+ years of industry experience in applied science or data science roles
+    Strong understanding of statistical modeling, machine learning algorithms, causal inference and experimental design
+    Experience with large-scale data processing and analysis using tools such as Spark, Hadoop, or Hive; knowledge of BigQuery a plus
+    Proficiency in Python or R and experience with machine learning libraries such as scikit-learn, TensorFlow, or PyTorch
+    Experience with SQL and relational databases
+    Excellent communication and presentation skills
+    Passion for Reddit and the online advertising industry
+
+
+Bonus Points
+
+    Experience with online advertising and ad tech
+    Experience with causal inference and A/B testing
+    Contributions to open-source projects or publications in relevant conferences or journals
+
+
+Benefits
+
+    Global Benefit programs that fit your lifestyle, from workspace to professional development to caregiving support
+    Family Planning Support
+    Gender-Affirming Care
+    Mental Health & Coaching Benefits
+    Comprehensive Medical Benefits & Health Care Spending Account
+    Registered Retirement Savings Plan with matching contributions
+    Income Replacement Programs
+    Flexible Vacation & Paid Volunteer Time Off
+    Generous Paid Parental Leave
+
+
+In select roles and locations, the interviews will be recorded, transcribed and summarized by artificial intelligence (AI). You will have the opportunity to opt out of recording, transcription and summarization prior to any scheduled interviews.
+
+During the interview, we will collect the following categories of personal information: Identifiers, Professional and Employment-Related Information, Sensory Information (audio/video recording), and any other categories of personal information you choose to share with us. We will use this information to evaluate your application for employment or an independent contractor role, as applicable. We will not sell your personal information or disclose it to any third party for their marketing purposes. We will delete any recording of your interview promptly after making a hiring decision. For more information about how we will handle your personal information, including our retention of it, please refer to our Candidate Privacy Policy for Potential Employees and Contractors.

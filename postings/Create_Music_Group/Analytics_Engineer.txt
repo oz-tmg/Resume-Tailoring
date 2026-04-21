@@ -1,0 +1,51 @@
+About the job
+
+Established in 2015, Create Music Group is a leading music and entertainment company. The company operates as a record label, distribution company, and entertainment network which generates over 15 billion music streams each month on DSP’s. Named #2 on the Inc 5000 Fastest Growth Companies in America in 2020, the company has grown exponentially by leveraging its owned IP with its media and technology platform. The company works with superstar artists, major and independent record labels, and global media brands. It operates a number of companies including Label Engine, one of the largest independent music distribution platforms in the world, with over 75,000 artists and 5,000 label clients; and Flighthouse, a digital entertainment brand focused on Gen Z, which has more than 300 million followers across social media. Create Music Group is based in Hollywood, CA and has 400 employees worldwide.
+
+Job Summary
+
+The Analytics Engineer will be part of our Analytics & Insights team and partner closely with stakeholders and internal data teams to translate business needs into scalable analytics solutions. The role will analyze; integrate data from multiple datasets, write and optimize SQL for analytics; reporting, own end-to-end analytics deliverables, and recommend data and reporting improvements.
+
+The ideal candidate takes ownership, approaches complex problems with creativity and persistence, and continuously raises the bar for analytical excellence. They pair technical expertise with sharp business acumen, transforming data into actionable insights that create meaningful business impact.
+
+Responsibilities
+
+Business Partnership & Stakeholder Collaboration
+
+    Partner closely with Finance, Music Ops, Acquisitions, and other business stakeholders to understand reporting needs, data gaps, and analytical requirements
+    Collaborate with internal data teams to translate business questions into scalable, well-modeled, analytics-ready data solutions
+
+Reporting Architecture & Data Modeling 
+
+    Analyze and integrate data from disparate datasets to develop niche reporting tables and generate meaningful business insights
+    Develop, optimize, and maintain complex SQL queries and reporting tables
+    Recommend and implement improvements to existing SQL data models
+    Design and build scalable reporting architecture that supports evolving analytics needs
+
+Analytics Engineering, Governance & Dashboarding
+
+    Design and develop executive dashboards and KPI frameworks that provide real-time visibility into business performance
+    Apply software engineering best practices to analytics code (e.g., version control, continuous integration)
+    Participate in code reviews and optimize SQL for performance, including Sigma-specific optimization
+    Maintain data documentation, definitions, and governance standards
+    Other duties as assigned
+
+Qualifications
+
+    Bachelor’s degree in a quantitative field (Mathematics, Statistics, Engineering, Computer Science etc.); Master's degree or advanced certification in related field preferred
+    2+ years of experience in the analytics domain as a data analyst/data engineer/data scientist
+    Strong proficiency in SQL
+    Proven ability to navigate ambiguous requirements, analyze and integrate datasets and build targeted reporting tables, executive dashboards and KPIs
+    Demonstrated expertise in building and owning the analytics semantic layer, including metric definitions, data models & business logic
+    Understanding of how data insights translate to business value and competitive advantage
+    Programming experience in R, Python, or similar analytical languages is preferred
+    Experience with dashboard development in Tableau or Sigma
+    Eagerness to learn new technologies, methodologies, and business domains
+    Ability to work independently and collaboratively within a team
+    Strong communication and cross-functional collaboration skills
+    Knowledge of the music industry is an asset
+
+Pay Scale
+
+    $90,000 - $110,000 per year
+    The final compensation within this range will be determined based on the candidate’s experience, skills, and overall fit for the role.

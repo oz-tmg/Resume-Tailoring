@@ -1,0 +1,45 @@
+About the job
+
+About Us
+
+Fanatics is building a leading global digital sports platform. We ignite the passions of global sports fans and maximize the presence and reach for our hundreds of sports partners globally by offering products and services across Fanatics Commerce, Fanatics Collectibles, and Fanatics Betting & Gaming, allowing sports fans to Buy, Collect, and Bet. Through the Fanatics platform, sports fans can buy licensed fan gear, jerseys, lifestyle and streetwear products, headwear, and hardgoods; collect physical and digital trading cards, sports memorabilia, and other digital assets; and bet as the company builds its Sportsbook and iGaming platform. Fanatics has an established database of over 100 million global sports fans; a global partner network with approximately 900 sports properties, including major national and international professional sports leagues, players associations, teams, colleges, college conferences and retail partners, 2,500 athletes and celebrities, and 200 exclusive athletes; and over 2,000 retail locations, including its Lids retail stores. Our more than 22,000 employees are committed to relentlessly enhancing the fan experience and delighting sports fans globally.
+
+Staff Data Analyst, Lifetime Value
+
+Overview
+
+As Fanatics Betting & Gaming scales, accurately understanding and forecasting customer lifetime value (LTV) is foundational to how we deploy capital, evaluate acquisition efficiency, and drive long-term profitability.
+
+As the Staff Data Analyst – Lifetime Value, you will serve as the business owner of the LTV framework. You will be responsible for the integrity, evolution, and business adoption of our LTV model — ensuring it is methodologically sound, operationally scalable, and deeply embedded in decision-making across Marketing, Finance, Product, and executive leadership.
+
+This role sits at the intersection of advanced analytics and strategy. You will partner closely with Data Science on model development and validation, while translating complex modeling outputs into clear, actionable insights that drive acquisition strategy, forecasting, and long-term value creation. You will live and breathe LTV — owning not just reporting, but how the organization understands, trusts, and acts on customer value.
+
+The ideal candidate combines strong statistical fluency with executive-level communication skills, thrives in high-growth environments, and is comfortable taking ownership of a core enterprise metric.
+
+Responsibilities
+
+    Partner with Data Science to develop and enhance predictive LTV models, contributing to feature design, cohort logic, retention modeling, revenue forecasting, and profitability estimation.
+    Act as the cross-functional authority on customer value, aligning Sportsbook, Casino, Marketing, Finance, Product, and Operations on interpretation and usage of LTV metrics.
+    Lead LTV-based acquisition performance measurement, shifting focus from short-term KPIs to long-term value creation (LTV/CAC, payback periods, cohort quality).
+    Translate model outputs into business narratives, enabling executives and senior stakeholders to understand drivers of value, forecast changes, and strategic trade-offs.
+    Standardize LTV reporting across the organization, ensuring consistent definitions, transparency of assumptions, and alignment between Analytics, Finance, and Marketing.
+    Embed LTV into strategic planning and capital allocation decisions, partnering with Marketing and Finance stakeholders on forecasting, scenario modeling, and long-range planning.
+    Drive scalable executive reporting, developing dashboards and materials that clearly communicate cohort trends, forecast updates, risks, and opportunities.
+    Strengthen the data foundation supporting LTV, partnering with Data Engineering to improve data pipelines, documentation, and quality controls.
+
+Experience And Skills
+
+    11+ years of experience in advanced analytics, data science, or strategic analytics roles, with direct experience owning or contributing to predictive models.
+    Experience partnering with Data Science teams to productionize and monitor predictive models, with experience with Lifetime Value models a strong advantage.
+    Experience building executive-level reporting and translating complex model outputs into clear business insights.
+    Strong understanding of statistical modeling techniques (e.g., survival analysis, regression, time-series forecasting, multivariate testing), with hands-on experience in Python, R, or similar languages.
+    Advanced SQL proficiency with experience building scalable datasets and supporting model inputs.
+    Strong understanding of acquisition economics, including CAC, payback periods, contribution margin, and ROI frameworks.
+    Experience integrating model outputs into financial planning, forecasting, or capital allocation decisions.
+    Proficiency in data visualization tools (Tableau, Power BI, or similar) with a focus on executive communication.
+    Demonstrated ability to influence senior leadership and drive adoption of analytics-based decision frameworks.
+    Experience in sports betting or iGaming is a strong advantage. 
+    Proven ability to manage multiple high-impact initiatives in a fast-paced, high-growth environment.
+    A passion for working in an entrepreneurial, fast-paced environment with a focus on agility and rapid decision-making.
+    Willingness to travel as needed to attend key meetings across Fanatics offices.
+

@@ -1,0 +1,53 @@
+About the job
+
+Established in 2015, Create Music Group is a leading music and entertainment company. The company operates as a record label, distribution company, and entertainment network which generates over 15 billion music streams each month on DSP’s. Named #2 on the Inc 5000 Fastest Growth Companies in America in 2020, the company has grown exponentially by leveraging its owned IP with its media and technology platform. The company works with superstar artists, major and independent record labels, and global media brands. It operates a number of companies including Label Engine, one of the largest independent music distribution platforms in the world, with over 75,000 artists and 5,000 label clients; and Flighthouse, a digital entertainment brand focused on Gen Z, which has more than 300 million followers across social media. Create Music Group is based in Hollywood, CA and has 400 employees worldwide.
+
+Job Summary
+
+We are seeking a proactive and growth-oriented Senior Data Analyst to serve as a strategic partner to Music Operations and Finance. This role sits at the intersection of business strategy and data engineering, translating complex operational and financial questions into scalable reporting, data models, and executive insights.
+
+The ideal candidate takes ownership, approaches complex problems with creativity and persistence, and continuously raises the bar for analytical excellence. They pair technical expertise with sharp business acumen, transforming data into actionable insights that create meaningful business impact.
+
+Responsibilities
+
+Business Partnership & Strategic Analytics 
+
+    Partner closely with Finance, Music Ops, Acquisitions, and other business stakeholders to understand business priorities, operational processes, reporting needs, data gaps, and advanced analytical requirements
+    Translate complex business questions into actionable analytics and reporting solutions
+    Lead deep-dive analyses on revenue, streams, royalties, catalogue & artist performances
+    Provide strategic insights and recommendations to support data-driven decision-making
+
+Data Analytics Solution Ownership 
+
+    Own the full data analytics lifecycle—from requirements gathering and data discovery to data modeling, visualization, and stakeholder delivery
+    Partner with stakeholders to thoroughly understand business needs, reporting objectives, and success metrics before solution design
+    Develop and optimize complex SQL queries to support financial and music operational reporting
+    Integrate data from multiple source systems to create unified, analytics-ready datasets
+    Ensure solutions are scalable, reusable, and aligned with enterprise data architecture
+
+Reporting, Data Quality & Governance
+
+    Design, build, and maintain executive and operational dashboards in Sigma, ensuring intuitive self-service reporting for Finance and Music Operations stakeholders
+    Establish and enforce standardized metric definitions, KPI frameworks, and semantic layers to ensure consistency across reports
+    Implement robust data quality checks, validation processes, and monitoring to proactively identify and resolve data discrepancies
+    Investigate and remediate data integrity issues by partnering with data engineering and source system owners
+    Maintain comprehensive documentation of data sources, transformations, business logic, and reporting definitions
+    Champion data governance best practices to ensure accuracy, reliability, and trust in analytics outputs
+    Other duties as assigned
+
+Qualifications
+
+    Bachelor’s degree in a quantitative field (Mathematics, Statistics, Engineering, Computer Science etc.); Master's degree or advanced certification in related field preferred
+    5+ years of experience in the analytics domain as a data analyst/data engineer/data scientist
+    Advanced proficiency in SQL with experience optimizing complex queries and building scalable data models
+    Hands-on experience with Sigma (or similar BI tools such as Looker, Tableau, Power BI) for dashboard development and self-service reporting
+    Programming experience in R, Python, or similar analytical languages is preferred
+    Demonstrates eagerness to learn new technologies, methodologies, and business domains
+    Ability to work both independently and collaboratively within a team
+    Strong communication and cross-functional collaboration skills
+    Strong understanding of financial reporting concepts or knowledge of music/entertainment industry is an asset
+
+Pay Scale
+
+    $100,000 - $125,000 CAD per year
+    The final compensation within this range will be determined based on the candidate’s experience, skills, and overall fit for the role.

@@ -1,0 +1,55 @@
+About the job
+
+At Wizards of the Coast, we connect people around the world through play and imagination. From our genre-defining games like Magic: The Gathering® and Dungeons & Dragons® to our growing multiverse, we continue to innovate and build new ways to foster friendship and connection. That’s where you come in!
+
+We’re looking for a Principal Business Analyst to help us make better, faster, and more confident decisions across our commercial, sales, and go-to-market teams. You’ll take on complex, undefined problems, partner to build the data and tools to solve them, and guide how we use analytics to understand performance and identify growth opportunities.
+
+This is a hands-on role for someone who can see both the big picture and the details — designing scalable data solutions, leading analysis projects, and helping shape our long-term analytics strategy. You’ll partner with business leaders, engineers, and other analysts to ensure our teams have the insights they need to act effectively.
+
+What You’ll Do:
+
+We rely on our Principal Analysts to bring clarity to complexity. In this role, you will:
+
+    Lead large-scale analysis projects that support commercial, sales, and go-to-market strategies.
+    Design and optimize advanced SQL solutions for large datasets, often working with Snowflake and automated data pipelines.
+    Partner with data engineers and business intelligence teams to improve data quality and reliability.
+    Build clear, integrated dashboards and tools that help teams understand performance and make better decisions.
+    Translate business questions into measurable, data-driven strategies — balancing short-term needs with long-term goals.
+    Mentor and support other analysts, sharing best practices and helping the team grow.
+    Work directly with senior leaders to shape how analytics informs planning, forecasting, and execution.
+
+We value curiosity and initiative. We expect you to look for better ways to measure success, simplify processes, and help others make sense of complex information.
+
+What You’ll Bring:
+
+We’re looking for someone who combines technical depth with business sense:
+
+    10+ years of experience in business or data analysis, ideally supporting commercial, sales, or go-to-market teams.
+    Master’s degree in Analytics, Data Science, Economics, or a related field (or equivalent experience).
+    Advanced SQL skills, including scalable and optimized query design.
+    Experience with Snowflake, dBT, ETL workflows, and data automation.
+    Strong understanding of data governance and quality management.
+    Proficiency in Tableau, Power BI, or Looker.
+    Experience presenting findings and recommendations to senior leaders.
+    A track record of mentoring others and improving analytical practices across teams.
+
+We know that great analysts don’t just deliver reports — they help teams see what matters, ask better questions, and make decisions with confidence.
+
+We are an Equal Opportunity / Affirmative Action Employer
+
+Wizards of the Coast is committed to equality of opportunity in all aspects of employment. We are committed to making all employment decisions without regard to race, color, religion, sex, sexual orientation, gender identity or expression, national origin, age, marital status, or any other legally protected status.
+
+We will ensure that individuals with disabilities are provided reasonable accommodation to participate in the job application or interview process, to perform essential job functions, and to receive other benefits and privileges of employment. If you have a disability and require assistance in this application process and need to request an accommodation, please contact your recruiter or coordinator.
+
+The base salary range for this position is $121,700.00 to $182,500.00. The hiring range will vary based on factors such as experience, skills, location and market conditions. Additionally, employees may be eligible for annual and long-term incentives as part of their overall compensation package.
+
+Our Comprehensive Benefits Package Includes:
+
+    Health & Wellness: Medical, Dental, and Vision Insurance
+    Time Off to Recharge: Paid Vacation & Holidays
+    Financial Well-being: Generous 401(k) Match
+    Life & Family Support: Paid Parental Leave
+    Giving Back: Volunteer & Employee Giving Programs
+    Level Up Your Skills: Tuition Reimbursement
+    Exclusive Perks: Product Discounts & More!
+

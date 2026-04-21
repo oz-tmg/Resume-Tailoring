@@ -1,0 +1,67 @@
+About the job
+
+Summary
+
+Apple’s App Store is the world’s largest and most innovative app marketplace, home to 2.1 million apps and serving more than 850 million customers every week across all the Apple devices. Since the App Store launched in 2008, it has changed how we all live; it has enabled countless new companies, spawned new industries, and built millions of jobs. In a world where apps have become essential in people’s daily lives, the App Store team has become essential to Apple’s business.
+
+Thanks to Apple’s unique integration of hardware, software, and services, engineers here partner to get behind a single unified vision. That vision always includes a deep commitment to strengthening Apple’s privacy policy, one of Apple’s core values, and fostering such values across developer community. We keep innovating privacy technologies and lead the world into a safer future where you control what data is collected about you.
+
+Although App Store is a bigger part of Apple’s business than ever before, these teams remain small, forward-thinking, and cross-functional, offering greater exposure to the array of opportunities here. In this role you will help deliver great experience and improve the store for both users and developers by generating insights from data in a privacy-friendly manner.
+
+Description
+
+As a member of the App Store Data Engineering team, you will play a key role in building large-scale data products for external reporting needs.
+
+This is a software engineering role with strong analytical responsibilities. We build robust, production-quality code and process petabytes of data daily in a distributed way.
+
+Data is our core product, and we care deeply about its correctness, semantic, lineage, usability and future evolution.
+
+Responsibilities
+
+    Work in highly cross functional team
+    Design new data products in collaboration
+    Maintain and evolve existing data products throughout their lifecycle 
+    Explore new ideas, run analysis, share insights, propose improvements, innovate
+    Evolve data contracts, improve interfaces with existing systems, introduce new ones
+    Write clean, efficient, scalable code that processes hundreds of terabytes of data
+    Review team members’ code in efficient and constructive way
+    Maintain and improve internal documentation
+    Conduct initial testing and work with other validating partners to complete certification
+    Own data quality, scalability and cost efficiency for the assigned datasets and data pipelines
+    Release changes to production
+    Work with SRE teams on troubleshooting
+    Contribute to surrounding infrastructure, services, frameworks, shared tools, standard methodologies, documentation and solutions to common problems
+    Abide by applicable policies and standards
+
+Minimum Qualifications
+
+    5+ years of hands-on experience in data engineering, analytics engineering, distributed data processing, or similar roles
+    5+ years of hands-on experience in Java or Scala
+    3+ years of hands-on experience in building and maintaining service layer applications, including data access patterns and integration with backend data systems
+    Expert-level proficiency in SQL
+    Good understanding of computer science fundamentals — algorithms, data structures, complexity
+    Good record of maintaining systems and apps in production
+    Bachelor or Master degree in Computer Science, Software Engineering, Business Information Systems, Statistics or similar quantitative degree, or equivalent work experience
+
+Preferred Qualifications
+
+    Excellent communication and collaboration skills and ability to present new ideas
+    Deep understanding of big-data stack, experience with some or all of following technologies: Spark, Flink, Kafka, Trino(Presto), Hadoop, Airflow, Iceberg, DBT, Snowflake, Cassandra, HBase, S3-like blob storage, Redis and other similar systems
+    Experience with traditional RDBMS systems: Oracle, PostgreSQL or others
+    Understanding e-Commerce domain: payments, transactions, sales, subscriptions, monetization, etc
+    Ability to work autonomously and unblock yourself
+    Experience of working in corporate environments with big number of teams
+    Data investigation and exploration skills
+    System design and documentation skills
+
+Pay & Benefits
+
+At Apple, base pay is one part of our total compensation package and is determined within a range. This provides the opportunity to progress as you grow and develop within a role. The base pay range for this role is between $116,800 and $226,000, and your base pay will depend on your skills, qualifications, experience, and location.
+
+Apple employees also have the opportunity to become an Apple shareholder through participation in Apple Inc.’s discretionary employee stock programs. Employees are eligible for discretionary restricted stock unit award recommendations, and can purchase Apple Inc. stock at a discount if voluntarily participating in Apple Inc.’s Employee Stock Purchase Plan. Participation in Apple Inc.’s discretionary stock programs is governed by Apple Inc.’s stock plans and agreements and are not part of local employment contracts or compensation.
+
+You’ll also receive benefits including: Comprehensive medical and dental coverage, retirement benefits, a range of discounted products and free services, and for formal education related to advancing your career at Apple, reimbursement for certain educational expenses — including tuition. Additionally, this role might be eligible for discretionary bonuses or commission payments as well as relocation. Learn more about Apple Benefits.
+
+Note: Apple benefit and compensation programs are subject to eligibility requirements and other terms of the applicable plan or program.
+
+Apple is an equal opportunity employer that is committed to inclusion and diversity. Apple provides reasonable accommodations to applicants with disabilities. Apple is a drug-free workplace.
