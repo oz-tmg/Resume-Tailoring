@@ -8,9 +8,9 @@ summary_ref: data_engineer
 bullet_selection:
   max_bullets_per_role:
     kano_senior_de_bi: 4          # Strongest DE role by recency
-    kix_sfg_lead: 3
-    kix_sfg_senior: 2
-    kixeye_product_analyst: 3
+    kix_lead: 3
+    kix_senior: 2
+    kix_product_analyst: 3
     ea_data_scientist: 2
     ea_business_analyst: 2
     pretio_data_scientist: 1
@@ -22,20 +22,20 @@ bullet_selection:
     - kano_dbt
     - kano_etl_performance         # Lead DE achievement — latency + cost
     - kano_rshiny_migration
-    - kix_sfg_snowflake_cost       # 45% Snowflake cost reduction — strong signal
-    - kix_sfg_looker_migration     # Infrastructure migration ownership
+    - kix_snowflake_cost       # 45% Snowflake cost reduction — strong signal
+    - kix_looker_migration     # Infrastructure migration ownership
     - kix_domino_jenkins           # ML + analytics pipeline migration — $27K/mo
     - kix_etl_repair
-    - kix_sfg_ab_automation        # Automation pipeline
+    - kix_ab_automation        # Automation pipeline
     - ea_ab_automation             # Hive/Jenkins/Redshift workflow
     - ea_licensing_automation      # R + Talend pipeline
 
   exclude_bullets:
-    - kix_sfg_forecasting_model    # DS framing, not infrastructure
-    - kix_sfg_matchmaking_churn    # DS diagnosis, not pipeline
-    - kix_sfg_alliance_recsys      # RecSys, not DE
-    - kix_sfg_churn_model          # ML model, not infrastructure
-    - kix_sfg_content_cadence      # Product analytics framing
+    - kix_forecasting_model    # DS framing, not infrastructure
+    - kix_matchmaking_churn    # DS diagnosis, not pipeline
+    - kix_alliance_recsys      # RecSys, not DE
+    - kix_churn_model          # ML model, not infrastructure
+    - kix_content_cadence      # Product analytics framing
     - kix_ua_strategy              # Business strategy, not engineering
     - kix_ltv_forecast             # Forecasting, not pipeline
     - ea_mab_recsys                # RecSys, not DE
@@ -121,9 +121,9 @@ section_order:
 # ---------------------------------------------------------------------------
 experience_roles_order:
   - kano_senior_de_bi
-  - kix_sfg_lead
-  - kix_sfg_senior
-  - kixeye_product_analyst
+  - kix_lead
+  - kix_senior
+  - kix_product_analyst
   - ea_data_scientist
   - ea_business_analyst
   - pretio_data_scientist

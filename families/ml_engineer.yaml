@@ -11,9 +11,9 @@ summary_ref: ml_engineer
 bullet_selection:
   max_bullets_per_role:
     kano_senior_de_bi: 2          # Infrastructure wins only
-    kix_sfg_lead: 3
-    kix_sfg_senior: 4             # Best MLE signals here
-    kixeye_product_analyst: 3
+    kix_lead: 3
+    kix_senior: 4             # Best MLE signals here
+    kix_product_analyst: 3
     ea_data_scientist: 4          # MAB + churn models in production
     ea_business_analyst: 1        # Thin MLE signal — propensity model only
     pretio_data_scientist: 2
@@ -22,9 +22,9 @@ bullet_selection:
   min_tier: 1
 
   priority_bullets:
-    - kix_sfg_alliance_recsys     # Production RecSys with revenue outcome
-    - kix_sfg_churn_model         # Model improvement with concrete AUC gains
-    - kix_sfg_matchmaking_churn   # System diagnosis + redesign
+    - kix_alliance_recsys     # Production RecSys with revenue outcome
+    - kix_churn_model         # Model improvement with concrete AUC gains
+    - kix_matchmaking_churn   # System diagnosis + redesign
     - kix_domino_jenkins          # ML pipeline migration — strongest MLOps signal
     - kix_spend_conversion        # Production ML tooling + experimentation
     - ea_mab_recsys               # Production MAB in Ruby — RecSys in prod
@@ -34,15 +34,15 @@ bullet_selection:
     - pretio_thompson_sampling    # Online learning algorithm swap
     - pretio_conversion_model     # Probability model in production context
     - kano_etl_performance        # Infrastructure / pipeline performance
-    - kix_sfg_ab_automation       # Automation of ML reporting pipelines
+    - kix_ab_automation       # Automation of ML reporting pipelines
 
   exclude_bullets:
     - kano_rshiny_migration       # BI migration, not ML
     - kano_analyst_adoption       # Team enablement, not MLE
     - kano_dbt                    # AE signal, not MLE
-    - kix_sfg_looker_migration    # BI migration, not ML
-    - kix_sfg_cross_promo         # Business analytics, not MLE
-    - kix_sfg_content_cadence     # Analytics framing, not MLE
+    - kix_looker_migration    # BI migration, not ML
+    - kix_cross_promo         # Business analytics, not MLE
+    - kix_content_cadence     # Analytics framing, not MLE
     - kix_ua_strategy             # Business strategy, not MLE
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Talend/R automation, not ML
@@ -118,9 +118,9 @@ section_order:
 # ---------------------------------------------------------------------------
 experience_roles_order:
   - kano_senior_de_bi
-  - kix_sfg_senior              # Lead with strongest MLE role
-  - kix_sfg_lead
-  - kixeye_product_analyst
+  - kix_senior              # Lead with strongest MLE role
+  - kix_lead
+  - kix_product_analyst
   - ea_data_scientist
   - ea_business_analyst
   - pretio_data_scientist

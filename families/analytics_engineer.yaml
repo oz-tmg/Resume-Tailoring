@@ -8,9 +8,9 @@ summary_ref: analytics_engineer
 bullet_selection:
   max_bullets_per_role:
     kano_senior_de_bi: 4          # This role is the strongest AE signal
-    kix_sfg_lead: 4
-    kix_sfg_senior: 3
-    kixeye_product_analyst: 3
+    kix_lead: 4
+    kix_senior: 3
+    kix_product_analyst: 3
     ea_data_scientist: 2
     ea_business_analyst: 3
     pretio_data_scientist: 2
@@ -23,9 +23,9 @@ bullet_selection:
     - kano_etl_performance         # Strongest technical achievement at Kano
     - kano_rshiny_migration        # Migration + modernization
     - kano_analyst_adoption        # Enablement is core AE value prop
-    - kix_sfg_snowflake_cost       # Cost + orchestration optimization
-    - kix_sfg_looker_migration     # Cross-studio migration ownership
-    - kix_sfg_ab_automation        # Pipeline automation for analytics
+    - kix_snowflake_cost       # Cost + orchestration optimization
+    - kix_looker_migration     # Cross-studio migration ownership
+    - kix_ab_automation        # Pipeline automation for analytics
     - kix_etl_repair               # ETL ownership signal
     - kix_domino_jenkins           # Pipeline migration — strong AE signal
     - ea_ab_automation             # Workflow automation
@@ -35,9 +35,9 @@ bullet_selection:
     - ea_mab_recsys                # Too ML engineering
     - ea_churn_reacquisition_models  # Too DS
     - ea_upsell_segmentation       # Too DS/targeting
-    - kix_sfg_alliance_recsys      # Too DS/RecSys
-    - kix_sfg_churn_model          # Too DS
-    - kix_sfg_matchmaking_churn    # Too DS
+    - kix_alliance_recsys      # Too DS/RecSys
+    - kix_churn_model          # Too DS
+    - kix_matchmaking_churn    # Too DS
     - pretio_thompson_sampling     # Too algorithmic
     - pretio_simulation            # Too modelling
     - tinymob_aso                  # Marketing noise
@@ -111,9 +111,9 @@ section_order:
 # ---------------------------------------------------------------------------
 experience_roles_order:
   - kano_senior_de_bi
-  - kix_sfg_lead
-  - kix_sfg_senior
-  - kixeye_product_analyst
+  - kix_lead
+  - kix_senior
+  - kix_product_analyst
   - ea_data_scientist
   - ea_business_analyst
   - pretio_data_scientist

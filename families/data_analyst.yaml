@@ -9,9 +9,9 @@ bullet_selection:
   # Maximum bullets to show per role. Older/less relevant roles get fewer.
   max_bullets_per_role:
     kano_senior_de_bi: 4
-    kix_sfg_lead: 4
-    kix_sfg_senior: 4
-    kixeye_product_analyst: 3
+    kix_lead: 4
+    kix_senior: 4
+    kix_product_analyst: 3
     ea_data_scientist: 3
     ea_business_analyst: 4
     pretio_data_scientist: 2
@@ -27,10 +27,10 @@ bullet_selection:
     - kano_rshiny_migration
     - kano_etl_performance
     - kano_analyst_adoption
-    - kix_sfg_looker_migration
-    - kix_sfg_forecasting_model
-    - kix_sfg_content_cadence
-    - kix_sfg_ab_automation
+    - kix_looker_migration
+    - kix_forecasting_model
+    - kix_content_cadence
+    - kix_ab_automation
     - kix_etl_repair
     - kix_ltv_forecast
     - kix_ua_strategy
@@ -53,9 +53,9 @@ bullet_selection:
     - ea_churn_reacquisition_models  # Too DS/MLE
     - pretio_thompson_sampling  # Too algorithmic/Bayesian
     - pretio_simulation         # Too modelling-heavy
-    - kix_sfg_churn_model       # AUC framing is DS, not DA
-    - kix_sfg_alliance_recsys   # RecSys framing is DS, not DA
-    - kixeye_product_analyst    # Suppress whole role's MLOps bullets via exclude above
+    - kix_churn_model       # AUC framing is DS, not DA
+    - kix_alliance_recsys   # RecSys framing is DS, not DA
+    - kix_product_analyst    # Suppress whole role's MLOps bullets via exclude above
 
 # ---------------------------------------------------------------------------
 # SKILLS ORDERING
@@ -121,9 +121,9 @@ section_order:
 # ---------------------------------------------------------------------------
 experience_roles_order:
   - kano_senior_de_bi
-  - kix_sfg_lead
-  - kix_sfg_senior
-  - kixeye_product_analyst
+  - kix_lead
+  - kix_senior
+  - kix_product_analyst
   - ea_data_scientist
   - ea_business_analyst
   - pretio_data_scientist

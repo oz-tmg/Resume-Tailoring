@@ -8,9 +8,9 @@ summary_ref: data_scientist
 bullet_selection:
   max_bullets_per_role:
     kano_senior_de_bi: 2          # Weak DS signal — use only infrastructure wins
-    kix_sfg_lead: 4
-    kix_sfg_senior: 4             # Strongest DS role in the portfolio
-    kixeye_product_analyst: 3
+    kix_lead: 4
+    kix_senior: 4             # Strongest DS role in the portfolio
+    kix_product_analyst: 3
     ea_data_scientist: 4          # Strong DS signal
     ea_business_analyst: 3
     pretio_data_scientist: 3
@@ -19,12 +19,12 @@ bullet_selection:
   min_tier: 1                     # DS roles are competitive — lean tier 1 first
 
   priority_bullets:
-    - kix_sfg_forecasting_model   # $14M valuation finding — headline DS win
-    - kix_sfg_matchmaking_churn   # Diagnosis + RecSys redesign
-    - kix_sfg_churn_model         # AUC improvement — concrete model win
-    - kix_sfg_alliance_recsys     # RecSys + revenue outcome
-    - kix_sfg_content_cadence     # Funnel + time-series modelling
-    - kix_sfg_ab_automation       # Experimentation infrastructure
+    - kix_forecasting_model   # $14M valuation finding — headline DS win
+    - kix_matchmaking_churn   # Diagnosis + RecSys redesign
+    - kix_churn_model         # AUC improvement — concrete model win
+    - kix_alliance_recsys     # RecSys + revenue outcome
+    - kix_content_cadence     # Funnel + time-series modelling
+    - kix_ab_automation       # Experimentation infrastructure
     - kix_spend_conversion        # Experimentation + ML tooling
     - kix_ltv_forecast            # Forecasting accuracy
     - ea_ab_test_design           # Experimentation design
@@ -114,9 +114,9 @@ section_order:
 # ---------------------------------------------------------------------------
 experience_roles_order:
   - kano_senior_de_bi
-  - kix_sfg_lead
-  - kix_sfg_senior
-  - kixeye_product_analyst
+  - kix_lead
+  - kix_senior
+  - kix_product_analyst
   - ea_data_scientist
   - ea_business_analyst
   - pretio_data_scientist

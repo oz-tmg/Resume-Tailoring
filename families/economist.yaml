@@ -12,9 +12,9 @@ summary_ref: economist
 bullet_selection:
   max_bullets_per_role:
     kano_senior_de_bi: 0          # No meaningful ECON signal — omit entirely
-    kix_sfg_lead: 2
-    kix_sfg_senior: 2
-    kixeye_product_analyst: 2
+    kix_lead: 2
+    kix_senior: 2
+    kix_product_analyst: 2
     ea_data_scientist: 3
     ea_business_analyst: 4        # Strongest ECON role — propensity, licensing
     pretio_data_scientist: 3
@@ -29,8 +29,8 @@ bullet_selection:
     - ea_ab_test_design           # Experimental design
     - ea_upsell_segmentation      # Behavioral targeting with evidence
     - ea_fifa19_revenue           # Revenue impact from designed experiment
-    - kix_sfg_forecasting_model   # Valuation + $14M overestimation correction
-    - kix_sfg_content_cadence     # Market mechanism / incentive design framing
+    - kix_forecasting_model   # Valuation + $14M overestimation correction
+    - kix_content_cadence     # Market mechanism / incentive design framing
     - kix_ua_strategy             # ROI / investment framing
     - kix_ltv_forecast            # LTV / welfare estimation framing
     - kix_spend_conversion        # Experimentation + behavioral response
@@ -46,12 +46,12 @@ bullet_selection:
     - kano_etl_performance        # Infrastructure, not economics
     - kano_rshiny_migration       # BI tooling, not economics
     - kano_analyst_adoption       # Enablement, not economics
-    - kix_sfg_snowflake_cost      # Infrastructure cost, not economic analysis
-    - kix_sfg_looker_migration    # BI migration, not economics
-    - kix_sfg_ab_automation       # Pipeline automation, not economics
-    - kix_sfg_alliance_recsys     # RecSys framing, not economic
-    - kix_sfg_churn_model         # ML framing, too technical
-    - kix_sfg_matchmaking_churn   # ML/systems framing
+    - kix_snowflake_cost      # Infrastructure cost, not economic analysis
+    - kix_looker_migration    # BI migration, not economics
+    - kix_ab_automation       # Pipeline automation, not economics
+    - kix_alliance_recsys     # RecSys framing, not economic
+    - kix_churn_model         # ML framing, too technical
+    - kix_matchmaking_churn   # ML/systems framing
     - kix_domino_jenkins          # MLOps, not economics
     - kix_etl_repair              # Engineering, not economics
     - ea_mab_recsys               # ML engineering, not economics
@@ -119,9 +119,9 @@ section_order:
 experience_roles_order:
   - ea_business_analyst          # Strongest ECON role
   - ea_data_scientist
-  - kix_sfg_lead
-  - kix_sfg_senior
-  - kixeye_product_analyst
+  - kix_lead
+  - kix_senior
+  - kix_product_analyst
   - pretio_data_scientist
   - tinymob_data_analyst
 
