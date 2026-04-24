@@ -197,11 +197,14 @@
 % List environment %
 %----------------------------------------------------------------------------------------
 
+\RequirePackage{longtable}
 \setlength{\tabcolsep}{0pt}
+\setlength{\LTpre}{0pt}   % removes longtable's default top spacing
+\setlength{\LTpost}{0pt}  % removes longtable's default bottom spacing
 \newenvironment{entrylist}{%
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+  \begin{longtable}{@{}p{1.8cm}@{\hspace{0.2cm}}p{13cm}@{}}
 }{%
-  \end{tabular*}
+  \end{longtable}
 }
 \renewcommand{\bfseries}{\headingfont\color{headercolor}}
 %\newcommand{\entry}[4]{%

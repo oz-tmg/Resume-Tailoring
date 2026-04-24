@@ -114,6 +114,7 @@ def build(family_name: str, posting_path: Path | None = None,
         personal=personal,
         output_dir=output_dir,
         template_dir=ROOT / "templates",
+        repo_root=ROOT,
     )
 
     print(f"\n  ✓ Generated: {tex_path}")
@@ -121,18 +122,55 @@ def build(family_name: str, posting_path: Path | None = None,
 
 
 def compile_pdf(tex_path: Path) -> Path:
-    """Run latexmk to compile .tex → PDF."""
+    """
+    Compile a .tex file to PDF using xelatex (two passes for cross-refs).
+
+    TEXINPUTS is extended to include the repo root so cv-style.cls is found
+    even if _stage_assets hasn't run (e.g. manual invocation). The renderer
+    also copies cv-style.cls into the output dir, so this is belt-and-suspenders.
+    """
+    import os
+
     pdf_path = tex_path.with_suffix(".pdf")
-    print(f"  Compiling PDF: {pdf_path.name}...")
-    result = subprocess.run(
-        ["latexmk", "-pdf", "-interaction=nonstopmode", str(tex_path)],
-        cwd=tex_path.parent,
-        capture_output=True, text=True,
-    )
-    if result.returncode != 0:
-        print("  ✗ LaTeX compilation failed. Log:")
-        print(result.stdout[-3000:])   # tail of log is most useful
-        sys.exit(1)
+    print(f"  [compile] {tex_path.name} → {pdf_path.name}")
+
+    # Build TEXINPUTS: current dir + output dir + repo root + original value
+    env = os.environ.copy()
+    existing = env.get("TEXINPUTS", "")
+    # Colon-separated on macOS/Linux; semicolon on Windows
+    sep = ";" if os.name == "nt" else ":"
+    env["TEXINPUTS"] = sep.join(filter(None, [
+        ".",
+        str(tex_path.parent),   # output/data_analyst/
+        str(ROOT),              # repo root — cv-style.cls lives here
+        str(ROOT / "fonts"),    # fonts/ for fontspec
+        existing,
+    ])) + sep                   # trailing separator = also search TeX defaults
+
+    xelatex_cmd = [
+        "/Library/TeX/texbin/xelatex",   # explicit path avoids PATH issues
+        "-file-line-error",
+        "-interaction=nonstopmode",
+        "-synctex=1",
+        str(tex_path),
+    ]
+
+    # Two passes: first builds .aux, second resolves cross-references
+    for pass_num in (1, 2):
+        result = subprocess.run(
+            xelatex_cmd,
+            cwd=tex_path.parent,
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            print(f"  ✗ xelatex pass {pass_num} failed. Log tail:\n")
+            # Print last 60 lines — the error is almost always at the end
+            lines = (result.stdout + result.stderr).splitlines()
+            print("\n".join(lines[-60:]))
+            sys.exit(1)
+
     print(f"  ✓ PDF ready: {pdf_path}")
     return pdf_path
 

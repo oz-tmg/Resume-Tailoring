@@ -49,7 +49,6 @@ make all
 content/
 ├── experience/     ← YAML source of truth, one file per company
 │   ├── kano.yaml
-│   ├── kixeye_sfg.yaml
 │   ├── kixeye.yaml
 │   ├── ea.yaml
 │   ├── pretio.yaml
