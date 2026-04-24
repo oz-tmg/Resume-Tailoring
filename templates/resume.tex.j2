@@ -7,6 +7,17 @@
 \usepackage{fontawesome5}
 \usepackage{pifont}
 
+%% Asset path — injected by renderer.py as the absolute path to the repo root.
+%% This allows fonts/ and icons/ to live once at the repo root and be found
+%% regardless of which output subdirectory this .tex file is compiled from.
+%% \graphicspath accepts a list of directories with trailing slashes.
+\graphicspath{
+  {<< assets_root >>/}
+  {<< assets_root >>/icons/logos/}
+  {<< assets_root >>/icons/main/}
+  {./}
+}
+
 %% Personal information — injected from content/personal.yaml
 %% \input{info} is intentionally NOT used; header_title comes from
 %% the family file, not a hardcoded \mytitle macro.
@@ -116,7 +127,7 @@ acquisition assessment.
 %% SIDEBAR — PAGE 2  (Data Science Skillset)
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\vspace{-1.0cm}
+\leavevmode\vspace{-1.0cm}
 \section{\LARGE Data Science Skillset}
 \noindent\rule{\textwidth}{0.4pt}
 \vspace{-0.2cm}
@@ -137,7 +148,7 @@ acquisition assessment.
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\vspace{-1.0cm}
+\leavevmode\vspace{-1.0cm}
 \section{\LARGE Data Engineering Toolkit}
 \noindent\rule{\textwidth}{0.4pt}
 <% if skills.data_engineering is defined and skills.data_engineering %>
