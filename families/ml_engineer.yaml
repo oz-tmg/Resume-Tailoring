@@ -47,7 +47,7 @@ bullet_selection:
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Talend/R automation, not ML
     - ea_licensing_models         # Statistical, not ML production
-    - ea_analyticon               # Presentation, not MLE
+    - ea_companion_app_analyticon               # Presentation, not MLE
     - ea_companion_app_revenue    # Business outcome without ML framing
     - pretio_mab_reporting        # Reporting, not model engineering
     - pretio_simulation           # Modelling exploration, not production ML

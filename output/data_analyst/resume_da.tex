@@ -12,9 +12,9 @@
 %% regardless of which output subdirectory this .tex file is compiled from.
 %% \graphicspath accepts a list of directories with trailing slashes.
 \graphicspath{
-  {/Users/Ender/Projects/Latex/Resume-Tailoring/}
-  {/Users/Ender/Projects/Latex/Resume-Tailoring/icons/logos/}
-  {/Users/Ender/Projects/Latex/Resume-Tailoring/icons/main/}
+  {/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/}
+  {/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/icons/logos/}
+  {/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/icons/main/}
   {./}
 }
 
@@ -54,36 +54,13 @@
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 1
+%% Family-specific aside. The file is static per family and maintained
+%% under sections/aside-pg1/. \leavevmode protects the leading \vspace
+%% from being swallowed when it's the first thing inside the aside.
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\vspace{3.5cm}%
-\section{EXPERIENCE BREAKDOWN}
-\vspace{-0.1cm}%
-\noindent\rule{\textwidth}{0.4pt}
-Experimentation \hfill 8 yrs \\
-Product Analytics \hfill 8 yrs \\
-Predictive Models \hfill 7 yrs \\
-Target RecSys \hfill 4 yrs \\
-Data Engineering \hfill 4 yrs \\
-Team Leadership \hfill 3 yrs \\
-Analytics Mgmt. \hfill 3 yrs \\
-~ \\
-Total Exp.: \hfill 10 yrs
-\noindent\rule{\textwidth}{0.4pt}%
-\vspace{-0.1cm}%
-\section{KEY VICTORIES}%
-\vspace{-0.25cm}
-\section{\large \faGem Personalization Impact}
-Built recommendation and targeting models that improved engagement,
-retention, and spend conversion across live digital products.
-\section{\large \faGem Experimentation Leadership}
-Designed and automated ML and A/B test measurement workflows that
-improved decision quality, accelerated readouts, and expanded
-stakeholder access to learnings.
-\section{\large \faGem Forecasting \& Valuation}
-Built long-term forecasting models used in strategic investment
-decisions, including identifying a \$14M overestimation in a game
-acquisition assessment.
+\leavevmode\vspace{3.5cm}%
+\input{/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/sections/aside-pg1/aside-pg1-da}
 \end{aside}
 
 %% -----------------------------------------------------------------------
@@ -312,32 +289,14 @@ acquisition assessment.
 
 
 %% -----------------------------------------------------------------------
-%% SIDEBAR — PAGE 2  (Data Science Skillset)
+%% SIDEBAR — PAGE 2
+%% Family-specific aside. Static files in sections/aside-pg2/ carry the
+%% family's curated skillset. \leavevmode protects any leading \vspace
+%% inside the included file from being dropped at the aside boundary.
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\leavevmode\vspace{-1.0cm}
-\section{\LARGE Data Science Skillset}
-\noindent\rule{\textwidth}{0.4pt}
-\vspace{-0.2cm}
-
-~
-
-\textbf{\large A/B Testing \& Experimentation} \\
-
-\textbf{\large Causal Inference} \\
-
-\textbf{\large Forecasting} \\
-
-\textbf{\large Churn Prediction} \\
-
-\textbf{\large Behavioral Clustering} \\
-
-
-
-\section{\LARGE Programming}
-\noindent\rule{\textwidth}{0.4pt}
-SQL, Python, R
-
+\leavevmode%
+\input{/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/sections/aside-pg2/aside-pg2-da}
 \end{aside}
 
 %% -----------------------------------------------------------------------

@@ -34,7 +34,17 @@ def validate_all(root: Path) -> bool:
     skills     = load_skills(root / "content" / "skills.yaml")
     summaries  = load_summaries(root / "content" / "summaries.yaml")
 
-    bullet_ids = set(experience["by_id"].keys())
+    # Collect both top-level bullet IDs and sub-bullet IDs so family file
+    # references can target either level (e.g. priority/exclude a sub-bullet
+    # like ea_companion_app_analyticon without also pulling its parent).
+    bullet_ids: set[str] = set(experience["by_id"].keys())
+    for company in experience["companies"]:
+        for role in company["roles"]:
+            for bullet in role["bullets"]:
+                for sub in bullet.get("sub_bullets", []):
+                    if "id" in sub:
+                        bullet_ids.add(sub["id"])
+
     role_ids   = {
         role["id"]
         for company in experience["companies"]

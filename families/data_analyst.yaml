@@ -40,7 +40,7 @@ bullet_selection:
     - ea_exec_reporting
     - ea_licensing_automation
     - ea_companion_app
-    - ea_analyticon
+    - ea_companion_app_analyticon
     - tinymob_churn_gameplay
     - tinymob_paywall_cannibalisation
     - tinymob_free_rider
@@ -55,7 +55,6 @@ bullet_selection:
     - pretio_simulation         # Too modelling-heavy
     - kix_churn_model       # AUC framing is DS, not DA
     - kix_alliance_recsys   # RecSys framing is DS, not DA
-    - kix_product_analyst    # Suppress whole role's MLOps bullets via exclude above
 
 # ---------------------------------------------------------------------------
 # SKILLS ORDERING

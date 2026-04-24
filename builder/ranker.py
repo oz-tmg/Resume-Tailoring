@@ -22,11 +22,24 @@ import os
 import textwrap
 from typing import Any
 
-import anthropic
-
 
 MODEL = "claude-sonnet-4-6"
-client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY from env
+
+# The Anthropic client is instantiated lazily so that importing this
+# module — which build.py does unconditionally — does NOT require the
+# `anthropic` package to be installed or `ANTHROPIC_API_KEY` to be set.
+# Base family builds and `make validate` never hit the API; only the
+# posting pipeline does.
+_client = None
+
+
+def _get_client():
+    """Lazy-init the Anthropic client on first use."""
+    global _client
+    if _client is None:
+        import anthropic  # imported lazily for the same reason
+        _client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+    return _client
 
 
 # ---------------------------------------------------------------------------
@@ -97,7 +110,7 @@ def _rank_bullets(flat: list, posting_text: str, family: dict) -> dict[str, int]
         No explanation, no markdown fences, just the JSON object.
     """).strip()
 
-    response = client.messages.create(
+    response = _get_client().messages.create(
         model=MODEL,
         max_tokens=1000,
         messages=[{"role": "user", "content": prompt}],
@@ -158,7 +171,7 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
         No explanation, no markdown fences, just the JSON object.
     """).strip()
 
-    response = client.messages.create(
+    response = _get_client().messages.create(
         model=MODEL,
         max_tokens=2000,
         messages=[{"role": "user", "content": prompt}],
@@ -244,7 +257,7 @@ def revoice_summary(base_summary: str, posting_text: str,
         Return ONLY the rewritten summary paragraph. No explanation.
     """).strip()
 
-    response = client.messages.create(
+    response = _get_client().messages.create(
         model=MODEL,
         max_tokens=400,
         messages=[{"role": "user", "content": prompt}],

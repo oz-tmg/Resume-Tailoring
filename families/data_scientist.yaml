@@ -43,7 +43,7 @@ bullet_selection:
     - kano_analyst_adoption       # Team enablement, not DS
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Automation, not modelling
-    - ea_analyticon               # Presentation, not DS work
+    - ea_companion_app_analyticon               # Presentation, not DS work
     - tinymob_aso                 # Marketing, not DS
     - tinymob_kpi_monitoring      # Reporting, not DS
     - tinymob_database_investment # Stakeholder influence, not DS

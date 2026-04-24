@@ -59,7 +59,7 @@ bullet_selection:
     - ea_ab_automation            # Pipeline automation, not economics
     - ea_exec_reporting           # Reporting, not economics
     - ea_licensing_automation     # Automation, not economic analysis
-    - ea_analyticon               # Presentation, not economics
+    - ea_companion_app_analyticon               # Presentation, not economics
     - tinymob_kpi_monitoring      # Monitoring, not economic analysis
     - tinymob_aso                 # Marketing, not economics
     - tinymob_database_investment # Infrastructure decision, not economics
