@@ -82,6 +82,78 @@ def _stage_assets(output_dir: Path, repo_root: Path) -> None:
 # Main render function
 # ---------------------------------------------------------------------------
 
+def _apply_education_mode(education_entries: list[dict],
+                          family: dict,
+                          mode: str) -> list[dict]:
+    """
+    Apply education display mode to the education entries.
+
+    Modes:
+      "full"      — return entries unchanged (current behaviour).
+      "condensed" — drop entries whose relevant_families doesn't include
+                    this family, then trim each remaining entry's
+                    `accomplishments` to the indices listed in
+                    `entry["condensed"][FAMILY_ID]`. Special value "all"
+                    keeps every accomplishment. Missing/empty list = no
+                    accomplishments shown (focus, thesis_url, dates,
+                    institution, degree are always preserved).
+    """
+    if mode == "full":
+        return education_entries
+
+    fam_id = family["id"]
+    out: list[dict] = []
+    for entry in education_entries:
+        rel = entry.get("relevant_families")
+        # If relevant_families is set and excludes this family, drop entry
+        if rel and fam_id not in rel:
+            continue
+
+        condensed_map = entry.get("condensed", {}) or {}
+        keep = condensed_map.get(fam_id, [])  # default = drop all accomplishments
+
+        accomplishments = entry.get("accomplishments", []) or []
+        if keep == "all":
+            kept = accomplishments
+        elif isinstance(keep, list):
+            kept = [accomplishments[i] for i in keep if 0 <= i < len(accomplishments)]
+        else:
+            kept = []
+
+        # Shallow copy so we don't mutate the loaded data
+        new_entry = {**entry, "accomplishments": kept}
+        out.append(new_entry)
+    return out
+
+
+def _select_certifications(certifications: list[dict],
+                           family: dict,
+                           edu_config: dict) -> list[dict]:
+    """
+    Filter the certifications list according to family rules.
+
+    Precedence:
+      1. Explicit allowlist `family.education.certifications_to_show: [id, ...]`
+         picks specific cert ids in order.
+      2. Else, drop any cert whose `relevant_families` doesn't include this
+         family (or has no `relevant_families` field — fall through unchanged).
+    """
+    show_certs = edu_config.get("certifications_to_show", None)
+    if show_certs is not None:
+        # Preserve the order specified by the family file
+        cert_by_id = {c["id"]: c for c in certifications}
+        return [cert_by_id[cid] for cid in show_certs if cid in cert_by_id]
+
+    fam_id = family["id"]
+    out: list[dict] = []
+    for c in certifications:
+        rel = c.get("relevant_families")
+        if rel and fam_id not in rel:
+            continue
+        out.append(c)
+    return out
+
+
 def render_tex(family: dict,
                resolved_experience: list[dict],
                skills: dict,
@@ -90,11 +162,21 @@ def render_tex(family: dict,
                personal: dict,
                output_dir: Path,
                template_dir: Path,
-               repo_root: Path) -> Path:
+               repo_root: Path,
+               education_mode: str | None = None,
+               certs_placement: str | None = None) -> Path:
     """
     Render resume.tex.j2 with all pipeline data and write to output_dir.
     Stages cv-style.cls and fonts/ alongside the .tex so any compiler works.
     Returns the path to the generated .tex file.
+
+    education_mode  — "full" | "condensed". If None, fall back to
+                      family.education.mode (default: "full").
+    certs_placement — "education" | "aside" | "omit". If None, fall back to
+                      family.education.certifications_placement (default:
+                      "education"). "aside" passes certifications into a
+                      separate `certifications_aside` template variable so
+                      they can render in the page-3 sidebar instead.
     """
     env = Environment(
         loader=FileSystemLoader(str(template_dir)),
@@ -111,25 +193,52 @@ def render_tex(family: dict,
 
     ordered_skills = select_skills(skills, family)
 
-    edu_config   = family.get("education", {})
-    show_certs   = edu_config.get("certifications_to_show", None)
-    all_certs    = education["certifications"]
-    certs_to_show = (
-        [c for c in all_certs if c["id"] in show_certs]
-        if show_certs is not None else all_certs
+    edu_config = family.get("education", {})
+
+    # Resolve education_mode and certs_placement: CLI argument wins, family
+    # default is the fallback, then the hard-coded default.
+    if education_mode is None:
+        education_mode = edu_config.get("mode", "full")
+    if certs_placement is None:
+        certs_placement = edu_config.get("certifications_placement", "education")
+
+    if education_mode not in ("full", "condensed"):
+        raise ValueError(f"Invalid education_mode: {education_mode!r}")
+    if certs_placement not in ("education", "aside", "omit"):
+        raise ValueError(f"Invalid certs_placement: {certs_placement!r}")
+
+    education_to_show = _apply_education_mode(
+        education["education"], family, education_mode
+    )
+    selected_certs    = _select_certifications(
+        education["certifications"], family, edu_config
     )
 
+    # Route certs to the right template slot based on placement.
+    if certs_placement == "omit":
+        certs_inline = []
+        certs_aside  = []
+    elif certs_placement == "aside":
+        certs_inline = []
+        certs_aside  = selected_certs
+    else:  # "education"
+        certs_inline = selected_certs
+        certs_aside  = []
+
     context = {
-        "family":          family,
-        "personal":        personal["personal"],
-        "summary_text":    summary["text"],
-        "experience":      resolved_experience,
-        "skills":          ordered_skills,
-        "education":       education["education"],
-        "certifications":  certs_to_show,
-        "header_title":    family["header_title"],
+        "family":               family,
+        "personal":             personal["personal"],
+        "summary_text":         summary["text"],
+        "experience":           resolved_experience,
+        "skills":               ordered_skills,
+        "education":            education_to_show,
+        "education_mode":       education_mode,
+        "certifications":       certs_inline,
+        "certifications_aside": certs_aside,
+        "certs_placement":      certs_placement,
+        "header_title":         family["header_title"],
         # Forward-slash path for LaTeX compatibility on all platforms
-        "assets_root":     str(repo_root).replace("\\", "/"),
+        "assets_root":          str(repo_root).replace("\\", "/"),
     }
 
     template  = env.get_template("resume.tex.j2")
