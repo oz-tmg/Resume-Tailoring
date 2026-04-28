@@ -98,17 +98,42 @@ All source-of-truth content has been written and tagged:
 
 ## What Remains
 
-### High Priority — Needed to Make the Pipeline Runnable
+### High Priority — ✅ Completed (April 2026)
 
-| Task | Details |
-|------|---------|
-| **Ensure `\aside{}` for page 1 and 2** | There are already templated tex files for each job family in /sections that need to be tested to ensure they work, look alright, and optimized with the best criteria |
-| **Rank Achievements** | There are already templated tex files for each job family in /sections that need to be tested to ensure they work, look alright, and optimized with the best criteria |
-| **Fix `resume.tex.j2`** | Validate the Jinja2 template produces `.tex` that compiles cleanly. Remove `\input{info}`. Inject `personal` context. Apply `\leavevmode` fix to aside vspace openings. Test that each family produces a valid, clean PDF. |
-| **End-to-end test: `make ds`** | Run the full pipeline for the DS family. Verify selector, resolver, renderer output. Compile the output `.tex` and check the PDF looks right. |
-| **End-to-end test: all families** | Run `make all`. Fix any per-family layout issues (bullet count, page overflow, section ordering). |
-| **Validate YAML integrity** | Run `make validate`. Fix any referential integrity errors (missing bullet IDs, undefined family references, etc.). |
-| **Validate `resume_bullet_manager.py`** | Ensure the script is capable of taking a resume and uses the same logic used to vet, score, and rank the experience bullet points founded within it while also capable of adding new listed bulleted points of experience for a matched job title within the proper experience .yaml file while also ensuring that it doesn't duplicate experience already documented. |
+| Task | Status | Notes |
+|------|--------|-------|
+| **Ensure `\aside{}` for page 1 and 2** | ✅ Done | All 6 families have aside-pg1 + aside-pg2 files; MLE variants authored; `\leavevmode` fix applied via template. |
+| **Rank Achievements** | ✅ Done | Structural parity across all 6 families (3 Key Victory gems each on pg1). DA swapped $14M forecasting (belonged to ECON) for licensing-automation win; ECON added a third gem surfacing the published CIRANO thesis; AE traded abstract "Scalable Analytics" for concrete Domino→Jenkins modernisation; DE collapsed Infra subsection into Storage & Warehouse for count parity. |
+| **Fix `resume.tex.j2`** | ✅ Done | `\input{info}` removed; `personal` context injected; `\leavevmode` fix applied to both aside openings; template uses `<< assets_root >>` for portable aside `\input` paths. |
+| **End-to-end test: `make ds`** | ✅ Done | DS pipeline runs clean end-to-end. |
+| **End-to-end test: all families** | ✅ Done | `make all` generates all 6 family .tex outputs with correct family-specific aside references. |
+| **Validate YAML integrity** | ✅ Done | `make validate` runs clean. Fixed: `ea_analyticon`→`ea_companion_app_analyticon` rename across family files; removed dead `kix_product_analyst` exclude reference; extended validator to index sub_bullet IDs. |
+| **Validate `resume_bullet_manager.py`** | ✅ Done | (a) Lazy-loaded the Anthropic client (was breaking imports at module load when SOCKS proxy was active / API key unset). (b) Added new `--add-pipeline` mode that writes directly to `content/experience/*.yaml` with full schema (id, families, keywords, tier) and dedupes against every bullet + sub_bullet + variant in the target role. (c) Text-preserving append so folded scalars (`text: >`), flow-style lists (`[DS, DA]`), and blank lines in Alex's hand-maintained YAML survive edits. End-to-end test confirms reload + validate are clean. |
+
+### Known Content Gap — ✅ Resolved (April 2026)
+
+Two new bullets added to `content/experience/kano.yaml`:
+- `kano_anomaly_detection` (tier 1; DS, MLE, AE, DE) — anomaly detection
+  framework migrated off RShiny onto Python/DBT/Prefect/Athena/Quicksight,
+  with irregular-cadence events folded in via cadence-aware standard errors.
+  Promoted to top of DS and MLE priority lists.
+- `kano_legacy_dsm_review` (tier 3; DS, MLE) — audit of inherited
+  decision-tree / random-forest assets, recommended against migration.
+  Stays out of base resumes (DS/MLE `min_tier: 1`) but available for
+  posting-tailored builds when the role asks for governance/judgement signal.
+
+In addition, **cross-family promotion** lets DS and MLE surface
+`kano_etl_performance` (the Parquet/Iceberg ETL win) even though it isn't
+tagged DS/MLE. The mechanism is general-purpose — see "Cross-family
+promotion" below.
+
+### Build Options Added (April 2026)
+
+| Option | CLI | YAML default | Effect |
+|--------|-----|--------------|--------|
+| **Cross-family bullet promotion** | n/a | `families/<f>.yaml: bullet_selection.promote_bullets: [bullet_id, ...]` | Force-includes a bullet on this family even when its `families` list doesn't include the target family. Tier and exclude filters still apply. Useful where DS/MLE work overlaps with DA/DE/AE (BI viz, ETLs, modelling). |
+| **Education condensed mode** | `--education-mode {full,condensed}` | `families/<f>.yaml: education.mode: condensed` | Drops education entries whose `relevant_families` excludes this family, then trims accomplishments per `entry.condensed.<FAMILY>` (`"all"` keeps all; list of indices keeps a subset; missing/empty drops them). Focus, thesis_url, dates, institution, degree always preserved. |
+| **Certifications placement** | `--certs-placement {education,aside,omit}` | `families/<f>.yaml: education.certifications_placement: aside` | `education` (default) renders certs inline under Education. `aside` routes them to the page-3 sidebar (below Data Engineering Toolkit). `omit` drops them entirely. |
 
 ### Medium Priority — Quality and Completeness
 
@@ -118,6 +143,7 @@ All source-of-truth content has been written and tagged:
 | **`interests.tex` / `references.tex`** | Decide whether these belong in a YAML layer or are omitted from the builder entirely (they're currently sidebar/optional content). |
 | **Cover letter template** | `personal.yaml` has a `cover_letter` block stubbed out. A `cover_letter.tex.j2` template + `make cover F=... P=...` target needs building. |
 | **README.md for resume-builder** | The README scaffold was produced (see prior chat) but may need refinement once end-to-end tests pass. |
+| **Family-level defaults for new build options** | The new `education.mode` and `education.certifications_placement` family-level defaults aren't set anywhere yet — every family currently uses CLI defaults (`full` + `education`). Decide per-family whether condensed should be the default for non-ECON families. |
 
 ### Lower Priority — Nice to Have
 
@@ -127,7 +153,7 @@ All source-of-truth content has been written and tagged:
 | **`postings/` gitignore strategy** | Decide whether to gitignore posting content entirely, gitignore just PDFs, or keep all of it. |
 | **Automated PDF output naming** | Currently output goes to `output/data_scientist/resume.pdf`. Consider `output/alex_oswald_DS_2026.pdf` naming convention for easier file management when sending applications. |
 | **Side-by-side diff view** | A utility to visually compare two family outputs side-by-side to sanity-check that tailoring is actually happening. |
-| **Certifications in content layer** | `certificates.tex` has Coursera/Udacity certs (2026). These need to be in `education.yaml` with family tags and rendered in the template. |
+| **Certifications in content layer** | ✅ Done. `education.yaml` carries `certifications:` with `relevant_families` per entry, and the renderer now filters by family. Placement is configurable (`--certs-placement education|aside|omit`). |
 
 ---
 

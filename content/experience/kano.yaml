@@ -50,3 +50,31 @@ roles:
         keywords: [onboarding, documentation, standardization, collaboration,
                    reporting, team enablement]
         tier: 2
+
+      - id: kano_anomaly_detection
+        text: >
+          Migrated the analytical-event anomaly detection framework off
+          RStudio Server and RShiny onto Python, DBT SQL, Prefect, AWS
+          Athena, and Quicksight; extended coverage to irregular-cadence
+          events that the prior framework dropped, by folding their known
+          cadence into the standard error calculation so they alert against
+          the right baseline.
+        families: [DS, MLE, AE, DE]
+        keywords: [anomaly detection, statistical monitoring, Python, DBT,
+                   Prefect, AWS Athena, Quicksight, RShiny migration,
+                   irregular cadence, standard error, time series,
+                   production monitoring]
+        tier: 1
+
+      - id: kano_legacy_dsm_review
+        text: >
+          Audited inherited data science assets — decision-tree and
+          random-forest churn and behaviour models trained on poorly
+          sampled data — and recommended against migrating them, citing
+          disuse and predictive power that was both underwhelming and
+          misleading against current event definitions.
+        families: [DS, MLE]
+        keywords: [model audit, model governance, decision trees, random
+                   forests, sampling bias, predictive validity, technical
+                   debt]
+        tier: 3

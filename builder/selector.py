@@ -23,7 +23,9 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
 
     Selection logic (in order of precedence):
       1. Role must appear in family["experience_roles_order"]
-      2. Bullet must list this family in its "families" field
+      2. Bullet must list this family in its "families" field, OR be
+         force-included via family["bullet_selection"]["promote_bullets"]
+         (cross-family promotion — see note below)
       3. Bullet must NOT be in family["bullet_selection"]["exclude_bullets"]
       4. Bullet tier must be <= family["bullet_selection"]["min_tier"]
          (lower number = more important, so tier 1 passes min_tier 2,
@@ -32,6 +34,15 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
          family["bullet_selection"]["max_bullets_per_role"]
       6. Priority bullets (listed in family config) are moved to the front
          within each role before the cap is applied.
+
+    Cross-family promotion (`promote_bullets`):
+      DS and MLE work overlaps heavily with DA/DE/AE work — BI dashboards,
+      ETLs, data modelling, exploratory analysis. When a role has thin
+      in-family signal but useful sibling-family bullets, list those
+      bullet ids in `promote_bullets` to surface them anyway. Tier and
+      exclude filters still apply; promotion only bypasses the family-tag
+      check. Promoted bullets that are also in `priority_bullets` keep
+      their priority placement.
     """
     fam_id       = family["id"]
     rules        = family["bullet_selection"]
@@ -39,6 +50,7 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
     max_per_role = rules.get("max_bullets_per_role", {})
     priority_ids = set(rules.get("priority_bullets", []))
     exclude_ids  = set(rules.get("exclude_bullets", []))
+    promote_ids  = set(rules.get("promote_bullets", []))
     role_order   = family["experience_roles_order"]
 
     # Build a lookup: role_id → (company_meta, role_dict)
@@ -70,7 +82,10 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
 
             if bid in exclude_ids:
                 continue
-            if fam_id not in bullet.get("families", []):
+            # Family tag check, with cross-family promotion bypass.
+            in_family    = fam_id in bullet.get("families", [])
+            is_promoted  = bid in promote_ids
+            if not in_family and not is_promoted:
                 continue
             if bullet.get("tier", 99) > min_tier:
                 continue

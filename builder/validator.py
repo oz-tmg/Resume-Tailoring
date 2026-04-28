@@ -127,6 +127,14 @@ def validate_all(root: Path) -> bool:
                     f"unknown bullet '{bid}'"
                 )
 
+        # bullet ids in promote_bullets exist (cross-family promotion)
+        for bid in bs.get("promote_bullets", []):
+            if bid not in bullet_ids:
+                warnings.append(
+                    f"[{label}] promote_bullets references "
+                    f"unknown bullet '{bid}'"
+                )
+
         # Skills in skills_order exist in master skills.yaml
         def _check_skills(order_node, path=""):
             if isinstance(order_node, list):
