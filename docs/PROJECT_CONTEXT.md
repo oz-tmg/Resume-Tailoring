@@ -1,6 +1,6 @@
 # PROJECT_CONTEXT.md — Current Status & Remaining Work
 
-Last updated: April 2026
+Last updated: May 2026
 
 ---
 
@@ -134,6 +134,184 @@ promotion" below.
 | **Cross-family bullet promotion** | n/a | `families/<f>.yaml: bullet_selection.promote_bullets: [bullet_id, ...]` | Force-includes a bullet on this family even when its `families` list doesn't include the target family. Tier and exclude filters still apply. Useful where DS/MLE work overlaps with DA/DE/AE (BI viz, ETLs, modelling). |
 | **Education condensed mode** | `--education-mode {full,condensed}` | `families/<f>.yaml: education.mode: condensed` | Drops education entries whose `relevant_families` excludes this family, then trims accomplishments per `entry.condensed.<FAMILY>` (`"all"` keeps all; list of indices keeps a subset; missing/empty drops them). Focus, thesis_url, dates, institution, degree always preserved. |
 | **Certifications placement** | `--certs-placement {education,aside,omit}` | `families/<f>.yaml: education.certifications_placement: aside` | `education` (default) renders certs inline under Education. `aside` routes them to the page-3 sidebar (below Data Engineering Toolkit). `omit` drops them entirely. |
+
+---
+
+## Selection Logic — Posting-Aware Mode + Diversity (May 2026)
+
+### The Bug We Fixed
+
+Until May 2026 the selector applied family rules as a **hard cut before
+the posting was ever read**. A bullet whose `families:` list didn't
+include the target family was dropped at step 2 of the pipeline; the
+ranker (step 4, the only stage that ever sees the posting) never got a
+chance to score it. This meant a Data Scientist posting that cared
+deeply about, say, "ETL performance optimization on Parquet/Iceberg"
+would silently exclude the Kano Parquet ETL bullet because that bullet
+is tagged `[DE, AE]` — even though the posting itself was begging for
+exactly that signal.
+
+The architectural rule has been changed from:
+
+> *Role must appear in family.*
+
+to:
+
+> *An experience bullet must align with the posting OR be relevant to
+> the job family of the posting.*
+
+### Two Modes
+
+| Mode | Triggered when | Family rule | Tier floor | Per-role pool | Output |
+|------|---------------|-------------|------------|---------------|--------|
+| **Base** | `--posting` not provided | Hard: `family ∈ bullet.families` OR `bullet ∈ promote_bullets` | `min_tier` | `max_bullets_per_role[role_id]` | Final selection — goes straight to renderer |
+| **Posting-tailored** | `--posting <path>` | Soft: `(family ∈ bullet.families)` OR `(bullet ∈ promote_bullets)` OR `(posting_fit ≥ posting_fit_threshold)` | `min_tier + 1` (relaxed by 1) | `max_bullets_per_role[role_id] × posting_pool_multiplier` | Candidate pool — ranker scores it, then `apply_diversity_and_cap` trims to base cap |
+
+In both modes the `exclude_bullets` list and `experience_roles_order` are
+honored as hard structural rules. Roles not listed in
+`experience_roles_order` are never admitted (this keeps the resume
+structurally stable across postings — no surprise roles appearing).
+
+### How `posting_fit` is Scored
+
+A deterministic, no-API token-bag overlap (computed in `selector.py`,
+not by Claude):
+
+1. Tokenize the posting: lowercase, drop stopwords and 1–2-char tokens,
+   keep hyphenated tech terms whole (so `multi-armed`, `scikit-learn`,
+   `A/B`-style terms survive).
+2. Tokenize the bullet's full searchable surface — `text` +
+   `keywords` + every `variants.<FAM>` body + every `sub_bullets[].text`
+   and `sub_bullets[].keywords` — through the same tokenizer.
+3. `posting_fit = |bullet_tokens ∩ posting_tokens| / min(|bt|, |pt|)`.
+   Smaller-side denominator avoids penalizing concise bullets when the
+   posting is long. Returns a value in `[0, 1]`.
+4. Admit the bullet to the candidate pool if `posting_fit ≥
+   posting_fit_threshold` (default 0.08).
+
+This is intentionally cheap. Stage 1 of the ranker (the Claude API call)
+re-scores the surviving pool with semantic understanding 0–3; the local
+score is just a gate, not a final ranking signal.
+
+### Diversity-Aware Cap (`apply_diversity_and_cap`)
+
+Once Claude has scored every pool entry, each role's pool is trimmed to
+`max_bullets_per_role[role_id]` by a greedy pick that penalizes
+redundancy. Composite score for each remaining candidate, recomputed
+after every pick:
+
+```
+composite = +10 * posting_score              # Claude's 0–3 score
+            +5   if bullet in priority_bullets
+            -1   * bullet.tier
+            -redundancy_weight * max_sim     # only if max_sim ≥ threshold
+```
+
+where `max_sim` is the maximum keyword-Jaccard similarity between this
+candidate and any bullet already picked in the same role. Bullets whose
+closest sibling has Jaccard `< redundancy_threshold` (default 0.55) lose
+nothing — the penalty kicks in only for genuine duplicates. Pick the
+highest composite, append, repeat until cap reached.
+
+This solves the "two roles, same project" problem: when EA's
+`ea_recommendation_engine` and Pretio's `pretio_targeting_engine` both
+rank highly for a recsys posting, the diversity pass keeps both (their
+keyword sets diverge — Thompson Sampling vs collaborative filtering)
+but suppresses near-duplicates within the same role.
+
+### Configurable Knobs
+
+All on `family["bullet_selection"]`, all optional with sensible defaults:
+
+| Knob | Default | Purpose |
+|------|---------|---------|
+| `min_tier` | 2 | Base-mode tier floor. |
+| `posting_min_tier` | `min_tier + 1` | Posting-mode tier floor (relaxed). |
+| `posting_pool_multiplier` | 2.0 | Pool widens to `cap × this` in posting mode. |
+| `posting_fit_threshold` | 0.08 | Minimum `posting_fit` to admit an out-of-family bullet. |
+| `redundancy_threshold` | 0.55 | Jaccard above which redundancy penalty applies. |
+| `diversity_pref` | `true` | Toggle the redundancy term off (back to score-only). |
+
+### Bullet Annotations Carried Through the Pipeline
+
+`select_bullets` annotates each surviving bullet with metadata used by
+the diversity pass and useful for debugging / future telemetry:
+
+- `_in_family` — true if `family ∈ bullet.families`
+- `_is_promoted` — true if bullet id is in `promote_bullets`
+- `_posting_fit` — float in `[0, 1]` (0 in base mode)
+- `_admitted_via_posting` — true iff the bullet passed only because of
+  `posting_fit` (i.e. would have been excluded by base-mode rules)
+
+Roles also carry `_role_cap` (the base cap from
+`max_bullets_per_role`) so the ranker's `apply_diversity_and_cap` step
+knows what to trim down to.
+
+### Future Evolution — Concept Tags + Per-Concept Caps
+
+The current diversity pass works on raw keyword Jaccard. That's good
+enough for the "same role, same project" case but blunt for the
+**cross-role same-concept** case (EA recsys + Pretio recsys + Kano
+behavioural targeting all hit the same hiring signal — does the resume
+need three of them?).
+
+Proposed schema evolution — **concept tags**, an opt-in second
+classification layer on bullets:
+
+```yaml
+# content/experience/<file>.yaml
+- id: ea_recommendation_engine
+  text: ...
+  families: [DS, MLE, DA]
+  keywords: [recommendation systems, collaborative filtering, ranking]
+  concepts: [recsys, personalization]
+  tier: 1
+```
+
+With a starter taxonomy:
+
+| Concept id | Examples |
+|------------|----------|
+| `etl_optimization` | Parquet/Iceberg migrations, partition tuning, cost reduction |
+| `recsys` | recommendation engines, ranking, collaborative filtering |
+| `ab_testing` | experimentation infra, hypothesis testing, lift analysis |
+| `causal_inference` | propensity matching, DiD, CEM, kernel matching |
+| `churn_modelling` | survival analysis, retention modelling, win-back |
+| `mlops` | model deployment, CI/CD for models, monitoring |
+| `bi_modernisation` | dashboard rebuilds, BI tool migrations, semantic layers |
+| `experimentation_infra` | A/B platforms, ramp-up frameworks, MAB systems |
+| `cost_reduction` | infra cost wins, query cost wins, compute right-sizing |
+| `forecasting` | time series, revenue forecasting, LTV modelling |
+
+Family files would gain optional caps and floors:
+
+```yaml
+# families/data_scientist.yaml
+bullet_selection:
+  concept_caps:
+    recsys: 2          # at most 2 recsys bullets across the whole resume
+    ab_testing: 3
+  concept_floors:
+    causal_inference: 1  # ensure at least 1 causal_inference bullet if any
+                         #   pass selection (otherwise no-op)
+```
+
+The diversity pass would then:
+1. Apply `concept_caps` as hard global limits before per-role greedy
+   pick (drop the lowest-scoring duplicates first).
+2. Apply `concept_floors` as soft preferences: if a role has any
+   floor-concept candidate at all, bias the composite score for it
+   regardless of redundancy.
+
+This keeps the scoring math local and deterministic, doesn't require an
+API call, and gives Alex a single knob to tune resume "shape" per
+posting style.
+
+**Status: not implemented.** The current Jaccard-on-keywords pass is
+the operational implementation; concept tags are a planned evolution
+when the keyword-only approach proves too coarse on real postings.
+
+---
 
 ### Medium Priority — Quality and Completeness
 

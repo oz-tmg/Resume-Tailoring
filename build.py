@@ -74,9 +74,15 @@ def build(family_name: str, posting_path: Path | None = None,
 
     # ------------------------------------------------------------------
     # 2. Select bullets per family rules
+    #    When a posting is provided, the selector switches to
+    #    posting-tailored mode: looser tier floor, wider per-role pool,
+    #    and bullets that miss the family tag but match posting keywords
+    #    are admitted to the candidate pool. The ranker (step 4) trims
+    #    the pool to the final cap with a diversity-aware pass.
     # ------------------------------------------------------------------
     print("  [2/5] Selecting bullets...")
-    selected = select_bullets(experience, family)
+    posting_text = posting_path.read_text() if posting_path else None
+    selected = select_bullets(experience, family, posting_text=posting_text)
 
     # ------------------------------------------------------------------
     # 3. Resolve variants — swap base text for pre-written family variant
@@ -89,9 +95,8 @@ def build(family_name: str, posting_path: Path | None = None,
     # ------------------------------------------------------------------
     # 4. Posting-specific ranking and revoicing (Claude API)
     # ------------------------------------------------------------------
-    if posting_path:
+    if posting_text is not None:
         print("  [4/5] Ranking and revoicing against posting...")
-        posting_text = posting_path.read_text()
         resolved = rank_and_revoice(resolved, posting_text, family)
     else:
         print("  [4/5] Skipping posting tailoring (no posting provided).")
