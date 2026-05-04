@@ -54,42 +54,45 @@
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 1
+%% Family-specific aside. The file is static per family and maintained
+%% under sections/aside-pg1/. \leavevmode protects the leading \vspace
+%% from being swallowed when it's the first thing inside the aside.
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\vspace{3.5cm}%
-\section{EXPERIENCE BREAKDOWN}
-\vspace{-0.1cm}%
-\noindent\rule{\textwidth}{0.4pt}
-Experimentation \hfill 8 yrs \\
-Product Analytics \hfill 8 yrs \\
-Predictive Models \hfill 7 yrs \\
-Target RecSys \hfill 4 yrs \\
-Data Engineering \hfill 4 yrs \\
-Team Leadership \hfill 3 yrs \\
-Analytics Mgmt. \hfill 3 yrs \\
-~ \\
-Total Exp.: \hfill 10 yrs
-\noindent\rule{\textwidth}{0.4pt}%
-\vspace{-0.1cm}%
-\section{KEY VICTORIES}%
-\vspace{-0.25cm}
-\section{\large \faGem Personalization Impact}
-Built recommendation and targeting models that improved engagement,
-retention, and spend conversion across live digital products.
-\section{\large \faGem Experimentation Leadership}
-Designed and automated ML and A/B test measurement workflows that
-improved decision quality, accelerated readouts, and expanded
-stakeholder access to learnings.
-\section{\large \faGem Forecasting \& Valuation}
-Built long-term forecasting models used in strategic investment
-decisions, including identifying a \$14M overestimation in a game
-acquisition assessment.
+\leavevmode\vspace{3.5cm}%
+\input{/Users/Ender/Projects/Latex/Resume-Tailoring/sections/aside-pg1/aside-pg1-ds}
 \end{aside}
 
 %% -----------------------------------------------------------------------
 %% WORK EXPERIENCE — PAGE 1 + 2
 %% -----------------------------------------------------------------------
 {\vspace{2.5cm}}
+
+
+
+
+\section{Kano Apps - Casual Games \hfill
+  \includegraphics[height=1em]{icons/logos/kano_logo.png}}
+{\vspace{-0.2cm}}
+
+
+\begin{entrylist}
+\entry
+  {2025-05 -- \\ 2026-02}
+  {Senior Game Data Engineer \& BI Analyst}
+  {Victoria, BC Canada}
+  {Hired to modernize the studio's analytics stack by migrating reporting and transformation workflows from RShiny to a scalable Python- and AWS-based platform.
+ \textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Migrated the analytical-event anomaly detection framework off RStudio Server and RShiny onto Python, DBT SQL, Prefect, AWS Athena, and Quicksight; extended coverage to irregular-cadence events that the prior framework dropped, by folding their known cadence into the standard error calculation so they alert against the right baseline.
+
+
+    \item Reduced daily report refresh times from up to 14 hours to less than 1 hour while lowering EC2 and Athena costs by migrating expensive R ETLs into optimized DBT-Athena SQL models on partitioned Parquet and Iceberg tables.
+
+
+  \end{itemize}}
+\end{entrylist}
 
 
 
@@ -272,48 +275,20 @@ acquisition assessment.
 
 
 %% -----------------------------------------------------------------------
-%% SIDEBAR — PAGE 2  (Data Science Skillset)
+%% SIDEBAR — PAGE 2
+%% Family-specific aside. Static files in sections/aside-pg2/ carry the
+%% family's curated skillset. \leavevmode protects any leading \vspace
+%% inside the included file from being dropped at the aside boundary.
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\leavevmode\vspace{-1.0cm}
-\section{\LARGE Data Science Skillset}
-\noindent\rule{\textwidth}{0.4pt}
-\vspace{-0.2cm}
-
-~
-
-\textbf{\large A/B Testing \& Experimentation} \\
-
-\textbf{\large Causal Inference} \\
-
-\textbf{\large Predictive Modelling} \\
-
-\textbf{\large Recommendation Systems} \\
-
-\textbf{\large Churn Prediction} \\
-
-\textbf{\large Forecasting} \\
-
-\textbf{\large Uplift Modelling} \\
-
-\textbf{\large Behavioral Clustering} \\
-
-\textbf{\large Multi-Armed Bandit} \\
-
-\textbf{\large Bayesian Analysis} \\
-
-\textbf{\large NLP} \\
-
-
-
-\section{\LARGE Programming}
-\noindent\rule{\textwidth}{0.4pt}
-Python, R, SQL, Ruby
-
+\leavevmode%
+\input{/Users/Ender/Projects/Latex/Resume-Tailoring/sections/aside-pg2/aside-pg2-ds}
 \end{aside}
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
+%% When `certs_placement == "aside"`, certifications render at the bottom
+%% of this same aside instead of inline under Education.
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \leavevmode\vspace{-1.0cm}
@@ -328,6 +303,7 @@ Apache Spark (PySpark, SparklyR)
 \section{\large Bi Tools}
 Amplitude, Jupyter Notebooks, RShiny, RMarkdown
 ~
+
 
 
 \end{aside}
@@ -409,12 +385,6 @@ Amplitude, Jupyter Notebooks, RShiny, RMarkdown
   {2026}
   {Advanced Machine Learning on Google Cloud}
   {Coursera}
-  {}
-
-\entry
-  {2026}
-  {Data Engineering with AWS Nanodegree}
-  {Udacity}
   {}
 
 \entry

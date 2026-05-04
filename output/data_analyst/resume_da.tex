@@ -44,47 +44,50 @@
   {\mylocation}%
   {\href{\myGithub}{github.com/oz-tmg}}%
   {\href{\myWordpress}{alexoswald.wordpress.com}}%
-  {Senior Data Analyst | Product Analytics, Experimentation & Insights}
+  {Lead Game Data Analyst, Data Utility Player}
 
 %% -----------------------------------------------------------------------
 %% SUMMARY
 %% -----------------------------------------------------------------------
-\subheader{SUMMARY}{Customer-focused Senior Data Analyst with 10 years of experience turning complex data into clear, actionable insights that drive product, growth, and monetization decisions in digital products. Proven track record of partnering with product, design, engineering, and executive stakeholders to define KPIs, build reliable reporting, and deliver analysis that changes how teams work. Hands-on with Python, R, SQL, Tableau, Looker, Amplitude, and the full modern analytics stack.
+\subheader{SUMMARY}{Self-directed Game Data Analyst with 10+ years driving data strategy across the games industry primarily as a sole contributor. A trusted cross-functional partner to product, design, engineering, and marketing — consistently delivering analysis that influences how teams build, balance, and grow games. Proven ability to communicate insights at every level of complexity, from executive-ready summaries to advanced data science models, turning player behaviour and business data into decisions that matter.
 }
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 1
+%% Family-specific aside. The file is static per family and maintained
+%% under sections/aside-pg1/. \leavevmode protects the leading \vspace
+%% from being swallowed when it's the first thing inside the aside.
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \vspace{3.5cm}%
-\section{EXPERIENCE BREAKDOWN}
+\section{\LARGE Hard Skills}%
 \vspace{-0.1cm}%
 \noindent\rule{\textwidth}{0.4pt}
-Experimentation \hfill 8 yrs \\
-Product Analytics \hfill 8 yrs \\
-Predictive Models \hfill 7 yrs \\
-Target RecSys \hfill 4 yrs \\
-Data Engineering \hfill 4 yrs \\
-Team Leadership \hfill 3 yrs \\
-Analytics Mgmt. \hfill 3 yrs \\
-~ \\
-Total Exp.: \hfill 10 yrs
-\noindent\rule{\textwidth}{0.4pt}%
+\section{\large Programming}
+SQL, {\color{red} $\varheartsuit$} Python \& R
+\section{\large Data Storage \& Processing Platforms}
+Snowflake; Redshift, AWS S3, Glue \& Athena; GCS \& BigQuery, \textbf{RDBMS} (MySQL, Postgres); \textbf{NoSQL} (Cassandra, Redis); Apache Spark (PySpark); HiveQL %, SQL Server, SparklyR
+%
+%\section{Data Modelling \& Transformations}
+%using {\color{red} $\varheartsuit$} DBT with Great Expectations and MetricFlow
+%
+\section{\large BI Tools}
+Tableau, \ding{72} Looker, Amplitude, RShiny, AWS Quicksight, RMarkdown, Jupyter Notebooks, Excel
+\section{\LARGE Game Analysis}%
 \vspace{-0.1cm}%
-\section{KEY VICTORIES}%
-\vspace{-0.25cm}
-\section{\large \faGem Personalization Impact}
-Built recommendation and targeting models that improved engagement,
-retention, and spend conversion across live digital products.
-\section{\large \faGem Experimentation Leadership}
-Designed and automated ML and A/B test measurement workflows that
-improved decision quality, accelerated readouts, and expanded
-stakeholder access to learnings.
-\section{\large \faGem Forecasting \& Valuation}
-Built long-term forecasting models used in strategic investment
-decisions, including identifying a \$14M overestimation in a game
-acquisition assessment.
+\noindent\rule{\textwidth}{0.4pt}
+\section{\large KPI Forecasting}
+Churn, Conversion, UA, Event Performance, Content Revenue Attribution
+\section{\large Funnel Analysis}
+FTUE, Events, Player Progression, Core, Game Loops
+\section{\large Segmentation}
+engagement \& content preferences, spender type 
+\section{\large Impact Analysis}
+revenue front-loading, cannibalization risks, churn trigger risks, economy balance, network effects
+%\section{\large Network Analysis}
+%rate and effects of alliance participation, leaderboards, \& tournaments
 \end{aside}
+
 
 %% -----------------------------------------------------------------------
 %% WORK EXPERIENCE — PAGE 1 + 2
@@ -96,7 +99,7 @@ acquisition assessment.
 
 \section{Kano Apps - Casual Games \hfill
   \includegraphics[height=1em]{icons/logos/kano_logo.png}}
-{\vspace{-0.2cm}}
+%{\vspace{-0.2cm}}
 
 
 \begin{entrylist}
@@ -104,15 +107,17 @@ acquisition assessment.
   {2025-05 -- \\ 2026-02}
   {Senior Game Data Engineer \& BI Analyst}
   {Victoria, BC Canada}
-  {Hired to modernize the studio's analytics stack by migrating reporting and transformation workflows from RShiny to a scalable Python- and AWS-based platform.
+  {Hired to modernize the studio’s analytics stack by migrating reporting and transformation workflows from an undocumented, monolithic, spaghetti code R-based platform to a more scalable Python based platform.
  \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
-    \item Reworked, enhanced, and migrated numerous RShiny reports to AWS Quicksight, improving reliability, accessibility, and maintainability.
-
-
-    \item Improved analyst adoption of the new stack by showcasing workflows, onboarding teammates, and standardizing how reporting was produced and maintained.
-
+    \item Reworked, enhanced and migrated numerous RShiny reports to Quicksight.%, and stakeholder insights.
+    \item Selectively applied LLM-assisted code translation to speed up migration. 
+    \item Manually refactored R scripts too large and unstructured for AI tooling into optimized Python DBT-Athena SQL models on partitioned Parquet \& Iceberg tables.
+    \begin{itemize}
+    	\item Preserved seamless service delivery and data continuity across migration.
+    	\item Improved monthly cost savings (23\%) and report turnaround time (13x).
+    \end{itemize}
 
   \end{itemize}}
 \end{entrylist}
@@ -122,237 +127,135 @@ acquisition assessment.
 
 \section{Kixeye Inc - Mobile Games \hfill
   \includegraphics[height=1em]{icons/logos/kixeye_horse_logo.png}}
-{\vspace{-0.2cm}}
+%{\vspace{-0.2cm}}
 
 
 \begin{entrylist}
 \entry
-  {2022-02 -- \\ 2025-01}
+  {Feb 2022 - Jan 2025}
   {Lead Data Analyst, Core Analytics Team Lead}
   {Victoria, BC Canada}
   {Led analytics roadmap and delivery for junior and senior analysts on Kixeye's Core Analytics Team. Later transitioned into more ML pipeline and analytical engineering work within Stillfront Group.
  \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
-    \item Independently migrated both Kixeye and Babil Games studios' Looker dashboards onto Stillfront's shared instance, reducing studio costs by \$90K annually while improving reporting continuity.
+    %\item Independently migrated both Kixeye and Babil Games studios' Looker dashboards onto Stillfront's shared instance, reducing studio costs by \$90K annually while improving reporting continuity.
+    \item Managed team's delivery of analytics reporting and tooling for two new games.  
 
 
     \item Developed a long-term revenue forecasting model in R and Python used in acquisition assessment, helping identify and correct a \$14M overestimation in a game acquisition deal.
 
 
-    \item Identified a structural flaw in the matchmaking system driving elevated churn; quantified the affected player population through behavioral segmentation and worked with product and engineering on a redesign that improved retention in impacted cohorts.
+    \item Revisited and eliminated PvP-matchmaking induced churn via a rather simple, yet novel approach while collaborating with Design, Product and Engineering.
 
+	\item Partnered with Stillfront's DS team to improve LTV forecasting resulting in more realistic month-over-month targets.  
 
-    \item Partnered with other Stillfront studios to define KPI frameworks, build reporting, and deliver deeper analysis for game cross-promotion initiatives.
+    \item Partnered with other Stillfront studios to define core KPIs,  reporting, deliver deep-dive analysis, and to foster trust for  cross-game-promotion initiatives.
 
 
   \end{itemize}}
 \end{entrylist}
 
-{\vspace{-0.5cm}}
+%{\vspace{-0.5cm}}
 
 \begin{entrylist}
 \entry
-  {2021-01 -- \\ 2022-02}
+  {Jan 2021 - Feb 2022}
   {Senior Product Analyst, Acting Core Analytics Team Lead}
   {Victoria, BC Canada}
   {Promoted to help establish a small analytics team and improve collaboration across product, design, and engineering. Supported multiple game teams while building better analytical workflows and decision support.
  \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
-    \item Collaborated with the Design team to build a new content cadence strategy backed by funnel analysis and spend trend modeling, resulting in more consistent monetization and reduced revenue volatility across content releases.
-
-
-    \item Automated KPI forecasting and A/B test reporting ETLs for Product and Design teams, improving experimentation support and freeing substantial analyst time.
+    %\item Automated KPI forecasting and A/B test reporting ETLs for Product and Design teams across all titles, improving experimentation support and significantly freeing up analyst time.
+    \item Helped Design team discover and remediate multiple churn triggers related to progression, gameplay balance, and economy shocks using bayesian logistic regressions when A/B tests were infeasible.  
+    \item Collaborated with the Design team to build a new content cadence strategy backed by funnel analysis and spend trend modelling, resulting in more consistent monetization and reduced revenue volatility across content releases. 
+    \item Used network analysis to also how alliances varied greatly in terms of uplifting member engagement leading to work with Customer Service team come up with solutions around tracking MVPs and Alliance Leadership
+    \item Built an Alliance Recommendation Engine in Python, materially improving retention and increasing yearly revenue by 7\% in concert with other improvements.  
+    \item Identified flaw in the game's ELO matchmaking system driving elevated churn among PvP centric player clusters. Worked with engineering on guardrails 
 
 
   \end{itemize}}
 \end{entrylist}
 
-{\vspace{-0.5cm}}
+%{\vspace{-0.5cm}}
 
 \begin{entrylist}
 \entry
-  {2019-08 -- \\ 2021-01}
+  {Aug 2019 - Jan 2021}
   {Product Analyst, War Commander: Rogue Assault Team}
   {Vancouver, BC Canada}
-  {Originally hired to support BI and ML engineering needs by maintaining dashboards, ETLs, segmentation tools, recommendation systems, and user acquisition analytics for a live mobile game.
- \textbf{Responsibilities \& Achievements}:
+  {Originally hired to support urgent BI and ML engineering needs by maintaining dashboards, ETLs, segmentation tools, recommendation systems, and user acquisition analytics for a live mobile game.  Transitioned to deeper analytics work afterwards.
   \begin{itemize}
-
-    \item Repaired and optimized numerous legacy ETL pipelines and dashboards, producing meaningful warehousing savings and improving trust in core reporting during first three months.
-
-
+    \item Improved cost savings and trust in core reporting during first three months from repairing and optimizing legacy SQL workflows for Tableau \& Looker reports.
+	\item Discovered and eliminated most revenue front loading and cannibalizing caused by implementing better guardrails in two Offer Recommendation Engines. 
     \item Significantly improved revenue and LTV forecast accuracy used by stakeholders to plan and evaluate product performance.
-
-
-    \item Proposed a revised user acquisition strategy that helped Facebook campaigns become profitable in 90 days instead of 200.
-
-
+    \item Assessed how 3rd party UA strategy was hurting early game retention, and successfully proposed a revised strategy that helped Facebook campaigns become profitable in 90 days instead of 200.
   \end{itemize}}
 \end{entrylist}
-
-
-
-
-\section{Electronic Arts - AAA Games \hfill
-  \includegraphics[height=1em]{icons/logos/ea_sports.png}}
-{\vspace{-0.2cm}}
-
-
-\begin{entrylist}
-\entry
-  {2018-11 -- \\ 2019-07}
-  {Data Scientist, Dynamic Experiences Team}
-  {Burnaby, BC Canada}
-  {Helped establish a Data Science team embedded within EA Sports live teams to prototype and support machine learning systems that delivered more personalized player experiences.
- \textbf{Responsibilities \& Achievements}:
-  \begin{itemize}
-
-    \item Proposed, designed, and evaluated A/B test messaging campaigns aimed at delivering more personalized in-game experiences using R, SQL, and HiveQL.
-
-
-    \item Identified player segments most likely to respond positively to upsell messaging, contributing to a 3\% cohort spend increase.
-
-
-    \item Analysis and recommendations from in-game messaging experiments generated an additional \$2M in revenue for FIFA 19.
-
-
-  \end{itemize}}
-\end{entrylist}
-
-{\vspace{-0.5cm}}
-
-\begin{entrylist}
-\entry
-  {2016-06 -- \\ 2018-11}
-  {Business Analyst, FIFA Player Analytics Team}
-  {Burnaby, BC Canada}
-  {Supported executive reporting, player engagement and monetization analysis, and licensing analytics for one of EA's largest franchises.
- \textbf{Responsibilities \& Achievements}:
-  \begin{itemize}
-
-    \item Managed game performance and insight delivery for monthly executive board meetings for EA Sports titles, and became trusted with reporting support for Motive, BioWare, and DICE studios.
-
-
-    \item Owned analytics reporting for FIFA's strategic licensing partners and automated large portions of the process using R and Talend, reducing weeks of manual work assembling 550 slides to seconds.
-
-
-    \item Applied propensity score matching in R to measure the true engagement and spend lift from FIFA's Companion and Web Apps, providing the evidence base that saved the Web App from discontinuation and secured ongoing investment in both platforms.
-
-    \begin{itemize}
-
-      \item Incremental spending gains among spenders of 4.2\% for Web App users and 7.0\% for Mobile App users, leading to millions in incremental revenue.
-
-      \item Presented findings at EA's 2018 Analyticon conference.
-
-      \item Findings and follow-on performance helped influence the Madden team to develop a companion app for Madden 19.
-
-    \end{itemize}
-
-
-    \item Built statistical models measuring the revenue impact each sports license generated for EA and the brand exposure value returned to partners, informing smarter procurement and renewal decisions.
-
-
-  \end{itemize}}
-\end{entrylist}
-
-
-
-
-\section{Pretio Interactive - Ad Tech Startup \hfill
-  \includegraphics[height=1em]{icons/logos/pretio-interactive.png}}
-{\vspace{-0.2cm}}
-
-
-\begin{entrylist}
-\entry
-  {2015-07 -- \\ 2016-02}
-  {Data Scientist}
-  {Victoria, BC Canada}
-  {Startup that developed an ad-network incorporating rewards into its ad-serving algorithms to foster brand loyalty and incentivize engagement. Responsible for statistical research on algorithm and reward performance, ad-hoc analysis, and automating data reports for the sales team.
- \textbf{Responsibilities \& Achievements}:
-  \begin{itemize}
-
-    \item Extracted performance data from an Epsilon Greedy MAB recommendation algorithm during exploration phase and showcased it in Mode reports for the sales team.
-
-
-  \end{itemize}}
-\end{entrylist}
-
-
-
-
-\section{TinyMob Games - Indie Game Startup \hfill
-  \includegraphics[height=1em]{icons/logos/tinymob_games_logo.png}}
-{\vspace{-0.2cm}}
-
-
-\begin{entrylist}
-\entry
-  {2014-11 -- \\ 2015-07}
-  {Data Analyst, TinyRealms}
-  {Victoria, BC Canada}
-  {Brought on as a data analyst to conduct KPI reporting and data gathering to investigate the studio's engagement and monetization difficulties in its first game, Tiny Realms.
- \textbf{Responsibilities \& Achievements}:
-  \begin{itemize}
-
-    \item Discovered a segment of players with elevated churn likelihood, attributed it to unbalanced gameplay, and worked with game design on solutions that improved early game (D7) retention from 11.3\% to 14.2\% for the affected cohort.
-
-
-    \item Discovered that one game-mode cannibalized revenue by reducing the impact of the game's soft paywall, leading to design changes that remedied it.
-
-
-    \item Uncovered a free-rider problem and identified it as the primary driver of the studio's monetization challenges.
-
-
-  \end{itemize}}
-\end{entrylist}
-
-
 
 %% -----------------------------------------------------------------------
-%% SIDEBAR — PAGE 2  (Data Science Skillset)
+%% SIDEBAR — PAGE 2
+%% Family-specific aside. Static files in sections/aside-pg2/ carry the
+%% family's curated skillset. \leavevmode protects any leading \vspace
+%% inside the included file from being dropped at the aside boundary.
 %% -----------------------------------------------------------------------
 \begin{aside}%
-\leavevmode\vspace{-1.0cm}
-\section{\LARGE Data Science Skillset}
-\noindent\rule{\textwidth}{0.4pt}
-\vspace{-0.2cm}
-
-~
-
-\textbf{\large A/B Testing \& Experimentation} \\
-
-\textbf{\large Causal Inference} \\
-
-\textbf{\large Forecasting} \\
-
-\textbf{\large Churn Prediction} \\
-
-\textbf{\large Behavioral Clustering} \\
-
-
-
-\section{\LARGE Programming}
-\noindent\rule{\textwidth}{0.4pt}
-SQL, Python, R
-
+<<<<<<< HEAD
+\vspace{-1.0cm}
+\section{\LARGE Experimentation}
+\vspace{-0.1cm}%
+=======
+\leavevmode%
+\input{/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/sections/aside-pg2/aside-pg2-da}
 \end{aside}
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
+%% When `certs_placement == "aside"`, certifications render at the bottom
+%% of this same aside instead of inline under Education.
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \leavevmode\vspace{-1.0cm}
 \section{\LARGE Data Engineering Toolkit}
+>>>>>>> 933290e6074bb0a096d617459aad603259aa1b3b
 \noindent\rule{\textwidth}{0.4pt}
-
-
-\section{\large Bi Tools}
-Tableau, Looker, Amplitude, AWS Quicksight, RShiny, RMarkdown, Jupyter Notebooks, Excel
+Designed and eval- uated experiments in live game ecosystems where network effects, feature overlap, and behavioral spillovers complicate inference.
+\section{\LARGE Scalable Analytics}
+\vspace{-0.1cm}%
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{R-to-Python Migration} Improved monthly cost savings (23\%) and rep- ort update time (13x)
+\textbf{ETL Orchestration Optimization}
+Reduced monthly warehousing costs by 45\% (\$130K annually) while Lead Data Analyst at Kixeye.
+\textbf{KIX Domino Migration} \$27K in monthly platform costs.
+\section{\LARGE Automation}
+\vspace{-0.1cm}%
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{Licensing Reporting} 
+Reducing weeks of manually assembling 550 slides to seconds at EA Sports
+\textbf{Cadence Forecasting}
+\textbf{A/B Test Reporting} 
+\section{\LARGE EDUCATION}
+\vspace{-0.1cm}%
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{\textcolor{uvicblue}{University of Victoria}}
+\textbf{Master's in Economics}
+Sept 2011 - Aug 2014 
+Victoria, BC Canada
+%School of Computing \\
+%\location{ Cum. GPA: 3.85 / 4.0 }
 ~
+\textbf{\textcolor{isured}{Illinois State University}}
+\textbf{Bachelor's in Economics, minor in Mathematics}
+Sept 2006 - May 2010 
+Normal, IL USA
 
+<<<<<<< HEAD
+\section{\LARGE Game Portfolio}
+\vspace{-0.1cm}%
+\noindent\rule{\textwidth}{0.4pt}
+FIFA 17 to 20, War Commander: Rogue Assault, Vega Conflict, Battle Pirates, Siege Apacolypse, Rise of Firstborn, Tiny Realms, Idle Distiller, Mob Wars
+=======
 \section{\large Storage And Warehousing}
 Snowflake, PostgreSQL, SQL Server
 ~
@@ -362,100 +265,105 @@ dbt
 ~
 
 
+
+>>>>>>> 933290e6074bb0a096d617459aad603259aa1b3b
 \end{aside}
 
-%% -----------------------------------------------------------------------
-%% EDUCATION
-%% -----------------------------------------------------------------------
-\section{Education}
-{\vspace{-0.3cm}}
-\begin{entrylist}
+\vspace{-0.5cm}
+\section{Electronic Arts - AAA Games \hfill
+  \includegraphics[height=1em]{icons/logos/ea_sports.png}}
+%{\vspace{-0.2cm}}
 
+
+\begin{entrylist}
 \entry
-  {2011--2014}
-  {M.A. Co-op Education in Economics}
-  {\normalsize \textbf{\textcolor{uvicblue}{University of Victoria}} | Victoria, BC Canada}
-  {Auctions, game theory, experimental economics, and behavioural economics.
- 
+  {Nov 2018 - Jul 2019}
+  {Data Scientist, Dynamic Experiences Team}
+  {Burnaby, BC Canada}
+  {Helped establish a Data Science team embedded within EA Sports live teams to delivered more personalized player experiences via A/B Testing, and developing machine learning applications.  Completed much of the groundwork for FIFA 20 with multi-armed bandit messaging recommendation engines, and KPI prediction models to better support them. Proposed, designed, and evaluated A/B test messaging campaigns.
+    \begin{itemize}
+
+    \item Identified player segments most likely to respond positively to upsell messaging, contributing to a 3\% cohort spend increase.
+    \item Analysis and recommendations from in-game messaging experiments generated an additional \$2M in revenue for FIFA 19.
+    \item Proved that promo FUT packs were revenue front loading with A/B test.
+
+  \end{itemize}}
+\end{entrylist}
+
+%{\vspace{-0.5cm}}
+
+\begin{entrylist}
+\entry
+  {Jun 2016 - Nov 2018}
+  {Business Analyst, FIFA Player Analytics Team}
+  {Burnaby, BC Canada}
+  {Responsible for FIFA's licensing analytics requirements for external stakeholders (Leagues, Teams, FIFA, etc).  Supported team with adhoc analysis in player engagement and monetization deep dives.  Managed game performance and insight delivery for monthly executive board meetings for EA Sports, Motive, BioWare, and DICE titles.
+ %\textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
-    \item Taught Intermediate Microeconomics, Intermediate Macroeconomics, Game Theory, and Natural Resource Economics as a Teaching Assistant for two years.
-
-
-    \item Worked as a Research Assistant researching second price auctions and running experiments that would later help optimize timber lot auctions in Quebec.
-
-
-    \item Awarded Phillips, Hager and North Master Degree Scholarship for Research in Environmental and Resource Economics.
-
-
-    \item Published and coauthored Masters Thesis research on auction design and optimization.
-
-
+    \item Applied propensity score matching to measure the true engagement and spend lift from FIFA's Companion and Web Apps: Incremental spending gains among spenders of 4.2\% for Web App users and 7.0\% for Mobile App users, leading to millions in incremental revenue. Several noteworthy outcomes soon followed:
 
     \begin{itemize}
-      \item \href{http://www.cirano.qc.ca/files/publications/2015RP-05.pdf}{http://www.cirano.qc.ca/files/publications/2015RP-05.pdf}
+
+      \item Ongoing investment was secured for both platforms; Web App saved.
+
+      \item Presented findings at EA's 2018 Analyticon conference.
+
+      \item Findings and follow-on performance helped influence the Madden team to develop a companion app for Madden 19.
+
     \end{itemize}
 
-  \end{itemize}}
 
-\entry
-  {2006--2010}
-  {B.Sc. in Economics,{\normalfont Minor in Mathematics}}
-  {\normalsize \textbf{\textcolor{isured}{Illinois State University}} | Normal, IL USA}
-  {
-  \begin{itemize}
-
-    \item Graduated with Honours in Economics.
-
-
-    \item Awarded the F. Russel Glasenor-Economics Advisory Board Scholarship for scholastic achievement.
-
+    \item Built statistical models measuring the revenue impact each sports license generated for EA and the brand exposure value returned to partners, informing smarter license procurement and renewal decisions.
 
 
   \end{itemize}}
-
-\entry
-  {2009--2009}
-  {Independent Study Abroad}
-  {\normalsize \textbf{\textcolor{bogazblue}{Bosphorus University}} | Istanbul, Turkey}
-  {
-  \begin{itemize}
-
-    \item Designed an independent study abroad program to further study of international economics and global markets at Turkey's most prestigious university.
-
-
-
-  \end{itemize}}
-
 \end{entrylist}
 
-%% -----------------------------------------------------------------------
-%% CERTIFICATIONS  (if any selected for this family)
-%% -----------------------------------------------------------------------
 
-\section{Certifications}
-{\vspace{-0.3cm}}
+<<<<<<< HEAD
+
+{\vspace{-0.5cm}}
+\section{Pretio Interactive - Ad Tech Startup \hfill
+  \includegraphics[height=1em]{icons/logos/pretio-interactive.png}}
+%{\vspace{-0.2cm}}
+
+
 \begin{entrylist}
-
 \entry
-  {2026}
-  {Advanced Machine Learning on Google Cloud}
-  {Coursera}
-  {}
-
-\entry
-  {2026}
-  {Data Engineering with AWS Nanodegree}
-  {Udacity}
-  {}
-
-\entry
-  {2026}
-  {Data Scientist Nanodegree}
-  {Udacity}
-  {}
-
+  {July 2015 - Feb 2016}
+  {Data Scientist}
+  {Victoria, BC Canada}
+  {Startup that developed an ad-network incorporating rewards into its ad-serving algorithms to foster brand loyalty and incentivize engagement. Responsible for statistical research on algorithm and reward performance, ad-hoc analysis, and automating data reports for the sales team.
+% \textbf{Responsibilities \& Achievements}:
+%  \begin{itemize}
+%
+%    \item Extracted performance data from an Epsilon Greedy MAB recommendation algorithm during exploration phase and showcased it in Mode reports for the sales team.
+ %\end{itemize}
+  }
 \end{entrylist}
 
+\vspace{-0.5cm}
+\section{TinyMob Games - Indie Game Startup \hfill
+  \includegraphics[height=1em]{icons/logos/tinymob_games_logo.png}}
+%{\vspace{-0.2cm}}
+=======
+>>>>>>> 933290e6074bb0a096d617459aad603259aa1b3b
 
+\begin{entrylist}
+\entry
+  {Nov 2014 - Jul 2015}
+  {Data Analyst, TinyRealms}
+  {Victoria, BC Canada}
+  {Brought on as a data analyst to conduct KPI reporting and to investigate the studio's engagement and monetization difficulties in its first game, Tiny Realms.
+ %\textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Discovered a segment of players with elevated churn likelihood, attributed it to unbalanced gameplay, and worked with game design on solutions that improved early game (D7) retention from 11.3\% to 14.2\% for the affected cohort.
+
+
+    \item Uncovered a free-rider problem within one game-mode that cannibalized revenue by reducing the impact of the game's soft paywall.%, leading to design changes that remedied it.
+
+  \end{itemize}}
+\end{entrylist}
 \end{document}

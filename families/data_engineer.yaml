@@ -43,7 +43,7 @@ bullet_selection:
     - ea_upsell_segmentation       # Analytics, not pipeline
     - ea_companion_app             # Causal inference, not DE
     - ea_companion_app_revenue     # Business outcome, not DE
-    - ea_analyticon                # Presentation, not DE
+    - ea_companion_app_analyticon                # Presentation, not DE
     - ea_exec_reporting            # Soft reporting
     - pretio_thompson_sampling     # Algorithmic, not infrastructure
     - pretio_simulation            # Modelling, not infrastructure

@@ -7,39 +7,175 @@ Pure Python — no I/O, no API calls.
 Returns a structured list of companies → roles → selected bullets,
 preserving the ordering defined in the family file's
 `experience_roles_order`.
+
+Two modes:
+
+  Base resume mode  (posting_text=None)
+    ─────────────────────────────────────
+    Hard family rules. Bullets are kept only if they satisfy ALL of:
+      role in experience_roles_order
+      family in bullet.families  OR  bullet in promote_bullets
+      bullet not in exclude_bullets
+      bullet.tier <= min_tier
+    Per-role cap is applied with priority_bullets sorted to the front.
+    This produces the final selection (no candidate pool — selector
+    output goes straight to the renderer).
+
+  Posting-tailored mode  (posting_text=<job posting string>)
+    ──────────────────────────────────────────────────────────
+    Soft family rules — a bullet is admitted if EITHER it satisfies the
+    family fit (family in bullet.families OR bullet in promote_bullets)
+    OR the posting fit (token overlap between (bullet.text +
+    bullet.keywords) and the posting >= posting_fit_threshold). The
+    exclude_bullets list is still hard (curated suppression). The tier
+    floor is relaxed by 1 (so a min_tier=1 family will admit tier 2 in
+    posting mode). Per-role candidate count is widened by
+    posting_pool_multiplier (default 2.0).
+
+    The result is a CANDIDATE POOL, not a final selection. The ranker
+    (builder/ranker.py) scores each pool entry against the posting via
+    Claude, then calls apply_diversity_and_cap() to trim each role's
+    pool down to max_bullets_per_role[role_id], preferring (in order):
+      1. higher posting score
+      2. priority_bullets membership
+      3. lower tier
+      4. greater keyword-Jaccard distance from already-selected bullets
+         in the same role (diversity preference; threshold-controlled)
+
+Configuration knobs — all on family["bullet_selection"], all optional:
+
+  posting_min_tier            int   default = min_tier + 1
+  posting_pool_multiplier     float default = 2.0
+  posting_fit_threshold       float default = 0.08
+  redundancy_threshold        float default = 0.55
+  diversity_pref              bool  default = true
 """
 
+from __future__ import annotations
+
+import re
 from typing import Any
+
+
+# ---------------------------------------------------------------------------
+# Posting-fit scoring (local, deterministic, no API call)
+# ---------------------------------------------------------------------------
+
+_TOKEN_RE = re.compile(r"[A-Za-z][A-Za-z0-9+.#-]{1,}")
+_STOPWORDS = frozenset({
+    "the", "and", "for", "with", "from", "this", "that", "into", "have",
+    "has", "had", "are", "was", "were", "been", "being", "but", "not",
+    "you", "your", "our", "their", "they", "them", "its", "his", "her",
+    "will", "can", "may", "any", "all", "every", "each", "some", "most",
+    "more", "less", "than", "then", "when", "while", "where", "what",
+    "who", "whom", "whose", "which", "such", "very", "much", "also",
+    "well", "etc", "ie", "eg", "we", "us", "as", "at", "by", "of", "or",
+    "on", "in", "is", "it", "to", "be", "an", "a",
+})
+
+
+def _tokenize(text: str) -> set[str]:
+    """
+    Lowercase token-bag with stopwords removed. Used for both posting
+    and bullet text. Hyphenated tech terms (e.g. multi-armed, scikit-learn)
+    are kept whole; pure punctuation is dropped.
+    """
+    if not text:
+        return set()
+    return {
+        t.lower() for t in _TOKEN_RE.findall(text)
+        if t.lower() not in _STOPWORDS and len(t) > 2
+    }
+
+
+def _bullet_tokens(bullet: dict) -> set[str]:
+    """All searchable tokens for a bullet: text + keywords + variants."""
+    parts: list[str] = [bullet.get("text", "") or ""]
+    parts.extend(bullet.get("keywords", []) or [])
+    for v in (bullet.get("variants") or {}).values():
+        parts.append(v or "")
+    for sub in bullet.get("sub_bullets", []) or []:
+        parts.append(sub.get("text", "") or "")
+        parts.extend(sub.get("keywords", []) or [])
+    return _tokenize(" ".join(parts))
+
+
+def _posting_fit(bullet: dict, posting_tokens: set[str]) -> float:
+    """
+    Posting fit score in [0, 1]. Token overlap of (bullet.tokens) ∩
+    (posting.tokens), normalized by the smaller side. Using the
+    smaller-side denominator avoids penalizing concise bullets when the
+    posting is long.
+    """
+    bt = _bullet_tokens(bullet)
+    if not bt or not posting_tokens:
+        return 0.0
+    overlap = bt & posting_tokens
+    denom   = min(len(bt), len(posting_tokens))
+    return len(overlap) / denom if denom else 0.0
+
+
+def _jaccard_keywords(a: dict, b: dict) -> float:
+    """
+    Jaccard similarity of two bullets' keyword sets, lowercased.
+    Used by the diversity pass. Returns 1.0 for identical sets, 0.0 for
+    disjoint sets.
+    """
+    ka = {k.lower() for k in a.get("keywords", []) or []}
+    kb = {k.lower() for k in b.get("keywords", []) or []}
+    if not ka and not kb:
+        return 0.0
+    union = ka | kb
+    return len(ka & kb) / len(union) if union else 0.0
 
 
 # ---------------------------------------------------------------------------
 # Bullet selection
 # ---------------------------------------------------------------------------
 
-def select_bullets(experience: dict, family: dict) -> list[dict]:
+def select_bullets(experience: dict,
+                   family: dict,
+                   *,
+                   posting_text: str | None = None) -> list[dict]:
     """
     Apply family rules to produce an ordered list of role dicts, each
-    containing only the bullets selected for this family.
+    containing only the bullets selected (or pooled) for this family.
 
-    Selection logic (in order of precedence):
-      1. Role must appear in family["experience_roles_order"]
-      2. Bullet must list this family in its "families" field
-      3. Bullet must NOT be in family["bullet_selection"]["exclude_bullets"]
-      4. Bullet tier must be <= family["bullet_selection"]["min_tier"]
-         (lower number = more important, so tier 1 passes min_tier 2,
-          but tier 3 does NOT pass min_tier 2)
-      5. Count of selected bullets per role is capped by
-         family["bullet_selection"]["max_bullets_per_role"]
-      6. Priority bullets (listed in family config) are moved to the front
-         within each role before the cap is applied.
+    See module docstring for the two modes (base vs posting-tailored).
+
+    Cross-family promotion (`promote_bullets`):
+      DS and MLE work overlaps heavily with DA/DE/AE work — BI dashboards,
+      ETLs, data modelling, exploratory analysis. When a role has thin
+      in-family signal but useful sibling-family bullets, list those
+      bullet ids in `promote_bullets` to surface them anyway. Tier and
+      exclude filters still apply; promotion only bypasses the family-tag
+      check. Promoted bullets that are also in `priority_bullets` keep
+      their priority placement.
     """
     fam_id       = family["id"]
     rules        = family["bullet_selection"]
-    min_tier     = rules.get("min_tier", 2)
+    base_min_tier = rules.get("min_tier", 2)
     max_per_role = rules.get("max_bullets_per_role", {})
     priority_ids = set(rules.get("priority_bullets", []))
     exclude_ids  = set(rules.get("exclude_bullets", []))
+    promote_ids  = set(rules.get("promote_bullets", []))
     role_order   = family["experience_roles_order"]
+
+    posting_mode = posting_text is not None
+    if posting_mode:
+        # Posting mode: relax the tier floor by 1, widen the per-role
+        # candidate pool, and admit posting-fit bullets that fail the
+        # family-tag check.
+        min_tier_eff      = rules.get("posting_min_tier",
+                                      base_min_tier + 1)
+        pool_multiplier   = float(rules.get("posting_pool_multiplier", 2.0))
+        posting_threshold = float(rules.get("posting_fit_threshold", 0.08))
+        posting_tokens    = _tokenize(posting_text)
+    else:
+        min_tier_eff      = base_min_tier
+        pool_multiplier   = 1.0
+        posting_threshold = None
+        posting_tokens    = None
 
     # Build a lookup: role_id → (company_meta, role_dict)
     role_lookup: dict[str, tuple[dict, dict]] = {}
@@ -48,7 +184,6 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
             role_lookup[role["id"]] = (company, role)
 
     selected_companies: list[dict] = []
-    # Track which companies we've already started building
     company_map: dict[str, dict] = {}
 
     for role_id in role_order:
@@ -58,37 +193,66 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
             continue
 
         company_meta, role = role_lookup[role_id]
-        cap = max_per_role.get(role_id, 4)
+        base_cap = max_per_role.get(role_id, 4)
 
-        if cap == 0:
+        if base_cap == 0:
             continue  # Entire role suppressed for this family
 
-        # Filter bullets
-        passing = []
+        effective_cap = (
+            max(base_cap, int(round(base_cap * pool_multiplier)))
+            if posting_mode else base_cap
+        )
+
+        # Filter bullets — annotate each survivor with its admission reason
+        # so the ranker / diversity pass can break ties.
+        passing: list[dict] = []
         for bullet in role["bullets"]:
             bid = bullet["id"]
 
             if bid in exclude_ids:
                 continue
-            if fam_id not in bullet.get("families", []):
-                continue
-            if bullet.get("tier", 99) > min_tier:
+            if bullet.get("tier", 99) > min_tier_eff:
                 continue
 
-            passing.append(bullet)
+            in_family   = fam_id in bullet.get("families", [])
+            is_promoted = bid in promote_ids
+            posting_fit = (
+                _posting_fit(bullet, posting_tokens)
+                if posting_mode else 0.0
+            )
+            passes_posting_fit = (
+                posting_mode and posting_fit >= posting_threshold
+            )
+
+            if not (in_family or is_promoted or passes_posting_fit):
+                continue
+
+            # Annotate the bullet (shallow copy so we don't mutate the
+            # loaded experience structure).
+            annotated = {
+                **bullet,
+                "_in_family":   in_family,
+                "_is_promoted": is_promoted,
+                "_posting_fit": posting_fit,
+                "_admitted_via_posting": (
+                    not in_family and not is_promoted and passes_posting_fit
+                ),
+            }
+            passing.append(annotated)
 
         if not passing:
-            continue  # No bullets survived — omit role entirely
+            continue
 
-        # Sort: priority bullets first (preserving relative order within
-        # each group), then remaining bullets by tier ascending
+        # Initial ordering: priority bullets first (in declared order),
+        # then remaining bullets by tier ascending. In posting mode this
+        # is just the candidate pool's stable order before scoring.
         priority   = [b for b in passing if b["id"] in priority_ids]
         remaining  = [b for b in passing if b["id"] not in priority_ids]
         remaining.sort(key=lambda b: b.get("tier", 99))
         ordered    = priority + remaining
 
-        # Apply cap
-        capped = ordered[:cap]
+        # Cap to (base_cap in base mode) or (pool size in posting mode).
+        capped = ordered[:effective_cap]
 
         # Attach to correct company entry
         cname = company_meta["company"]
@@ -104,10 +268,85 @@ def select_bullets(experience: dict, family: dict) -> list[dict]:
 
         company_map[cname]["roles"].append({
             **role,
-            "bullets": capped,
+            "bullets":   capped,
+            "_role_cap": base_cap,   # carried forward for the ranker
         })
 
     return selected_companies
+
+
+# ---------------------------------------------------------------------------
+# Diversity-aware final cap (called by ranker after Stage 1 scoring)
+# ---------------------------------------------------------------------------
+
+def apply_diversity_and_cap(selected_companies: list[dict],
+                            family: dict,
+                            *,
+                            scores: dict[str, int] | None = None
+                            ) -> list[dict]:
+    """
+    Trim each role's candidate pool to its base cap
+    (max_bullets_per_role[role_id]) using a diversity-aware greedy pick.
+
+    Pick order, per role, walking until the cap is reached:
+      1. Sort remaining candidates by composite score:
+           +10 * posting_score (when scores provided)
+           +5  if bullet in priority_bullets
+           -1  * tier
+           -redundancy_weight * max(jaccard_keywords(bullet, picked))
+                  for picked already in this role's selection.
+      2. Pick the highest-scoring candidate. Append. Repeat.
+
+    If `diversity_pref` is False on the family, the redundancy term is
+    skipped (back to score-only ordering).
+
+    Returns the same nested list with bullets re-ordered & trimmed.
+    """
+    rules                = family["bullet_selection"]
+    priority_ids         = set(rules.get("priority_bullets", []))
+    redundancy_threshold = float(rules.get("redundancy_threshold", 0.55))
+    diversity_pref       = bool(rules.get("diversity_pref", True))
+    # Redundancy weight maps "max similarity above threshold" to a score
+    # penalty. A bullet whose closest selected sibling has Jaccard >=
+    # threshold loses ~3 score points; below threshold it loses none.
+    redundancy_weight    = 6.0
+
+    scores = scores or {}
+
+    out_companies: list[dict] = []
+    for company in selected_companies:
+        company_copy = {**company, "roles": []}
+        for role in company["roles"]:
+            cap = role.get("_role_cap")
+            if cap is None:
+                # Selector wasn't run in posting mode — pool already capped.
+                # Pass through.
+                company_copy["roles"].append({**role,
+                                              "bullets": role["bullets"]})
+                continue
+
+            pool = list(role["bullets"])
+            picked: list[dict] = []
+
+            while pool and len(picked) < cap:
+                def composite(b: dict) -> float:
+                    score = float(scores.get(b["id"], 0)) * 10.0
+                    if b["id"] in priority_ids:
+                        score += 5.0
+                    score -= float(b.get("tier", 99))
+                    if diversity_pref and picked:
+                        max_sim = max(_jaccard_keywords(b, p) for p in picked)
+                        if max_sim >= redundancy_threshold:
+                            # Scaled penalty: stronger overlap → bigger hit
+                            score -= redundancy_weight * max_sim
+                    return score
+
+                pool.sort(key=composite, reverse=True)
+                picked.append(pool.pop(0))
+
+            company_copy["roles"].append({**role, "bullets": picked})
+        out_companies.append(company_copy)
+    return out_companies
 
 
 # ---------------------------------------------------------------------------

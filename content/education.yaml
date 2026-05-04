@@ -27,6 +27,18 @@ education:
           Published and coauthored Masters Thesis research on auction design
           and optimization.
     thesis_url: http://www.cirano.qc.ca/files/publications/2015RP-05.pdf
+    # Per-family accomplishment indices to keep when --education-mode=condensed
+    # is on. "all" keeps everything (used for ECON since teaching/RA/scholarship
+    # are core academic signals). Other families keep only the highest-value
+    # signal — the published thesis + thesis_url for everyone except ECON.
+    # Omitted family => keep no accomplishments (still shows thesis_url).
+    condensed:
+      ECON: all
+      DS:   [3]
+      DA:   [3]
+      MLE:  [3]
+      AE:   [3]
+      DE:   [3]
     keywords: [game theory, experimental economics, behavioural economics,
                auctions, causal inference, econometrics, research]
 
@@ -46,6 +58,15 @@ education:
       - >
           Awarded the F. Russel Glasenor-Economics Advisory Board Scholarship
           for scholastic achievement.
+    # Condensed-mode trim. Honours is a brief credibility signal worth keeping
+    # for everyone; the scholarship line is ECON-specific.
+    condensed:
+      ECON: all
+      DS:   [0]
+      DA:   [0]
+      MLE:  [0]
+      AE:   [0]
+      DE:   [0]
     keywords: [economics, mathematics, statistics, quantitative methods]
 
   - id: bosphorus_abroad
@@ -62,6 +83,11 @@ education:
           Designed an independent study abroad program to further study of
           international economics and global markets at Turkey's most
           prestigious university.
+    # Bosphorus is ECON-only (relevant_families above). In condensed mode it
+    # is dropped entirely for non-ECON families because the entry isn't in
+    # their relevant_families list. ECON keeps the accomplishment.
+    condensed:
+      ECON: all
     keywords: [international economics, global markets, independent study]
 
 certifications:

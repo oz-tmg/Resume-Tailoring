@@ -19,6 +19,7 @@ bullet_selection:
   min_tier: 1                     # DS roles are competitive — lean tier 1 first
 
   priority_bullets:
+    - kano_anomaly_detection      # Production statistical-monitoring framework
     - kix_forecasting_model   # $14M valuation finding — headline DS win
     - kix_matchmaking_churn   # Diagnosis + RecSys redesign
     - kix_churn_model         # AUC improvement — concrete model win
@@ -38,12 +39,19 @@ bullet_selection:
     - pretio_conversion_model     # Probability model
     - tinymob_churn_gameplay      # Churn diagnosis + retention improvement
 
+  # Cross-family promotion: include these bullets for DS even though they
+  # are not tagged DS. DS work overlaps with DE/AE on data modelling and
+  # ETL/warehouse fluency — surfacing this signal keeps the recent role
+  # honest about the platform context our DS work runs on.
+  promote_bullets:
+    - kano_etl_performance        # ETL refresh 14h → 1h on partitioned Parquet/Iceberg
+
   exclude_bullets:
     - kano_rshiny_migration       # Too BI/reporting
     - kano_analyst_adoption       # Team enablement, not DS
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Automation, not modelling
-    - ea_analyticon               # Presentation, not DS work
+    - ea_companion_app_analyticon               # Presentation, not DS work
     - tinymob_aso                 # Marketing, not DS
     - tinymob_kpi_monitoring      # Reporting, not DS
     - tinymob_database_investment # Stakeholder influence, not DS

@@ -1,0 +1,45 @@
+company: "Savepoint Analytics"
+industry: "Data Consulting — Indie & Scaling Game Studios"
+logo: ~
+role: "Founder & Principal Data Consultant"
+location: "Victoria, Canada (Remote)"
+start: "2026-03"
+end: present
+description: >
+  Founded an independent consultancy specialising in analytics platform
+  design and implementation for indie and scaling game studios. Focused
+  on helping studios modernise their data infrastructure to support
+  growth-stage decision-making.
+
+bullets:
+  - id: savepoint_analytics_platform
+    text: >
+      Designing end-to-end analytics platform architectures using AWS, DBT,
+      and modern BI tooling tailored to studios with lean data teams.
+    families: []
+    keywords: []
+    tier: 1
+  - id: savepoint_telemetry_event_design
+    text: >
+      Advising on analytics and telemetry event selection, design and 
+      implementation to ensure relevant data is captured given each game's 
+      unique characteristics while remaining game agnostic to ensure 
+      reusability.
+    families: []
+    keywords: []
+    tier: 1
+  - id: 
+    text: >
+      Advising on data pipeline migration, KPI framework design, and
+      reporting standardisation for studios transitioning from ad hoc
+      tooling to scalable systems.
+    families: []
+    keywords: []
+    tier: 1
+  - id: savepoint_platform_blueprint
+    text: >
+      Developed a reusable analytics platform blueprint targeting studios
+      scaling from prototype to live operations.
+    families: []
+    keywords: []
+    tier: 1

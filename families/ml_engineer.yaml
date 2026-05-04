@@ -22,6 +22,7 @@ bullet_selection:
   min_tier: 1
 
   priority_bullets:
+    - kano_anomaly_detection      # Production monitoring system in Prefect/Athena
     - kix_alliance_recsys     # Production RecSys with revenue outcome
     - kix_churn_model         # Model improvement with concrete AUC gains
     - kix_matchmaking_churn   # System diagnosis + redesign
@@ -36,6 +37,13 @@ bullet_selection:
     - kano_etl_performance        # Infrastructure / pipeline performance
     - kix_ab_automation       # Automation of ML reporting pipelines
 
+  # Cross-family promotion: include these bullets for MLE even though they
+  # are not tagged MLE. MLE work depends on solid data infrastructure;
+  # surfacing the recent platform-modernisation win keeps the ML pipeline
+  # context concrete (Athena/Parquet/Iceberg under the model layer).
+  promote_bullets:
+    - kano_etl_performance        # ETL refresh 14h → 1h on partitioned Parquet/Iceberg
+
   exclude_bullets:
     - kano_rshiny_migration       # BI migration, not ML
     - kano_analyst_adoption       # Team enablement, not MLE
@@ -47,7 +55,7 @@ bullet_selection:
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Talend/R automation, not ML
     - ea_licensing_models         # Statistical, not ML production
-    - ea_analyticon               # Presentation, not MLE
+    - ea_companion_app_analyticon               # Presentation, not MLE
     - ea_companion_app_revenue    # Business outcome without ML framing
     - pretio_mab_reporting        # Reporting, not model engineering
     - pretio_simulation           # Modelling exploration, not production ML

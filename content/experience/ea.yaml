@@ -85,7 +85,7 @@ roles:
           Managed game performance and insight delivery for monthly executive
           board meetings for EA Sports titles, and became trusted with
           reporting support for Motive, BioWare, and DICE studios.
-        families: [DA]
+        families: [DA, AM]
         keywords: [executive reporting, stakeholder management, KPI, insights,
                    product analytics]
         tier: 2
@@ -100,12 +100,20 @@ roles:
                    stakeholder, efficiency]
         tier: 1
 
+      - id: ea_licensing_gdpr
+        text: >
+          Managed GDPR compliance of analytics services for EA's licensed partners.
+        families: [DE]
+        keywords: [automation, R, Talend, reporting, licensing, ETL,
+                   stakeholder, efficiency]
+        tier: 1
+
       - id: ea_licensing_models
         text: >
           Built statistical models to assess the value each license created for
           EA and the reciprocal value exposure provided to partners, helping
           improve licensing decisions.
-        families: [DS, DA, ECON]
+        families: [DS, DA, ECON, AM]
         keywords: [statistical modelling, licensing valuation, partner
                    analytics, causal inference, decision support]
         tier: 2
@@ -148,7 +156,7 @@ roles:
             text: >
               Findings and follow-on performance helped influence the Madden
               team to develop a companion app for Madden 19.
-            families: [DA, ECON]
+            families: [DA, ECON, AM]
         families: [DS, DA, ECON]
         keywords: [propensity score matching, causal inference, incremental
                    value, R, companion app, product valuation, Analyticon]
