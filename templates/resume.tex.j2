@@ -113,6 +113,8 @@
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
+%% When `certs_placement == "aside"`, certifications render at the bottom
+%% of this same aside instead of inline under Education.
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \leavevmode\vspace{-1.0cm}
@@ -122,6 +124,16 @@
 <% for subcat, subskills in skills.data_engineering.items() %>
 \section{\large << subcat | replace("_", " ") | title | latex_escape >>}
 <% for skill in subskills %><< skill.name | latex_escape >><% if not loop.last %>, <% endif %><% endfor %>
+~
+<% endfor %>
+<% endif %>
+<% if certifications_aside %>
+\vspace{0.4cm}
+\section{\LARGE Certifications}
+\noindent\rule{\textwidth}{0.4pt}
+<% for cert in certifications_aside %>
+\textbf{<< cert.name | latex_escape >>}
+{\small << cert.issuer | latex_escape >> | << cert.year >>}
 ~
 <% endfor %>
 <% endif %>

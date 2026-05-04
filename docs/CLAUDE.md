@@ -89,6 +89,10 @@ resume-latex/            ← Design/style repo
 | MLE  | ML Engineer          | `make mle`   | Production ML systems, MLOps            |
 | ECON | Economist            | `make econ`  | Research, causal inference, policy      |
 
+Note: `sections/aside-pg*-am.tex` is a people-management (Analytics Manager)
+variant of the DA family. It is selected manually — not via a family ID — see
+the file headers for when to use it instead of `aside-pg*-da.tex`.
+
 ---
 
 ## Key Conventions

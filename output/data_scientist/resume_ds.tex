@@ -71,6 +71,32 @@
 
 
 
+\section{Kano Apps - Casual Games \hfill
+  \includegraphics[height=1em]{icons/logos/kano_logo.png}}
+{\vspace{-0.2cm}}
+
+
+\begin{entrylist}
+\entry
+  {2025-05 -- \\ 2026-02}
+  {Senior Game Data Engineer \& BI Analyst}
+  {Victoria, BC Canada}
+  {Hired to modernize the studio's analytics stack by migrating reporting and transformation workflows from RShiny to a scalable Python- and AWS-based platform.
+ \textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Migrated the analytical-event anomaly detection framework off RStudio Server and RShiny onto Python, DBT SQL, Prefect, AWS Athena, and Quicksight; extended coverage to irregular-cadence events that the prior framework dropped, by folding their known cadence into the standard error calculation so they alert against the right baseline.
+
+
+    \item Reduced daily report refresh times from up to 14 hours to less than 1 hour while lowering EC2 and Athena costs by migrating expensive R ETLs into optimized DBT-Athena SQL models on partitioned Parquet and Iceberg tables.
+
+
+  \end{itemize}}
+\end{entrylist}
+
+
+
+
 \section{Kixeye Inc - Mobile Games \hfill
   \includegraphics[height=1em]{icons/logos/kixeye_horse_logo.png}}
 {\vspace{-0.2cm}}
@@ -261,6 +287,8 @@
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
+%% When `certs_placement == "aside"`, certifications render at the bottom
+%% of this same aside instead of inline under Education.
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \leavevmode\vspace{-1.0cm}
@@ -275,6 +303,7 @@ Apache Spark (PySpark, SparklyR)
 \section{\large Bi Tools}
 Amplitude, Jupyter Notebooks, RShiny, RMarkdown
 ~
+
 
 
 \end{aside}
@@ -356,12 +385,6 @@ Amplitude, Jupyter Notebooks, RShiny, RMarkdown
   {2026}
   {Advanced Machine Learning on Google Cloud}
   {Coursera}
-  {}
-
-\entry
-  {2026}
-  {Data Engineering with AWS Nanodegree}
-  {Udacity}
   {}
 
 \entry

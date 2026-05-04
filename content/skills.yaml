@@ -33,12 +33,14 @@ data_science:
     tier: 1
     families: [DS, ECON, DA]
     keywords: [causal inference, propensity score matching, quasi-experimental,
-               difference-in-differences]
+               difference-in-differences, coarsened exact matching, CEM,
+               kernel matching, observational studies]
   - name: Predictive Modelling
     tier: 1
     families: [DS, MLE]
     keywords: [predictive modelling, supervised learning, regression,
-               classification]
+               classification, XGBoost, gradient boosting, SVM, support
+               vector machines, decision trees, random forests]
   - name: Churn Prediction
     tier: 1
     families: [DS, MLE, DA]
@@ -130,6 +132,18 @@ data_engineering:
       tier: 3
       families: [DE]
       keywords: [Redis, cache, NoSQL]
+    - name: Neo4j
+      tier: 3
+      families: [DE]
+      keywords: [Neo4j, graph database, Cypher]
+    - name: Amazon Neptune
+      tier: 3
+      families: [DE]
+      keywords: [Amazon Neptune, AWS, graph database]
+    - name: Teradata
+      tier: 3
+      families: [DE]
+      keywords: [Teradata, MPP, data warehouse]
 
   data_processing:
     - name: Apache Spark (PySpark, SparklyR)
@@ -168,6 +182,10 @@ data_engineering:
       tier: 2
       families: [DE, AE, MLE]
       keywords: [Jenkins, CI/CD, pipeline]
+    - name: Astronomer
+      tier: 3
+      families: [DE, MLE]
+      keywords: [Astronomer, managed Airflow, orchestration]
 
   bi_tools:
     - name: Tableau
