@@ -150,7 +150,7 @@ roles:
           Increased churn prediction accuracy from AUC 0.71 to 0.86 in
           Python, helping identify and remediate multiple gameplay-related
           churn drivers.
-        families: [DS, MLE]
+        families: [DS, MLE, DA]
         keywords: [churn prediction, AUC, Python, classification, machine
                    learning, model improvement, retention]
         tier: 1
@@ -227,3 +227,10 @@ roles:
         keywords: [user acquisition, Facebook, UA strategy, campaign
                    optimization, ROI, profitability]
         tier: 2
+      
+      - id: kix_network_effects
+        text: >
+          Discovered that potentially high value players were churning early 
+          due to weeker network effects within alliances joined. 
+        families: [DA, AE]
+        keywords: [exploratory analysis, BI]
