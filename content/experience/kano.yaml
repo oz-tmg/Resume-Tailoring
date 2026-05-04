@@ -40,13 +40,51 @@ roles:
         keywords: [ETL, Athena, Parquet, Iceberg, DBT, SQL, cost reduction,
                    performance, EC2, data latency]
         tier: 1
+      - id: kano_etl_r_to_python_migration
+        text: >
+          Executed R-to-Python migration of legacy ETL pipelines inherited from a
+          single-author codebase characterised by undocumented, non-modular scripts
+          exceeding 10,000 lines; applied LLM-assisted code translation selectively
+          where script structure permitted, and manually refactored the remainder
+          using deep bilingual R and Python expertise — the combination of skills
+          that made the migration viable at all.
+        families: [DE, AE, DS]
+        keywords: [R, Python, ETL, migration, legacy codebase, refactoring,
+                  LLM-assisted development, AI tooling, code translation,
+                  technical debt, bilingual, R to Python]
+        tier: 2
+        variants:
+          DA: >
+            Preserved full analytical parity across a complex R-to-Python ETL
+            migration, manually validating migrated pipelines inherited from an
+            undocumented, monolithic codebase using bilingual R and Python
+            proficiency — ensuring stakeholders could trust reporting outputs
+            throughout the transition.
+          DE: >
+            Migrated a legacy R ETL codebase to Python, navigating undocumented,
+            monolithic scripts exceeding 10,000 lines that exceeded LLM context
+            limits; applied AI-assisted translation where script structure permitted
+            and manually refactored the remainder, leveraging bilingual R and Python
+            proficiency to deliver the full migration without analytical regression.
+          AE: >
+            Translated a non-modular, single-author R ETL codebase into Python,
+            applying LLM-assisted code translation selectively on tractable modules
+            while manually refactoring scripts too large and unstructured for AI
+            tooling; deep bilingual R and Python expertise was the critical enabler
+            that made the migration viable.
+          DS: >
+            Leveraged LLM-assisted code translation and bilingual R/Python expertise
+            to migrate legacy ETL pipelines from R to Python, navigating an
+            undocumented codebase with 10,000+ line scripts that exceeded LLM
+            context limits — applying AI tooling selectively and completing the
+            remainder through manual refactoring.
 
       - id: kano_analyst_adoption
         text: >
           Improved analyst adoption of the new stack by showcasing workflows,
           onboarding teammates, and standardizing how reporting was produced
           and maintained.
-        families: [DA, AE, DE]
+        families: [AM, AE, DE]
         keywords: [onboarding, documentation, standardization, collaboration,
                    reporting, team enablement]
         tier: 2
