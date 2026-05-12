@@ -18,26 +18,45 @@ bullet_selection:
 
   min_tier: 2
 
+  # Roles listed here render with a two-section layout: "Responsibilities"
+  # (category: work bullets) followed by "Outcomes" (category: outcome bullets).
+  # Falls back to the standard flat list if only one category is present.
+  split_sections:
+    - kano_senior_de_bi
+
   priority_bullets:
+    # Kano — strongest AE role by recency
     - kano_dbt                     # Core AE signal — dbt addition
-    - kano_etl_performance         # Strongest technical achievement at Kano
+    - kano_etl_performance         # Headline outcome — 14h → 1h, cost reduction
     - kano_rshiny_migration        # Migration + modernization
     - kano_analyst_adoption        # Enablement is core AE value prop
-    - kix_snowflake_cost       # Cost + orchestration optimization
-    - kix_looker_migration     # Cross-studio migration ownership
-    - kix_ab_automation        # Pipeline automation for analytics
+    - kano_iceberg_migration       # Technical depth — Parquet→Iceberg + DBT-Athena
+    # Kixeye Lead
+    - kix_gcp_aws_migration        # GCP → AWS Firehose/Lambda/Kinesis — strong AE/DE signal
+    - kix_new_game_launches        # Analytics delivery for two new titles under fast turnaround
+    - kix_snowflake_cost           # Cost + orchestration optimization
+    - kix_looker_migration         # Cross-studio migration ownership
+    - kix_cross_promo              # Analytics event design + SDK iteration
+    # Kixeye Senior
+    - kix_ab_automation            # Pipeline automation for analytics
+    - kix_alliance_recsys          # Event schema design + data modelling → 7% revenue
+    # Kixeye Product Analyst
     - kix_etl_repair               # ETL ownership signal
     - kix_domino_jenkins           # Pipeline migration — strong AE signal
+    - kix_ua_strategy              # AppsFlyer integration + UA data modelling
+    - kix_ltv_forecast             # LTV model as stakeholder data product (weaker signal)
+    # EA — light AE period
     - ea_ab_automation             # Workflow automation
     - ea_licensing_automation      # Automation of high-value reporting
+    - ea_ab_test_design            # HiveQL/SQL experiment pipeline
+    - ea_fifa19_revenue            # Pipeline → business outcome (outcome framing)
 
   exclude_bullets:
     - ea_mab_recsys                # Too ML engineering
     - ea_churn_reacquisition_models  # Too DS
     - ea_upsell_segmentation       # Too DS/targeting
-    - kix_alliance_recsys      # Too DS/RecSys
-    - kix_churn_model          # Too DS
-    - kix_matchmaking_churn    # Too DS
+    - kix_churn_model              # Too DS
+    - kix_matchmaking_churn        # Too DS — now has AE variant but event design covered by kix_alliance_recsys
     - pretio_thompson_sampling     # Too algorithmic
     - pretio_simulation            # Too modelling
     - tinymob_aso                  # Marketing noise
@@ -170,3 +189,154 @@ revoicing_persona: >
   work prominently. Frame cost savings and latency improvements as engineering
   wins. Downplay soft stakeholder language — outcomes here are pipeline health,
   data freshness, and analyst productivity.
+
+# ---------------------------------------------------------------------------
+# GAMES-INDUSTRY REVOICING PERSONA
+# ---------------------------------------------------------------------------
+games_revoicing_persona: >
+  Frame bullets in a live-games analytics engineering context. Use game-industry
+  vocabulary where appropriate: telemetry pipelines, event schemas, player funnel
+  modelling, live ops data delivery, game analytics platform. Emphasize that
+  pipeline reliability and data quality directly affect game-team decision speed.
+  Use verbs like: modelled, built, migrated, standardized, enabled, optimized.
+
+# ---------------------------------------------------------------------------
+# ATS TEMPLATE OVERRIDES (resume-ats.tex.j2 — single-column layout)
+# ---------------------------------------------------------------------------
+# These fields are consumed only when --template ats is passed to build.py.
+# They are ignored by the standard two-column template. All three are
+# optional — when absent, the renderer derives sensible defaults from the
+# fields used by the standard template.
+#
+# ats_tagline       — keyword tagline rendered under the subtitle line in
+#                     the navy header. Pass as a LaTeX-ready string;
+#                     defaults to the first 6 entries of
+#                     ats_keyword_watchlist joined with \textbullet.
+# ats_skills_groups — list of {label, items: [...]} dicts that drive the
+#                     Technical Skills key/value table. Items are
+#                     rendered verbatim, so the family file can include
+#                     phrases ("LTV forecasting", "A/B experimentation")
+#                     that aren't strict entries in skills.yaml.
+# impact_metrics    — 3 or 4 {value, label} entries shown in the
+#                     Key Impact Metrics callout. Omit the field to skip
+#                     the section entirely.
+# `ats_tagline` is passed to LaTeX as-is (no escape) so it can include
+# macros. Single-quoted YAML preserves the literal backslashes.
+ats_tagline: 'dbt \textbullet\ Snowflake \textbullet\ Python \textbullet\ Airflow \textbullet\ Data Modeling \textbullet\ Marketing Analytics'
+
+# Items in `ats_skills_groups` are rendered through latex_escape; write them
+# as plain prose, NOT LaTeX. The renderer joins each group's items with
+# ", " when emitting the table row.
+ats_skills_groups:
+  - label: "Pipeline & Orchestration"
+    items:
+      - "Apache Airflow"
+      - "Prefect"
+      - "AWS Firehose"
+      - "Kinesis"
+      - "Lambda"
+      - "Glue"
+      - "S3"
+      - "Spark (working knowledge)"
+      - "Azure (familiar)"
+  - label: "Data Modeling & dbt"
+    items:
+      - "dbt (models, tests, docs, MetricFlow)"
+      - "Apache Iceberg"
+      - "Parquet"
+      - "semantic layer design"
+      - "data contracts"
+      - "incremental models"
+  - label: "Cloud Platforms"
+    items:
+      - "AWS (Athena, EC2, Redshift, S3, QuickSight)"
+      - "Snowflake"
+      - "GCP (BigQuery)"
+  - label: "Languages"
+    items:
+      - "Python (4+ yrs)"
+      - "SQL (advanced)"
+      - "R (expert)"
+      - "Bash"
+  - label: "Marketing Analytics"
+    items:
+      - "LTV forecasting"
+      - "UA performance"
+      - "AppsFlyer"
+      - "acquisition funnel modeling"
+      - "campaign profitability analysis"
+      - "A/B experimentation"
+  - label: "BI & Delivery"
+    items:
+      - "Looker"
+      - "AWS QuickSight"
+      - "Tableau"
+      - "RShiny — self-service analytics as a delivery outcome"
+  - label: "DevOps / DataOps"
+    items:
+      - "Docker"
+      - "Terraform"
+      - "Jenkins"
+      - "Great Expectations"
+      - "Git"
+      - "data quality monitoring"
+
+# Impact metric values and labels are escaped on render, so write them as
+# plain text. `$`, `&`, `%` etc. are safe; Unicode arrows and em-dashes
+# render natively via XeLaTeX.
+impact_metrics:
+  - value: "13x"
+    label: "Report latency improvement (14 hrs → <1 hr) via dbt + Iceberg migration"
+  - value: "$220K+/yr"
+    label: "Annual cloud cost savings across Snowflake, EC2, Athena, and platform consolidation"
+  - value: "$14M"
+    label: "Acquisition overestimation identified via forecasting model — corrected before deal close"
+  - value: "$2M+"
+    label: "Incremental FIFA 19 revenue from A/B test pipeline and experimentation analytics"
+
+# ---------------------------------------------------------------------------
+# ASIDE SKILLS — PAGE 2 SIDEBAR
+# ---------------------------------------------------------------------------
+aside_skills:
+  page2:
+    title: "Analytics Engineering"
+    sections:
+      - id: transformation_modelling
+        label: "Transformation & Modelling"
+        keywords: [transformation, modelling, dbt, SQL, data model, semantic layer,
+                   statistical model, propensity, segmentation, analytical layer]
+        text: >
+          Built statistical and transformation models that served as the
+          analytical layer between raw data and stakeholder consumption —
+          licensing valuation, propensity models, segmentation.
+      - id: automation_repeatability
+        label: "Automation & Repeatability"
+        keywords: [automation, automated, pipeline, repeatability, Jenkins,
+                   Talend, Hive, R, workflow, ETL, orchestration, reproducible]
+        text: >
+          Automated large-scale reporting workflows (R, Talend, Hive, Jenkins)
+          to eliminate manual assembly, reduce error, and make outputs
+          reproducible at scale.
+      - id: metric_definition
+        label: "Metric Definition & Trust"
+        keywords: [KPI, metric, reporting, trust, consistency, executive,
+                   stakeholder, licensing, accuracy, data quality]
+        text: >
+          Owned KPI reporting for executive stakeholders and licensing partners;
+          consistency and trust in numbers were non-negotiable delivery requirements.
+      - id: self_service
+        label: "Self-Service Delivery"
+        keywords: [self-service, analyst, dashboard, pipeline, repair, legacy,
+                   independently, stakeholder, reliability, query]
+        text: >
+          Repaired legacy pipelines and dashboards so analysts and stakeholders
+          could rely on them independently, without analyst intervention on
+          every query.
+      - id: bi_stack
+        label: "BI & Reporting Stack"
+        keywords: [Hive, Redshift, Talend, Jenkins, dbt, Snowflake, Athena,
+                   Looker, Quicksight, BI, reporting, warehouse]
+        text: >
+          Hive, Redshift, R, Talend, Jenkins; later DBT, Snowflake, Athena,
+          Looker, Quicksight.
+    programming_latex: '{\color{red} $\varheartsuit$} R, Python, SQL, Bash'
