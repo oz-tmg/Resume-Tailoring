@@ -35,6 +35,7 @@ venv/
 # OS / EDITOR
 # =============================================================================
 .DS_Store
+output/.DS_Store
 Thumbs.db
 .idea/
 .vscode/
