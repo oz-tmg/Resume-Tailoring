@@ -25,6 +25,12 @@ personal:
   blog_url: https://alexoswald.wordpress.com/2025/02/23/companion-apps-in-games/
   blog_display: alexoswald.wordpress.com
 
+  # Work authorization — shown on the resume when enabled.
+  # Set show_on_resume: false to suppress the note.
+  work_authorization:
+    show_on_resume: true
+    note: "Authorized to work in Canada and United States"
+
 # Cover letter defaults — overridden per posting via overrides.yaml
 cover_letter:
   recipient: Hiring Manager
