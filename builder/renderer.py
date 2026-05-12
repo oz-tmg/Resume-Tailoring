@@ -15,7 +15,7 @@ import re
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from builder.selector import select_skills
+from builder.selector import select_skills, select_aside_skills
 
 
 # ---------------------------------------------------------------------------
@@ -51,31 +51,49 @@ def _latex_escape(text: str) -> str:
 # Asset staging
 # ---------------------------------------------------------------------------
 
-def _stage_assets(output_dir: Path, repo_root: Path) -> None:
+def _stage_assets(output_dir: Path, repo_root: Path,
+                  cls_names: tuple[str, ...] = ("cv-style.cls",)) -> None:
     """
-    Copy cv-style.cls into the output directory so XeLaTeX can find it
-    regardless of how the .tex file is compiled (build.py, IDE, direct
-    xelatex invocation).  The fonts/ directory is also symlinked/copied
+    Copy the requested LaTeX class file(s) into the output directory so XeLaTeX
+    can find them regardless of how the .tex file is compiled (build.py, IDE,
+    direct xelatex invocation). The fonts/ directory is also symlinked/copied
     for the same reason.
 
     This is intentionally belt-and-suspenders: build.py also sets
     TEXINPUTS, but any editor or manual xelatex call will work too.
+
+    cls_names — which .cls file(s) to stage. Defaults to ("cv-style.cls",)
+                for backwards compatibility. The ATS template uses
+                ("cv-style-ats.cls",).
     """
-    # cv-style.cls — required by \documentclass[]{cv-style}
-    cls_src = repo_root / "cv-style.cls"
-    cls_dst = output_dir / "cv-style.cls"
-    if cls_src.exists() and not cls_dst.exists():
-        shutil.copy2(cls_src, cls_dst)
+    for cls_name in cls_names:
+        cls_src = repo_root / cls_name
+        cls_dst = output_dir / cls_name
+        if cls_src.exists() and not cls_dst.exists():
+            shutil.copy2(cls_src, cls_dst)
 
     # fonts/ — required by \newfontfamily calls in cv-style.cls
     fonts_src = repo_root / "fonts"
     fonts_dst = output_dir / "fonts"
-    if fonts_src.exists() and not fonts_dst.exists():
-        try:
-            fonts_dst.symlink_to(fonts_src.resolve())
-        except (OSError, NotImplementedError):
-            # Symlinks unavailable (e.g. some Windows configs) — copy instead
-            shutil.copytree(fonts_src, fonts_dst)
+    if fonts_src.exists():
+        # Skip if destination already exists and resolves correctly.
+        if fonts_dst.exists():
+            pass  # Already in place (real dir or working symlink)
+        else:
+            # A broken symlink has .exists() == False but .is_symlink() == True.
+            # Try to unlink it so we can lay down a fresh link or copy.
+            if fonts_dst.is_symlink():
+                try:
+                    fonts_dst.unlink()
+                except (OSError, PermissionError):
+                    pass  # Some environments (sandboxes) disallow unlink
+            # Only proceed if the destination still doesn't exist after cleanup
+            if not fonts_dst.exists() and not fonts_dst.is_symlink():
+                try:
+                    fonts_dst.symlink_to(fonts_src.resolve())
+                except (OSError, NotImplementedError):
+                    # Symlinks unavailable (e.g. Windows, sandboxes) — copy
+                    shutil.copytree(fonts_src, fonts_dst)
 
 
 # ---------------------------------------------------------------------------
@@ -126,6 +144,102 @@ def _apply_education_mode(education_entries: list[dict],
     return out
 
 
+# ---------------------------------------------------------------------------
+# ATS template helpers — skills-table grouping + keyword tagline
+# ---------------------------------------------------------------------------
+
+# Default-grouping labels for when a family doesn't define ats_skills_groups.
+# Keys match keys in skills.yaml::data_engineering.<subcategory>.
+_ATS_DE_LABELS = {
+    "modelling_and_transformation":  "Data Modeling & Transformation",
+    "storage_and_warehousing":       "Storage & Warehousing",
+    "orchestration":                 "Pipeline & Orchestration",
+    "streaming_and_ingestion":       "Streaming & Ingestion",
+    "data_processing":               "Data Processing",
+    "bi_tools":                      "BI & Delivery",
+    "hosting_and_infrastructure":    "DevOps / Infrastructure",
+    "file_formats":                  "File Formats",
+}
+
+
+def _compose_ats_skills_groups(skills: dict, family: dict,
+                                ordered_skills: dict) -> list[dict]:
+    """
+    Build the list of `{label, items_text}` rows that populate the ATS
+    "Technical Skills" table.
+
+    Precedence:
+      1. `family.ats_skills_groups` — explicit override, used as-is. Each
+         entry is `{label, items: [...skill display names...]}`. Items are
+         passed through verbatim — they're treated as display strings, not
+         lookups, so family files can include human-readable phrases that
+         aren't strict skills.yaml entries (e.g. "LTV forecasting,
+         AppsFlyer, A/B experimentation" for a Marketing Analytics group).
+      2. Derived from `ordered_skills` (output of select_skills) — grouped
+         by skills.yaml category. Programming → "Languages",
+         data_engineering subcats → human labels via _ATS_DE_LABELS,
+         data_science → "Data Science".
+
+    The renderer never silently drops a non-empty override group — an
+    empty `items` list is still rendered as a row, in case the family
+    wants the label present for ATS keyword density even without items.
+    """
+    explicit = family.get("ats_skills_groups")
+    if explicit:
+        out: list[dict] = []
+        for grp in explicit:
+            items = grp.get("items", []) or []
+            out.append({
+                "label":      grp["label"],
+                "items_text": ", ".join(items),
+            })
+        return out
+
+    out = []
+    if ordered_skills.get("programming"):
+        out.append({
+            "label":      "Languages",
+            "items_text": ", ".join(s["name"] for s in ordered_skills["programming"]),
+        })
+    if ordered_skills.get("data_science"):
+        out.append({
+            "label":      "Data Science",
+            "items_text": ", ".join(s["name"] for s in ordered_skills["data_science"]),
+        })
+    de = ordered_skills.get("data_engineering") or {}
+    for cat_key, items in de.items():
+        if not items:
+            continue
+        label = _ATS_DE_LABELS.get(cat_key, cat_key.replace("_", " ").title())
+        out.append({
+            "label":      label,
+            "items_text": ", ".join(s["name"] for s in items),
+        })
+    return out
+
+
+def _compose_ats_tagline(family: dict) -> str:
+    """
+    Return the keyword tagline that renders directly under the subtitle line
+    in the navy header band.
+
+    Precedence:
+      1. `family.ats_tagline` — explicit LaTeX-ready string from the family file.
+         Treated as raw LaTeX (not escaped) so the family can include macros.
+      2. Derived from `family.ats_keyword_watchlist[:6]`, joined with
+         `\\textbullet`. Each keyword is latex-escaped individually.
+      3. Empty string when neither is defined.
+    """
+    if family.get("ats_tagline"):
+        return family["ats_tagline"]
+
+    keywords = (family.get("ats_keyword_watchlist") or [])[:6]
+    if not keywords:
+        return ""
+    escaped = [_latex_escape(k) for k in keywords]
+    return r" \textbullet\ ".join(escaped)
+
+
 def _select_certifications(certifications: list[dict],
                            family: dict,
                            edu_config: dict) -> list[dict]:
@@ -154,6 +268,22 @@ def _select_certifications(certifications: list[dict],
     return out
 
 
+# ---------------------------------------------------------------------------
+# Template registry — maps the --template flag to (jinja file, .cls staged)
+# ---------------------------------------------------------------------------
+
+_TEMPLATES: dict[str, dict[str, str]] = {
+    "standard": {
+        "jinja":  "resume.tex.j2",
+        "cls":    "cv-style.cls",
+    },
+    "ats": {
+        "jinja":  "resume-ats.tex.j2",
+        "cls":    "cv-style-ats.cls",
+    },
+}
+
+
 def render_tex(family: dict,
                resolved_experience: list[dict],
                skills: dict,
@@ -164,7 +294,10 @@ def render_tex(family: dict,
                template_dir: Path,
                repo_root: Path,
                education_mode: str | None = None,
-               certs_placement: str | None = None) -> Path:
+               certs_placement: str | None = None,
+               industry: str = "agnostic",
+               posting_text: str | None = None,
+               template: str = "standard") -> Path:
     """
     Render resume.tex.j2 with all pipeline data and write to output_dir.
     Stages cv-style.cls and fonts/ alongside the .tex so any compiler works.
@@ -177,7 +310,27 @@ def render_tex(family: dict,
                       "education"). "aside" passes certifications into a
                       separate `certifications_aside` template variable so
                       they can render in the page-3 sidebar instead.
+    industry        — "games" | "agnostic". When "games", the games_text
+                      summary variant is used if available, and aside skills
+                      are rendered with games-friendly framing.
+    posting_text    — Job posting text used to reorder aside skill sections
+                      by posting relevance.
+    template        — "standard" | "ats". "standard" renders the
+                      two-column layout via templates/resume.tex.j2 +
+                      cv-style.cls (default). "ats" renders the single-
+                      column ATS-friendly layout via
+                      templates/resume-ats.tex.j2 + cv-style-ats.cls.
+                      The ATS layout adds new context variables
+                      `ats_skills_groups`, `ats_tagline`, and
+                      `impact_metrics` (all optional, with sensible
+                      fallbacks derived from existing family fields).
     """
+    if template not in _TEMPLATES:
+        raise ValueError(
+            f"Invalid template: {template!r}. "
+            f"Valid options: {sorted(_TEMPLATES)}"
+        )
+    tmpl_cfg = _TEMPLATES[template]
     env = Environment(
         loader=FileSystemLoader(str(template_dir)),
         undefined=StrictUndefined,
@@ -192,6 +345,17 @@ def render_tex(family: dict,
     env.filters["latex_escape"] = _latex_escape
 
     ordered_skills = select_skills(skills, family)
+
+    # Resolve aside skills for pg2 sidebar — reordered by posting relevance
+    # when a posting is provided.
+    raw_aside_skills = family.get("aside_skills")
+    aside_skills = select_aside_skills(raw_aside_skills, posting_text)
+
+    # Choose summary text: games variant when industry="games" and available.
+    if industry == "games" and summary.get("games_text"):
+        summary_text = summary["games_text"]
+    else:
+        summary_text = summary["text"]
 
     edu_config = family.get("education", {})
 
@@ -225,32 +389,56 @@ def render_tex(family: dict,
         certs_inline = selected_certs
         certs_aside  = []
 
+    # ATS-template-only context: composed here so they're cheap no-ops when
+    # the standard template renders (Jinja2 ignores unused keys).
+    ats_skills_groups = _compose_ats_skills_groups(skills, family, ordered_skills)
+    ats_tagline       = _compose_ats_tagline(family)
+    impact_metrics    = family.get("impact_metrics") or []
+
     context = {
         "family":               family,
         "personal":             personal["personal"],
-        "summary_text":         summary["text"],
+        "summary_text":         summary_text,
         "experience":           resolved_experience,
         "skills":               ordered_skills,
+        "aside_skills":         aside_skills,
         "education":            education_to_show,
         "education_mode":       education_mode,
         "certifications":       certs_inline,
         "certifications_aside": certs_aside,
         "certs_placement":      certs_placement,
         "header_title":         family["header_title"],
+        "industry":             industry,
+        "template":             template,
+        # ATS-template context (harmless to the standard template)
+        "ats_skills_groups":    ats_skills_groups,
+        "ats_tagline":          ats_tagline,
+        "impact_metrics":       impact_metrics,
         # Forward-slash path for LaTeX compatibility on all platforms
         "assets_root":          str(repo_root).replace("\\", "/"),
     }
 
-    template  = env.get_template("resume.tex.j2")
-    rendered  = template.render(**context)
+    jinja_tmpl = env.get_template(tmpl_cfg["jinja"])
+    rendered   = jinja_tmpl.render(**context)
 
+    # Per-template output filename suffix — keeps both layouts side-by-side
+    # in the same output directory rather than overwriting each other.
     family_id = family["id"].lower()
-    tex_path  = output_dir / f"resume_{family_id}.tex"
+    if template == "ats":
+        tex_path = output_dir / f"resume_{family_id}_ats.tex"
+    else:
+        tex_path = output_dir / f"resume_{family_id}.tex"
 
     output_dir.mkdir(parents=True, exist_ok=True)
     tex_path.write_text(rendered, encoding="utf-8")
 
-    # Stage cv-style.cls and fonts/ next to the .tex so any compiler finds them
-    _stage_assets(output_dir, repo_root)
+    # Stage the right .cls file (and fonts/) next to the .tex so any compiler
+    # finds them. We stage both classes when the standard template is used so
+    # an ATS build that lands in the same directory later doesn't need a
+    # re-stage; conversely, for an ATS build only the ATS class is needed.
+    cls_files: tuple[str, ...] = (tmpl_cfg["cls"],)
+    if template == "standard":
+        cls_files = ("cv-style.cls",)
+    _stage_assets(output_dir, repo_root, cls_names=cls_files)
 
     return tex_path
