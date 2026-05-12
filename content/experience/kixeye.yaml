@@ -262,7 +262,7 @@ roles:
           Increased churn prediction accuracy from AUC 0.71 to 0.86 in
           Python, helping identify and remediate multiple gameplay-related
           churn drivers.
-        families: [DS, MLE]
+        families: [DS, MLE, DA]
         keywords: [churn prediction, AUC, Python, classification, machine
                    learning, model improvement, retention]
         tier: 1
@@ -416,3 +416,10 @@ roles:
             Redesigned Kixeye's Facebook UA strategy, cutting the time to
             campaign profitability from 200 to 90 days — significantly
             accelerating return on paid acquisition spend for the live game.
+      
+      - id: kix_network_effects
+        text: >
+          Discovered that potentially high value players were churning early 
+          due to weeker network effects within alliances joined. 
+        families: [DA, AE]
+        keywords: [exploratory analysis, BI]

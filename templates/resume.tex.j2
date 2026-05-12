@@ -80,10 +80,10 @@
 <%- if ns.first_role %>
 \section{<< company.company | latex_escape >> <% if company.division %>- << company.division | latex_escape >><% endif %> \hfill
   <% if company.logo %>\includegraphics[height=1em]{<< company.logo >>}<% endif %>}
-{\vspace{-0.2cm}}
+%{\vspace{-0.2cm}}
 <% set ns.first_role = false %>
 <% else %>
-{\vspace{-0.5cm}}
+%{\vspace{-0.5cm}}
 <% endif %>
 \begin{entrylist}
 \entry

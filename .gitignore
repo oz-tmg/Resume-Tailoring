@@ -10,6 +10,7 @@ content/personal.yaml
 output/
 postings/*/output/
 postings/*/*.tex
+postings/*/*.txt
 postings/*/resume_*.tex
 postings/*/resume_*.pdf
 
