@@ -47,8 +47,8 @@ All source-of-truth content has been written and tagged:
 | `content/experience/tinymob.yaml` | ✅ Done    | Early career analytics bullets                    |
 | `content/skills.yaml`             | ✅ Done    | Full skills inventory, categorized, family-tagged |
 | `content/education.yaml`          | ✅ Done    | Degrees + certifications, family-tagged           |
-| `content/summaries.yaml`          | ✅ Done    | 6 summaries (DS, DA, AE, DE, MLE, ECON) each with `revoicing_persona` |
-| `content/personal.yaml`           | ✅ Done    | Contact info schema to replace info.tex           |
+| `content/summaries.yaml`          | ✅ Done    | 6 summaries each with `text`, `revoicing_persona`, `games_text`, `games_revoicing_persona` |
+| `content/personal.yaml`           | ✅ Done    | Contact info + optional `work_authorization` block |
 
 #### Family Rules Layer — ✅ Complete
 
@@ -61,25 +61,25 @@ All source-of-truth content has been written and tagged:
 | `families/ml_engineer.yaml`       | ✅ Done    |                                                   |
 | `families/economist.yaml`         | ✅ Done    |                                                   |
 
-#### Pipeline Modules — 🔶 Scaffolded, Not Fully Tested
+#### Pipeline Modules — ✅ Complete and Tested End-to-End
 
 | Module                    | Status          | Notes                                                       |
 |---------------------------|-----------------|-------------------------------------------------------------|
-| `builder/loader.py`       | ✅ Written       | Loads + normalizes all YAML. Includes `load_personal()`.    |
-| `builder/selector.py`     | ✅ Written       | Filters bullets by family, tier, exclude; orders by priority |
-| `builder/resolver.py`     | ✅ Written       | Resolves `variants.<FAMILY_ID>` to final bullet text        |
-| `builder/ranker.py`       | ✅ Written       | Claude API integration: Stage 1 score, Stage 2 revoice      |
-| `builder/renderer.py`     | ✅ Written       | Jinja2 → .tex. Includes `latex_escape` filter.              |
-| `builder/validator.py`    | ✅ Written       | Referential integrity checks across all YAML layers         |
-| `build.py`                | ✅ Written       | CLI entry point. Orchestrates the full pipeline.            |
-| `Makefile`                | ✅ Written       | `make ds`, `make all`, `make posting`, `make pdf`, `make validate` |
-| `SCHEMA.md`               | ✅ Written       | Full field documentation. Explains `variants` contract.     |
+| `builder/loader.py`       | ✅ Done          | Loads + normalizes all YAML. Includes `load_personal()`.    |
+| `builder/selector.py`     | ✅ Done          | Filters bullets by family, tier, exclude; orders by priority; `select_aside_skills()` for posting-aware pg2 ordering |
+| `builder/resolver.py`     | ✅ Done          | Resolves `variants.<FAMILY_ID>` → `variants.GAMES` → `text`; resolves `summary_variants` per role |
+| `builder/ranker.py`       | ✅ Done          | Claude API: Stage 1 score, Stage 2 revoice; games-industry persona support |
+| `builder/renderer.py`     | ✅ Done          | Jinja2 → .tex; `latex_escape` filter; `aside_skills` + posting ordering; `--industry` support |
+| `builder/validator.py`    | ✅ Done          | Referential integrity checks; `GAMES` and `AM` are valid variant keys |
+| `build.py`                | ✅ Done          | CLI entry point; `--industry {games,agnostic}` flag wired through pipeline |
+| `Makefile`                | ✅ Done          | All base targets + `ds-games`, `posting-games`, etc. |
+| `SCHEMA.md`               | ✅ Done          | Documents all fields including `summary_variants`, `GAMES` variant key, `aside_skills`, `work_authorization`, `games_text` |
 
-#### Templates — 🔴 Incomplete
+#### Templates — ✅ Complete
 
 | File                      | Status          | Notes                                                       |
 |---------------------------|-----------------|-------------------------------------------------------------|
-| `templates/resume.tex.j2` | 🔶 Partial       | Jinja2 template exists but needs validation against `cv-style.cls` layout. `\leavevmode` fix needs to be in template (not in generated output). `\input{info}` needs to be removed and replaced with `personal` context variables. |
+| `templates/resume.tex.j2` | ✅ Done          | Fully wired. `\input{info}` removed; personal context variables injected; `\leavevmode` applied; dynamic pg2 aside from `aside_skills.page2`; games-industry support; work authorization note; family-aware role summaries via `resolved_summary`. |
 
 ---
 
@@ -126,6 +126,78 @@ In addition, **cross-family promotion** lets DS and MLE surface
 `kano_etl_performance` (the Parquet/Iceberg ETL win) even though it isn't
 tagged DS/MLE. The mechanism is general-purpose — see "Cross-family
 promotion" below.
+
+### ATS-Friendly Template Added (May 2026)
+
+A recruiter prepared an ATS-friendly version of Alex's resume — single-column
+sections, no asides, no photo, technical-skills table, key-impact-metrics
+callout. Layout reproduces cleanly in `cv-style-ats.cls` and
+`templates/resume-ats.tex.j2`.
+
+| Asset | Purpose |
+|-------|---------|
+| `cv-style-ats.cls` | Single-column class. Same Roboto fonts + navy/atsblue palette as `cv-style.cls`. New commands: `\atsheader`, `\techskills`/`\skillgroup`, `\impactbox`/`\impactcell`, `\jobcompany`/`\jobrole`/`\jobsummary`/`\jobbullets`/`\jobsubhead`, `\edublock`/`\edudegree`/`\edusingle`, `\certlist`/`\certentry`. No fontawesome dependency (icons removed for ATS-cleanliness). |
+| `templates/resume-ats.tex.j2` | Companion Jinja2 template. Same data model as `resume.tex.j2` — consumes `personal`, `summary_text`, `experience` (with `resolved_text`/`resolved_summary`/`split_sections`), `education`, `certifications`. Adds three new context variables (see below). |
+| `build.py --template {standard,ats}` | New CLI flag (default: `standard`). Plumbed through `build()` → `render_tex()`. The renderer's `_TEMPLATES` registry maps the flag to the Jinja filename and the `.cls` file to stage. Output filename is suffixed `_ats` for the ATS layout so both can coexist in the same `output/<family>/` directory. |
+| `make ds-ats`, `make da-ats`, ..., `make econ-ats` | One per family. |
+| `make posting-ats F=<f> P=<path>` | Posting-tailored builds in the ATS layout. |
+| `TEMPLATE=ats` pass-through | Append to any base/posting/pdf target. |
+
+**New family-file fields (all optional, ATS-only):**
+
+| Field | Schema | Effect |
+|-------|--------|--------|
+| `ats_tagline` | LaTeX-ready string | Keyword tagline rendered under the subtitle in the navy header. Passed to LaTeX verbatim (single-quoted YAML preserves backslashes). Defaults to first 6 entries of `ats_keyword_watchlist` joined with `\textbullet`. |
+| `ats_skills_groups` | `[{label, items: [...]}, ...]` | Drives the Technical Skills key/value table. Items render verbatim (after `latex_escape`) — write plain prose, not LaTeX. Defaults to a derivation from `skills_order` via `_compose_ats_skills_groups()` (Languages, Data Science, then Data-Engineering subcats mapped to human labels). |
+| `impact_metrics` | `[{value, label}, ...]` | Renders the Key Impact Metrics callout. 3-entry list uses `impactbox*` env (3-up), other counts use 4-up. Section is omitted entirely when absent. Values and labels are latex-escaped, so write `$14M` not `\$14M`. |
+
+Currently set: `families/analytics_engineer.yaml` carries all three with the
+exact wording from the recruiter-prepared PDF. Other families work via the
+default fallbacks (no impact-metrics section; tagline derived from the watchlist).
+
+**Implementation details — what the renderer does:**
+
+- `_compose_ats_skills_groups(skills, family, ordered_skills)` resolves the
+  explicit override or derives from `select_skills()` output, joining each
+  group's items with `", "` for `skillgroup`.
+- `_compose_ats_tagline(family)` resolves the explicit override or falls back
+  to joining the keyword watchlist with `\textbullet`.
+- `_stage_assets(output_dir, repo_root, cls_names)` now takes a tuple of
+  `.cls` filenames; `render_tex` passes `("cv-style-ats.cls",)` for ATS
+  builds. Fonts staging is unchanged.
+- The same `latex_escape` filter and resolved-bullet pipeline (selector →
+  resolver → ranker) feeds both templates, so posting-tailored ATS builds
+  benefit from the full diversity-aware Claude scoring path.
+
+**Known follow-ups:**
+
+- The contact strip on the right of the navy header can clip if the lines
+  are long; tighten font sizes in `\atsheader` or shorten handles if it
+  visually intrudes.
+- Only `analytics_engineer.yaml` has hand-authored `impact_metrics`. Add
+  per-family metrics if/when the user wants the section to appear on other
+  resumes.
+
+---
+
+### Games-Industry Mode Added (May 2026)
+
+Five features were added to support games-studio job applications:
+
+| Feature | Details |
+|---------|---------|
+| **`--industry games` flag** | New CLI arg (default: `agnostic`). Wired through entire pipeline: resolver → ranker → renderer. |
+| **`GAMES` bullet variants** | Bullets can carry `variants.GAMES` with live-games framing. Resolver uses it as a fallback when building in games mode and no family-specific variant exists. Added to ~20+ bullets across all 5 company YAML files. |
+| **Games summaries & revoicing** | Each family in `summaries.yaml` now has `games_text` (games-focused summary paragraph) and `games_revoicing_persona` (Claude API persona for games-mode revoicing). |
+| **Work authorization note** | `personal.yaml` now has an optional `work_authorization.show_on_resume` / `note` block. When enabled, a small italic note appears at the bottom of the page-1 sidebar. |
+| **Dynamic pg2 aside (data-driven)** | `aside_skills.page2` in family files replaces the static `aside-pg2-*.tex` files. Sections have keywords that are scored against a job posting to reorder them by relevance. All 6 families converted. Falls back to static `.tex` if `aside_skills` is not defined. |
+| **Family-aware role summaries** | Experience YAML roles can carry `summary_variants` keyed by family ID. Resolver picks the matching variant and exposes it as `role.resolved_summary` to the template. Added to all roles across all 5 company files. |
+
+**Make targets added:**
+- `make ds-games`, `make da-games`, `make ae-games`, `make de-games`, `make mle-games`, `make econ-games`
+- `make posting-games F=<family> P=<posting>`
+
+---
 
 ### Build Options Added (April 2026)
 
@@ -339,10 +411,10 @@ when the keyword-only approach proves too coarse on real postings.
 
 | Issue | Details |
 |-------|---------|
-| `skills-ds.tex` and `skills-de.tex` in `resume-latex/`| These are static `.tex` files in the design repo but are generated files in the builder context. The `\leavevmode` fix applied to them in the design repo needs to be replicated in the Jinja2 template, not just those files. |
-| `resume.tex.j2` — `\input{info}` dependency | The Jinja2 template may still reference `\input{info}`. This should be removed; personal info should come from `personal` context variables. |
-| No integration tests | The pipeline modules are unit-written but haven't been run as a full pipeline. The first `make ds` run will likely surface issues. |
-| Font path assumption | `cv-style.cls` assumes Roboto is system-installed (Ubuntu: `fonts-roboto` package). The Jinja2 template's compile step needs the same assumption documented and enforced. |
+| `skills-ds.tex` and `skills-de.tex` in `resume-latex/` | These static `.tex` files remain in the design repo for reference. The builder now generates pg2 sidebar content dynamically from `aside_skills.page2` in family YAML — those static files are no longer the source of truth for the builder. |
+| `resume.tex.j2` — `\input{info}` dependency | ✅ Resolved. `\input{info}` removed; personal info comes from `personal` context variables. |
+| No integration tests | `make all` and `make ds` run clean end-to-end. Posting-mode (Claude API) still needs a real posting test to verify revoicing quality. |
+| Font path assumption | `cv-style.cls` assumes Roboto is system-installed (Ubuntu: `fonts-roboto` package). The builder copies or symlinks the local `fonts/` directory into the output folder so XeLaTeX can find fonts regardless of system installation. |
 
 ---
 

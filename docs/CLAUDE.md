@@ -106,9 +106,21 @@ the file headers for when to use it instead of `aside-pg*-da.tex`.
   keywords: [keyword1, kw2]      # ATS terms
   tier: 1                        # 1=headline, 2=supporting, 3=contextual
   exclude_from: [ECON]           # optional override suppression
-  variants:                      # only when framing concept changes per family
+  variants:                      # only when framing concept changes per family/mode
     DA: > DA-specific rewrite
     ECON: > ECON-specific rewrite
+    GAMES: > Games-industry rewrite (used when --industry games, no family variant)
+```
+
+### Role summary_variants (always follow)
+```yaml
+roles:
+  - id: some_role_id
+    summary: >
+      Neutral base role description.
+    summary_variants:            # optional per-family role descriptions
+      DS: > Data science framing of this role.
+      DA: > Analytics framing of this role.
 ```
 
 ### Tier rules
@@ -142,8 +154,16 @@ make de
 make mle
 make econ
 
+# Build games-industry variant (uses GAMES bullet variants + games summary/persona)
+make ds-games    # → output/data_scientist/resume_ds.tex (games framing)
+make da-games
+# (all six families have -games variants)
+
 # Build posting-tailored resume (calls Claude API for ranking + revoicing)
 make posting F=data_scientist P=postings/acme_ds/posting.txt
+
+# Build posting-tailored games resume
+make posting-games F=data_scientist P=postings/ea_ds/posting.txt
 
 # Build + compile to PDF
 make pdf F=data_scientist
@@ -151,6 +171,19 @@ make pdf F=data_scientist
 # Build all six base resumes
 make all
 ```
+
+### Key CLI flags (build.py)
+
+| Flag | Values | Default | Effect |
+|---|---|---|---|
+| `--family` | `data_scientist`, `data_analyst`, etc. | — | Target job family |
+| `--industry` | `games`, `agnostic` | `agnostic` | Games-mode: uses GAMES bullet variants, games summary, games revoicing persona |
+| `--posting` | path to posting `.txt` | — | Enables posting-tailored mode (Claude API scoring + revoicing) |
+| `--education-mode` | `full`, `condensed` | family default | Override education display mode |
+| `--certs-placement` | `education`, `aside`, `omit` | family default | Where certifications render |
+| `--pdf` | flag | — | Run XeLaTeX after generating `.tex` |
+| `--all` | flag | — | Build all six families |
+| `--validate` | flag | — | Run YAML integrity checks only |
 
 ---
 
