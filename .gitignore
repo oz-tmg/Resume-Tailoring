@@ -9,6 +9,7 @@ content/personal.yaml
 # =============================================================================
 output/
 postings/*/output/
+postings/*/*.tex
 postings/*/resume_*.tex
 postings/*/resume_*.pdf
 

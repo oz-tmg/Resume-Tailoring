@@ -56,10 +56,17 @@
 %% Family-specific aside. The file is static per family and maintained
 %% under sections/aside-pg1/. \leavevmode protects the leading \vspace
 %% from being swallowed when it's the first thing inside the aside.
+%% Work authorization note is appended when enabled in personal.yaml.
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \leavevmode\vspace{3.5cm}%
 \input{<< assets_root >>/sections/aside-pg1/aside-pg1-<< family.id | lower >>}
+<% if personal.work_authorization is defined and personal.work_authorization and personal.work_authorization.show_on_resume %>
+~
+\noindent\rule{\textwidth}{0.4pt}%
+\vspace{-0.1cm}%
+{\small \textit{<< personal.work_authorization.note | latex_escape >>}}
+<% endif %>
 \end{aside}
 
 %% -----------------------------------------------------------------------
@@ -83,7 +90,30 @@
   {<< role.start >> -- \\ << role.end >>}
   {<< role.title | latex_escape >>}
   {<< role.location | latex_escape >>}
-  {<% if role.summary is defined and role.summary %><< role.summary | latex_escape >> <% endif %>\textbf{Responsibilities \& Achievements}:
+  {<% if role.resolved_summary is defined and role.resolved_summary %><< role.resolved_summary | latex_escape >> <% endif %><%
+  if role._split_sections is defined and role._split_sections %><%
+    set work_bs    = role.bullets | selectattr("category", "equalto", "work")    | list %><%
+    set outcome_bs = role.bullets | selectattr("category", "equalto", "outcome") | list %><%
+    if work_bs and outcome_bs %>\textbf{Responsibilities}:
+  \begin{itemize}
+<% for bullet in work_bs %>
+    \item << bullet.resolved_text | latex_escape >>
+<% if bullet.resolved_subs is defined and bullet.resolved_subs %>
+    \begin{itemize}
+<% for sub in bullet.resolved_subs %>
+      \item << sub.resolved_text | latex_escape >>
+<% endfor %>
+    \end{itemize}
+<% endif %>
+<% endfor %>
+  \end{itemize}
+\textbf{Outcomes}:
+  \begin{itemize}
+<% for bullet in outcome_bs %>
+    \item << bullet.resolved_text | latex_escape >>
+<% endfor %>
+  \end{itemize}<%
+    else %>\textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 <% for bullet in role.bullets %>
     \item << bullet.resolved_text | latex_escape >>
@@ -95,21 +125,58 @@
     \end{itemize}
 <% endif %>
 <% endfor %>
-  \end{itemize}}
+  \end{itemize}<%
+    endif %><%
+  else %>\textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+<% for bullet in role.bullets %>
+    \item << bullet.resolved_text | latex_escape >>
+<% if bullet.resolved_subs is defined and bullet.resolved_subs %>
+    \begin{itemize}
+<% for sub in bullet.resolved_subs %>
+      \item << sub.resolved_text | latex_escape >>
+<% endfor %>
+    \end{itemize}
+<% endif %>
+<% endfor %>
+  \end{itemize}<%
+  endif %>}
 \end{entrylist}
 <% endfor %>
-<% endfor %>
-
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 2
-%% Family-specific aside. Static files in sections/aside-pg2/ carry the
-%% family's curated skillset. \leavevmode protects any leading \vspace
-%% inside the included file from being dropped at the aside boundary.
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
 %% -----------------------------------------------------------------------
+<% if loop.first %>
 \begin{aside}%
 \leavevmode%
+<% if aside_skills is defined and aside_skills and aside_skills.page2 is defined %>
+<%- set pg2 = aside_skills.page2 %>
+\vspace{-1.0cm}
+\section{\LARGE << pg2.title | latex_escape >>}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{-0.2cm}
+~
+<% for sec in pg2.sections %>
+\textbf{\large << sec.label | latex_escape >>}
+\faGem << sec.text | latex_escape >>
+<% if not loop.last %>~
+<% endif %>
+<% endfor %>
+<% if pg2.programming_latex is defined and pg2.programming_latex %>
+\section{\LARGE Programming}
+\noindent\rule{\textwidth}{0.4pt}
+<< pg2.programming_latex >>
+<% endif %>
+<% else %>
 \input{<< assets_root >>/sections/aside-pg2/aside-pg2-<< family.id | lower >>}
+<% endif %>
 \end{aside}
+<% endif %>
+<% endfor %>
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
