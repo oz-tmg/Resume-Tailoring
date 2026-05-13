@@ -26,16 +26,21 @@ OUTDIR  := output
 #   EDU        — full | condensed         (--education-mode)
 #   CERTS      — education | aside | omit (--certs-placement)
 #   TEMPLATE   — standard | ats           (default: standard; ATS = single-column)
+#   LOC        — default | relocate | us  (--location-mode; header location signal)
+#   CITY       — city name string         (--relocation-city; e.g. "San Francisco")
 #
 # Example:
 #   make posting F=analytics_engineer P=postings/Microsoft/posting.txt \
-#        INDUSTRY=games EDU=condensed CERTS=omit TEMPLATE=ats
+#        INDUSTRY=games EDU=condensed CERTS=omit TEMPLATE=ats \
+#        LOC=us CITY=Redmond
 
 _INDUSTRY_FLAG  := $(if $(INDUSTRY),--industry $(INDUSTRY),)
 _EDU_FLAG       := $(if $(EDU),--education-mode $(EDU),)
 _CERTS_FLAG     := $(if $(CERTS),--certs-placement $(CERTS),)
 _TEMPLATE_FLAG  := $(if $(TEMPLATE),--template $(TEMPLATE),)
-_EXTRA          := $(_INDUSTRY_FLAG) $(_EDU_FLAG) $(_CERTS_FLAG) $(_TEMPLATE_FLAG)
+_LOC_FLAG       := $(if $(LOC),--location-mode $(LOC),)
+_CITY_FLAG      := $(if $(CITY),--relocation-city "$(CITY)",)
+_EXTRA          := $(_INDUSTRY_FLAG) $(_EDU_FLAG) $(_CERTS_FLAG) $(_TEMPLATE_FLAG) $(_LOC_FLAG) $(_CITY_FLAG)
 
 .PHONY: all da ae de ds mle econ \
         da-games ae-games de-games ds-games mle-games econ-games \
@@ -205,8 +210,11 @@ help:
 	@echo "    EDU=condensed             Condense education section"
 	@echo "    CERTS=omit|aside          Move or drop certifications"
 	@echo "    TEMPLATE=ats              ATS-friendly single-column layout"
+	@echo "    LOC=relocate|us           Header location: add relocation/US-eligibility signal"
+	@echo "    CITY=\"<name>\"             Override relocation city (default: Vancouver / Seattle)"
 	@echo ""
 	@echo "  Example:"
 	@echo "    make posting F=analytics_engineer P=postings/Microsoft/posting.txt \\"
-	@echo "         INDUSTRY=games EDU=condensed CERTS=omit TEMPLATE=ats"
+	@echo "         INDUSTRY=games EDU=condensed CERTS=omit TEMPLATE=ats \\"
+	@echo "         LOC=us CITY=Redmond"
 	@echo ""

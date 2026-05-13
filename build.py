@@ -52,7 +52,9 @@ def build(family_name: str, posting_path: Path | None = None,
           education_mode: str | None = None,
           certs_placement: str | None = None,
           industry: str = "agnostic",
-          template: str = "standard") -> Path:
+          template: str = "standard",
+          location_mode: str = "default",
+          relocation_city: str | None = None) -> Path:
     """
     Full build pipeline for one family + optional posting.
     Returns the path of the generated .tex file.
@@ -79,6 +81,11 @@ def build(family_name: str, posting_path: Path | None = None,
         label_bits.append(f"Industry: {industry}")
     if template != "standard":
         label_bits.append(f"Template: {template}")
+    if location_mode != "default":
+        bit = f"Location: {location_mode}"
+        if relocation_city:
+            bit += f" ({relocation_city})"
+        label_bits.append(bit)
 
     print(f"\n{'='*60}")
     print("  " + "  |  ".join(label_bits))
@@ -156,6 +163,8 @@ def build(family_name: str, posting_path: Path | None = None,
         industry=industry,
         posting_text=posting_text,
         template=template,
+        location_mode=location_mode,
+        relocation_city=relocation_city,
     )
 
     print(f"\n  ✓ Generated: {tex_path}")
@@ -256,6 +265,22 @@ def main():
                               "with a technical-skills table and "
                               "key-impact-metrics callout (modeled after the "
                               "recruiter-prepared resume)."))
+    parser.add_argument("--location-mode",
+                        choices=["default", "relocate", "us"],
+                        default="default",
+                        help=("Header location mode. 'default' shows just "
+                              "the base location ('Victoria, BC.'). "
+                              "'relocate' appends an 'Open to Relocation "
+                              "(<city>)' clause — default city: Vancouver. "
+                              "'us' additionally inserts 'US Citizen & "
+                              "Canadian PR' to signal work eligibility — "
+                              "default city: Seattle. Override the city "
+                              "with --relocation-city."))
+    parser.add_argument("--relocation-city",
+                        help=("City for the 'Open to Relocation' clause "
+                              "when --location-mode is 'relocate' or 'us'. "
+                              "Defaults to Vancouver (relocate) or Seattle "
+                              "(us). Ignored when --location-mode=default."))
     args = parser.parse_args()
 
     if args.validate:
@@ -276,7 +301,9 @@ def main():
                         education_mode=args.education_mode,
                         certs_placement=args.certs_placement,
                         industry=args.industry,
-                        template=args.template)
+                        template=args.template,
+                        location_mode=args.location_mode,
+                        relocation_city=args.relocation_city)
             if args.pdf:
                 compile_pdf(tex)
         return
@@ -291,7 +318,9 @@ def main():
                 education_mode=args.education_mode,
                 certs_placement=args.certs_placement,
                 industry=args.industry,
-                template=args.template)
+                template=args.template,
+                location_mode=args.location_mode,
+                relocation_city=args.relocation_city)
 
     if args.pdf:
         compile_pdf(tex)

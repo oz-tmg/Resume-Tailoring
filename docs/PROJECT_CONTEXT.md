@@ -169,6 +169,60 @@ default fallbacks (no impact-metrics section; tagline derived from the watchlist
   resolver → ranker) feeds both templates, so posting-tailored ATS builds
   benefit from the full diversity-aware Claude scoring path.
 
+**Header-location modes (May 2026 — supersedes the work-authorization slot):**
+
+The previous standalone "Can work in..." note (a YAML-driven static line on
+both resumes) has been retired. Work-eligibility + relocation signal now
+rides inside the header's **location field** itself, controlled by two
+build-time CLI flags:
+
+| Flag | Values | Default |
+|------|--------|---------|
+| `--location-mode` | `default` \| `relocate` \| `us` | `default` |
+| `--relocation-city` | any string | per-mode default: `Vancouver` (relocate), `Seattle` (us) |
+
+The renderer's `_compose_header_location(personal, location_mode, relocation_city)`
+assembles the string and exposes it as `header_location` in the template
+context (both templates apply `latex_escape` on render):
+
+| Mode | Output |
+|------|--------|
+| `default` | `Victoria, BC.` |
+| `relocate` (no city) | `Victoria, BC · Open to Relocation (Vancouver)` |
+| `relocate --relocation-city Toronto` | `Victoria, BC · Open to Relocation (Toronto)` |
+| `us` (no city) | `Victoria, BC · US Citizen & Canadian PR · Open to Relocation (Seattle)` |
+| `us --relocation-city "San Francisco"` | `Victoria, BC · US Citizen & Canadian PR · Open to Relocation (San Francisco)` |
+
+The separator is the Unicode middle dot (U+00B7), which XeLaTeX renders
+natively under the bundled Roboto fonts. Both templates consume the same
+`header_location` variable:
+
+- **Standard template** (`resume.tex.j2`): replaces arg #6 of `\header{}` —
+  the location cell of the 3-column contact tabular in cv-style.cls. The
+  cell may push wordpress/github horizontally on the longer `us` string;
+  if visual overflow becomes a problem, the cls header tabular can be
+  reworked to put location on its own row beneath the icons.
+- **ATS template** (`resume-ats.tex.j2`): replaces arg #7 of `\atsheader{}`
+  — the bottom line of the right contact column. The minipage uses
+  `\raggedleft`, so longer location lines wrap gracefully across two visual
+  lines within the same column width. Navy band is fixed at 3.8cm.
+
+Makefile pass-throughs:
+
+```
+LOC=relocate              → --location-mode relocate
+LOC=us CITY=Redmond       → --location-mode us --relocation-city Redmond
+```
+
+Choose the mode at build time per posting:
+- Local Victoria/Vancouver Island roles → no flag (default).
+- Canada-non-Victoria roles → `LOC=relocate CITY="<city>"`.
+- US roles → `LOC=us CITY="<city>"` — explicit "US Citizen & Canadian PR"
+  signal helps US recruiters skip past the Canadian address.
+
+The `personal.yaml::work_authorization` block has been removed; the
+comment block in `personal.yaml` documents the new CLI-driven approach.
+
 **Known follow-ups:**
 
 - The contact strip on the right of the navy header can clip if the lines

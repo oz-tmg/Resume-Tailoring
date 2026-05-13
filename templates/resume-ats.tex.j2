@@ -33,7 +33,14 @@
 \begin{document}
 
 %% -----------------------------------------------------------------------
-%% HEADER — navy band with name, subtitle, keyword tagline, contact info
+%% HEADER — navy band with name, subtitle, keyword tagline, contact info.
+%%
+%% The location slot (arg #7) carries the work-eligibility / relocation
+%% signal — built by renderer._compose_header_location:
+%%   --location-mode default  →  "Victoria, BC."
+%%   --location-mode relocate →  "Victoria, BC · Open to Relocation (Vancouver)"
+%%   --location-mode us       →  "Victoria, BC · US Citizen & Canadian PR · Open to Relocation (Seattle)"
+%% Override the city with --relocation-city.
 %% -----------------------------------------------------------------------
 \atsheader%
   {<< personal.first_name >>}%
@@ -42,7 +49,7 @@
   {\href{mailto:\myemail}{\myemail}}%
   {\href{\mylinkedinpage}{\mylinkedin}}%
   {\href{\myGithub}{github.com/<< personal.github_handle >>}}%
-  {<< personal.location >><% if personal.country is defined and personal.country %>, << personal.country | latex_escape >><% endif %>}%
+  {<< header_location | latex_escape >>}%
   {<< header_title >>}%
   {<< ats_tagline >>}
 
@@ -51,10 +58,6 @@
 %% -----------------------------------------------------------------------
 \section{Professional Summary}
 << summary_text | latex_escape >>
-<% if personal.work_authorization is defined and personal.work_authorization and personal.work_authorization.show_on_resume %>
-
-\noindent\textit{<< personal.work_authorization.note | latex_escape >>}
-<% endif %>
 
 %% -----------------------------------------------------------------------
 %% TECHNICAL SKILLS — key/value table

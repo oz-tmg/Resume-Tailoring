@@ -218,6 +218,70 @@ def _compose_ats_skills_groups(skills: dict, family: dict,
     return out
 
 
+# ---------------------------------------------------------------------------
+# Header-location composer — encodes work-eligibility + relocation context
+# into the location field of the header (used by both templates).
+# ---------------------------------------------------------------------------
+
+# Default cities per location mode. The recruiter's first-instinct relocation
+# guess from Victoria, BC is Vancouver for Canadian roles and Seattle for US
+# roles (closest major tech hubs + Alex's relocation comfort zones).
+_DEFAULT_RELOCATION_CITY: dict[str, str] = {
+    "relocate": "Vancouver",
+    "us":       "Seattle",
+}
+
+# Unicode middle dot — renders natively under XeLaTeX with the Roboto fonts
+# included in this repo. Kept as a constant so the separator is consistent
+# across both templates and easy to swap later (e.g. to "•" or "|").
+_LOC_SEP = " · "  # " · "
+
+
+def _compose_header_location(personal: dict,
+                              location_mode: str = "default",
+                              relocation_city: str | None = None) -> str:
+    """
+    Build the location string that drops into the header's location slot.
+
+    Modes:
+      "default"  — `Victoria, BC.`
+                   The base `personal.location` with a trailing period (if
+                   not already present). Used for jobs at or near the home
+                   base — no relocation or work-eligibility signal needed.
+      "relocate" — `Victoria, BC · Open to Relocation (Vancouver)`
+                   Adds an explicit relocation clause. City defaults to
+                   "Vancouver" — typical recruiter shorthand for "this
+                   candidate would move within Canada." Override via
+                   `--relocation-city`.
+      "us"       — `Victoria, BC · US Citizen & Canadian PR · Open to Relocation (Seattle)`
+                   Adds work-eligibility signal for US recruiters scanning
+                   resumes from non-US locations. City defaults to "Seattle"
+                   — closest major US tech hub.
+
+    The returned string is plain text. The template applies `latex_escape`
+    so `&` and other LaTeX specials are handled at render time.
+    """
+    if location_mode not in ("default", "relocate", "us"):
+        raise ValueError(
+            f"Invalid location_mode: {location_mode!r}. "
+            f"Valid options: default, relocate, us"
+        )
+
+    base = (personal.get("location") or "").rstrip(".").rstrip()
+    if not base:
+        return ""
+
+    if location_mode == "default":
+        return f"{base}."
+
+    city = relocation_city or _DEFAULT_RELOCATION_CITY[location_mode]
+    pieces: list[str] = [base]
+    if location_mode == "us":
+        pieces.append("US Citizen & Canadian PR")
+    pieces.append(f"Open to Relocation ({city})")
+    return _LOC_SEP.join(pieces)
+
+
 def _compose_ats_tagline(family: dict) -> str:
     """
     Return the keyword tagline that renders directly under the subtitle line
@@ -297,7 +361,9 @@ def render_tex(family: dict,
                certs_placement: str | None = None,
                industry: str = "agnostic",
                posting_text: str | None = None,
-               template: str = "standard") -> Path:
+               template: str = "standard",
+               location_mode: str = "default",
+               relocation_city: str | None = None) -> Path:
     """
     Render resume.tex.j2 with all pipeline data and write to output_dir.
     Stages cv-style.cls and fonts/ alongside the .tex so any compiler works.
@@ -324,6 +390,17 @@ def render_tex(family: dict,
                       `ats_skills_groups`, `ats_tagline`, and
                       `impact_metrics` (all optional, with sensible
                       fallbacks derived from existing family fields).
+    location_mode   — "default" | "relocate" | "us". Controls what goes in
+                      the header's location slot. "default" shows just
+                      `personal.location` with a trailing period; "relocate"
+                      appends an "Open to Relocation (<city>)" clause;
+                      "us" additionally inserts "US Citizen & Canadian PR"
+                      to signal work eligibility to US recruiters. See
+                      _compose_header_location for the exact format.
+    relocation_city — City name for the "Open to Relocation" clause when
+                      location_mode is "relocate" or "us". Defaults to
+                      "Vancouver" (relocate) or "Seattle" (us) when None.
+                      Ignored when location_mode is "default".
     """
     if template not in _TEMPLATES:
         raise ValueError(
@@ -395,6 +472,12 @@ def render_tex(family: dict,
     ats_tagline       = _compose_ats_tagline(family)
     impact_metrics    = family.get("impact_metrics") or []
 
+    # Header location — applied to both templates. Encodes work-eligibility
+    # and relocation context (defaults to a plain "Victoria, BC.").
+    header_location   = _compose_header_location(
+        personal["personal"], location_mode, relocation_city,
+    )
+
     context = {
         "family":               family,
         "personal":             personal["personal"],
@@ -408,6 +491,8 @@ def render_tex(family: dict,
         "certifications_aside": certs_aside,
         "certs_placement":      certs_placement,
         "header_title":         family["header_title"],
+        "header_location":      header_location,
+        "location_mode":        location_mode,
         "industry":             industry,
         "template":             template,
         # ATS-template context (harmless to the standard template)

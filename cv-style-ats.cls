@@ -131,12 +131,18 @@
 % The blog URL is intentionally omitted from the ATS header — the recruiter
 % version Alex was given doesn't include it, and the keyword line carries
 % more ATS signal.
+%
+% Note: arg #7 (location) is built by renderer._compose_header_location and
+% may be longer than just "Victoria, BC" — e.g. when --location-mode=us it
+% includes "US Citizen & Canadian PR · Open to Relocation (Seattle)". The
+% right-column minipage uses \raggedleft so longer location lines wrap
+% gracefully across two visual lines without breaking the header layout.
 %----------------------------------------------------------------------------------------
 \newcommand{\atsheader}[9]{%
   \begin{tikzpicture}[remember picture, overlay]
     \node[
       rectangle, fill=navyblue, anchor=north,
-      minimum width=\paperwidth, minimum height=3.6cm
+      minimum width=\paperwidth, minimum height=3.8cm
     ] (atsbox) at (current page.north) {};
     % LEFT block — name + subtitle + keyword line
     \node[anchor=north west, xshift=0.55in, yshift=-0.50cm] (left) at (atsbox.north west) {%
@@ -146,7 +152,7 @@
         {\fontsize{8.5pt}{11pt}\thinfont\color{header} #9}
       \end{minipage}%
     };
-    % RIGHT block — contact info, right-aligned
+    % RIGHT block — contact info; location (#7) may wrap to two lines
     \node[anchor=north east, xshift=-0.55in, yshift=-0.50cm] (right) at (atsbox.north east) {%
       \begin{minipage}[t]{0.38\paperwidth}
         \raggedleft
@@ -161,7 +167,7 @@
     };
   \end{tikzpicture}%
   % Reserve vertical space below the header band before body content begins
-  \vspace*{3.0cm}\par%
+  \vspace*{3.2cm}\par%
 }
 
 %----------------------------------------------------------------------------------------

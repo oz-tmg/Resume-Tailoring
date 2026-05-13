@@ -419,7 +419,8 @@ roles:
       
       - id: kix_network_effects
         text: >
-          Discovered that potentially high value players were churning early 
-          due to weeker network effects within alliances joined. 
+          Discovered that potentially high value players were churning early
+          due to weeker network effects within alliances joined.
         families: [DA, AE]
         keywords: [exploratory analysis, BI]
+        tier: 3
