@@ -42,34 +42,43 @@
 %%   --location-mode us       →  "Victoria, BC · US Citizen & Canadian PR · Open to Relocation (Seattle)"
 %% Override the city with --relocation-city.
 %% -----------------------------------------------------------------------
+%% Contact links use \headerhref so they render in light blue (legible on
+%% the navy header band). Phone and location are plain text (no link).
 \atsheader%
   {<< personal.first_name >>}%
   {<< personal.last_name >>}%
   {\myphone}%
-  {\href{mailto:\myemail}{\myemail}}%
-  {\href{\mylinkedinpage}{\mylinkedin}}%
-  {\href{\myGithub}{github.com/<< personal.github_handle >>}}%
+  {\headerhref{mailto:\myemail}{\myemail}}%
+  {\headerhref{\mylinkedinpage}{\mylinkedin}}%
+  {\headerhref{\myGithub}{github.com/<< personal.github_handle >>}}%
   {<< header_location | latex_escape >>}%
   {<< header_title >>}%
   {<< ats_tagline >>}
 
 %% -----------------------------------------------------------------------
 %% PROFESSIONAL SUMMARY
+%% Set in \small to match the skills table and keep page-1 content compact.
 %% -----------------------------------------------------------------------
 \section{Professional Summary}
-<< summary_text | latex_escape >>
+{\small << summary_text | latex_escape >>\par}
 
 %% -----------------------------------------------------------------------
 %% TECHNICAL SKILLS — key/value table
 %% Driven by `ats_skills_groups` (composed by renderer._compose_ats_skills_groups
 %% from skills.yaml + the family's optional ats_skills_groups override).
+%%
+%% Whitespace control: the minus-sign markers on the loop tags are
+%% load-bearing. Without them, the blank lines Jinja2 leaves between
+%% iterations become stray \par tokens that get absorbed into the next
+%% \skillgroup's label cell — which knocks the label out of top-alignment
+%% with its skills list. Keep the markers when editing this loop.
 %% -----------------------------------------------------------------------
 <% if ats_skills_groups %>
 \section{Technical Skills}
 \begin{techskills}
-<% for grp in ats_skills_groups %>
+<%- for grp in ats_skills_groups %>
 \skillgroup{<< grp.label | latex_escape >>}{<< grp.items_text | latex_escape >>}
-<% endfor %>
+<%- endfor %>
 \end{techskills}
 <% endif %>
 
@@ -84,14 +93,33 @@
 <% else %>
 \begin{impactbox}
 <% endif %>
-<% for m in impact_metrics %>
+<%- for m in impact_metrics %>
 \impactcell{<< m.value | latex_escape >>}{<< m.label | latex_escape >>}<% if not loop.last %> &<% endif %>
-<% endfor %>
+<%- endfor %>
 <% if impact_metrics | length == 3 %>
 \end{impactbox*}
 <% else %>
 \end{impactbox}
 <% endif %>
+<% endif %>
+
+%% -----------------------------------------------------------------------
+%% KEY ACHIEVEMENTS — shaded box, single-column list
+%% Driven by the curated `achievements` list in the family file (each entry
+%% is {title, description}). Section is omitted when the family file
+%% doesn't define `achievements`. The minus-sign whitespace markers on the
+%% loop tags keep blank lines out of the achievementbox list.
+%%
+%% achievementbox takes the heading as its argument and emits it itself
+%% (with \nobreak) so heading + box never separate — no outer minipage
+%% needed, which keeps the box's page-fit accounting honest.
+%% -----------------------------------------------------------------------
+<% if achievements %>
+\begin{achievementbox}{Key Achievements}
+<%- for a in achievements %>
+\achievement{<< a.title | latex_escape >>}{<< a.description | latex_escape >>}
+<%- endfor %>
+\end{achievementbox}
 <% endif %>
 
 %% -----------------------------------------------------------------------
@@ -109,7 +137,7 @@
 \jobcompany{<< company.company | latex_escape >>}{<% if company.division %><< company.division | latex_escape >><% endif %>}
 <% set ns.first_role = false %>
 <% endif %>
-\jobrole{<< role.title | latex_escape >>}{<< role.start >> -- << role.end >>}
+\jobrole{<< role.title | latex_escape >>}{<< role.start >> -- << role.end >>}{<% if role.location is defined and role.location %><< role.location | latex_escape >><% endif %>}
 <% if role.resolved_summary is defined and role.resolved_summary %>
 \jobsummary{<< role.resolved_summary | latex_escape >>}
 <% endif %>

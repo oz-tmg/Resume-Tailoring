@@ -150,10 +150,32 @@ callout. Layout reproduces cleanly in `cv-style-ats.cls` and
 | `ats_tagline` | LaTeX-ready string | Keyword tagline rendered under the subtitle in the navy header. Passed to LaTeX verbatim (single-quoted YAML preserves backslashes). Defaults to first 6 entries of `ats_keyword_watchlist` joined with `\textbullet`. |
 | `ats_skills_groups` | `[{label, items: [...]}, ...]` | Drives the Technical Skills key/value table. Items render verbatim (after `latex_escape`) — write plain prose, not LaTeX. Defaults to a derivation from `skills_order` via `_compose_ats_skills_groups()` (Languages, Data Science, then Data-Engineering subcats mapped to human labels). |
 | `impact_metrics` | `[{value, label}, ...]` | Renders the Key Impact Metrics callout. 3-entry list uses `impactbox*` env (3-up), other counts use 4-up. Section is omitted entirely when absent. Values and labels are latex-escaped, so write `$14M` not `\$14M`. |
+| `achievements` | `[{title, description}, ...]` | Renders the Key Achievements box — a shaded, single-column list. Curated per-family (no posting-aware ranking). 4–5 entries reads best. `title` + `description` are both latex-escaped. Section is omitted when absent. Mirrors the "Key Victories" gems in the standard resume's page-1 aside — keep the two in sync. |
 
-Currently set: `families/analytics_engineer.yaml` carries all three with the
-exact wording from the recruiter-prepared PDF. Other families work via the
-default fallbacks (no impact-metrics section; tagline derived from the watchlist).
+Currently set: `families/analytics_engineer.yaml` carries all four with the
+exact wording from the recruiter-prepared PDF + the AE Key Victories. Other
+families work via the default fallbacks (no impact-metrics / achievements
+sections; tagline derived from the watchlist).
+
+**ATS class commands for the achievement box:**
+`\begin{achievementbox} ... \end{achievementbox}` wraps a shaded,
+single-column list; `\achievement{title}{description}` is one entry
+(atsblue square marker + bold title + em-dash + description, hanging
+indent). The template wraps the `\section{Key Achievements}` heading +
+box in a `minipage` so the heading never orphans at a page foot.
+
+**Header weblink colour:** `cv-style-ats.cls` uses `hidelinks` (hyperref
+applies no colour of its own) plus a `\headerhref{url}{text}` macro that
+renders link text in `headerlink` (light blue, HTML 9DC2F2) — legible
+against the navy header band. The template uses `\headerhref` for the
+email / LinkedIn / GitHub contact links; phone and location stay white.
+
+**Whitespace control gotcha:** the `techskills` and `impact_metrics`
+loops in `resume-ats.tex.j2` use Jinja2 minus-sign whitespace markers on
+the loop tags. Without them, blank lines between iterations become stray
+`\par` tokens that get absorbed into the next tabular cell — which knocked
+skill-category labels out of top-alignment. Keep the markers when editing
+those loops.
 
 **Implementation details — what the renderer does:**
 
@@ -223,14 +245,39 @@ Choose the mode at build time per posting:
 The `personal.yaml::work_authorization` block has been removed; the
 comment block in `personal.yaml` documents the new CLI-driven approach.
 
+**ATS refinements (May 2026):**
+
+- **Staged `.cls` is now always overwritten.** `_stage_assets` previously
+  copied `cv-style*.cls` into `output/` only when absent, so every class
+  edit was silently shadowed by a stale staged copy (a build kept using an
+  old class that lacked `\headerhref`, making `\headerhref{url}{text}`
+  fall through to literal text). It now overwrites on every build.
+- **Header weblinks** use `\headerhref` → light-blue (`headerlink`) text,
+  legible on the navy band; hyperref runs in `hidelinks` mode.
+- **Job locations** render on the ATS experience entries — `\jobrole` takes
+  a third argument (location), shown as `location · dates` on the right.
+- **Skill table** is set in `\small`; AE groups were relabelled
+  ("Languages"→"Programming Languages", "Cloud Platforms"→"Storage &
+  Warehousing", "Data Modeling & dbt"→"Data Modeling & Transformation")
+  and trimmed so each group is one line.
+- **Key Achievements box** is assembled into a single zero-depth `\vbox`
+  (`\boxmaxdepth=0pt`) added in vertical mode. This was necessary to make
+  the page builder's fit accounting exact — a colorbox's large depth and
+  paragraph-line placement otherwise made LaTeX bump the box to the next
+  page even when it fit. The header band + summary were compacted so the
+  4-entry box lands on page 1.
+
 **Known follow-ups:**
 
 - The contact strip on the right of the navy header can clip if the lines
   are long; tighten font sizes in `\atsheader` or shorten handles if it
   visually intrudes.
-- Only `analytics_engineer.yaml` has hand-authored `impact_metrics`. Add
-  per-family metrics if/when the user wants the section to appear on other
-  resumes.
+- Only `analytics_engineer.yaml` has hand-authored `impact_metrics` and
+  `achievements`. Add per-family entries when those sections should appear
+  on other families' resumes.
+- The page-1 fit of the Key Achievements box depends on content length
+  above it (summary, skills). If a family's summary runs long, the box may
+  spill to page 2 — trim the summary or achievements to recover the fit.
 
 ---
 

@@ -226,7 +226,8 @@ ats_tagline: 'dbt \textbullet\ Snowflake \textbullet\ Python \textbullet\ Airflo
 
 # Items in `ats_skills_groups` are rendered through latex_escape; write them
 # as plain prose, NOT LaTeX. The renderer joins each group's items with
-# ", " when emitting the table row.
+# ", " when emitting the table row. The ATS skills table is set in \small,
+# and item lists are kept concise so each group fits on a single line.
 ats_skills_groups:
   - label: "Pipeline & Orchestration"
     items:
@@ -237,22 +238,26 @@ ats_skills_groups:
       - "Lambda"
       - "Glue"
       - "S3"
-      - "Spark (working knowledge)"
-      - "Azure (familiar)"
-  - label: "Data Modeling & dbt"
+      - "Spark"
+      - "Azure"
+  - label: "Data Modeling & Transformation"
     items:
-      - "dbt (models, tests, docs, MetricFlow)"
-      - "Apache Iceberg"
-      - "Parquet"
+      - "dbt"
+      - "MetricFlow"
       - "semantic layer design"
       - "data contracts"
       - "incremental models"
-  - label: "Cloud Platforms"
+      - "Iceberg"
+      - "Parquet"
+  - label: "Storage & Warehousing"
     items:
-      - "AWS (Athena, EC2, Redshift, S3, QuickSight)"
       - "Snowflake"
-      - "GCP (BigQuery)"
-  - label: "Languages"
+      - "AWS Redshift"
+      - "Athena"
+      - "S3"
+      - "Glue"
+      - "GCP BigQuery"
+  - label: "Programming Languages"
     items:
       - "Python (4+ yrs)"
       - "SQL (advanced)"
@@ -263,15 +268,15 @@ ats_skills_groups:
       - "LTV forecasting"
       - "UA performance"
       - "AppsFlyer"
-      - "acquisition funnel modeling"
-      - "campaign profitability analysis"
+      - "acquisition funnels"
       - "A/B experimentation"
   - label: "BI & Delivery"
     items:
       - "Looker"
       - "AWS QuickSight"
       - "Tableau"
-      - "RShiny — self-service analytics as a delivery outcome"
+      - "RShiny"
+      - "Amplitude"
   - label: "DevOps / DataOps"
     items:
       - "Docker"
@@ -293,6 +298,30 @@ impact_metrics:
     label: "Acquisition overestimation identified via forecasting model — corrected before deal close"
   - value: "$2M+"
     label: "Incremental FIFA 19 revenue from A/B test pipeline and experimentation analytics"
+
+# Key Achievements — curated per-family list rendered as the ATS template's
+# "Key Achievements" box (a shaded, single-column list). title + description
+# are both latex-escaped on render, so write them as plain text. 4 entries
+# keeps the box compact enough to stay on page 1. Omit the field to skip the
+# section. (These mirror the "Key Victories" gems in the standard resume's
+# page-1 aside — keep the two in sync when editing.)
+achievements:
+  - title: "dbt Semantic Layer"
+    description: >-
+      Made dbt the studio's transformation standard — models, tests, docs, and
+      a semantic layer feeding analysts and ML one source of truth.
+  - title: "Self-Service Delivery"
+    description: >-
+      Cut a 14-hour daily refresh to under 1 hour and moved dashboards to AWS
+      QuickSight via dbt-Athena models.
+  - title: "Reporting Modernisation"
+    description: >-
+      Migrated analytics ETLs and BI jobs off Domino onto Jenkins — $27K/mo
+      saved, reproducibility restored.
+  - title: "Warehouse Cost Reduction"
+    description: >-
+      Cut Snowflake warehousing costs 45% (~$130K/year) through ETL and
+      orchestration optimisation.
 
 # ---------------------------------------------------------------------------
 # ASIDE SKILLS — PAGE 2 SIDEBAR

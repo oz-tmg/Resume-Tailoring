@@ -316,6 +316,20 @@ impact_metrics:
     label: "Report latency improvement (14 hrs → <1 hr)"
   - value: "$220K+/yr"
     label: "Annual cloud cost savings across Snowflake, EC2, Athena"
+
+# OPTIONAL. 4–5 entries render the Key Achievements box (a shaded,
+# single-column list). title + description are both latex-escaped — write
+# them as plain text. Curated per family (no posting-aware ranking).
+# Section is omitted when the field is absent. Mirrors the "Key Victories"
+# gems in the standard resume's page-1 aside.
+achievements:
+  - title: "Reporting Modernisation"
+    description: >-
+      Migrated analytics ETLs off Domino onto Jenkins, cutting $27K/mo
+      while restoring reproducibility.
+  - title: "Self-Service Delivery"
+    description: >-
+      Cut a 14-hour daily refresh to under 1 hour via dbt-Athena models.
 ```
 
 ---

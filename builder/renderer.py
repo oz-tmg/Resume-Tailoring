@@ -69,7 +69,13 @@ def _stage_assets(output_dir: Path, repo_root: Path,
     for cls_name in cls_names:
         cls_src = repo_root / cls_name
         cls_dst = output_dir / cls_name
-        if cls_src.exists() and not cls_dst.exists():
+        # ALWAYS overwrite — the staged .cls is a generated copy of the
+        # repo-root source. A previous "copy only if missing" guard left
+        # stale class files in output/ that silently shadowed every
+        # cv-style*.cls edit (e.g. a build kept using an old class that
+        # lacked \headerhref, so \headerhref{url}{text} fell through to
+        # literal text). The .cls must track the source on every build.
+        if cls_src.exists():
             shutil.copy2(cls_src, cls_dst)
 
     # fonts/ — required by \newfontfamily calls in cv-style.cls
@@ -471,6 +477,10 @@ def render_tex(family: dict,
     ats_skills_groups = _compose_ats_skills_groups(skills, family, ordered_skills)
     ats_tagline       = _compose_ats_tagline(family)
     impact_metrics    = family.get("impact_metrics") or []
+    # `achievements` — curated per-family list of {title, description} dicts.
+    # Rendered by the ATS template as the "Key Achievements" box. Optional;
+    # the section is omitted when the family file doesn't define it.
+    achievements      = family.get("achievements") or []
 
     # Header location — applied to both templates. Encodes work-eligibility
     # and relocation context (defaults to a plain "Victoria, BC.").
@@ -499,6 +509,7 @@ def render_tex(family: dict,
         "ats_skills_groups":    ats_skills_groups,
         "ats_tagline":          ats_tagline,
         "impact_metrics":       impact_metrics,
+        "achievements":         achievements,
         # Forward-slash path for LaTeX compatibility on all platforms
         "assets_root":          str(repo_root).replace("\\", "/"),
     }
