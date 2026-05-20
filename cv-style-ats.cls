@@ -43,11 +43,14 @@
 \definecolor{atsblue}{HTML}{2E5B9C}        % section headings + accents (recruiter PDF tone)
 \definecolor{accent}{HTML}{2E5B9C}         % alias for company names
 \definecolor{impactbg}{HTML}{E4ECF7}       % key-impact-metrics callout fill
+\definecolor{headerlink}{HTML}{9DC2F2}     % web links inside the navy header — light
+                                           % blue, high-contrast against navyblue
 
 \ifdefined\@cvats@print
   \colorlet{atsblue}{gray}
   \colorlet{accent}{gray}
   \colorlet{header}{gray}
+  \colorlet{headerlink}{gray}
   \colorlet{impactbg}{white}
 \else
   \colorlet{header}{white}
@@ -100,15 +103,21 @@
   \sbox0{\begin{otherlanguage}[#1]{#2}%
     \hyphenation{#3}\end{otherlanguage}}}
 
+% hidelinks: hyperref makes links clickable but applies NO colour or border
+% of its own. Link colour is then controlled entirely by explicit \textcolor,
+% which lets header links be light blue (legible on navy) while any future
+% body links can be coloured independently. See \headerhref below.
 \hypersetup{
     pdftitle=CV/Resume \textbar{} Alex Oswald,
     pdfauthor=Alex Oswald,
     pdfsubject=CV/Resume,
-    colorlinks=true,
-    linkcolor=atsblue,
-    urlcolor=atsblue,
-    citecolor=atsblue,
+    hidelinks,
 }
+
+% \headerhref{url}{display text} — a clickable link whose visible text is
+% rendered in `headerlink` (light blue). Used for the email / LinkedIn /
+% GitHub links in the navy header, where atsblue would be too dark to read.
+\newcommand{\headerhref}[2]{\href{#1}{\textcolor{headerlink}{#2}}}
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
@@ -142,21 +151,21 @@
   \begin{tikzpicture}[remember picture, overlay]
     \node[
       rectangle, fill=navyblue, anchor=north,
-      minimum width=\paperwidth, minimum height=3.8cm
+      minimum width=\paperwidth, minimum height=3.1cm
     ] (atsbox) at (current page.north) {};
     % LEFT block — name + subtitle + keyword line
-    \node[anchor=north west, xshift=0.55in, yshift=-0.50cm] (left) at (atsbox.north west) {%
+    \node[anchor=north west, xshift=0.55in, yshift=-0.42cm] (left) at (atsbox.north west) {%
       \begin{minipage}[t]{0.56\paperwidth}
-        {\fontsize{24pt}{28pt}\bodyfont\bfseries\color{header} #1 #2}\\[0.25em]
-        {\fontsize{11pt}{13pt}\bodyfont\color{header} #8}\\[0.15em]
-        {\fontsize{8.5pt}{11pt}\thinfont\color{header} #9}
+        {\fontsize{22pt}{25pt}\bodyfont\bfseries\color{header} #1 #2}\\[0.22em]
+        {\fontsize{10.5pt}{12pt}\bodyfont\color{header} #8}\\[0.13em]
+        {\fontsize{8pt}{10pt}\thinfont\color{header} #9}
       \end{minipage}%
     };
     % RIGHT block — contact info; location (#7) may wrap to two lines
-    \node[anchor=north east, xshift=-0.55in, yshift=-0.50cm] (right) at (atsbox.north east) {%
+    \node[anchor=north east, xshift=-0.55in, yshift=-0.42cm] (right) at (atsbox.north east) {%
       \begin{minipage}[t]{0.38\paperwidth}
         \raggedleft
-        {\fontsize{8.5pt}{11.5pt}\thinfont\color{header}%
+        {\fontsize{8pt}{10.5pt}\thinfont\color{header}%
           #3 \\
           #4 \\
           linkedin: #5 \\
@@ -166,19 +175,21 @@
       \end{minipage}%
     };
   \end{tikzpicture}%
-  % Reserve vertical space below the header band before body content begins
-  \vspace*{3.2cm}\par%
+  % Reserve vertical space below the header band before body content begins.
+  % Tuned so the first section heading sits just clear of the 3.1cm navy
+  % band while keeping the header-to-summary gap tight.
+  \vspace*{2.25cm}\par%
 }
 
 %----------------------------------------------------------------------------------------
 % Section heading — atsblue uppercase + thin 0.5pt rule underline
 %----------------------------------------------------------------------------------------
 \renewcommand{\section}[1]{%
-  \par\vspace{0.7em}%
+  \par\vspace{0.45em}%
   {\headingfont\large\color{atsblue}\MakeUppercase{#1}}\par
   \vspace{-0.4em}%
   {\color{atsblue}\rule{\linewidth}{0.5pt}}\par
-  \vspace{0.35em}%
+  \vspace{0.25em}%
 }
 
 % Sub-section: lighter (used inside Education / inside long lists)
@@ -201,14 +212,16 @@
 % Wrapping tabularx in \newenvironment misbehaves with its width-scanner,
 % so the skills table uses a plain `tabular` with fixed-width p columns.
 % Combined left+right ≈ 0.95\linewidth; remaining gutter goes to spacing.
+% Set in \small so concise skill groups fit on a single line.
 \newenvironment{techskills}{%
+  \small
   \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\linewidth}@{\hspace{0.6em}}>{\raggedright\arraybackslash}p{0.67\linewidth}@{}}
 }{%
   \end{tabular}\par\vspace{0.2em}%
 }
 
 \newcommand{\skillgroup}[2]{%
-  {\headingfont\color{atsblue} #1} & #2 \\[0.45em]
+  {\headingfont\color{atsblue} #1} & #2 \\[0.4em]
 }
 
 %----------------------------------------------------------------------------------------
@@ -265,6 +278,75 @@
 }
 
 %----------------------------------------------------------------------------------------
+% Key-achievements box
+%
+% Usage:
+%   \begin{achievementbox}{Key Achievements}
+%     \achievement{Reporting Modernisation}{Migrated analytics ETLs off Domino ...}
+%     \achievement{Self-Service Delivery}{Cut 14-hr daily refresh to under 1 hr ...}
+%     ... (4 entries)
+%   \end{achievementbox}
+%
+% A light-shaded box (same fill as the impact-metrics callout) holding a
+% single-column list. Argument #1 is the section heading — emitted by the
+% environment itself (NOT a separate \section call) so heading + box stay
+% together.
+%
+% Page-fit mechanics (this took some doing):
+%  - The achievement items are captured into \achieveSbox via lrbox, then
+%    \colorbox-wrapped.
+%  - Heading + rule + shaded box are assembled into ONE \vbox (\achieveOuter).
+%    A \vbox is inherently unbreakable, so the heading can never orphan from
+%    its box.
+%  - \boxmaxdepth=0pt while that \vbox is packed forces it to zero depth —
+%    all its extent becomes height. Without this, the colorbox's large depth
+%    propagates to the \vbox, and the page builder (which caps a trailing
+%    box's depth at \maxdepth and bills the excess as height) mis-estimates
+%    the room needed and bumps the whole box to the next page even when it
+%    plainly fits. Zero depth makes the page-fit accounting exact.
+%----------------------------------------------------------------------------------------
+\newsavebox{\achieveSbox}
+\newsavebox{\achieveOuter}
+
+\newenvironment{achievementbox}[1]{%
+  \def\@achievetitle{#1}%
+  \begin{lrbox}{\achieveSbox}%
+    \begin{minipage}[t]{\dimexpr\linewidth-2\fboxsep\relax}%
+      \small
+      \vspace{0.1em}%
+      \begin{itemize}[
+          leftmargin=1.5em, itemsep=0.2em, parsep=0pt, topsep=0.1em,
+          label={\textcolor{atsblue}{\rule[0.15ex]{0.55ex}{0.55ex}}}, labelsep=0.55em
+      ]%
+}{%
+      \end{itemize}%
+      \vspace{0.1em}%
+    \end{minipage}%
+  \end{lrbox}%
+  % Assemble heading + rule + shaded box into one zero-depth \vbox.
+  \par\addvspace{0.45em}%
+  \setbox\achieveOuter=\vbox{%
+    \boxmaxdepth=\z@
+    \hsize=\linewidth \@parboxrestore \parindent=\z@
+    {\headingfont\large\color{atsblue}\MakeUppercase{\@achievetitle}}\par
+    \vspace{-0.4em}%
+    {\color{atsblue}\rule{\linewidth}{0.5pt}}\par
+    \vspace{0.25em}%
+    \noindent\colorbox{impactbg}{\usebox{\achieveSbox}}\par
+  }%
+  % Add the assembled box in VERTICAL mode (no \noindent / no enclosing
+  % paragraph). \box in vmode stacks it as a true vertical box; wrapping it
+  % in a paragraph instead would make it a giant "line" and wreck the
+  % page-fit accounting.
+  \box\achieveOuter
+  \addvspace{0.4em}%
+}
+
+\newcommand{\achievement}[2]{%
+  \item {\headingfont\color{atsblue} #1} — #2%
+}
+
+%----------------------------------------------------------------------------------------
 % Experience block — company / role / bullets
 %
 % Usage:
@@ -282,8 +364,13 @@
   \vspace{-0.1em}%
 }
 
-\newcommand{\jobrole}[2]{%
-  \noindent{\bodyfont\bfseries\color{darkgray} #1}\hfill{\italica{#2}}\par
+% \jobrole{title}{dates}{location}
+%   Title (bold) on the left; the right side shows the location and dates
+%   in italic, separated by a bullet. If the location (#3) is empty the
+%   bullet and location are dropped so only the dates show.
+\newcommand{\jobrole}[3]{%
+  \noindent{\bodyfont\bfseries\color{darkgray} #1}\hfill
+  {\italica{\ifx\relax#3\relax #2\else #3 \textbullet\ #2\fi}}\par
   \vspace{0.05em}%
 }
 
