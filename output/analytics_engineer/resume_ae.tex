@@ -12,9 +12,9 @@
 %% regardless of which output subdirectory this .tex file is compiled from.
 %% \graphicspath accepts a list of directories with trailing slashes.
 \graphicspath{
-  {/Users/Ender/Projects/Latex/Resume-Tailoring/}
-  {/Users/Ender/Projects/Latex/Resume-Tailoring/icons/logos/}
-  {/Users/Ender/Projects/Latex/Resume-Tailoring/icons/main/}
+  {/sessions/epic-magical-mendel/mnt/Resume-Tailoring/}
+  {/sessions/epic-magical-mendel/mnt/Resume-Tailoring/icons/logos/}
+  {/sessions/epic-magical-mendel/mnt/Resume-Tailoring/icons/main/}
   {./}
 }
 
@@ -41,7 +41,7 @@
   {\myphone}%
   {\myemail}%
   {\href{\mylinkedinpage}{\mylinkedin}}%
-  {\mylocation}%
+  {Victoria, BC.}%
   {\href{\myGithub}{github.com/oz-tmg}}%
   {\href{\myWordpress}{alexoswald.wordpress.com}}%
   {Analytics Engineer | dbt, Snowflake, Pipeline Modernization}
@@ -57,10 +57,13 @@
 %% Family-specific aside. The file is static per family and maintained
 %% under sections/aside-pg1/. \leavevmode protects the leading \vspace
 %% from being swallowed when it's the first thing inside the aside.
+%%
+%% (The work-authorization note previously rendered at the bottom of this
+%% aside has moved into the header's location field via --location-mode.)
 %% -----------------------------------------------------------------------
 \begin{aside}%
 \leavevmode\vspace{3.5cm}%
-\input{/Users/Ender/Projects/Latex/Resume-Tailoring/sections/aside-pg1/aside-pg1-ae}
+\input{/sessions/epic-magical-mendel/mnt/Resume-Tailoring/sections/aside-pg1/aside-pg1-ae}
 \end{aside}
 
 %% -----------------------------------------------------------------------
@@ -73,7 +76,7 @@
 
 \section{Kano Apps - Casual Games \hfill
   \includegraphics[height=1em]{icons/logos/kano_logo.png}}
-{\vspace{-0.2cm}}
+%{\vspace{-0.2cm}}
 
 
 \begin{entrylist}
@@ -81,8 +84,7 @@
   {2025-05 -- \\ 2026-02}
   {Senior Game Data Engineer \& BI Analyst}
   {Victoria, BC Canada}
-  {Hired to modernize the studio's analytics stack by migrating reporting and transformation workflows from RShiny to a scalable Python- and AWS-based platform.
- \textbf{Responsibilities \& Achievements}:
+  {Hired to modernize the studio’s analytics stack by migrating reporting and  transformation workflows from an undocumented, monolithic, spaghetti code  R-based platform to a more scalable Python-SQL based platform. \textbf{Responsibilities}:
   \begin{itemize}
 
     \item Added DBT to the platform to better model, scale, and optimize transformations across the analytics stack.
@@ -91,21 +93,88 @@
     \item Reworked, enhanced, and migrated numerous RShiny reports to AWS Quicksight, improving reliability, accessibility, and maintainability.
 
 
+    \item Migrated parquet table ETLs into partitioned Apache Iceberg tables, added DBT-Athena to the new platform to better model, scale, and optimize transformations done originally in R scripts too large, old and unstructured for Gemini to handle.
+
+    \begin{itemize}
+
+      \item DBT models reduced numerous redundancies, and improved turnaround time, and .
+
+      \item Preserved seamless service delivery and data continuity across migration.
+
+      \item Using Partitioned Iceberg tables allowed for more incremental updates, improving monthly EC2 and Athena savings (23\%) and report turnaround time (13x).
+
+    \end{itemize}
+
+
+  \end{itemize}
+\textbf{Outcomes}:
+  \begin{itemize}
+
     \item Reduced daily report refresh times from up to 14 hours to less than 1 hour while lowering EC2 and Athena costs by migrating expensive R ETLs into optimized DBT-Athena SQL models on partitioned Parquet and Iceberg tables.
-
-
-    \item Improved analyst adoption of the new stack by showcasing workflows, onboarding teammates, and standardizing how reporting was produced and maintained.
-
 
   \end{itemize}}
 \end{entrylist}
+
+%% -----------------------------------------------------------------------
+%% SIDEBAR — PAGE 2
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
+%% -----------------------------------------------------------------------
+
+\begin{aside}%
+\leavevmode%
+
+\vspace{-1.0cm}
+\section{\LARGE Analytics Engineering}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{-0.2cm}
+~
+
+\textbf{\large Transformation \& Modelling}
+\faGem Built statistical and transformation models that served as the analytical layer between raw data and stakeholder consumption — licensing valuation, propensity models, segmentation.
+
+~
+
+
+\textbf{\large Automation \& Repeatability}
+\faGem Automated large-scale reporting workflows (R, Talend, Hive, Jenkins) to eliminate manual assembly, reduce error, and make outputs reproducible at scale.
+
+~
+
+
+\textbf{\large Metric Definition \& Trust}
+\faGem Owned KPI reporting for executive stakeholders and licensing partners; consistency and trust in numbers were non-negotiable delivery requirements.
+
+~
+
+
+\textbf{\large Self-Service Delivery}
+\faGem Repaired legacy pipelines and dashboards so analysts and stakeholders could rely on them independently, without analyst intervention on every query.
+
+~
+
+
+\textbf{\large BI \& Reporting Stack}
+\faGem Hive, Redshift, R, Talend, Jenkins; later DBT, Snowflake, Athena, Looker, Quicksight.
+
+
+
+
+\section{\LARGE Programming}
+\noindent\rule{\textwidth}{0.4pt}
+{\color{red} $\varheartsuit$} R, Python, SQL, Bash
+
+
+\end{aside}
 
 
 
 
 \section{Kixeye Inc - Mobile Games \hfill
   \includegraphics[height=1em]{icons/logos/kixeye_horse_logo.png}}
-{\vspace{-0.2cm}}
+%{\vspace{-0.2cm}}
 
 
 \begin{entrylist}
@@ -113,8 +182,7 @@
   {2022-02 -- \\ 2025-01}
   {Lead Data Analyst, Core Analytics Team Lead}
   {Victoria, BC Canada}
-  {Led analytics roadmap and delivery for junior and senior analysts on Kixeye's Core Analytics Team. Later transitioned into more ML pipeline and analytical engineering work within Stillfront Group.
- \textbf{Responsibilities \& Achievements}:
+  {Led analytics engineering improvements for Kixeye's Core Analytics Team while managing analysts — consolidating BI tooling, cutting Snowflake costs, and standardizing data delivery pipelines. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
     \item Reduced monthly Snowflake warehousing costs by 45\% through ETL and orchestration optimization, saving an estimated \$130K annually.
@@ -123,38 +191,48 @@
     \item Independently migrated both Kixeye and Babil Games studios' Looker dashboards onto Stillfront's shared instance, reducing studio costs by \$90K annually while improving reporting continuity.
 
 
+    \item Designed and iterated on analytics event schemas within a cross-studio SDK — identifying and correcting structural flaws in initial event definitions to ensure reliable cross-game player behavior tracking for promotion measurement.
+
+
+    \item Assisted migrateing game analytics pipelines from Google Cloud Platform  to AWS — rebuilding streaming and batch data flows using Firehose, Lambda, and Kinesis to support the data infrastructure needs of two newly launched titles.
+
+
   \end{itemize}}
 \end{entrylist}
 
-{\vspace{-0.5cm}}
+%{\vspace{-0.5cm}}
 
 \begin{entrylist}
 \entry
   {2021-01 -- \\ 2022-02}
   {Senior Product Analyst, Acting Core Analytics Team Lead}
   {Victoria, BC Canada}
-  {Promoted to help establish a small analytics team and improve collaboration across product, design, and engineering. Supported multiple game teams while building better analytical workflows and decision support.
- \textbf{Responsibilities \& Achievements}:
+  {Acting Core Analytics Team Lead, owning experimentation and KPI reporting ETL automation while building analytical infrastructure for product and design teams across multiple live game titles. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
     \item Automated KPI forecasting and A/B test reporting ETLs for Product and Design teams, improving experimentation support and freeing substantial analyst time.
 
 
+    \item Designed the analytics event schema and data models powering the Alliance Recommendation Engine — translating raw player behavior events into engagement and spend features, contributing to a 7\% annual revenue improvement.
+
+
   \end{itemize}}
 \end{entrylist}
 
-{\vspace{-0.5cm}}
+%{\vspace{-0.5cm}}
 
 \begin{entrylist}
 \entry
   {2019-08 -- \\ 2021-01}
   {Product Analyst, War Commander: Rogue Assault Team}
   {Vancouver, BC Canada}
-  {Originally hired to support BI and ML engineering needs by maintaining dashboards, ETLs, segmentation tools, recommendation systems, and user acquisition analytics for a live mobile game.
- \textbf{Responsibilities \& Achievements}:
+  {Embedded analyst on War Commander — repairing legacy ETLs, migrating ML pipelines off Domino, and building reliable data infrastructure for the live game's product and UA teams. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
     \item Repaired and optimized numerous legacy ETL pipelines and dashboards, producing meaningful warehousing savings and improving trust in core reporting during first three months.
+
+
+    \item Built and maintained LTV and revenue forecast models as stakeholder-facing data products — improving forecast accuracy and providing product and UA teams with reliable planning inputs.
 
 
     \item Migrated analytics ETLs, ML pipelines, and data science applications off Domino and onto Jenkins, reducing monthly platform costs by roughly \$27K.
@@ -163,12 +241,20 @@
   \end{itemize}}
 \end{entrylist}
 
+%% -----------------------------------------------------------------------
+%% SIDEBAR — PAGE 2
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
+%% -----------------------------------------------------------------------
+
 
 
 
 \section{Electronic Arts - AAA Games \hfill
   \includegraphics[height=1em]{icons/logos/ea_sports.png}}
-{\vspace{-0.2cm}}
+%{\vspace{-0.2cm}}
 
 
 \begin{entrylist}
@@ -176,45 +262,46 @@
   {2018-11 -- \\ 2019-07}
   {Data Scientist, Dynamic Experiences Team}
   {Burnaby, BC Canada}
-  {Helped establish a Data Science team embedded within EA Sports live teams to prototype and support machine learning systems that delivered more personalized player experiences.
- \textbf{Responsibilities \& Achievements}:
+  {Embedded on EA Sports' Dynamic Experiences team, building and automating A/B test analysis pipelines (Hive, Jenkins, R, Redshift) and supporting the data infrastructure behind personalized live game experiences. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
-    \item Automated A/B test analysis workflows using Hive, Jenkins, R, and Redshift to make experimental readouts faster and more repeatable.
+    \item Built HiveQL and SQL analysis pipelines that powered A/B test evaluation for FIFA in-game messaging — providing repeatable, analyst-ready experiment readouts across campaigns.
+
+
+    \item Experimentation pipeline work and analysis contributed to \$2M in incremental FIFA 19 revenue — connecting automated reporting infrastructure to measurable product outcomes.
 
 
   \end{itemize}}
 \end{entrylist}
 
-{\vspace{-0.5cm}}
+%{\vspace{-0.5cm}}
 
 \begin{entrylist}
 \entry
   {2016-06 -- \\ 2018-11}
   {Business Analyst, FIFA Player Analytics Team}
   {Burnaby, BC Canada}
-  {Supported executive reporting, player engagement and monetization analysis, and licensing analytics for one of EA's largest franchises.
- \textbf{Responsibilities \& Achievements}:
+  {Delivered analytics engineering work for FIFA Player Analytics — automating 550-slide licensing reports from weeks to seconds using R and Talend, and building statistical models for licensing valuation. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
     \item Owned analytics reporting for FIFA's strategic licensing partners and automated large portions of the process using R and Talend, reducing weeks of manual work assembling 550 slides to seconds.
 
 
+    \item Built statistical models to assess the value each license created for EA and the reciprocal value exposure provided to partners, helping improve licensing decisions.
+
+
   \end{itemize}}
 \end{entrylist}
 
-
-
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 2
-%% Family-specific aside. Static files in sections/aside-pg2/ carry the
-%% family's curated skillset. \leavevmode protects any leading \vspace
-%% inside the included file from being dropped at the aside boundary.
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
 %% -----------------------------------------------------------------------
-\begin{aside}%
-\leavevmode%
-\input{/Users/Ender/Projects/Latex/Resume-Tailoring/sections/aside-pg2/aside-pg2-ae}
-\end{aside}
+
+
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)
@@ -240,7 +327,7 @@ Airflow, Prefect, Jenkins
 ~
 
 \section{\large Bi Tools}
-Looker, Tableau, AWS Quicksight
+Looker, Tableau, AWS Quicksight, Jupyter Notebooks
 ~
 
 \section{\large Streaming And Ingestion}

@@ -50,14 +50,45 @@ FAMILIES = ["data_analyst", "analytics_engineer", "data_engineer",
 def build(family_name: str, posting_path: Path | None = None,
           output_dir: Path | None = None,
           education_mode: str | None = None,
-          certs_placement: str | None = None) -> Path:
+          certs_placement: str | None = None,
+          industry: str = "agnostic",
+          template: str = "standard",
+          location_mode: str = "default",
+          relocation_city: str | None = None) -> Path:
     """
     Full build pipeline for one family + optional posting.
     Returns the path of the generated .tex file.
+
+    industry — "games" | "agnostic" (default).
+      "games"    : uses games-industry vernacular in summaries, bullet
+                   variants (variants.GAMES), and Claude revoicing persona.
+      "agnostic" : neutral language suitable for non-games employers.
+
+    template — "standard" | "ats" (default: "standard").
+      "standard" : two-column layout via cv-style.cls + resume.tex.j2
+                   (navy header, left sidebar with skills/key victories).
+      "ats"      : single-column ATS-friendly layout via cv-style-ats.cls
+                   + resume-ats.tex.j2 (navy header, no sidebar, technical-
+                   skills table, key-impact-metrics callout). Modeled after
+                   the recruiter-prepared resume Alex received in May 2026.
     """
+    label_bits = [f"Building: {family_name}"]
+    if posting_path:
+        label_bits.append(f"Posting: {posting_path.name}")
+    else:
+        label_bits.append("Base resume")
+    if industry != "agnostic":
+        label_bits.append(f"Industry: {industry}")
+    if template != "standard":
+        label_bits.append(f"Template: {template}")
+    if location_mode != "default":
+        bit = f"Location: {location_mode}"
+        if relocation_city:
+            bit += f" ({relocation_city})"
+        label_bits.append(bit)
+
     print(f"\n{'='*60}")
-    print(f"  Building: {family_name}" +
-          (f"  |  Posting: {posting_path.name}" if posting_path else "  |  Base resume"))
+    print("  " + "  |  ".join(label_bits))
     print(f"{'='*60}")
 
     # ------------------------------------------------------------------
@@ -90,14 +121,19 @@ def build(family_name: str, posting_path: Path | None = None,
     #    only revoices bullets that don't already have a curated variant.
     # ------------------------------------------------------------------
     print("  [3/5] Resolving variants...")
-    resolved = resolve_bullets(selected, family["id"])
+    split_section_ids = set(
+        family.get("bullet_selection", {}).get("split_sections", [])
+    )
+    resolved = resolve_bullets(selected, family["id"], industry=industry,
+                               split_section_ids=split_section_ids)
 
     # ------------------------------------------------------------------
     # 4. Posting-specific ranking and revoicing (Claude API)
     # ------------------------------------------------------------------
     if posting_text is not None:
         print("  [4/5] Ranking and revoicing against posting...")
-        resolved = rank_and_revoice(resolved, posting_text, family)
+        resolved = rank_and_revoice(resolved, posting_text, family,
+                                    industry=industry)
     else:
         print("  [4/5] Skipping posting tailoring (no posting provided).")
 
@@ -124,6 +160,11 @@ def build(family_name: str, posting_path: Path | None = None,
         repo_root=ROOT,
         education_mode=education_mode,
         certs_placement=certs_placement,
+        industry=industry,
+        posting_text=posting_text,
+        template=template,
+        location_mode=location_mode,
+        relocation_city=relocation_city,
     )
 
     print(f"\n  ✓ Generated: {tex_path}")
@@ -207,6 +248,39 @@ def main():
                         help=("Where to render certifications. "
                               "Defaults to family.education.certifications_placement "
                               "(or 'education')."))
+    parser.add_argument("--industry",
+                        choices=["games", "agnostic"],
+                        default="agnostic",
+                        help=("Industry framing: 'games' uses game-industry "
+                              "vernacular in summaries, bullet variants "
+                              "(variants.GAMES), and Claude revoicing. "
+                              "Default: 'agnostic'."))
+    parser.add_argument("--template",
+                        choices=["standard", "ats"],
+                        default="standard",
+                        help=("Output layout: 'standard' (default) renders "
+                              "the two-column resume with sidebar via "
+                              "cv-style.cls. 'ats' renders an ATS-friendly "
+                              "single-column layout via cv-style-ats.cls "
+                              "with a technical-skills table and "
+                              "key-impact-metrics callout (modeled after the "
+                              "recruiter-prepared resume)."))
+    parser.add_argument("--location-mode",
+                        choices=["default", "relocate", "us"],
+                        default="default",
+                        help=("Header location mode. 'default' shows just "
+                              "the base location ('Victoria, BC.'). "
+                              "'relocate' appends an 'Open to Relocation "
+                              "(<city>)' clause — default city: Vancouver. "
+                              "'us' additionally inserts 'US Citizen & "
+                              "Canadian PR' to signal work eligibility — "
+                              "default city: Seattle. Override the city "
+                              "with --relocation-city."))
+    parser.add_argument("--relocation-city",
+                        help=("City for the 'Open to Relocation' clause "
+                              "when --location-mode is 'relocate' or 'us'. "
+                              "Defaults to Vancouver (relocate) or Seattle "
+                              "(us). Ignored when --location-mode=default."))
     args = parser.parse_args()
 
     if args.validate:
@@ -225,7 +299,11 @@ def main():
         for fam in FAMILIES:
             tex = build(fam,
                         education_mode=args.education_mode,
-                        certs_placement=args.certs_placement)
+                        certs_placement=args.certs_placement,
+                        industry=args.industry,
+                        template=args.template,
+                        location_mode=args.location_mode,
+                        relocation_city=args.relocation_city)
             if args.pdf:
                 compile_pdf(tex)
         return
@@ -238,7 +316,11 @@ def main():
                 posting_path=posting,
                 output_dir=args.output,
                 education_mode=args.education_mode,
-                certs_placement=args.certs_placement)
+                certs_placement=args.certs_placement,
+                industry=args.industry,
+                template=args.template,
+                location_mode=args.location_mode,
+                relocation_city=args.relocation_city)
 
     if args.pdf:
         compile_pdf(tex)

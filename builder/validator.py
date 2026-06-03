@@ -18,7 +18,13 @@ from pathlib import Path
 from builder.loader import (load_family, load_all_experience,
                             load_skills, load_summaries)
 
+# Standard job-family IDs
 FAMILY_IDS = {"DA", "AE", "DE", "DS", "MLE", "ECON"}
+
+# Non-family variant keys that are valid in the variants block.
+# GAMES: industry-specific rewrite used when --industry games is passed.
+# AM:    Analytics Manager variant (people-management framing, manual select).
+EXTRA_VARIANT_KEYS = {"GAMES", "AM"}
 FAMILIES   = ["data_analyst", "analytics_engineer", "data_engineer",
               "data_scientist", "ml_engineer", "economist"]
 
@@ -77,12 +83,14 @@ def validate_all(root: Path) -> bool:
                 else:
                     seen_ids[bid] = role["id"]
 
-    # Validate variants use legal family IDs
+    # Validate variants use legal family IDs or known extra keys (e.g. GAMES, AM)
+    valid_variant_keys = FAMILY_IDS | EXTRA_VARIANT_KEYS
     for bid, bullet in experience["by_id"].items():
         for vfam in bullet.get("variants", {}).keys():
-            if vfam not in FAMILY_IDS:
+            if vfam not in valid_variant_keys:
                 errors.append(
-                    f"Bullet '{bid}' has variant for unknown family '{vfam}'"
+                    f"Bullet '{bid}' has variant for unknown key '{vfam}' "
+                    f"(expected one of: {', '.join(sorted(valid_variant_keys))})"
                 )
 
     # Validate each family file

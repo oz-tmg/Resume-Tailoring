@@ -50,7 +50,8 @@ def _get_client():
 
 def rank_and_revoice(selected_companies: list[dict],
                      posting_text: str,
-                     family: dict) -> list[dict]:
+                     family: dict,
+                     industry: str = "agnostic") -> list[dict]:
     """
     Run Stage 1 (rank) then Stage 2 (revoice) against the job posting.
 
@@ -64,6 +65,10 @@ def rank_and_revoice(selected_companies: list[dict],
                higher posting score, priority membership, lower tier,
                and keyword-diversity vs already-picked bullets.
       Stage 2: revoice surviving (still-unresolved) bullets.
+
+    `industry`: when "games", uses games_revoicing_persona from the family
+    or summary config for the revoicing prompt. When "agnostic" (default),
+    uses the standard revoicing_persona.
 
     Returns the same nested structure with bullets reordered within
     roles, the pool trimmed, and unresolved survivors potentially
@@ -91,7 +96,8 @@ def rank_and_revoice(selected_companies: list[dict],
     # ------------------------------------------------------------------
     flat_final = _flatten(selected_companies)
     print(f"    → Stage 2: revoicing up to {len(flat_final)} survivors...")
-    rewrites = _revoice_bullets(flat_final, scores, posting_text, family)
+    rewrites = _revoice_bullets(flat_final, scores, posting_text, family,
+                                industry=industry)
 
     # Apply scores + rewrites back into the structure
     result = _apply_results(selected_companies, flat_final, scores, rewrites)
@@ -162,11 +168,15 @@ def _rank_bullets(flat: list, posting_text: str, family: dict) -> dict[str, int]
 # ---------------------------------------------------------------------------
 
 def _revoice_bullets(flat: list, scores: dict, posting_text: str,
-                     family: dict) -> dict[str, str]:
+                     family: dict,
+                     industry: str = "agnostic") -> dict[str, str]:
     """
     For unresolved bullets scoring >= 2, ask Claude to rewrite them to
     mirror the posting's language while preserving facts and outcomes.
     Returns {bullet_id: rewritten_text}.
+
+    When industry="games", uses games_revoicing_persona from the family
+    config if available; falls back to the standard revoicing_persona.
     """
     candidates = [
         b for _, _, _, b in flat
@@ -175,6 +185,12 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
 
     if not candidates:
         return {}
+
+    # Choose the appropriate persona for this build
+    if industry == "games":
+        persona = family.get("games_revoicing_persona") or family["revoicing_persona"]
+    else:
+        persona = family["revoicing_persona"]
 
     bullet_list = "\n".join(
         f'  "{b["id"]}": {b["resolved_text"]}'
@@ -192,7 +208,7 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
         - Match terminology from the posting where it fits naturally
         - Keep each bullet to 1-2 sentences maximum
         - Write in third-person implied (no "I")
-        - Tone and persona: {family["revoicing_persona"]}
+        - Tone and persona: {persona}
 
         JOB POSTING:
         {posting_text}
@@ -268,18 +284,27 @@ def _apply_results(selected_companies: list[dict],
 # ---------------------------------------------------------------------------
 
 def revoice_summary(base_summary: str, posting_text: str,
-                    family: dict) -> str:
+                    family: dict,
+                    industry: str = "agnostic") -> str:
     """
     Rewrite the base summary paragraph for a specific posting.
     Preserves factual claims; mirrors posting's framing and keywords.
+
+    When industry="games", uses games_revoicing_persona from the family
+    if available.
     """
+    if industry == "games":
+        persona = family.get("games_revoicing_persona") or family["revoicing_persona"]
+    else:
+        persona = family["revoicing_persona"]
+
     prompt = textwrap.dedent(f"""
         Rewrite the following resume summary paragraph for a specific job
         posting. Mirror the posting's language and emphasis. Keep all
         factual claims. Do not add credentials or experience not present.
         Keep to 3-4 sentences maximum.
 
-        Persona / tone: {family["revoicing_persona"]}
+        Persona / tone: {persona}
 
         JOB POSTING:
         {posting_text}

@@ -415,3 +415,72 @@ def select_skills(skills: dict, family: dict) -> dict:
                     output[section][subcat] = picked
 
     return output
+
+
+# ---------------------------------------------------------------------------
+# Aside-skills selection and ordering (pg2 sidebar)
+# ---------------------------------------------------------------------------
+
+def select_aside_skills(aside_config: dict | None,
+                        posting_text: str | None = None) -> dict | None:
+    """
+    Return the aside_skills config with page2 sections reordered by posting
+    relevance when a posting is provided.
+
+    `aside_config` is the `aside_skills` block from the family file:
+
+        page2:
+          title: "Data Science Skillset"
+          sections:
+            - id: experimentation
+              label: "Experimentation & Measurement"
+              keywords: [experimentation, A/B testing, ...]
+              text: >
+                Designed and evaluated experiments...
+          programming_latex: 'R, {\\color{red} $\\varheartsuit$} Python, SQL, Bash'
+
+    When no posting is provided the sections are returned in their
+    original (curated) order. When a posting is provided, each section
+    is scored by the fraction of its keywords that appear in the posting,
+    and sections are sorted descending. Ties preserve original order.
+    Sections with zero overlap are kept but placed at the end.
+
+    Returns a copy of the config with sections reordered (or the original
+    if no posting / no aside_config).
+    """
+    if not aside_config:
+        return aside_config
+
+    if not posting_text:
+        return aside_config
+
+    posting_tokens = _tokenize(posting_text)
+    page2 = aside_config.get("page2")
+    if not page2:
+        return aside_config
+
+    sections = list(page2.get("sections") or [])
+    if not sections:
+        return aside_config
+
+    # Score each section: token overlap between the section's keywords
+    # and the posting token-bag.
+    def _section_score(section: dict) -> float:
+        kws = [k.lower() for k in (section.get("keywords") or [])]
+        if not kws:
+            return 0.0
+        kw_tokens = _tokenize(" ".join(kws))
+        if not kw_tokens:
+            return 0.0
+        overlap = kw_tokens & posting_tokens
+        return len(overlap) / len(kw_tokens)
+
+    scored = [(i, s, _section_score(s)) for i, s in enumerate(sections)]
+    # Sort by score descending, preserve original index as tiebreak
+    scored.sort(key=lambda x: (-x[2], x[0]))
+    reordered = [s for _, s, _ in scored]
+
+    return {
+        **aside_config,
+        "page2": {**page2, "sections": reordered},
+    }

@@ -12,9 +12,15 @@
 %% regardless of which output subdirectory this .tex file is compiled from.
 %% \graphicspath accepts a list of directories with trailing slashes.
 \graphicspath{
+<<<<<<< HEAD
+  {/sessions/upbeat-zealous-wozniak/mnt/Resume-Tailoring/}
+  {/sessions/upbeat-zealous-wozniak/mnt/Resume-Tailoring/icons/logos/}
+  {/sessions/upbeat-zealous-wozniak/mnt/Resume-Tailoring/icons/main/}
+=======
   {/Users/Ender/Projects/Latex/Resume-Tailoring/}
   {/Users/Ender/Projects/Latex/Resume-Tailoring/icons/logos/}
   {/Users/Ender/Projects/Latex/Resume-Tailoring/icons/main/}
+>>>>>>> d6af63e4aac90d9a3d10b5c85c8887dba1babda5
   {./}
 }
 
@@ -57,8 +63,19 @@
 %% Family-specific aside. The file is static per family and maintained
 %% under sections/aside-pg1/. \leavevmode protects the leading \vspace
 %% from being swallowed when it's the first thing inside the aside.
+%% Work authorization note is appended when enabled in personal.yaml.
 %% -----------------------------------------------------------------------
 \begin{aside}%
+<<<<<<< HEAD
+\leavevmode\vspace{3.5cm}%
+\input{/sessions/upbeat-zealous-wozniak/mnt/Resume-Tailoring/sections/aside-pg1/aside-pg1-da}
+
+~
+\noindent\rule{\textwidth}{0.4pt}%
+\vspace{-0.1cm}%
+{\small \textit{Authorized to work in Canada and United States}}
+
+=======
 \vspace{3.5cm}%
 \section{\LARGE Hard Skills}%
 \vspace{-0.1cm}%
@@ -86,6 +103,7 @@ engagement \& content preferences, spender type
 revenue front-loading, cannibalization risks, churn trigger risks, economy balance, network effects
 %\section{\large Network Analysis}
 %rate and effects of alliance participation, leaderboards, \& tournaments
+>>>>>>> d6af63e4aac90d9a3d10b5c85c8887dba1babda5
 \end{aside}
 
 
@@ -107,8 +125,12 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
   {2025-05 -- \\ 2026-02}
   {Senior Game Data Engineer \& BI Analyst}
   {Victoria, BC Canada}
+<<<<<<< HEAD
+  {Hired to rebuild Kano's reporting platform, migrating RShiny dashboards to AWS Quicksight and enabling analyst self-service on a modern stack. \textbf{Responsibilities \& Achievements}:
+=======
   {Hired to modernize the studio’s analytics stack by migrating reporting and transformation workflows from an undocumented, monolithic, spaghetti code R-based platform to a more scalable Python based platform.
  \textbf{Responsibilities \& Achievements}:
+>>>>>>> d6af63e4aac90d9a3d10b5c85c8887dba1babda5
   \begin{itemize}
 
     \item Reworked, enhanced and migrated numerous RShiny reports to Quicksight.%, and stakeholder insights.
@@ -119,8 +141,68 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
     	\item Improved monthly cost savings (23\%) and report turnaround time (13x).
     \end{itemize}
 
+    \item Replaced fragile cron-scheduled shell scripts with Prefect workflows, improving orchestration, observability, and analytics stack maintainability.
+
+
+    \item Selectively applied LLM-assisted code translation to speed up migration.
+
+
   \end{itemize}}
 \end{entrylist}
+
+%% -----------------------------------------------------------------------
+%% SIDEBAR — PAGE 2
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
+%% -----------------------------------------------------------------------
+
+\begin{aside}%
+\leavevmode%
+
+\vspace{-1.0cm}
+\section{\LARGE IC Scope \& Judgment}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{-0.2cm}
+~
+
+\textbf{\large Self-Directed Analysis}
+\faGem Companion app propensity study was self-proposed — identified the business question, chose the identification strategy, and owned delivery end-to-end without being assigned the work.
+
+~
+
+
+\textbf{\large Decisions Changed}
+\faGem Analysis saved the Web App, drove millions in incremental revenue, and influenced a separate franchise's product roadmap — outcomes, not deliverables.
+
+~
+
+
+\textbf{\large Scope Beyond Title}
+\faGem Trusted with executive board reporting for EA Sports and insight delivery for Motive, BioWare, and DICE studios while a Business Analyst.
+
+~
+
+
+\textbf{\large Automation at Scale}
+\faGem Reduced weeks of manual reporting work to seconds; owned the full pipeline from data to executive consumption.
+
+~
+
+
+\textbf{\large Methods}
+\faGem Propensity score matching, MAB recommendation, churn and spend modelling, A/B test design and readout, LTV forecasting, survival analysis.
+
+
+
+
+\section{\LARGE Programming}
+\noindent\rule{\textwidth}{0.4pt}
+{\color{red} $\varheartsuit$} R, Python, SQL, Bash
+
+
+\end{aside}
 
 
 
@@ -135,8 +217,7 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
   {Feb 2022 - Jan 2025}
   {Lead Data Analyst, Core Analytics Team Lead}
   {Victoria, BC Canada}
-  {Led analytics roadmap and delivery for junior and senior analysts on Kixeye's Core Analytics Team. Later transitioned into more ML pipeline and analytical engineering work within Stillfront Group.
- \textbf{Responsibilities \& Achievements}:
+  {Led Kixeye's Core Analytics Team — setting the analytics roadmap, managing analysts, and owning KPI reporting and insight delivery for live game product and leadership teams. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
     %\item Independently migrated both Kixeye and Babil Games studios' Looker dashboards onto Stillfront's shared instance, reducing studio costs by \$90K annually while improving reporting continuity.
@@ -163,8 +244,7 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
   {Jan 2021 - Feb 2022}
   {Senior Product Analyst, Acting Core Analytics Team Lead}
   {Victoria, BC Canada}
-  {Promoted to help establish a small analytics team and improve collaboration across product, design, and engineering. Supported multiple game teams while building better analytical workflows and decision support.
- \textbf{Responsibilities \& Achievements}:
+  {Acting Core Analytics Team Lead, collaborating with product and design teams across multiple live games on KPI definition, A/B reporting, content strategy analysis, and analytics workflows. \textbf{Responsibilities \& Achievements}:
   \begin{itemize}
 
     %\item Automated KPI forecasting and A/B test reporting ETLs for Product and Design teams across all titles, improving experimentation support and significantly freeing up analyst time.
@@ -185,7 +265,11 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
   {Aug 2019 - Jan 2021}
   {Product Analyst, War Commander: Rogue Assault Team}
   {Vancouver, BC Canada}
+<<<<<<< HEAD
+  {Product analyst embedded on the War Commander live game team, responsible for player reporting, UA analytics, LTV forecasting, and decision support for product and live ops stakeholders. \textbf{Responsibilities \& Achievements}:
+=======
   {Originally hired to support urgent BI and ML engineering needs by maintaining dashboards, ETLs, segmentation tools, recommendation systems, and user acquisition analytics for a live mobile game.  Transitioned to deeper analytics work afterwards.
+>>>>>>> d6af63e4aac90d9a3d10b5c85c8887dba1babda5
   \begin{itemize}
     \item Improved cost savings and trust in core reporting during first three months from repairing and optimizing legacy SQL workflows for Tableau \& Looker reports.
 	\item Discovered and eliminated most revenue front loading and cannibalizing caused by implementing better guardrails in two Offer Recommendation Engines. 
@@ -194,12 +278,157 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
   \end{itemize}}
 \end{entrylist}
 
+<<<<<<< HEAD
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 2
-%% Family-specific aside. Static files in sections/aside-pg2/ carry the
-%% family's curated skillset. \leavevmode protects any leading \vspace
-%% inside the included file from being dropped at the aside boundary.
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
 %% -----------------------------------------------------------------------
+
+
+
+
+\section{Electronic Arts - AAA Games \hfill
+  \includegraphics[height=1em]{icons/logos/ea_sports.png}}
+{\vspace{-0.2cm}}
+
+
+\begin{entrylist}
+\entry
+  {2018-11 -- \\ 2019-07}
+  {Data Scientist, Dynamic Experiences Team}
+  {Burnaby, BC Canada}
+  {Embedded data scientist on EA Sports' Dynamic Experiences team — designing and evaluating in-game messaging experiments, building player segmentation models, and delivering analysis that improved monetization for FIFA 19 and 20. \textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Proposed, designed, and evaluated A/B test messaging campaigns aimed at delivering more personalized in-game experiences using R, SQL, and HiveQL.
+
+
+    \item Identified player segments most likely to respond positively to upsell messaging, contributing to a 3\% cohort spend increase.
+
+
+    \item Analysis and recommendations from in-game messaging experiments generated an additional \$2M in revenue for FIFA 19.
+
+
+  \end{itemize}}
+\end{entrylist}
+
+{\vspace{-0.5cm}}
+
+\begin{entrylist}
+\entry
+  {2016-06 -- \\ 2018-11}
+  {Business Analyst, FIFA Player Analytics Team}
+  {Burnaby, BC Canada}
+  {Owned executive reporting, player engagement and monetization analysis, and licensing analytics for FIFA — one of EA's highest-revenue franchises — while extending analytical coverage to Motive, BioWare, and DICE studios. \textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Managed game performance and insight delivery for monthly executive board meetings for EA Sports titles, and became trusted with reporting support for Motive, BioWare, and DICE studios.
+
+
+    \item Owned analytics reporting for FIFA's strategic licensing partners and automated large portions of the process using R and Talend, reducing weeks of manual work assembling 550 slides to seconds.
+
+
+    \item Applied propensity score matching in R to measure the true engagement and spend lift from FIFA's Companion and Web Apps, providing the evidence base that saved the Web App from discontinuation and secured ongoing investment in both platforms.
+
+    \begin{itemize}
+
+      \item Incremental spending gains among spenders of 4.2\% for Web App users and 7.0\% for Mobile App users, leading to millions in incremental revenue.
+
+      \item Presented findings at EA's 2018 Analyticon conference.
+
+      \item Findings and follow-on performance helped influence the Madden team to develop a companion app for Madden 19.
+
+    \end{itemize}
+
+
+    \item Built statistical models measuring the revenue impact each sports license generated for EA and the brand exposure value returned to partners, informing smarter procurement and renewal decisions.
+
+
+  \end{itemize}}
+\end{entrylist}
+
+%% -----------------------------------------------------------------------
+%% SIDEBAR — PAGE 2
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
+%% -----------------------------------------------------------------------
+
+
+
+
+\section{Pretio Interactive - Ad Tech Startup \hfill
+  \includegraphics[height=1em]{icons/logos/pretio-interactive.png}}
+{\vspace{-0.2cm}}
+
+
+\begin{entrylist}
+\entry
+  {2015-07 -- \\ 2016-02}
+  {Data Scientist}
+  {Victoria, BC Canada}
+  {Owned statistical research and ad-hoc analysis for a reward-based ad-network startup, extracting MAB exploration data and automating performance reporting for the sales team. \textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Extracted performance data from an Epsilon Greedy MAB recommendation algorithm during exploration phase and showcased it in Mode reports for the sales team.
+
+
+  \end{itemize}}
+\end{entrylist}
+
+%% -----------------------------------------------------------------------
+%% SIDEBAR — PAGE 2
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
+%% -----------------------------------------------------------------------
+
+
+
+
+\section{TinyMob Games - Indie Game Startup \hfill
+  \includegraphics[height=1em]{icons/logos/tinymob_games_logo.png}}
+{\vspace{-0.2cm}}
+
+
+\begin{entrylist}
+\entry
+  {2014-11 -- \\ 2015-07}
+  {Data Analyst, TinyRealms}
+  {Victoria, BC Canada}
+  {Early-career analyst role focused on KPI reporting, player retention analysis, and monetization diagnosis for TinyMob's first mobile game, Tiny Realms. \textbf{Responsibilities \& Achievements}:
+  \begin{itemize}
+
+    \item Discovered a segment of players with elevated churn likelihood, attributed it to unbalanced gameplay, and worked with game design on solutions that improved early game (D7) retention from 11.3\% to 14.2\% for the affected cohort.
+
+
+    \item Discovered that one game-mode cannibalized revenue by reducing the impact of the game's soft paywall, leading to design changes that remedied it.
+
+
+    \item Uncovered a free-rider problem and identified it as the primary driver of the studio's monetization challenges.
+
+
+  \end{itemize}}
+\end{entrylist}
+
+=======
+>>>>>>> d6af63e4aac90d9a3d10b5c85c8887dba1babda5
+%% -----------------------------------------------------------------------
+%% SIDEBAR — PAGE 2
+%% Emitted after the first company block (Kano) so it falls on page 2,
+%% not page 3. Placed here — inside the company loop, after the role
+%% loop closes — so LaTeX encounters it between the first and second
+%% company sections. loop.first refers to the outer company loop.
+%% -----------------------------------------------------------------------
+<<<<<<< HEAD
+
+
+=======
 \begin{aside}%
 <<<<<<< HEAD
 \vspace{-1.0cm}
@@ -209,6 +438,7 @@ revenue front-loading, cannibalization risks, churn trigger risks, economy balan
 \leavevmode%
 \input{/sessions/jolly-kind-fermi/mnt/Resume-Tailoring/sections/aside-pg2/aside-pg2-da}
 \end{aside}
+>>>>>>> d6af63e4aac90d9a3d10b5c85c8887dba1babda5
 
 %% -----------------------------------------------------------------------
 %% SIDEBAR — PAGE 3  (Data Engineering Toolkit)

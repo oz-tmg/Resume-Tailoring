@@ -194,7 +194,7 @@ data_engineering:
       keywords: [Tableau, BI, dashboards, visualization]
     - name: Looker
       tier: 2
-      families: [DA, AE]
+      families: [DA, AE, DE]
       keywords: [Looker, LookML, BI, dashboards]
     - name: Amplitude
       tier: 2
@@ -214,7 +214,7 @@ data_engineering:
       keywords: [RMarkdown, R, reporting]
     - name: Jupyter Notebooks
       tier: 2
-      families: [DS, MLE, DA]
+      families: [DS, MLE, DA, AE, DE]
       keywords: [Jupyter, notebooks, Python]
     - name: Excel
       tier: 2
@@ -224,7 +224,7 @@ data_engineering:
   hosting_and_infrastructure:
     - name: Docker
       tier: 2
-      families: [DE, MLE, AE]
+      families: [DE, MLE, AE, DS]
       keywords: [Docker, containers, containerization]
     - name: AWS ECS & EC2
       tier: 2
