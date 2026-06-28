@@ -19,30 +19,36 @@ PYTHON  := python3
 BUILD   := $(PYTHON) build.py
 OUTDIR  := output
 
+# Optional gaming flag — surfaces the gaming-specific domain_knowledge
+# skill blocks (DA/DS/AE) for video-games postings. Enable with GAMING=1, e.g.
+#   make da GAMING=1
+#   make posting F=data_analyst P=postings/Electronic_Arts/Advanced_Analyst_Apex.txt GAMING=1
+GAMINGFLAG := $(if $(GAMING),--gaming)
+
 .PHONY: all da ae de ds mle econ posting pdf validate clean help
 
 ## Base resume targets — one per family
 da:
-	$(BUILD) --family data_analyst
+	$(BUILD) --family data_analyst $(GAMINGFLAG)
 
 ae:
-	$(BUILD) --family analytics_engineer
+	$(BUILD) --family analytics_engineer $(GAMINGFLAG)
 
 de:
-	$(BUILD) --family data_engineer
+	$(BUILD) --family data_engineer $(GAMINGFLAG)
 
 ds:
-	$(BUILD) --family data_scientist
+	$(BUILD) --family data_scientist $(GAMINGFLAG)
 
 mle:
-	$(BUILD) --family ml_engineer
+	$(BUILD) --family ml_engineer $(GAMINGFLAG)
 
 econ:
-	$(BUILD) --family economist
+	$(BUILD) --family economist $(GAMINGFLAG)
 
 ## Build all six base resumes
 all:
-	$(BUILD) --all
+	$(BUILD) --all $(GAMINGFLAG)
 
 ## Build against a specific posting
 ## Usage: make posting F=data_scientist P=postings/acme/posting.txt
@@ -53,7 +59,7 @@ endif
 ifndef P
 	$(error P is required — usage: make posting F=<family> P=<posting_path>)
 endif
-	$(BUILD) --family $(F) --posting $(P)
+	$(BUILD) --family $(F) --posting $(P) $(GAMINGFLAG)
 
 ## Build + compile to PDF
 ## Usage: make pdf F=data_scientist
@@ -61,7 +67,7 @@ pdf:
 ifndef F
 	$(error F is required — usage: make pdf F=<family>)
 endif
-	$(BUILD) --family $(F) --pdf
+	$(BUILD) --family $(F) --pdf $(GAMINGFLAG)
 
 ## Build posting + compile to PDF
 ## Usage: make posting-pdf F=data_scientist P=postings/acme/posting.txt
@@ -72,7 +78,7 @@ endif
 ifndef P
 	$(error P is required)
 endif
-	$(BUILD) --family $(F) --posting $(P) --pdf
+	$(BUILD) --family $(F) --posting $(P) --pdf $(GAMINGFLAG)
 
 ## Validate YAML integrity
 validate:
@@ -107,6 +113,7 @@ help:
 	@echo "  make all             Build all six base resumes"
 	@echo "  make posting F=<f> P=<path>   Build against a job posting"
 	@echo "  make pdf F=<f>       Build + compile to PDF"
+	@echo "  add GAMING=1         Surface gaming domain-knowledge blocks (DA/DS/AE)"
 	@echo "  make validate        Validate YAML content"
 	@echo "  make clean           Remove generated files"
 	@echo "  make install         Install Python dependencies"

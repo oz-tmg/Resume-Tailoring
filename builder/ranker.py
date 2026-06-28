@@ -52,12 +52,18 @@ def rank_and_revoice(selected_companies: list[dict],
     print("    → Stage 1: ranking bullets against posting...")
     scores = _rank_bullets(flat, posting_text, family)
 
+    # Stage 1b: for bullets with multiple pre-written alternates, let Claude
+    # pick the alternate that best fits this posting.
+    print("    → Stage 1b: selecting best variant alternates...")
+    variant_choices = _select_variants(flat, posting_text, family)
+
     # Stage 2: revoice unresolved bullets that scored well
     print("    → Stage 2: revoicing unresolved bullets...")
     rewrites = _revoice_bullets(flat, scores, posting_text, family)
 
-    # Apply scores + rewrites back into the structure
-    result = _apply_results(selected_companies, flat, scores, rewrites)
+    # Apply scores + variant choices + rewrites back into the structure
+    result = _apply_results(selected_companies, flat, scores, rewrites,
+                            variant_choices)
 
     return result
 
@@ -109,6 +115,67 @@ def _rank_bullets(flat: list, posting_text: str, family: dict) -> dict[str, int]
     except json.JSONDecodeError:
         print(f"    ⚠  Could not parse ranking response — using default scores.")
         return {b["id"]: 2 for _, _, _, b in flat}
+
+
+# ---------------------------------------------------------------------------
+# Stage 1b: Variant selection
+# ---------------------------------------------------------------------------
+
+def _select_variants(flat: list, posting_text: str,
+                     family: dict) -> dict[str, str]:
+    """
+    For each bullet that carries more than one pre-written alternate
+    (bullet["variant_options"]), ask Claude which alternate id best fits
+    this posting. Returns {bullet_id: chosen_option_id}.
+
+    Bullets with zero or one option are left to their resolver default.
+    """
+    multi = [b for _, _, _, b in flat if len(b.get("variant_options", [])) > 1]
+    if not multi:
+        return {}
+
+    blocks = []
+    for b in multi:
+        opts = "\n".join(
+            f'    - {opt["id"]}: {opt["text"]}'
+            for opt in b["variant_options"]
+        )
+        blocks.append(f'  "{b["id"]}":\n{opts}')
+    options_block = "\n".join(blocks)
+
+    prompt = textwrap.dedent(f"""
+        You are tailoring a resume to a specific job posting. Several bullets
+        have multiple pre-written alternates. For each bullet, choose the ONE
+        alternate id whose wording and emphasis best match this posting.
+
+        Prefer the alternate that mirrors the posting's domain, tools, and
+        responsibilities. When the posting is gaming-specific, prefer the
+        gaming-detailed alternate; when it is generic, prefer the concise one.
+
+        JOB POSTING:
+        {posting_text}
+
+        BULLETS AND THEIR ALTERNATES (bullet_id -> list of "alt_id: text"):
+        {options_block}
+
+        Return ONLY a JSON object mapping each bullet id to the chosen
+        alternate id. Example: {{"bullet_id_1": "gaming_detailed"}}
+        No explanation, no markdown fences, just the JSON object.
+    """).strip()
+
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=600,
+        messages=[{"role": "user", "content": prompt}],
+    )
+
+    raw = response.content[0].text.strip()
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        print("    ⚠  Could not parse variant-selection response — "
+              "using defaults.")
+        return {}
 
 
 # ---------------------------------------------------------------------------
@@ -179,13 +246,20 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
 def _apply_results(selected_companies: list[dict],
                    flat: list,
                    scores: dict[str, int],
-                   rewrites: dict[str, str]) -> list[dict]:
+                   rewrites: dict[str, str],
+                   variant_choices: dict[str, str] | None = None) -> list[dict]:
     """
-    Apply scores and rewrites into the nested structure.
+    Apply scores, variant choices, and rewrites into the nested structure.
     Within each role, bullets are re-sorted by score descending
     (highest relevance to posting first), with ties preserving
     original order.
+
+    Precedence for a bullet's final text:
+      1. Claude rewrite (only for unresolved bullets)
+      2. Posting-selected variant alternate (variant_choices)
+      3. Resolver default text already on the bullet
     """
+    variant_choices = variant_choices or {}
     result = []
 
     for ci, company in enumerate(selected_companies):
@@ -195,13 +269,27 @@ def _apply_results(selected_companies: list[dict],
             role_copy = {**role, "bullets": []}
 
             for bullet in role["bullets"]:
-                bid          = bullet["id"]
-                score        = scores.get(bid, 1)
-                final_text   = rewrites.get(bid, bullet["resolved_text"])
+                bid           = bullet["id"]
+                score         = scores.get(bid, 1)
+                resolved_text = bullet["resolved_text"]
+                resolved_subs = bullet.get("resolved_subs", [])
+
+                # Apply posting-selected variant alternate, if any.
+                chosen_id = variant_choices.get(bid)
+                if chosen_id:
+                    for opt in bullet.get("variant_options", []):
+                        if opt["id"] == chosen_id:
+                            resolved_text = opt["text"]
+                            resolved_subs = opt.get("resolved_subs", [])
+                            break
+
+                # A Claude rewrite (unresolved bullets only) wins over text.
+                final_text = rewrites.get(bid, resolved_text)
 
                 role_copy["bullets"].append({
                     **bullet,
                     "resolved_text": final_text,
+                    "resolved_subs": resolved_subs,
                     "posting_score": score,
                 })
 

@@ -92,6 +92,43 @@ def resolve_bullet(bullet, family_id):
         # Claude then revoices this per the family's revoicing_persona
 ```
 
+### Multiple Alternates Per Family (multi-variant)
+
+A family entry under `variants` can be **either** a single string (the
+classic form above) **or** a list of alternates when you have written more
+than one phrasing of the same accomplishment for the same family and want
+the build to choose the best fit per context:
+
+```yaml
+variants:
+  DA:
+    - id: concise
+      default: true          # used for base (no-posting) builds
+      text: >
+        A tight, general-purpose DA phrasing — the safe primary.
+    - id: gaming_detailed
+      text: >
+        A richer, gaming-specific DA phrasing with system detail.
+      sub_bullets:           # OPTIONAL — overrides the bullet-level subs
+        - id: da_pvp_models
+          text: > Built and cross-validated three logistic models ...
+          families: [DA, DS]
+```
+
+Rules:
+- Exactly one alternate should carry `default: true`. It is used for base
+  (`make da`) builds. If none is flagged, the first is used (validator warns).
+- `id` must be unique within the family's alternate list.
+- An alternate may define its own `sub_bullets`; if it does, those replace
+  the bullet-level `sub_bullets` when that alternate is selected. Omit the
+  key to inherit the bullet-level subs.
+- **Posting builds** (`--posting`) auto-select: the Claude ranker scores each
+  alternate against the job description and swaps in the best match
+  (gaming-detailed for gaming postings, concise for generic ones). See
+  `builder/ranker.py::_select_variants`. No `--posting` ⇒ the `default` wins.
+- The single-string form and the list form can coexist across families on the
+  same bullet (e.g. `DA` as a list, `ECON` as a string).
+
 ### Authoring Guidelines
 
 - Write `text` (the base) in the most neutral, complete framing — typically
@@ -155,3 +192,67 @@ def resolve_bullet(bullet, family_id):
    - Add the bullet id to `priority_bullets` if tier 1
    - Add to `exclude_bullets` in families where it would read as noise
 6. Run `make validate` to check for missing family references and schema errors
+
+---
+
+## Education Schema
+
+Each `content/education.yaml` entry supports:
+
+| Field | Required | Notes |
+|---|---|---|
+| `degree` | yes | e.g. `M.A. in Economics` |
+| `specialization` | no | Rendered after the degree with an em-dash, e.g. `Auctions & Experimental Economics` |
+| `minor` | no | Rendered as `, Minor in <minor>` |
+| `focus` | no | One-line focus statement shown above the accomplishments |
+| `accomplishments` | no | Bullet list (hidden in `compact` layout) |
+| `thesis_url` | no | Rendered as a linked sub-item under accomplishments |
+
+### Education layout (detailed vs compact)
+
+The education section has two layouts, selected per family in the family file:
+
+```yaml
+# families/<family>.yaml
+education:
+  layout: compact      # or "detailed" (the default)
+  certifications_to_show: [gcp_ml, udacity_de]   # optional cert filter
+```
+
+- **`detailed`** (default) — shows `focus` and the full `accomplishments`
+  list (plus the thesis link). Mirrors the hand-tailored EA resume's
+  education section.
+- **`compact`** — emits a tight degree / institution / dates strip with no
+  body, for resumes that need education kept to a single line each.
+
+---
+
+## Gaming Domain Knowledge (`domain_knowledge`)
+
+`content/skills.yaml` has a top-level `domain_knowledge` section: gaming-
+specific descriptive skill groups (not single tools), each with a `name`
+label and a `detail` comma-list. They mirror the hand-tailored EA resume's
+**Game Systems Analytics**, **Product & Monetization Analytics**, **ML
+Modeling & Personalization** blocks and the detailed **A/B Testing** list.
+
+```yaml
+domain_knowledge:
+  - name: Game Systems Analytics
+    gaming: true
+    families: [DA, DS, AE]
+    detail: > matchmaking quality, player progression, ...
+    keywords: [matchmaking, progression, ...]
+```
+
+These are **gaming-gated**: they only render when a build is run with
+`--gaming` (or `build(..., gaming=True)`), and only for the families listed.
+Base, non-gaming builds omit the section entirely. Optionally control order
+per family with `domain_knowledge_order: [<group name>, ...]` in the family
+file. See `builder/selector.py::select_domain_knowledge`.
+
+```bash
+# Surface the gaming domain-knowledge blocks for a games posting:
+python build.py --family data_analyst --gaming
+python build.py --family data_analyst --gaming \
+    --posting postings/Electronic_Arts/Advanced_Analyst_Apex.txt
+```

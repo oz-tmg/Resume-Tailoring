@@ -7,10 +7,10 @@ summary_ref: analytics_engineer
 # ---------------------------------------------------------------------------
 bullet_selection:
   max_bullets_per_role:
-    kano_senior_de_bi: 4          # This role is the strongest AE signal
+    kano_senior_de_bi: 5          # This role is the strongest AE signal
     kix_lead: 4
     kix_senior: 3
-    kix_product_analyst: 3
+    kix_product_analyst: 4
     ea_data_scientist: 2
     ea_business_analyst: 3
     pretio_data_scientist: 2
@@ -21,12 +21,17 @@ bullet_selection:
   priority_bullets:
     - kano_dbt                     # Core AE signal — dbt addition
     - kano_etl_performance         # Strongest technical achievement at Kano
-    - kano_rshiny_migration        # Migration + modernization
+    - kano_rshiny_migration        # Migration + modernization (orchestration alt for postings)
+    - kano_llm_translation         # LLM-assisted code migration
+    - kano_manual_refactor         # Bilingual R/Python refactor, analytical parity
+    - kano_anomaly_detection       # Live-ops anomaly detection migration
     - kano_analyst_adoption        # Enablement is core AE value prop
     - kix_snowflake_cost       # Cost + orchestration optimization
     - kix_looker_migration     # Cross-studio migration ownership
+    - kix_two_games_delivery   # Reporting/tooling for two new launches
     - kix_ab_automation        # Pipeline automation for analytics
     - kix_etl_repair               # ETL ownership signal
+    - kix_revenue_attribution      # SQL/PySpark revenue-attribution modelling
     - kix_domino_jenkins           # Pipeline migration — strong AE signal
     - ea_ab_automation             # Workflow automation
     - ea_licensing_automation      # Automation of high-value reporting
@@ -71,6 +76,8 @@ skills_order:
       - Airflow
       - Prefect
       - Jenkins
+    ml_ops:
+      - MLflow
     bi_tools:
       - Looker
       - Tableau
@@ -118,6 +125,21 @@ experience_roles_order:
   - ea_business_analyst
   - pretio_data_scientist
   - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# GAMING DOMAIN KNOWLEDGE  (only rendered with --gaming)
+# AE gets the engineering-adjacent subset.
+# ---------------------------------------------------------------------------
+domain_knowledge_order:
+  - Game Systems Analytics
+  - Product & Monetization Analytics
+  - A/B Testing & Experimentation
+
+# ---------------------------------------------------------------------------
+# EDUCATION  (layout: detailed | compact)
+# ---------------------------------------------------------------------------
+education:
+  layout: detailed
 
 # ---------------------------------------------------------------------------
 # SIDEBAR

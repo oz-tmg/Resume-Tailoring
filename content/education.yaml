@@ -3,29 +3,35 @@ education:
     institution: University of Victoria
     institution_short: UVic
     color_key: uvicblue
-    degree: M.A. Co-op Education in Economics
+    degree: M.A. in Economics
+    # Specialization shown after the degree (em-dash) — matches the
+    # hand-tailored layout: "M.A. in Economics — Auctions & Experimental
+    # Economics".
+    specialization: Auctions & Experimental Economics
     field: Economics
     start: 2011
     end: 2014
     location: Victoria, BC Canada
     relevant_families: [DS, ECON, DA, MLE]
     focus: >
-      Auctions, game theory, experimental economics, and behavioural economics.
+      Focused on auctions, game theory, experimental economics, and
+      behavioural economics.
     accomplishments:
       - >
-          Taught Intermediate Microeconomics, Intermediate Macroeconomics,
-          Game Theory, and Natural Resource Economics as a Teaching Assistant
-          for two years.
+          Teaching assistant for two years for Game Theory, Natural Resource,
+          and Intermediate Micro & Macroeconomics.
       - >
-          Worked as a Research Assistant researching second price auctions and
-          running experiments that would later help optimize timber lot auctions
-          in Quebec.
+          Worked as a research assistant researching single-bidder second-price
+          auctions and running experiments.
+      - >
+          Published and coauthored Master's Thesis research that would later
+          help optimize timber lot auctions in Quebec.
       - >
           Awarded Phillips, Hager and North Master Degree Scholarship for
           Research in Environmental and Resource Economics.
       - >
-          Published and coauthored Masters Thesis research on auction design
-          and optimization.
+          Completed multiple economic analyst co-op semesters with the Ministry
+          of Transportation.
     thesis_url: http://www.cirano.qc.ca/files/publications/2015RP-05.pdf
     keywords: [game theory, experimental economics, behavioural economics,
                auctions, causal inference, econometrics, research]

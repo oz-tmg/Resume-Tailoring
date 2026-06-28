@@ -8,10 +8,10 @@ summary_ref: data_analyst
 bullet_selection:
   # Maximum bullets to show per role. Older/less relevant roles get fewer.
   max_bullets_per_role:
-    kano_senior_de_bi: 4
-    kix_lead: 4
-    kix_senior: 4
-    kix_product_analyst: 3
+    kano_senior_de_bi: 5
+    kix_lead: 5
+    kix_senior: 5
+    kix_product_analyst: 4
     ea_data_scientist: 3
     ea_business_analyst: 4
     pretio_data_scientist: 2
@@ -27,11 +27,18 @@ bullet_selection:
     - kano_rshiny_migration
     - kano_etl_performance
     - kano_analyst_adoption
+    - kix_two_games_delivery
     - kix_looker_migration
     - kix_forecasting_model
+    - kix_matchmaking_churn       # DA default = concise; gaming-detailed alt for postings
+    - kix_cohort_ltv_stillfront
     - kix_content_cadence
+    - kix_churn_model             # DA variant = Bayesian churn-trigger framing
+    - kix_alliance_network_analysis
+    - kix_elo_matchmaking_diagnosis
     - kix_ab_automation
     - kix_etl_repair
+    - kix_revenue_attribution
     - kix_ltv_forecast
     - kix_ua_strategy
     - ea_ab_test_design
@@ -40,7 +47,6 @@ bullet_selection:
     - ea_exec_reporting
     - ea_licensing_automation
     - ea_companion_app
-    - ea_analyticon
     - tinymob_churn_gameplay
     - tinymob_paywall_cannibalisation
     - tinymob_free_rider
@@ -53,9 +59,7 @@ bullet_selection:
     - ea_churn_reacquisition_models  # Too DS/MLE
     - pretio_thompson_sampling  # Too algorithmic/Bayesian
     - pretio_simulation         # Too modelling-heavy
-    - kix_churn_model       # AUC framing is DS, not DA
     - kix_alliance_recsys   # RecSys framing is DS, not DA
-    - kix_product_analyst    # Suppress whole role's MLOps bullets via exclude above
 
 # ---------------------------------------------------------------------------
 # SKILLS ORDERING
@@ -87,6 +91,7 @@ skills_order:
       - RShiny
       - RMarkdown
       - Jupyter Notebooks
+      - Hex
       - Excel
     storage_and_warehousing:
       - Snowflake
@@ -128,6 +133,25 @@ experience_roles_order:
   - ea_business_analyst
   - pretio_data_scientist
   - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# GAMING DOMAIN KNOWLEDGE
+# Order of the gaming-specific skill groups. Only rendered when built with
+# --gaming (i.e. for video-games postings). See content/skills.yaml.
+# ---------------------------------------------------------------------------
+domain_knowledge_order:
+  - A/B Testing & Experimentation
+  - Game Systems Analytics
+  - Product & Monetization Analytics
+  - ML Modeling & Personalization
+
+# ---------------------------------------------------------------------------
+# EDUCATION
+# layout: detailed (default) shows focus + accomplishments + thesis link;
+#         compact emits a tight degree/institution strip with no body.
+# ---------------------------------------------------------------------------
+education:
+  layout: detailed
 
 # ---------------------------------------------------------------------------
 # SIDEBAR / ASIDE CONTENT

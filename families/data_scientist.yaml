@@ -20,13 +20,19 @@ bullet_selection:
 
   priority_bullets:
     - kix_forecasting_model   # $14M valuation finding — headline DS win
-    - kix_matchmaking_churn   # Diagnosis + RecSys redesign
+    - kix_matchmaking_churn   # Diagnosis + RecSys redesign (gaming-detailed alt for postings)
     - kix_churn_model         # AUC improvement — concrete model win
     - kix_alliance_recsys     # RecSys + revenue outcome
     - kix_content_cadence     # Funnel + time-series modelling
+    - kix_elo_matchmaking_diagnosis  # Logit diagnosis of ELO matchmaking churn
     - kix_ab_automation       # Experimentation infrastructure
     - kix_spend_conversion        # Experimentation + ML tooling
+    - kix_alliance_network_analysis  # Network analysis of alliance engagement
+    - kix_cohort_ltv_stillfront   # Cohort LTV forecasting partnership
+    - kix_revenue_attribution     # PySpark revenue-attribution modelling
+    - kix_two_games_delivery      # Reporting/tooling for two new launches
     - kix_ltv_forecast            # Forecasting accuracy
+    - kano_anomaly_detection      # Anomaly detection for live-ops data
     - ea_ab_test_design           # Experimentation design
     - ea_upsell_segmentation      # Targeting + spend outcome
     - ea_fifa19_revenue           # Revenue impact from experimentation
@@ -43,7 +49,6 @@ bullet_selection:
     - kano_analyst_adoption       # Team enablement, not DS
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Automation, not modelling
-    - ea_analyticon               # Presentation, not DS work
     - tinymob_aso                 # Marketing, not DS
     - tinymob_kpi_monitoring      # Reporting, not DS
     - tinymob_database_investment # Stakeholder influence, not DS
@@ -85,12 +90,15 @@ skills_order:
       - Airflow
       - Prefect
       - Jenkins
+    ml_ops:
+      - MLflow
     data_processing:
       - Apache Spark (PySpark, SparklyR)
       - HiveQL
     bi_tools:
       - Amplitude
       - Jupyter Notebooks
+      - Hex
       - RShiny
       - RMarkdown
       - Tableau
@@ -121,6 +129,21 @@ experience_roles_order:
   - ea_business_analyst
   - pretio_data_scientist
   - tinymob_data_analyst
+
+# ---------------------------------------------------------------------------
+# GAMING DOMAIN KNOWLEDGE  (only rendered with --gaming)
+# ---------------------------------------------------------------------------
+domain_knowledge_order:
+  - A/B Testing & Experimentation
+  - ML Modeling & Personalization
+  - Game Systems Analytics
+  - Product & Monetization Analytics
+
+# ---------------------------------------------------------------------------
+# EDUCATION  (layout: detailed | compact)
+# ---------------------------------------------------------------------------
+education:
+  layout: detailed
 
 # ---------------------------------------------------------------------------
 # SIDEBAR

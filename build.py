@@ -48,9 +48,14 @@ FAMILIES = ["data_analyst", "analytics_engineer", "data_engineer",
 
 
 def build(family_name: str, posting_path: Path | None = None,
-          output_dir: Path | None = None) -> Path:
+          output_dir: Path | None = None, gaming: bool = False) -> Path:
     """
     Full build pipeline for one family + optional posting.
+
+    gaming=True surfaces the gaming-specific domain_knowledge skill groups
+    (Game Systems Analytics, Product & Monetization Analytics, ML Modeling &
+    Personalization, and the detailed A/B testing list) for DA/DS/AE builds.
+
     Returns the path of the generated .tex file.
     """
     print(f"\n{'='*60}")
@@ -115,6 +120,7 @@ def build(family_name: str, posting_path: Path | None = None,
         output_dir=output_dir,
         template_dir=ROOT / "templates",
         repo_root=ROOT,
+        gaming=gaming,
     )
 
     print(f"\n  ✓ Generated: {tex_path}")
@@ -187,6 +193,9 @@ def main():
                         help="Compile .tex to PDF after generation")
     parser.add_argument("--all",     action="store_true",
                         help="Build base resumes for all six families")
+    parser.add_argument("--gaming",  action="store_true",
+                        help="Surface gaming-specific domain_knowledge skill "
+                             "groups (DA/DS/AE) for video-games postings")
     parser.add_argument("--validate", action="store_true",
                         help="Validate YAML content only, do not build")
     args = parser.parse_args()
@@ -205,7 +214,7 @@ def main():
 
     if args.all:
         for fam in FAMILIES:
-            tex = build(fam)
+            tex = build(fam, gaming=args.gaming)
             if args.pdf:
                 compile_pdf(tex)
         return
@@ -214,7 +223,8 @@ def main():
         parser.error("--family is required unless using --all or --validate")
 
     posting = Path(args.posting) if args.posting else None
-    tex = build(args.family, posting_path=posting, output_dir=args.output)
+    tex = build(args.family, posting_path=posting, output_dir=args.output,
+                gaming=args.gaming)
 
     if args.pdf:
         compile_pdf(tex)

@@ -19,6 +19,15 @@ roles:
       and analytical engineering work within Stillfront Group.
 
     bullets:
+      - id: kix_two_games_delivery
+        text: >
+          Managed the team's delivery of analytics reporting and tooling for
+          two new game launches using Snowflake and Looker.
+        families: [DA, AE, DS]
+        keywords: [Snowflake, Looker, reporting, tooling, team delivery, KPI,
+                   live-service, game launch]
+        tier: 2
+
       - id: kix_snowflake_cost
         text: >
           Reduced monthly Snowflake warehousing costs by 45% through ETL and
@@ -67,25 +76,100 @@ roles:
           engagement in affected cohorts.
         families: [DS, MLE, DA]
         keywords: [churn, clustering, recommendation, retention, engagement,
-                   behavioral analysis, matchmaking, causal inference]
+                   behavioral analysis, matchmaking, gameplay balance, economy,
+                   causal inference]
         tier: 1
         variants:
-          DA: >
-            Identified a structural flaw in the matchmaking system driving
-            elevated churn; quantified the affected player population through
-            behavioral segmentation and worked with product and engineering
-            on a redesign that improved retention in impacted cohorts.
-          DS: >
-            Applied behavioral clustering and churn modeling to diagnose a
-            platform matching failure causing abnormal attrition; guided a
-            hybrid recommendation redesign that improved retention and
-            engagement metrics in the affected player segments.
+          # DA: concise default (general-purpose) + a gaming-detailed
+          # alternate that carries its own sub-bullets (the hand-written
+          # "Restored PvP viability" story). The posting ranker chooses the
+          # gaming-detailed alternate for gaming/game-systems postings.
+          DA:
+            - id: concise
+              default: true
+              text: >
+                Identified a structural flaw in the matchmaking system driving
+                elevated churn; quantified the affected player population
+                through behavioral segmentation and worked with product and
+                engineering on a redesign that improved retention in impacted
+                cohorts.
+            - id: gaming_detailed
+              text: >
+                Restored PvP viability for the segment hit hardest by a
+                thinning opponent pool — an externality of the earlier
+                matchmaking stop-gaps — by simulating optimal defender base
+                configurations and generating progression-tiered bot-base specs
+                for Design to author and Engineering to ship as A/B-testable
+                content.
+              sub_bullets:
+                - id: kix_pvp_models
+                  text: >
+                    Built and cross-validated three logistic models — PvP
+                    match-initiation propensity, expected resource/premium-
+                    currency sink, and 7-day forward engagement — extending the
+                    framework from the original matchmaking diagnosis, then
+                    combined them into a multi-objective score.
+                  families: [DA, DS]
+                - id: kix_pvp_simulation
+                  text: >
+                    Simulated defender base-attribute combinations and ranked
+                    optimal configurations by attacker level tier.
+                  families: [DA, DS]
+                - id: kix_pvp_retention
+                  text: >
+                    Iterated to a net-positive, segment-specific result — a
+                    retention lift up to 2 points emerging from D14 onward (not
+                    D7), concentrated in mid-progression players, with
+                    incremental late-cohort revenue among returning spenders as
+                    cohorts matured — and surfaced why early- and late-game
+                    players responded less, informing downstream economy
+                    balancing.
+                  families: [DA, DS]
+          DS:
+            - id: concise
+              default: true
+              text: >
+                Applied behavioral clustering and churn modeling to diagnose a
+                platform matching failure causing abnormal attrition; guided a
+                hybrid recommendation redesign that improved retention and
+                engagement metrics in the affected player segments.
+            - id: gaming_detailed
+              text: >
+                Restored PvP viability for the segment hit hardest by a
+                thinning opponent pool by modeling player behaviour and
+                simulating optimal defender base configurations, then generating
+                progression-tiered bot-base specs shipped as A/B-testable
+                content.
+              sub_bullets:
+                - id: kix_pvp_models_ds
+                  text: >
+                    Built and cross-validated three logistic models — PvP
+                    match-initiation propensity, expected resource/premium-
+                    currency sink, and 7-day forward engagement — and combined
+                    them into a multi-objective optimization score.
+                  families: [DS, DA]
+                - id: kix_pvp_retention_ds
+                  text: >
+                    Iterated to a net-positive, segment-specific retention lift
+                    of up to 2 points emerging from D14 onward, concentrated in
+                    mid-progression players, with incremental late-cohort
+                    revenue among returning spenders.
+                  families: [DS, DA]
           ECON: >
             Identified a platform design externality where competing user
             pathways undermined the matching mechanism and generated negative
             spillovers on retention; used behavioral segmentation to quantify
             the welfare loss and informed a market design intervention that
             improved platform efficiency and participant retention.
+
+      - id: kix_cohort_ltv_stillfront
+        text: >
+          Partnered with Stillfront's data science team to improve cohort LTV
+          forecasting, producing more realistic month-to-month revenue targets.
+        families: [DS, DA, ECON]
+        keywords: [LTV, cohort analysis, forecasting, revenue, partnership,
+                   product analytics]
+        tier: 2
 
       - id: kix_cross_promo
         text: >
@@ -150,10 +234,18 @@ roles:
           Increased churn prediction accuracy from AUC 0.71 to 0.86 in
           Python, helping identify and remediate multiple gameplay-related
           churn drivers.
-        families: [DS, MLE]
+        families: [DS, MLE, DA]
         keywords: [churn prediction, AUC, Python, classification, machine
-                   learning, model improvement, retention]
+                   learning, model improvement, retention, Bayesian,
+                   gameplay balance, economy]
         tier: 1
+        # DA telling of the same work: leads with the design outcome and the
+        # Bayesian-when-A/B-infeasible method rather than the AUC metric.
+        variants:
+          DA: >
+            Helped the Design team discover and remediate multiple churn
+            triggers tied to progression, gameplay balance, and economy shocks,
+            using Bayesian logistic regression when A/B tests were infeasible.
 
       - id: kix_alliance_recsys
         text: >
@@ -165,6 +257,27 @@ roles:
         keywords: [recommendation engine, Python, uplift modelling, retention,
                    revenue, engagement, RecSys, spend conversion]
         tier: 1
+
+      - id: kix_alliance_network_analysis
+        text: >
+          Used network analysis to show how alliances differed in their effect
+          on member engagement, then partnered with Customer Service on
+          solutions for tracking MVPs and alliance leadership.
+        families: [DA, DS]
+        keywords: [network analysis, social graph, engagement, alliances,
+                   behavioral segmentation, retention]
+        tier: 2
+
+      - id: kix_elo_matchmaking_diagnosis
+        text: >
+          Used logit regression to confirm player disengagement from PvP and
+          elevated churn among PvP-centric player clusters caused by the ELO
+          matchmaking system; partnered with Engineering on interim guardrails
+          that reduced churn but narrowed the matchable opponent pool.
+        families: [DS, DA]
+        keywords: [logit regression, churn, PvP, ELO, matchmaking,
+                   behavioral segmentation, gameplay balance]
+        tier: 2
 
   # ---------------------------------------------------------------------------
   # Product Analyst, War Commander: Rogue Assault Team  (Aug 2019 – Jan 2021)
@@ -209,6 +322,18 @@ roles:
         keywords: [Jenkins, Domino, migration, ML pipelines, cost reduction,
                    MLOps, orchestration]
         tier: 1
+
+      - id: kix_revenue_attribution
+        text: >
+          Reworked the game's revenue-attribution modeling using SQL, PySpark,
+          and Looker to more accurately estimate in-game economy and
+          monetization drivers — surfacing a wave of insights that drove major
+          strategy shifts and a promotion to Senior Product Analyst and team
+          lead.
+        families: [DS, DA, AE]
+        keywords: [revenue attribution, SQL, PySpark, Looker, monetization,
+                   in-game economy, product analytics]
+        tier: 2
 
       - id: kix_spend_conversion
         text: >

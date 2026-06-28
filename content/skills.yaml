@@ -169,6 +169,13 @@ data_engineering:
       families: [DE, AE, MLE]
       keywords: [Jenkins, CI/CD, pipeline]
 
+  ml_ops:
+    - name: MLflow
+      tier: 2
+      families: [DS, MLE, AE, DE]
+      keywords: [MLflow, experiment tracking, model registry, MLOps,
+                 model lifecycle]
+
   bi_tools:
     - name: Tableau
       tier: 2
@@ -198,6 +205,10 @@ data_engineering:
       tier: 2
       families: [DS, MLE, DA]
       keywords: [Jupyter, notebooks, Python]
+    - name: Hex
+      tier: 2
+      families: [DA, DS]
+      keywords: [Hex, notebooks, BI, collaborative analytics, Python]
     - name: Excel
       tier: 2
       families: [DA, ECON]
@@ -222,3 +233,57 @@ data_engineering:
       tier: 2
       families: [DE, AE]
       keywords: [Iceberg, table format, data lakehouse]
+
+# ---------------------------------------------------------------------------
+# DOMAIN KNOWLEDGE — gaming-specific skill groups.
+# These are descriptive groups (name + detail line), not single tools, and
+# are GAMING-GATED: they only render when a build targets a games posting
+# (build.py --gaming, or families with gaming context). They surface on
+# DA, DS, and AE builds for games postings, mirroring the hand-tailored EA
+# resume's "Game Systems Analytics", "Product & Monetization Analytics", and
+# "ML Modeling & Personalization" blocks plus the detailed A/B testing list.
+# Each entry: name (group label), detail (comma list), families, gaming flag.
+# ---------------------------------------------------------------------------
+domain_knowledge:
+  - name: A/B Testing & Experimentation
+    gaming: true
+    families: [DA, DS, AE]
+    detail: >
+      A/B test design, cluster/community-level randomization, switchback
+      tests, quasi-experimental analysis, propensity score matching,
+      difference-in-differences, guardrail metrics, novelty effects, SRM
+      checks, network/spillover effects, uplift measurement, randomized
+      reward-system inference
+    keywords: [A/B testing, experimentation, randomization, switchback,
+               quasi-experimental, propensity score matching,
+               difference-in-differences, guardrail metrics, SRM, uplift]
+
+  - name: Game Systems Analytics
+    gaming: true
+    families: [DA, DS, AE]
+    detail: >
+      matchmaking quality, player progression, gameplay balance, economy
+      shocks, content cadence, live-ops events, behavioral segmentation,
+      retention/churn drivers
+    keywords: [game systems, matchmaking, player progression, gameplay
+               balance, economy, content cadence, live-ops, segmentation,
+               retention, churn]
+
+  - name: Product & Monetization Analytics
+    gaming: true
+    families: [DA, DS, AE]
+    detail: >
+      player behaviour, engagement funnels, spend conversion, LTV
+      forecasting, UA performance, monetization cannibalization
+    keywords: [product analytics, monetization, engagement funnels, spend
+               conversion, LTV, user acquisition, cannibalization]
+
+  - name: ML Modeling & Personalization
+    gaming: true
+    families: [DA, DS, AE]
+    detail: >
+      churn prediction, revenue forecasting, clustering, recommendation
+      systems, multi-armed bandits, conversion modeling, anomaly detection
+    keywords: [churn prediction, revenue forecasting, clustering,
+               recommendation systems, multi-armed bandits, conversion
+               modeling, anomaly detection, personalization]

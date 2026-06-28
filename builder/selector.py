@@ -176,3 +176,49 @@ def select_skills(skills: dict, family: dict) -> dict:
                     output[section][subcat] = picked
 
     return output
+
+
+# ---------------------------------------------------------------------------
+# Gaming domain knowledge selection
+# ---------------------------------------------------------------------------
+
+def select_domain_knowledge(skills: dict, family: dict,
+                            gaming: bool) -> list[dict]:
+    """
+    Return the gaming-specific `domain_knowledge` groups for this family,
+    but ONLY when gaming=True (i.e. the build targets a video-games posting).
+
+    Each returned item is {"name": str, "detail": str}. Groups are filtered
+    by family membership and ordered by the family file's optional
+    `domain_knowledge_order` (a list of group names); otherwise file order
+    is preserved.
+
+    For non-gaming builds this returns [] so the section is omitted entirely.
+    """
+    if not gaming:
+        return []
+
+    fam_id  = family["id"]
+    groups  = skills.get("domain_knowledge", [])
+    by_name = {g["name"]: g for g in groups}
+
+    order = family.get("domain_knowledge_order")
+    ordered_names = order if order else [g["name"] for g in groups]
+
+    result: list[dict] = []
+    for name in ordered_names:
+        g = by_name.get(name)
+        if g is None:
+            print(f"  ⚠  Warning: domain_knowledge '{name}' in family order "
+                  f"not found in skills.yaml — skipping.")
+            continue
+        if not g.get("gaming", False):
+            continue
+        if fam_id not in g.get("families", []):
+            continue
+        result.append({
+            "name":   g["name"],
+            "detail": " ".join(g["detail"].split()),
+        })
+
+    return result

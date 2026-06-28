@@ -67,13 +67,58 @@ def validate_all(root: Path) -> bool:
                 else:
                     seen_ids[bid] = role["id"]
 
-    # Validate variants use legal family IDs
+    # Validate variants use legal family IDs and well-formed alternates
     for bid, bullet in experience["by_id"].items():
-        for vfam in bullet.get("variants", {}).keys():
+        for vfam, ventry in bullet.get("variants", {}).items():
             if vfam not in FAMILY_IDS:
                 errors.append(
                     f"Bullet '{bid}' has variant for unknown family '{vfam}'"
                 )
+            # Multi-variant (list) form: each alternate needs id + text,
+            # ids must be unique, and at most one may be flagged default.
+            if isinstance(ventry, list):
+                if not ventry:
+                    errors.append(
+                        f"Bullet '{bid}' variant '{vfam}' is an empty list"
+                    )
+                alt_ids: list[str] = []
+                default_count = 0
+                for i, alt in enumerate(ventry):
+                    if not isinstance(alt, dict):
+                        errors.append(
+                            f"Bullet '{bid}' variant '{vfam}' alternate #{i} "
+                            f"must be a mapping with 'id' and 'text'"
+                        )
+                        continue
+                    if "text" not in alt:
+                        errors.append(
+                            f"Bullet '{bid}' variant '{vfam}' alternate "
+                            f"'{alt.get('id', i)}' is missing 'text'"
+                        )
+                    if "id" not in alt:
+                        warnings.append(
+                            f"Bullet '{bid}' variant '{vfam}' alternate #{i} "
+                            f"has no 'id' (a positional id will be used)"
+                        )
+                    else:
+                        alt_ids.append(alt["id"])
+                    if alt.get("default"):
+                        default_count += 1
+                if len(alt_ids) != len(set(alt_ids)):
+                    errors.append(
+                        f"Bullet '{bid}' variant '{vfam}' has duplicate "
+                        f"alternate ids"
+                    )
+                if default_count == 0:
+                    warnings.append(
+                        f"Bullet '{bid}' variant '{vfam}' has no alternate "
+                        f"flagged default — first will be used for base builds"
+                    )
+                elif default_count > 1:
+                    errors.append(
+                        f"Bullet '{bid}' variant '{vfam}' has {default_count} "
+                        f"alternates flagged default — only one is allowed"
+                    )
 
     # Validate each family file
     for fam_name in FAMILIES:

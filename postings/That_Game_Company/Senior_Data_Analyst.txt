@@ -1,0 +1,86 @@
+Remote US & Canada
+
+We are seeking a highly motivated and autonomous Senior Data Analyst to join our team.
+
+In this role, you will be pivotal in surfacing insights and providing guidance to a broad spectrum of disciplines across the studio, empowering these teams to leverage data in new ways and do their best work with accurate data in hand.
+
+We expect you to:
+
+    Have deep passion for video games and think on behalf of our players
+
+    Be curious; a detail-oriented problem solver and a self starter who is comfortable taking risks. Know how and when to apply your knowledge, and be willing to share with the rest of us
+
+    Be comfortable with ambiguity. Navigate, iterate, and advocate solutions in the problem space
+
+    Comb through large sets of game telemetry data to uncover player relationships, feature usage trends, security threats, inefficiencies, and opportunities to improve the player and developer experience
+
+    Serve as a bridge between technical and non-technical teams and provide technical guidance. Translate stakeholder needs and context into requirements, tangible data solutions, and actionable business insights
+
+    Develop an intimate understanding of our games through hands-on playtime
+
+Required Skills
+
+    Extensive experience writing optimized SQL to build and analyze datasets and associated data resources - tables, views, stored procedures etc
+
+    Experience working with data sourced from a variety of structured/unstructured storage mediums (SQL, NoSQL, cache, blob storage etc) and unifying disparate datasets
+
+    Proficiency conducting exploratory data analysis
+
+    Proficiency with a data visualization tool like Tableau or Looker
+
+    Deep understanding of data modeling, data quality practices, and cost-efficient storage architecture
+
+    Experience with Git and modern version control workflows
+
+Preferred Experience
+
+Any of the following would be highly preferred, but most of all, we value team players who are eager to learn and contribute:
+
+    Familiar with Python data-related libraries (e.g., Pandas, Airflow, Flask, Plotly)
+
+    Experience with the broader GCP ecosystem (Kubernetes, GCS, PubSub, Cloud Functions, etc)
+
+    Experience with Apache Spark
+
+    Experience with dbt or other state management systems
+
+    Experience in the video gaming industry
+
+    Experience in a small company with a startup feel
+
+    Interest in technical writing and sharing your work
+
+Perks:
+
+    Paid Time Off, Holidays and Two Weeks Winter Break
+
+    Employees and their dependents get medical, dental, and vision coverage, regardless of their level, tenure, or position within the company. Moreover, these benefits start on the first day of the job—there’s no waiting period before they kick in.
+
+    Pet Insurance for those who need it too.
+
+    Compassionate leave for employees who needs to take care of their family members
+
+    Pre-tax wellness stipend
+
+    Pre-tax work from home stipend
+
+    Access our savings plan (401K program) with company match
+
+    Mental health resources including Headspace membership and Employee Assistance Program (EAP)
+
+    Discount portal for everyday goods and services
+
+    Employee inclusive and diversity initiatives such as Grow Together
+
+    Support for personal professional development
+
+We look forward to meeting you!
+
+Applicants must be authorized to work for any employer in the U.S. We are unable to sponsor or take over sponsorship of an employment Visa at this time.
+
+The salary range for this position is $109,000 USD to $171,000 USD annually, with the
+opportunity to earn an annual discretionary bonus. This salary range is an estimate, and the actual salary may vary based on the Company’s compensation practices. Employees in this position are eligible to participate in the Company’s standard employee benefit programs, which currently include the following: medical, dental, vision, 401k, and paid time off.
+
+Our base pay is benchmarked against regional market and industry data and is adjusted to reflect the cost of living in your specific geographic area.
+
+#LI-Remote

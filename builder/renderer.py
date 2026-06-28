@@ -15,7 +15,7 @@ import re
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from builder.selector import select_skills
+from builder.selector import select_skills, select_domain_knowledge
 
 
 # ---------------------------------------------------------------------------
@@ -90,10 +90,15 @@ def render_tex(family: dict,
                personal: dict,
                output_dir: Path,
                template_dir: Path,
-               repo_root: Path) -> Path:
+               repo_root: Path,
+               gaming: bool = False) -> Path:
     """
     Render resume.tex.j2 with all pipeline data and write to output_dir.
     Stages cv-style.cls and fonts/ alongside the .tex so any compiler works.
+
+    gaming=True injects the gaming-specific domain_knowledge skill groups
+    (DA/DS/AE only); otherwise that section is omitted.
+
     Returns the path to the generated .tex file.
     """
     env = Environment(
@@ -109,7 +114,8 @@ def render_tex(family: dict,
 
     env.filters["latex_escape"] = _latex_escape
 
-    ordered_skills = select_skills(skills, family)
+    ordered_skills    = select_skills(skills, family)
+    domain_knowledge  = select_domain_knowledge(skills, family, gaming)
 
     edu_config   = family.get("education", {})
     show_certs   = edu_config.get("certifications_to_show", None)
@@ -118,6 +124,9 @@ def render_tex(family: dict,
         [c for c in all_certs if c["id"] in show_certs]
         if show_certs is not None else all_certs
     )
+    # "detailed" (default) shows focus + accomplishments; "compact" emits a
+    # tight degree/institution strip. Set per family via education.layout.
+    education_layout = edu_config.get("layout", "detailed")
 
     context = {
         "family":          family,
@@ -125,7 +134,9 @@ def render_tex(family: dict,
         "summary_text":    summary["text"],
         "experience":      resolved_experience,
         "skills":          ordered_skills,
+        "domain_knowledge": domain_knowledge,
         "education":       education["education"],
+        "education_layout": education_layout,
         "certifications":  certs_to_show,
         "header_title":    family["header_title"],
         # Forward-slash path for LaTeX compatibility on all platforms

@@ -142,6 +142,16 @@ acquisition assessment.
 \noindent\rule{\textwidth}{0.4pt}
 <% for skill in skills.programming %><< skill.name | latex_escape >><% if not loop.last %>, <% endif %><% endfor %>
 <% endif %>
+<# Gaming-only domain knowledge — populated solely when build --gaming is set #>
+<% if domain_knowledge %>
+\section{\LARGE Game Domain Knowledge}
+\noindent\rule{\textwidth}{0.4pt}
+~
+<% for grp in domain_knowledge %>
+\textbf{<< grp.name | latex_escape >>:} << grp.detail | latex_escape >>
+\\[0.15cm]
+<% endfor %>
+<% endif %>
 \end{aside}
 
 %% -----------------------------------------------------------------------
@@ -166,11 +176,17 @@ acquisition assessment.
 \section{Education}
 {\vspace{-0.3cm}}
 \begin{entrylist}
+<# education_layout: "detailed" (default) shows focus + accomplishments;
+   "compact" emits a tight degree/institution strip (no body) — matches the
+   recruiter-prepared ATS layout. Set per family via education.layout. #>
 <% for edu in education %>
 \entry
   {<< edu.start >>--<< edu.end >>}
-  {<< edu.degree | latex_escape >><% if edu.minor is defined and edu.minor %>,{\normalfont Minor in << edu.minor | latex_escape >>}<% endif %>}
+  {<< edu.degree | latex_escape >><% if edu.specialization is defined and edu.specialization %> --- {\normalfont << edu.specialization | latex_escape >>}<% endif %><% if edu.minor is defined and edu.minor %>,{\normalfont Minor in << edu.minor | latex_escape >>}<% endif %>}
   {\normalsize \textbf{\textcolor{<< edu.color_key >>}{<< edu.institution | latex_escape >>}} | << edu.location | latex_escape >>}
+<% if education_layout == 'compact' %>
+  {}
+<% else %>
   {<% if edu.focus is defined and edu.focus %><< edu.focus | latex_escape >> <% endif %>
   \begin{itemize}
 <% for acc in edu.accomplishments %>
@@ -182,6 +198,7 @@ acquisition assessment.
     \end{itemize}
 <% endif %>
   \end{itemize}}
+<% endif %>
 <% endfor %>
 \end{entrylist}
 

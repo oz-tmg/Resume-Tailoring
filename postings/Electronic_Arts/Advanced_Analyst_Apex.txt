@@ -1,0 +1,51 @@
+Description & Requirements
+
+Electronic Arts creates next-level entertainment experiences that inspire players and fans around the world. Here, everyone is part of the story. Part of a community that connects across the globe. A place where creativity thrives, new perspectives are invited, and ideas matter. A team where everyone makes play happen.
+
+The Data & Insights (D&I) team transforms data into actionable insights that power EA. We guide strategy and governance, build data and AI solutions, and ensure personalization experimentation and analytics; partnering across teams to improve decisions and create more meaningful player experiences.
+
+Reporting to the Senior Manager of Analytics, you will have an impact on all game systems in Apex Legends, one of the world's biggest shooter franchises.
+
+This is a hybrid remote/in-office role.
+
+Responsibilities
+
+    Conduct A/B tests and causal inference to evaluate the impact of game content and feature changes.
+    Analyze behavioral data to provide insights into game features.
+    Collaborate with team members to improve the game optimization strategies in Apex Legends.
+    Model and simulate complex gameplay systems throughout the development lifecycle.
+    Design dashboards and presentations that communicate insights to team members.
+    Partner with Data Engineers and Architects to promote scalable analysis.
+
+Qualifications
+
+    5+ years of professional experience informing product strategy with data analysis in gaming or adjacent digital products with high independence.
+    Degree in a quantitative field (e.g., Computer Science, Statistics, Economics, or related discipline).
+    Expert–level SQL proficiency with experience extracting insights from complex datasets.
+    Experience applying hypothesis testing, modeling, and experiment evaluation using Python, familiarity with advanced experiment design and analysis approaches.
+    Experience designing self-service dashboards using Looker, Tableau, or other similar tools.
+    Familiarity with game design principles, player retention, and monetization models.
+
+We want to connect you with job opportunities that align with your interests, skills, and expertise. When you create an EA Careers Account and are logged into the portal, you can click “Get Recommendations” to view a curated list of job openings. These recommendations are enhanced by automated processing, including artificial intelligence, and take into account your skills and experience. However, all employment decisions are made by our hiring teams, not by automated systems.
+
+Pay Transparency - North America
+
+Compensation And Benefits
+
+The ranges listed below are what EA in good faith expects to pay applicants for this role in these locations at the time of this posting. If you reside in a different location, a recruiter will advise on the applicable range and benefits. Pay offered will be determined based on a number of relevant business and candidate factors (e.g. education, qualifications, certifications, experience, skills, geographic location, or business needs).
+
+PAY RANGES
+
+     British Columbia (depending on location e.g. Vancouver vs. Victoria) *$114,300 - $156,200 CAD
+
+Pay is just one part of the overall compensation at EA.
+
+For Canada, we offer a package of benefits including vacation (3 weeks per year to start), 10 days per year of sick time, paid top-up to EI/QPIP benefits up to 100% of base salary when you welcome a new child (12 weeks for maternity, and 4 weeks for parental/adoption leave), extended health/dental/vision coverage, life insurance, disability insurance, retirement plan to regular full-time employees. Certain roles may also be eligible for bonus and equity.
+
+About Electronic Arts
+
+We’re proud to have an extensive portfolio of games and experiences, locations around the world, and opportunities across EA. We value adaptability, resilience, creativity, and curiosity. From leadership that brings out your potential, to creating space for learning and experimenting, we empower you to do great work and pursue opportunities for growth.
+
+We adopt a holistic approach to our benefits programs, emphasizing physical, emotional, financial, career, and community wellness to support a balanced life. Our packages are tailored to meet local needs and may include healthcare coverage, mental well-being support, retirement savings, paid time off, family leaves, complimentary games, and more. We nurture environments where our teams can always bring their best to what they do.
+
+Electronic Arts is an equal opportunity employer. All employment decisions are made without regard to race, color, national origin, ancestry, sex, gender, gender identity or expression, sexual orientation, age, genetic information, religion, disability, medical condition, pregnancy, marital status, family status, veteran status, or any other characteristic protected by law. We will also consider employment qualified applicants with criminal records in accordance with applicable law. EA also makes workplace accommodations for qualified individuals with disabilities as required by applicable law.

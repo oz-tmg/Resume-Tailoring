@@ -128,8 +128,17 @@ Key things to know:
 - **Bullet `variants`**: Pre-written rewrites for specific families. Write these for
   any bullet where the framing concept changes (not just the tone) across families.
   Most important for ECON variants, which require specific economic vocabulary.
+  A family's variant can be a **single string** or a **list of named alternates**
+  (one flagged `default`); posting builds auto-pick the best-fitting alternate.
+  See SCHEMA.md → "Multiple Alternates Per Family".
 - **Family `exclude_bullets`**: Explicitly suppresses bullets that would signal the
   wrong identity for that family, regardless of the `families` tag on the bullet.
+- **Gaming domain knowledge**: `--gaming` (or `make <fam> GAMING=1`) surfaces the
+  gaming-specific skill blocks (Game Systems Analytics, Product & Monetization
+  Analytics, ML Modeling & Personalization, detailed A/B testing) for DA/DS/AE
+  builds — intended for video-games postings only.
+- **Education layout**: set `education.layout: compact` in a family file for a tight
+  one-line-per-degree strip, or `detailed` (default) for focus + accomplishments.
 
 ## Environment Variables
 

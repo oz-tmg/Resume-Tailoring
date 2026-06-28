@@ -22,13 +22,74 @@ roles:
         keywords: [dbt, data modelling, transformations, analytics engineering]
         tier: 2
 
+      - id: kano_llm_translation
+        text: >
+          Selectively applied LLM-assisted code translation (Gemini and
+          ChatGPT Codex) to accelerate migration of the studio's legacy
+          monolithic R analytics platform onto a Python- and SQL-based stack.
+        families: [AE, DE]
+        keywords: [LLM, code translation, Gemini, Codex, R, Python, SQL,
+                   migration, analytics engineering]
+        tier: 2
+
+      - id: kano_manual_refactor
+        text: >
+          Manually refactored the components LLMs could not handle — fully
+          reworking them with deep bilingual R and Python expertise while
+          preserving full analytical parity.
+        families: [AE, DE]
+        keywords: [refactoring, R, Python, code migration, data quality,
+                   analytical parity, analytics engineering]
+        tier: 2
+
+      - id: kano_anomaly_detection
+        text: >
+          Migrated anomaly detection and extended its coverage to
+          irregular-cadence live-ops events, improving the reliability of
+          live-ops data.
+        families: [AE, DE, DS]
+        keywords: [anomaly detection, live-ops, data quality, monitoring,
+                   data reliability, game analytics]
+        tier: 2
+
       - id: kano_rshiny_migration
         text: >
           Reworked, enhanced, and migrated numerous RShiny reports to AWS
-          Quicksight, improving reliability, accessibility, and maintainability.
+          QuickSight, improving reliability, accessibility, and maintainability.
         families: [DE, AE, DA]
-        keywords: [RShiny, Quicksight, AWS, migration, dashboards, BI]
+        keywords: [RShiny, QuickSight, AWS, migration, dashboards, BI, Prefect,
+                   orchestration]
         tier: 2
+        # Multi-variant demo: concise default + an orchestration-detailed
+        # alternate (mentions the cron-to-Prefect rework). The posting ranker
+        # picks the detailed one for orchestration-heavy AE/DE postings.
+        variants:
+          AE:
+            - id: concise
+              default: true
+              text: >
+                Reworked, enhanced, and migrated numerous RShiny reports to AWS
+                QuickSight, improving reliability, accessibility, and
+                maintainability.
+            - id: orchestration_detailed
+              text: >
+                Reworked and migrated RShiny reports to AWS QuickSight and
+                replaced their fragile cron-scheduled shell-script updates with
+                Prefect workflows — improving reliability, accessibility,
+                orchestration, and maintainability.
+          DE:
+            - id: concise
+              default: true
+              text: >
+                Reworked, enhanced, and migrated numerous RShiny reports to AWS
+                QuickSight, improving reliability, accessibility, and
+                maintainability.
+            - id: orchestration_detailed
+              text: >
+                Reworked and migrated RShiny reports to AWS QuickSight and
+                replaced their fragile cron-scheduled shell-script updates with
+                Prefect workflows — improving reliability, accessibility,
+                orchestration, and maintainability.
 
       - id: kano_etl_performance
         text: >
