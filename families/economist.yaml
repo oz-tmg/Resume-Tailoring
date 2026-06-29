@@ -59,6 +59,7 @@ bullet_selection:
     - ea_ab_automation            # Pipeline automation, not economics
     - ea_exec_reporting           # Reporting, not economics
     - ea_licensing_automation     # Automation, not economic analysis
+    - ea_companion_app_analyticon               # Presentation, not economics
     - tinymob_kpi_monitoring      # Monitoring, not economic analysis
     - tinymob_aso                 # Marketing, not economics
     - tinymob_database_investment # Infrastructure decision, not economics
@@ -187,3 +188,61 @@ revoicing_persona: >
   mechanism. Churn is demand attrition. Revenue impact is welfare or
   surplus estimation. Lead with the research question, follow with method,
   close with the economic interpretation of the finding.
+
+# ---------------------------------------------------------------------------
+# GAMES-INDUSTRY REVOICING PERSONA
+# ---------------------------------------------------------------------------
+games_revoicing_persona: >
+  Frame bullets in the context of games and interactive digital markets. Use
+  economic framing — incentive design, mechanism design, market structure,
+  player welfare — connected to live-games realities: F2P economy design,
+  in-game market mechanisms, engagement incentives, LTV valuation, and
+  experimental design in live services. Academic framing is appropriate;
+  game-industry vernacular signals domain depth.
+
+# ---------------------------------------------------------------------------
+# ASIDE SKILLS — PAGE 2 SIDEBAR
+# ---------------------------------------------------------------------------
+aside_skills:
+  page2:
+    title: "Applied Methods"
+    sections:
+      - id: causal_identification
+        label: "Causal Identification"
+        keywords: [causal inference, propensity score, DiD, regression discontinuity,
+                   quasi-experimental, observational, RCT, identification, treatment]
+        text: >
+          Propensity score matching to estimate incremental product value;
+          DiD, regression discontinuity, and quasi-experimental design for
+          settings where RCTs are infeasible.
+      - id: experiment_design
+        label: "Experiment Design"
+        keywords: [A/B testing, experiment design, holdout, network spillover,
+                   power analysis, multi-armed bandit, MAB, ramp-up, dependency]
+        text: >
+          A/B and multi-armed bandit design; holdout construction; network
+          spillover handling; power analysis under complex dependencies.
+      - id: behavioural_structural
+        label: "Behavioural & Structural"
+        keywords: [auction theory, game theory, experimental economics, mechanism design,
+                   behavioural, marketplace, engagement, incentive design]
+        text: >
+          Auction theory, game theory, and experimental economics applied to
+          digital marketplace and engagement problems.
+      - id: forecasting
+        label: "Forecasting"
+        keywords: [forecasting, survival analysis, time series, LTV, investment,
+                   acquisition, valuation, revenue, financial modelling]
+        text: >
+          Survival analysis, time-series modelling, and LTV forecasting —
+          built to inform investment and acquisition decisions, not just
+          product reporting.
+      - id: presentation
+        label: "Presentation & Influence"
+        keywords: [presentation, Analyticon, propensity, leadership, analytical,
+                   policy, influence, franchise, product investment]
+        text: >
+          Analyticon 2018: presented propensity matching findings to EA's
+          analytical leadership; outcomes shaped a separate franchise's
+          product investment.
+    programming_latex: '{\color{red} $\varheartsuit$} R, Python, SQL'

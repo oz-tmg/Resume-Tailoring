@@ -19,6 +19,7 @@ bullet_selection:
   min_tier: 1                     # DS roles are competitive — lean tier 1 first
 
   priority_bullets:
+    - kano_anomaly_detection      # Production statistical-monitoring framework
     - kix_forecasting_model   # $14M valuation finding — headline DS win
     - kix_matchmaking_churn   # Diagnosis + RecSys redesign (gaming-detailed alt for postings)
     - kix_churn_model         # AUC improvement — concrete model win
@@ -44,11 +45,19 @@ bullet_selection:
     - pretio_conversion_model     # Probability model
     - tinymob_churn_gameplay      # Churn diagnosis + retention improvement
 
+  # Cross-family promotion: include these bullets for DS even though they
+  # are not tagged DS. DS work overlaps with DE/AE on data modelling and
+  # ETL/warehouse fluency — surfacing this signal keeps the recent role
+  # honest about the platform context our DS work runs on.
+  promote_bullets:
+    - kano_etl_performance        # ETL refresh 14h → 1h on partitioned Parquet/Iceberg
+
   exclude_bullets:
     - kano_rshiny_migration       # Too BI/reporting
     - kano_analyst_adoption       # Team enablement, not DS
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Automation, not modelling
+    - ea_companion_app_analyticon               # Presentation, not DS work
     - tinymob_aso                 # Marketing, not DS
     - tinymob_kpi_monitoring      # Reporting, not DS
     - tinymob_database_investment # Stakeholder influence, not DS
@@ -196,3 +205,68 @@ revoicing_persona: >
   measurable outcome. Causal inference and experimental design are core
   differentiators — highlight these explicitly. Where a bullet involves
   a model, include the technique and the performance metric.
+
+# ---------------------------------------------------------------------------
+# GAMES-INDUSTRY REVOICING PERSONA
+# Used when --industry games is passed to the build.
+# ---------------------------------------------------------------------------
+games_revoicing_persona: >
+  Frame bullets in live-games and F2P context. Use game-industry vernacular
+  where it fits naturally: DAU/WAU, live ops, LTO systems, engagement loops,
+  churn win-back, meta progression, matchmaking, player segmentation, F2P
+  monetization funnels. Emphasize that experimentation and modelling happened
+  in live-service environments with network effects, player lifecycle complexity,
+  and real-time feedback loops. Use verbs like: developed, modelled, designed,
+  deployed, diagnosed. Lead with the game-systems problem, follow with the
+  method, close with the measurable player or revenue outcome.
+
+# ---------------------------------------------------------------------------
+# ASIDE SKILLS — PAGE 2 SIDEBAR
+# Defines the skillset sections for the pg2 sidebar. When a job posting is
+# provided, these sections are reordered by posting keyword relevance.
+# programming_latex is passed directly to LaTeX (not escaped).
+# ---------------------------------------------------------------------------
+aside_skills:
+  page2:
+    title: "Data Science Skillset"
+    sections:
+      - id: experimentation
+        label: "Experimentation & Measurement"
+        keywords: [experimentation, A/B testing, experiment, uplift, holdout,
+                   hypothesis, measurement, statistical testing, CUPED, power analysis]
+        text: >
+          Designed and evaluated experiments in live digital ecosystems where
+          network effects, feature overlap, and behavioral spillovers
+          complicated clean inference.
+      - id: personalization
+        label: "Personalization & Recommendation"
+        keywords: [recommendation, personalization, ranking, RecSys, targeting,
+                   collaborative filtering, content, offers, engagement, retention]
+        text: >
+          Built ranking, targeting, and RecSys approaches for content, offers,
+          and social experiences to improve engagement, conversion, and retention.
+      - id: predictive_modeling
+        label: "Predictive Modeling"
+        keywords: [predictive modelling, churn, LTV, forecasting, reacquisition,
+                   spend conversion, survival analysis, classification, regression]
+        text: >
+          Developed churn, spend conversion, reacquisition, and long-term
+          revenue forecasting models used to guide product, portfolio, and
+          acquisition decisions.
+      - id: causal_inference
+        label: "Causal Inference"
+        keywords: [causal inference, propensity score, DiD, difference-in-differences,
+                   quasi-experimental, regression discontinuity, interaction effects,
+                   observational studies, CEM]
+        text: >
+          Applied propensity score methods, regression modelling, interaction
+          effects, and quasi-experimental reasoning to estimate incremental
+          product impact.
+      - id: model_governance
+        label: "Model Evaluation & Governance"
+        keywords: [model evaluation, governance, cannibalization, LTO, holdout,
+                   diagnosis, model retirement, model monitoring, model audit]
+        text: >
+          Diagnosed when a Limited Time Offer rec engine's short-term lift
+          masked longer-term cannibalization, leading to its retirement.
+    programming_latex: 'R, {\color{red} $\varheartsuit$} Python, SQL, Bash, Ruby'

@@ -9,6 +9,8 @@ content/personal.yaml
 # =============================================================================
 output/
 postings/*/output/
+postings/*/*.tex
+postings/*/*.txt
 postings/*/resume_*.tex
 postings/*/resume_*.pdf
 
@@ -35,6 +37,7 @@ venv/
 # OS / EDITOR
 # =============================================================================
 .DS_Store
+output/.DS_Store
 Thumbs.db
 .idea/
 .vscode/

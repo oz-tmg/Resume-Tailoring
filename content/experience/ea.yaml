@@ -12,6 +12,33 @@ roles:
       Helped establish a Data Science team embedded within EA Sports live
       teams to prototype and support machine learning systems that delivered
       more personalized player experiences.
+    summary_variants:
+      DS: >
+        Helped establish EA Sports' embedded Data Science function, building
+        A/B experimentation systems, MAB recommendation engines, and predictive
+        models that delivered personalized player experiences in live games.
+      DA: >
+        Embedded data scientist on EA Sports' Dynamic Experiences team —
+        designing and evaluating in-game messaging experiments, building
+        player segmentation models, and delivering analysis that improved
+        monetization for FIFA 19 and 20.
+      AE: >
+        Embedded on EA Sports' Dynamic Experiences team, building and automating
+        A/B test analysis pipelines (Hive, Jenkins, R, Redshift) and supporting
+        the data infrastructure behind personalized live game experiences.
+      DE: >
+        Embedded on EA Sports' Dynamic Experiences team, owning automation of
+        A/B test workflows (Hive, Jenkins, Redshift) and supporting the data
+        pipeline infrastructure behind in-game personalization systems.
+      MLE: >
+        Helped establish EA Sports' embedded DS function — building MAB
+        recommendation engines, churn and reacquisition models, and A/B
+        pipeline automation for live personalization experiences in FIFA.
+      ECON: >
+        Embedded data scientist on EA Sports' Dynamic Experiences team,
+        designing and evaluating in-game A/B experiments that generated $2M
+        in incremental FIFA 19 revenue and building predictive models to
+        support player reactivation and spend conversion.
 
     bullets:
       - id: ea_ab_test_design
@@ -19,10 +46,19 @@ roles:
           Proposed, designed, and evaluated A/B test messaging campaigns aimed
           at delivering more personalized in-game experiences using R, SQL,
           and HiveQL.
-        families: [DS, DA, ECON]
+        families: [DS, DA, ECON, AE]
         keywords: [A/B testing, experimentation, R, SQL, HiveQL, personalization,
                    messaging, campaign design]
         tier: 1
+        variants:
+          AE: >
+            Built HiveQL and SQL analysis pipelines that powered A/B test
+            evaluation for FIFA in-game messaging — providing repeatable,
+            analyst-ready experiment readouts across campaigns.
+          GAMES: >
+            Proposed, designed, and evaluated A/B test live-ops messaging
+            campaigns for FIFA — using R, SQL, and HiveQL to measure
+            personalization lift across in-game player touchpoints.
 
       - id: ea_upsell_segmentation
         text: >
@@ -32,15 +68,29 @@ roles:
         keywords: [segmentation, targeting, upsell, spend, cohort analysis,
                    personalization]
         tier: 1
+        variants:
+          GAMES: >
+            Identified FIFA player segments with the highest upsell
+            responsiveness, targeting live-ops messaging to those cohorts
+            and contributing to a 3% spend increase across targeted players.
 
       - id: ea_fifa19_revenue
         text: >
           Analysis and recommendations from in-game messaging experiments
           generated an additional $2M in revenue for FIFA 19.
-        families: [DS, DA, ECON]
+        families: [DS, DA, ECON, AE]
         keywords: [experimentation, revenue impact, A/B testing, messaging,
                    monetization, product analytics]
         tier: 1
+        variants:
+          AE: >
+            Experimentation pipeline work and analysis contributed to $2M in
+            incremental FIFA 19 revenue — connecting automated reporting
+            infrastructure to measurable product outcomes.
+          GAMES: >
+            A/B experimentation on FIFA 19 live-ops messaging generated an
+            additional $2M in revenue — a direct outcome of personalized
+            in-game communication design and rigorous experiment evaluation.
 
       - id: ea_ab_automation
         text: >
@@ -50,6 +100,11 @@ roles:
         keywords: [A/B testing, automation, Hive, Jenkins, R, Redshift,
                    experimentation, workflow]
         tier: 1
+        variants:
+          GAMES: >
+            Automated live-ops A/B test analysis workflows for FIFA using
+            Hive, Jenkins, R, and Redshift — accelerating experiment readouts
+            and making results reproducible for game and product teams.
 
       - id: ea_mab_recsys
         text: >
@@ -59,6 +114,11 @@ roles:
         keywords: [multi-armed bandit, recommendation engine, Ruby,
                    personalization, MAB, RecSys]
         tier: 1
+        variants:
+          GAMES: >
+            Built multi-armed bandit messaging recommendation engines in Ruby
+            for FIFA 20 live ops — adaptively targeting in-game messages to
+            player segments to maximize personalization and spend conversion.
 
       - id: ea_churn_reacquisition_models
         text: >
@@ -69,6 +129,11 @@ roles:
         keywords: [churn prediction, pack spend conversion, reacquisition, R,
                    predictive modelling, recommendation systems, retention]
         tier: 1
+        variants:
+          GAMES: >
+            Developed new-player churn, pack spend conversion, and reacquisition
+            prediction models in R for FIFA — feeding recommendation systems and
+            guiding targeted live-ops player reactivation campaigns.
 
   - id: ea_business_analyst
     title: Business Analyst, FIFA Player Analytics Team
@@ -78,6 +143,34 @@ roles:
     summary: >
       Supported executive reporting, player engagement and monetization
       analysis, and licensing analytics for one of EA's largest franchises.
+    summary_variants:
+      DS: >
+        Delivered quantitative analysis for FIFA Player Analytics — including
+        propensity score matching for companion app valuation and statistical
+        models for licensing — while managing monthly executive reporting for
+        EA Sports.
+      DA: >
+        Owned executive reporting, player engagement and monetization analysis,
+        and licensing analytics for FIFA — one of EA's highest-revenue
+        franchises — while extending analytical coverage to Motive, BioWare,
+        and DICE studios.
+      AE: >
+        Delivered analytics engineering work for FIFA Player Analytics —
+        automating 550-slide licensing reports from weeks to seconds using
+        R and Talend, and building statistical models for licensing valuation.
+      DE: >
+        Built and owned analytics reporting automation for FIFA's licensing
+        partnerships using R and Talend, managed GDPR compliance for partner
+        analytics services, and delivered executive reporting for EA Sports.
+      MLE: >
+        Delivered propensity score matching analysis and statistical valuation
+        models for FIFA Player Analytics, while managing executive reporting
+        and licensing analytics for one of EA's largest franchises.
+      ECON: >
+        Applied causal inference (propensity score matching) and bilateral
+        economic valuation methods to FIFA's companion app and licensing
+        portfolio — producing evidence that influenced major platform
+        investment and contract pricing decisions at EA Sports.
 
     bullets:
       - id: ea_exec_reporting
@@ -85,7 +178,7 @@ roles:
           Managed game performance and insight delivery for monthly executive
           board meetings for EA Sports titles, and became trusted with
           reporting support for Motive, BioWare, and DICE studios.
-        families: [DA]
+        families: [DA, AM]
         keywords: [executive reporting, stakeholder management, KPI, insights,
                    product analytics]
         tier: 2
@@ -100,16 +193,22 @@ roles:
                    stakeholder, efficiency]
         tier: 1
 
+      - id: ea_licensing_gdpr
+        text: >
+          Managed GDPR compliance of analytics services for EA's licensed partners.
+        families: [DE]
+        keywords: [GDPR, compliance, data governance, privacy, licensing, partners]
+        tier: 1
+
       - id: ea_licensing_models
         text: >
           Built statistical models to assess the value each license created for
           EA and the reciprocal value exposure provided to partners, helping
           improve licensing decisions.
-        families: [DS, DA, ECON]
+        families: [DS, DA, ECON, AM, AE]
         keywords: [statistical modelling, licensing valuation, partner
                    analytics, causal inference, decision support]
         tier: 2
-        # --- VARIANTS ---
         variants:
           DA: >
             Built statistical models measuring the revenue impact each sports
@@ -148,12 +247,11 @@ roles:
             text: >
               Findings and follow-on performance helped influence the Madden
               team to develop a companion app for Madden 19.
-            families: [DA, ECON]
+            families: [DA, ECON, AM]
         families: [DS, DA, ECON]
         keywords: [propensity score matching, causal inference, incremental
                    value, R, companion app, product valuation, Analyticon]
         tier: 1
-        # --- VARIANTS: strongest causal inference story in the portfolio ---
         variants:
           DA: >
             Applied propensity score matching in R to measure the true
@@ -173,10 +271,15 @@ roles:
             spend lift (Web App) and 7.0% (Mobile App), reversing a planned
             discontinuation and reallocating investment toward higher-return
             platform development.
+          GAMES: >
+            Used propensity score matching in R to estimate the true player
+            value of FIFA's Companion App and Web App — producing causal
+            evidence (4.2% and 7.0% incremental spend lift respectively) that
+            saved the Web App from discontinuation, influenced Madden to
+            develop a companion app, and shaped EA's cross-platform live
+            engagement strategy.
 
-      # ea_companion_app_revenue and ea_analyticon are now sub_bullets above.
-      # Kept as standalone fallbacks below (tier 3) for families or postings
-      # where sub_bullets are suppressed and the detail still needs to surface.
+      # Standalone fallback (tier 3) when sub_bullets are suppressed
       - id: ea_companion_app_revenue
         text: >
           Incremental spending gains of 4.2% for Web App users and 7.0% for

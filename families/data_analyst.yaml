@@ -47,6 +47,7 @@ bullet_selection:
     - ea_exec_reporting
     - ea_licensing_automation
     - ea_companion_app
+    - ea_companion_app_analyticon
     - tinymob_churn_gameplay
     - tinymob_paywall_cannibalisation
     - tinymob_free_rider
@@ -206,3 +207,61 @@ revoicing_persona: >
   Avoid heavy ML or infrastructure jargon — frame technical work in terms of
   what it enabled for the team or product. If a bullet is about a model, lead
   with what the model told you, not how it was built.
+
+# ---------------------------------------------------------------------------
+# GAMES-INDUSTRY REVOICING PERSONA
+# ---------------------------------------------------------------------------
+games_revoicing_persona: >
+  Frame bullets in live-games and F2P context. Use game-industry vocabulary
+  where it fits: DAU/WAU, live ops, player engagement, monetization funnels,
+  LTV, retention cohorts, feature adoption, UA reporting. Emphasize that
+  insight delivery happened in a live-service environment where speed and
+  stakeholder trust directly affected product decisions. Use verbs like:
+  identified, built, delivered, automated, presented. Lead with the player or
+  studio outcome; follow with the method.
+
+# ---------------------------------------------------------------------------
+# ASIDE SKILLS — PAGE 2 SIDEBAR
+# ---------------------------------------------------------------------------
+aside_skills:
+  page2:
+    title: "IC Scope & Judgment"
+    sections:
+      - id: self_directed
+        label: "Self-Directed Analysis"
+        keywords: [self-directed, independent, initiative, autonomous, scoped,
+                   proposed, owned, end-to-end, identification strategy]
+        text: >
+          Companion app propensity study was self-proposed — identified the
+          business question, chose the identification strategy, and owned
+          delivery end-to-end without being assigned the work.
+      - id: decisions_changed
+        label: "Decisions Changed"
+        keywords: [decisions, impact, revenue, outcome, product roadmap,
+                   business decision, influence, changed, saved, generated]
+        text: >
+          Analysis saved the Web App, drove millions in incremental revenue,
+          and influenced a separate franchise's product roadmap — outcomes,
+          not deliverables.
+      - id: scope_beyond_title
+        label: "Scope Beyond Title"
+        keywords: [executive reporting, stakeholder, cross-functional, scope,
+                   board, leadership, trust, reporting, delivery, KPI]
+        text: >
+          Trusted with executive board reporting for EA Sports and insight
+          delivery for Motive, BioWare, and DICE studios while a Business Analyst.
+      - id: automation_at_scale
+        label: "Automation at Scale"
+        keywords: [automation, automated, pipeline, reporting, efficiency,
+                   manual, workflow, scale, repeatability, reduce]
+        text: >
+          Reduced weeks of manual reporting work to seconds; owned the full
+          pipeline from data to executive consumption.
+      - id: methods
+        label: "Methods"
+        keywords: [propensity score, MAB, churn, spend, A/B, LTV, survival,
+                   segmentation, recommendation, forecasting, causal]
+        text: >
+          Propensity score matching, MAB recommendation, churn and spend
+          modelling, A/B test design and readout, LTV forecasting, survival analysis.
+    programming_latex: '{\color{red} $\varheartsuit$} R, Python, SQL, Bash'

@@ -6,7 +6,6 @@ roles:
 
   # ---------------------------------------------------------------------------
   # Lead Data Analyst, Core Analytics Team Lead  (Feb 2022 – Jan 2025)
-  # Formerly in kixeye_sfg.yaml as role id: kix_sfg_lead
   # ---------------------------------------------------------------------------
   - id: kix_lead
     title: Lead Data Analyst, Core Analytics Team Lead
@@ -17,6 +16,31 @@ roles:
       Led analytics roadmap and delivery for junior and senior analysts on
       Kixeye's Core Analytics Team. Later transitioned into more ML pipeline
       and analytical engineering work within Stillfront Group.
+    summary_variants:
+      DS: >
+        Led DS and analytics delivery for Kixeye's Core Analytics Team,
+        owning forecasting models, churn diagnosis, and recommendation system
+        improvements across the live mobile games portfolio.
+      DA: >
+        Led Kixeye's Core Analytics Team — setting the analytics roadmap,
+        managing analysts, and owning KPI reporting and insight delivery for
+        live game product and leadership teams.
+      AE: >
+        Led analytics engineering improvements for Kixeye's Core Analytics
+        Team while managing analysts — consolidating BI tooling, cutting
+        Snowflake costs, and standardizing data delivery pipelines.
+      DE: >
+        Managed Kixeye's Core Analytics Team while owning data infrastructure
+        improvements — reducing Snowflake costs by 45%, consolidating Looker
+        across studios, and migrating ML pipelines off Domino.
+      ECON: >
+        Led Kixeye's Core Analytics Team, combining team management with
+        hands-on valuation modelling used in acquisition due diligence —
+        identifying a $14M overestimation in a game acquisition deal.
+      MLE: >
+        Led analytics and ML delivery for Kixeye's Core Analytics Team,
+        managing analysts while owning ML pipeline migrations, recommendation
+        system improvements, and churn modelling work.
 
     bullets:
       - id: kix_two_games_delivery
@@ -36,6 +60,11 @@ roles:
         keywords: [Snowflake, ETL, orchestration, cost reduction, warehousing,
                    optimization]
         tier: 1
+        variants:
+          GAMES: >
+            Cut Kixeye's monthly Snowflake costs by 45% (~$130K/year) through
+            ETL and orchestration optimization — freeing budget for live ops
+            infrastructure without reducing data availability to game teams.
 
       - id: kix_looker_migration
         text: >
@@ -45,6 +74,12 @@ roles:
         families: [DA, AE, DE]
         keywords: [Looker, migration, dashboards, BI, cost reduction, reporting]
         tier: 1
+        variants:
+          GAMES: >
+            Independently migrated game analytics dashboards for Kixeye and
+            Babil Games onto Stillfront's shared Looker instance, saving $90K
+            annually and ensuring game teams had uninterrupted access to
+            player and monetization reporting.
 
       - id: kix_forecasting_model
         text: >
@@ -66,6 +101,10 @@ roles:
             for game acquisition assessment; identified and corrected a $14M
             overestimation, demonstrating the value of rigorous model
             evaluation in strategic contexts.
+          GAMES: >
+            Built a long-term game revenue forecasting model in R and Python
+            for an M&A acquisition assessment — identifying and correcting a
+            $14M overestimation before deal close.
 
       - id: kix_matchmaking_churn
         text: >
@@ -161,6 +200,12 @@ roles:
             spillovers on retention; used behavioral segmentation to quantify
             the welfare loss and informed a market design intervention that
             improved platform efficiency and participant retention.
+          GAMES: >
+            Diagnosed a hidden matchmaking failure in a live mobile game where
+            competing player pathways undermined alliance-matching logic and
+            elevated churn; used behavioral clustering and churn modelling to
+            quantify the problem, then guided a recommendation redesign that
+            improved DAU retention in affected player cohorts.
 
       - id: kix_cohort_ltv_stillfront
         text: >
@@ -176,14 +221,46 @@ roles:
           Partnered with other Stillfront studios to define KPI frameworks,
           build reporting, and deliver deeper analysis for game cross-promotion
           initiatives.
-        families: [DA, DS]
+        families: [DA, DS, AE]
         keywords: [KPI, frameworks, cross-promotion, stakeholder, reporting,
-                   product analytics]
+                   product analytics, event design, SDK, analytics schema]
+        tier: 2
+        variants:
+          AE: >
+            Designed and iterated on analytics event schemas within a
+            cross-studio SDK — identifying and correcting structural flaws in
+            initial event definitions to ensure reliable cross-game player
+            behavior tracking for promotion measurement.
+          GAMES: >
+            Partnered with Stillfront sister studios to define shared KPI
+            frameworks, build cross-game reporting, and deliver player behavior
+            analysis that informed multi-title cross-promotion strategies.
+
+      - id: kix_gcp_aws_migration
+        text: >
+          Assisted migrateing game analytics pipelines from Google Cloud Platform 
+          to AWS — rebuilding streaming and batch data flows using Firehose, Lambda, and
+          Kinesis to support the data infrastructure needs of two newly launched titles.
+        families: [AE, DE]
+        keywords: [GCP, Google Cloud Platform, AWS, Firehose, Lambda, Kinesis,
+                   pipeline migration, streaming, cloud infrastructure, data engineering,
+                   event ingestion, real-time, batch]
+        tier: 1
+
+      - id: kix_new_game_launches
+        text: >
+          Led analytics team delivery of reporting and tooling for two new titles
+          on compressed timelines — one re-skinned game and one studio acquisition —
+          building analytics measurement foundations from scratch under fast-turnaround
+          constraints.
+        families: [DA, AE, DE, AM]
+        keywords: [game launch, analytics delivery, reporting tooling, fast turnaround,
+                   new title, studio acquisition, re-skinned game, analytics infrastructure,
+                   team delivery, measurement]
         tier: 2
 
   # ---------------------------------------------------------------------------
   # Senior Product Analyst, Acting Core Analytics Team Lead  (Jan 2021 – Feb 2022)
-  # Formerly in kixeye_sfg.yaml as role id: kix_sfg_senior
   # ---------------------------------------------------------------------------
   - id: kix_senior
     title: Senior Product Analyst, Acting Core Analytics Team Lead
@@ -195,6 +272,31 @@ roles:
       collaboration across product, design, and engineering. Supported
       multiple game teams while building better analytical workflows and
       decision support.
+    summary_variants:
+      DS: >
+        Acting Team Lead while building and deploying DS work — churn models,
+        Alliance RecSys, A/B automation, and content cadence modelling —
+        across Kixeye's live mobile games portfolio.
+      DA: >
+        Acting Core Analytics Team Lead, collaborating with product and design
+        teams across multiple live games on KPI definition, A/B reporting,
+        content strategy analysis, and analytics workflows.
+      AE: >
+        Acting Core Analytics Team Lead, owning experimentation and KPI
+        reporting ETL automation while building analytical infrastructure for
+        product and design teams across multiple live game titles.
+      DE: >
+        Acting Core Analytics Team Lead while owning ETL automation and ML
+        pipeline work that improved experimentation support and freed analyst
+        capacity across Kixeye's mobile games studio.
+      MLE: >
+        Acting Core Analytics Team Lead while building and shipping ML
+        systems — Alliance RecSys, churn models, and A/B pipeline automation
+        — into production across Kixeye's live mobile games portfolio.
+      ECON: >
+        Acting Core Analytics Team Lead while applying quantitative methods —
+        time-series spend analysis, conversion modelling, LTV forecasting —
+        to guide product and content strategy decisions across live games.
 
     bullets:
       - id: kix_content_cadence
@@ -218,6 +320,11 @@ roles:
             conversion modelling to identify suboptimal content release
             timing; evidence-based recommendations shifted cadence strategy
             and reduced monetization volatility across releases.
+          GAMES: >
+            Used multi-stage monetization funnel analysis and time-series spend
+            dynamics to diagnose content cadence problems in a live mobile
+            game; recommendations shifted the Design team's release strategy
+            and reduced F2P revenue volatility across content drops.
 
       - id: kix_ab_automation
         text: >
@@ -228,6 +335,11 @@ roles:
         keywords: [A/B testing, KPI, forecasting, automation, ETL,
                    experimentation, reporting]
         tier: 1
+        variants:
+          GAMES: >
+            Automated A/B test reporting and KPI forecasting ETLs for Kixeye's
+            game product and design teams, accelerating live ops experiment
+            readouts and freeing analyst capacity for higher-value work.
 
       - id: kix_churn_model
         text: >
@@ -239,13 +351,17 @@ roles:
                    learning, model improvement, retention, Bayesian,
                    gameplay balance, economy]
         tier: 1
-        # DA telling of the same work: leads with the design outcome and the
-        # Bayesian-when-A/B-infeasible method rather than the AUC metric.
         variants:
+          # DA telling of the same work: leads with the design outcome and the
+          # Bayesian-when-A/B-infeasible method rather than the AUC metric.
           DA: >
             Helped the Design team discover and remediate multiple churn
             triggers tied to progression, gameplay balance, and economy shocks,
             using Bayesian logistic regression when A/B tests were infeasible.
+          GAMES: >
+            Improved War Commander's player churn prediction model from AUC
+            0.71 to 0.86 in Python — surfacing multiple gameplay-design churn
+            drivers that informed targeted live ops retention interventions.
 
       - id: kix_alliance_recsys
         text: >
@@ -253,10 +369,22 @@ roles:
           groups by predicted uplift in engagement and spend conversion,
           materially improving retention and increasing yearly revenue by 7%
           in concert with other improvements.
-        families: [DS, MLE]
+        families: [DS, MLE, DA, AE]
         keywords: [recommendation engine, Python, uplift modelling, retention,
-                   revenue, engagement, RecSys, spend conversion]
+                   revenue, engagement, RecSys, spend conversion, analytics event design,
+                   data modelling, machine learning]
         tier: 1
+        variants:
+          AE: >
+            Designed the analytics event schema and data models powering the
+            Alliance Recommendation Engine — translating raw player behavior
+            events into engagement and spend features, contributing to a 7%
+            annual revenue improvement.
+          GAMES: >
+            Built a live-game Alliance Recommendation Engine in Python that
+            matched players to alliances by predicted engagement and spend
+            conversion uplift — improving player retention and contributing
+            to a 7% annual revenue increase alongside other live ops improvements.
 
       - id: kix_alliance_network_analysis
         text: >
@@ -281,7 +409,6 @@ roles:
 
   # ---------------------------------------------------------------------------
   # Product Analyst, War Commander: Rogue Assault Team  (Aug 2019 – Jan 2021)
-  # Formerly in kixeye.yaml as role id: kixeye_product_analyst
   # ---------------------------------------------------------------------------
   - id: kix_product_analyst
     title: "Product Analyst, War Commander: Rogue Assault Team"
@@ -292,6 +419,31 @@ roles:
       Originally hired to support BI and ML engineering needs by maintaining
       dashboards, ETLs, segmentation tools, recommendation systems, and user
       acquisition analytics for a live mobile game.
+    summary_variants:
+      DS: >
+        Embedded data scientist on the War Commander live ops team — owning
+        LTV forecasting, spend conversion experimentation, and churn modelling
+        while migrating ML infrastructure off Domino onto Jenkins.
+      DA: >
+        Product analyst embedded on the War Commander live game team,
+        responsible for player reporting, UA analytics, LTV forecasting,
+        and decision support for product and live ops stakeholders.
+      AE: >
+        Embedded analyst on War Commander — repairing legacy ETLs, migrating
+        ML pipelines off Domino, and building reliable data infrastructure
+        for the live game's product and UA teams.
+      DE: >
+        Embedded on War Commander responsible for data infrastructure:
+        repairing legacy ETL pipelines, migrating ML workloads from Domino
+        to Jenkins (~$27K/mo savings), and maintaining warehousing.
+      MLE: >
+        Embedded ML practitioner on War Commander — migrating ML pipelines
+        from Domino to Jenkins, building spend conversion experimentation
+        tooling, and owning LTV and churn modelling for the live mobile game.
+      ECON: >
+        Embedded analyst on War Commander, owning LTV forecasting, UA
+        strategy analysis, and spend conversion experimentation that improved
+        campaign profitability and player valuation accuracy.
 
     bullets:
       - id: kix_etl_repair
@@ -303,15 +455,29 @@ roles:
         keywords: [ETL, pipelines, dashboards, optimization, data quality,
                    warehousing]
         tier: 2
+        variants:
+          GAMES: >
+            Repaired and optimized legacy ETL pipelines and game analytics
+            dashboards within the first 90 days, restoring data trust for the
+            live ops and product teams and improving warehousing efficiency.
 
       - id: kix_ltv_forecast
         text: >
           Significantly improved revenue and LTV forecast accuracy used by
           stakeholders to plan and evaluate product performance.
-        families: [DS, DA, ECON]
+        families: [DS, DA, ECON, AE]
         keywords: [LTV, forecasting, revenue, stakeholder, product analytics,
-                   accuracy]
+                   accuracy, data modelling]
         tier: 2
+        variants:
+          AE: >
+            Built and maintained LTV and revenue forecast models as
+            stakeholder-facing data products — improving forecast accuracy
+            and providing product and UA teams with reliable planning inputs.
+          GAMES: >
+            Significantly improved player LTV and revenue forecast accuracy for
+            War Commander, giving the live ops team more reliable models for
+            UA spend planning and content investment decisions.
 
       - id: kix_domino_jenkins
         text: >
@@ -322,6 +488,11 @@ roles:
         keywords: [Jenkins, Domino, migration, ML pipelines, cost reduction,
                    MLOps, orchestration]
         tier: 1
+        variants:
+          GAMES: >
+            Migrated the live game's ML pipelines and analytics ETLs off Domino
+            onto Jenkins, cutting monthly platform costs by ~$27K and improving
+            reliability of batch scoring and reporting for the live ops team.
 
       - id: kix_revenue_attribution
         text: >
@@ -343,12 +514,37 @@ roles:
         keywords: [experimentation, A/B testing, Python, spend conversion,
                    ML tooling, monetization]
         tier: 1
+        variants:
+          GAMES: >
+            Built and managed Python experimentation and ML tooling that
+            improved War Commander's F2P spend conversion by 0.6 percentage
+            points while lowering operating cost — a meaningful monetization
+            lift in a mature live-service game.
 
       - id: kix_ua_strategy
         text: >
           Proposed a revised user acquisition strategy that helped Facebook
           campaigns become profitable in 90 days instead of 200.
-        families: [DA, DS, ECON]
+        families: [DA, DS, ECON, AE]
         keywords: [user acquisition, Facebook, UA strategy, campaign
-                   optimization, ROI, profitability]
+                   optimization, ROI, profitability, AppsFlyer, LTV forecasting,
+                   data modelling, UA reporting]
         tier: 2
+        variants:
+          AE: >
+            Built UA campaign reporting infrastructure and LTV forecasting
+            models by integrating AppsFlyer data into the analytics stack —
+            the data foundation behind a revised acquisition strategy that
+            cut time-to-campaign-profitability from 200 to 90 days.
+          GAMES: >
+            Redesigned Kixeye's Facebook UA strategy, cutting the time to
+            campaign profitability from 200 to 90 days — significantly
+            accelerating return on paid acquisition spend for the live game.
+      
+      - id: kix_network_effects
+        text: >
+          Discovered that potentially high value players were churning early
+          due to weeker network effects within alliances joined.
+        families: [DA, AE]
+        keywords: [exploratory analysis, BI]
+        tier: 3

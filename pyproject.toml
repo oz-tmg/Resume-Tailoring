@@ -1,0 +1,15 @@
+[project]
+name = "resume-tailoring"
+version = "0.1.0"
+description = "Resume builder pipeline — produces tailored LaTeX resumes across multiple job families"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.25.0",
+    "jinja2>=3.1.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+]
+
+[tool.uv]
+# Keep the venv inside the project so direnv can activate it automatically
+managed = true

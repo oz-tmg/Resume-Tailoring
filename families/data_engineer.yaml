@@ -18,15 +18,24 @@ bullet_selection:
 
   min_tier: 2
 
+  # Roles listed here render with a two-section layout: "Responsibilities"
+  # (category: work bullets) followed by "Outcomes" (category: outcome bullets).
+  # Falls back to the standard flat list if only one category is present.
+  split_sections:
+    - kano_senior_de_bi
+
   priority_bullets:
     - kano_dbt
-    - kano_etl_performance         # Lead DE achievement — latency + cost
+    - kano_etl_performance         # Headline outcome — 14h → 1h, cost reduction
+    - kano_iceberg_migration       # Technical depth — Parquet→Iceberg + DBT-Athena
     - kano_rshiny_migration
-    - kix_snowflake_cost       # 45% Snowflake cost reduction — strong signal
-    - kix_looker_migration     # Infrastructure migration ownership
+    - kix_gcp_aws_migration        # GCP → AWS Firehose/Lambda/Kinesis — strong DE signal
+    - kix_snowflake_cost           # 45% Snowflake cost reduction — strong signal
+    - kix_looker_migration         # Infrastructure migration ownership
+    - kix_new_game_launches        # Analytics infra delivery for two new titles
     - kix_domino_jenkins           # ML + analytics pipeline migration — $27K/mo
     - kix_etl_repair
-    - kix_ab_automation        # Automation pipeline
+    - kix_ab_automation            # Automation pipeline
     - ea_ab_automation             # Hive/Jenkins/Redshift workflow
     - ea_licensing_automation      # R + Talend pipeline
 
@@ -43,6 +52,7 @@ bullet_selection:
     - ea_upsell_segmentation       # Analytics, not pipeline
     - ea_companion_app             # Causal inference, not DE
     - ea_companion_app_revenue     # Business outcome, not DE
+    - ea_companion_app_analyticon                # Presentation, not DE
     - ea_exec_reporting            # Soft reporting
     - pretio_thompson_sampling     # Algorithmic, not infrastructure
     - pretio_simulation            # Modelling, not infrastructure
@@ -181,3 +191,61 @@ revoicing_persona: >
   framing — "stakeholder" language should be replaced with "downstream
   consumers" or "data consumers." Frame modeling work as transformation
   pipeline work, not analytical work.
+
+# ---------------------------------------------------------------------------
+# GAMES-INDUSTRY REVOICING PERSONA
+# ---------------------------------------------------------------------------
+games_revoicing_persona: >
+  Frame bullets in a live-games data engineering context. Use game-industry
+  vocabulary where appropriate: telemetry pipelines, event ingestion, player
+  data at scale, live ops data delivery, game analytics platform. Emphasize
+  that latency improvements and system reliability directly affect studio
+  decision speed and game health monitoring. Use verbs like: built,
+  engineered, migrated, deployed, orchestrated.
+
+# ---------------------------------------------------------------------------
+# ASIDE SKILLS — PAGE 2 SIDEBAR
+# ---------------------------------------------------------------------------
+aside_skills:
+  page2:
+    title: "Engineering Approach"
+    sections:
+      - id: pipeline_reliability
+        label: "Pipeline Reliability"
+        keywords: [reliability, legacy, ETL, debt, repair, trust, pipeline,
+                   diagnostic, reporting, stability, stakeholder trust]
+        text: >
+          Diagnosed and repaired legacy ETL debt systematically — restoring
+          stakeholder trust in core reporting before building new on top.
+      - id: cost_latency
+        label: "Cost & Latency"
+        keywords: [cost, latency, performance, migration, trade-off, baseline,
+                   measured, infrastructure, platform, optimization, savings]
+        text: >
+          Evaluated platform and infrastructure trade-offs with cost and
+          latency together, not separately. Migration decisions driven by
+          measured baselines, not assumptions.
+      - id: ml_pipeline_ops
+        label: "ML Pipeline Ops"
+        keywords: [ML pipeline, machine learning, orchestration, migration,
+                   model, Domino, Jenkins, retraining, batch scoring, cost]
+        text: >
+          Maintained and migrated ML pipelines and DS applications between
+          orchestration platforms, preserving model behaviour and reducing
+          operating cost.
+      - id: experimentation_infra
+        label: "Experimentation Infra"
+        keywords: [experimentation, A/B, automation, experiment, pipeline,
+                   automated, reproducible, self-service, analysis, readout]
+        text: >
+          Automated A/B test analysis pipelines and ML eval workflows to
+          make experimental readouts reproducible and self-service.
+      - id: analytics_bi
+        label: "Analytics & BI Delivery"
+        keywords: [dashboard, BI, segmentation, analytics, UA, reporting,
+                   ingestion, insight, visualization, stack]
+        text: >
+          Built and maintained dashboards, segmentation tools, and UA
+          analytics alongside pipeline work — owning the full stack from
+          ingestion to insight.
+    programming_latex: 'Python, SQL, R, Bash, Ruby'

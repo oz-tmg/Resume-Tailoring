@@ -1,0 +1,52 @@
+Position Details: 
+Client: Microsoft
+Role: Senior Analytics Engineer
+Job ID: 161644-1 
+Type: Contract - Upto 18 months
+Location: Remote/Hybrid  IN (Vancouver, BC) 
+
+SENIOR ANALYTICS ENGINEER, MINECRAFT
+Minecraft is one of the most popular video games of all time, with more than 200 million copies sold worldwide across PC, console, and mobile. It inspires people around the world to create together—and has built one of the most active and passionate player communities in gaming.
+
+We’re looking for a Senior Analytics Engineer to join the Player and Data Analytics team at Mojang Studios. In this role, you will build robust pipelines, well-crafted data models, and innovative data products to drive impactful outcomes. You will craft solutions which level up our Creator programs to deliver new and amazing experiences for Players.
+
+You are a critical thinker who will combine their technical expertise with a deep understanding of the business to deliver solutions which transform signals into actionable insights and data products. We prioritize security, data quality, reliability, and usability to ensure stakeholder confidence in our solutions.
+
+You’ll partner closely with data scientists, analysts, data engineers, and game teams to understand needs, align on definitions, and deliver at the pace of the business. Our team embraces a growth mindset, takes on hard problems, and continuously levels up.
+
+Responsibilities
+• Build subject matter expertise of our business and data domains to collaborate with data consumers and stakeholders to understand their information needs and assist them with data access.
+• Identify and analyze multi-structured data or metadata from a variety of sources to select and document the most effective and accurate data which fulfills the analytics requirements.
+• Design data models, architect dataflows, and develop abstractions to deliver scalable solutions for analytics and machine learning ensuring they can evolve with changing needs.
+• Leverage modern data engineering practices and frameworks with an object-oriented approach to architect, build, and maintain automated data pipelines which transform data into clean, enriched, and accurate information.
+• Advance our infrastructure by developing and using frameworks, reusable components and new capabilities to achieve our mission.
+• Develop enterprise grade data-serving API endpoints and underlying data products, analytics solutions, and infrastructure.
+• Enable the Franchise performance marketing strategy through the development of relevant and robust data products.
+
+Required Qualifications
+• Bachelor's Degree in Computer Science, Software Engineering, Computer Engineering, or related field AND 4+ years experience in analytics engineering, data engineering, data science, data analyst, or related software development work
+• Master's Degree in Computer Science, Software Engineering, Computer Engineering, or related field AND 3+ years experience in analytics engineering, data engineering, data science, data analyst, or related software development work
+o OR equivalent experience.
+• 2+ years working as an Analytics Engineer or Data Engineer with regular business collaboration or equivalent on large enterprise systems.
+• Experience building, maintaining and optimizing enterprise scale data pipelines handling logs and event streaming data on Cloud Data Platforms using modern tools like Spark, and airflow (Azure experience preferred)
+• Proficiency with SQL; Advanced skills with Python for data transformation and automation
+• Backend development experience building secure and performant enterprise grade APIs (Azure experience preferred)
+
+\Preferred Qualifications
+• Critical thinker and problem solver who brings a creative and open mindset.
+• A proven track record building and optimizing analytic solutions and data products which deliver significant business impact.
+• Data analysis and exploration skills to identify, select and prepare data for analytics.
+• Business acumen to address business challenges through analytics engineering.
+• Working knowledge of DevOps and DataOps.
+• Video game domain knowledge is important – as an experienced Player or industry veteran.
+
+• Purpose of the Team: The purpose of this team is to support (Minecraft) by preparing and managing data for analytics, reporting, and downstream use across AI/ML, marketing, and product systems.
+• Key projects: This role will contribute to supporting the creator strategy by preparing and delivering creator-related data for both internal use and external creator-facing systems.
+• Disqualifiers: Repetitive, overly long, or generic or keyword heavy resumes that lack context on impact or outcomes (ex, just listing tools/tech without explaining business value) will likely be disqualified
+• Best vs. Average: The ideal resume would contain resumes that clearly demonstrate how their work drives business impact (ex. improved performance, enabled decision making, supported marketing or product outcomes) and show strong critical thinking and problem solving in how they present their experience.  You will craft solutions which level up our performance marketing programs.
+
+Top 3 hard skills:
+
+    Python 4-5 years
+    Data modeling 3 years
+    Cloud experience 2 years (Azure preferred)

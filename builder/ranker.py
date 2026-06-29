@@ -22,11 +22,26 @@ import os
 import textwrap
 from typing import Any
 
-import anthropic
+from builder.selector import apply_diversity_and_cap
 
 
 MODEL = "claude-sonnet-4-6"
-client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY from env
+
+# The Anthropic client is instantiated lazily so that importing this
+# module — which build.py does unconditionally — does NOT require the
+# `anthropic` package to be installed or `ANTHROPIC_API_KEY` to be set.
+# Base family builds and `make validate` never hit the API; only the
+# posting pipeline does.
+_client = None
+
+
+def _get_client():
+    """Lazy-init the Anthropic client on first use."""
+    global _client
+    if _client is None:
+        import anthropic  # imported lazily for the same reason
+        _client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+    return _client
 
 
 # ---------------------------------------------------------------------------
@@ -35,37 +50,76 @@ client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY from env
 
 def rank_and_revoice(selected_companies: list[dict],
                      posting_text: str,
-                     family: dict) -> list[dict]:
+                     family: dict,
+                     industry: str = "agnostic") -> list[dict]:
     """
     Run Stage 1 (rank) then Stage 2 (revoice) against the job posting.
-    Returns the same nested structure with bullets reordered within roles
-    and unresolved bullets potentially rewritten.
+
+    When the selector ran in posting-tailored mode, `selected_companies`
+    contains a CANDIDATE POOL (~2x the per-role cap) — including bullets
+    that lacked the family tag but matched posting keywords. The flow is:
+
+      Stage 1: score every pool entry against the posting (Claude API).
+      Trim:    apply_diversity_and_cap() — keep only the top
+               max_bullets_per_role[role_id] per role, biased toward
+               higher posting score, priority membership, lower tier,
+               and keyword-diversity vs already-picked bullets.
+      Stage 2: revoice surviving (still-unresolved) bullets.
+
+    `industry`: when "games", uses games_revoicing_persona from the family
+    or summary config for the revoicing prompt. When "agnostic" (default),
+    uses the standard revoicing_persona.
+
+    Returns the same nested structure with bullets reordered within
+    roles, the pool trimmed, and unresolved survivors potentially
+    rewritten.
     """
-    # Flatten to (company_idx, role_idx, bullet_idx, bullet) for easy indexing
+    # ------------------------------------------------------------------
+    # Stage 1: rank the entire candidate pool against the posting
+    # ------------------------------------------------------------------
+    flat_pool = _flatten(selected_companies)
+    print(f"    → Stage 1: ranking {len(flat_pool)} bullets against posting...")
+    scores = _rank_bullets(flat_pool, posting_text, family)
+
+    # ------------------------------------------------------------------
+    # Trim the pool to the family's per-role cap with a diversity pass.
+    # This is a no-op if the selector already capped (base mode never
+    # passes a pool here, only the posting path does).
+    # ------------------------------------------------------------------
+    print("    → Trimming pool with diversity-aware cap...")
+    selected_companies = apply_diversity_and_cap(
+        selected_companies, family, scores=scores
+    )
+
+    # ------------------------------------------------------------------
+    # Stage 1b: for surviving bullets with multiple pre-written alternates,
+    # let Claude pick the alternate that best fits this posting.
+    # ------------------------------------------------------------------
+    flat_final = _flatten(selected_companies)
+    print("    → Stage 1b: selecting best variant alternates...")
+    variant_choices = _select_variants(flat_final, posting_text, family)
+
+    # ------------------------------------------------------------------
+    # Stage 2: revoice only the survivors
+    # ------------------------------------------------------------------
+    print(f"    → Stage 2: revoicing up to {len(flat_final)} survivors...")
+    rewrites = _revoice_bullets(flat_final, scores, posting_text, family,
+                                industry=industry)
+
+    # Apply scores + variant choices + rewrites back into the structure
+    result = _apply_results(selected_companies, flat_final, scores, rewrites,
+                            variant_choices)
+
+    return result
+
+
+def _flatten(selected_companies: list[dict]) -> list[tuple[int, int, int, dict]]:
     flat: list[tuple[int, int, int, dict]] = []
     for ci, company in enumerate(selected_companies):
         for ri, role in enumerate(company["roles"]):
             for bi, bullet in enumerate(role["bullets"]):
                 flat.append((ci, ri, bi, bullet))
-
-    # Stage 1: rank
-    print("    → Stage 1: ranking bullets against posting...")
-    scores = _rank_bullets(flat, posting_text, family)
-
-    # Stage 1b: for bullets with multiple pre-written alternates, let Claude
-    # pick the alternate that best fits this posting.
-    print("    → Stage 1b: selecting best variant alternates...")
-    variant_choices = _select_variants(flat, posting_text, family)
-
-    # Stage 2: revoice unresolved bullets that scored well
-    print("    → Stage 2: revoicing unresolved bullets...")
-    rewrites = _revoice_bullets(flat, scores, posting_text, family)
-
-    # Apply scores + variant choices + rewrites back into the structure
-    result = _apply_results(selected_companies, flat, scores, rewrites,
-                            variant_choices)
-
-    return result
+    return flat
 
 
 # ---------------------------------------------------------------------------
@@ -103,7 +157,7 @@ def _rank_bullets(flat: list, posting_text: str, family: dict) -> dict[str, int]
         No explanation, no markdown fences, just the JSON object.
     """).strip()
 
-    response = client.messages.create(
+    response = _get_client().messages.create(
         model=MODEL,
         max_tokens=1000,
         messages=[{"role": "user", "content": prompt}],
@@ -183,11 +237,15 @@ def _select_variants(flat: list, posting_text: str,
 # ---------------------------------------------------------------------------
 
 def _revoice_bullets(flat: list, scores: dict, posting_text: str,
-                     family: dict) -> dict[str, str]:
+                     family: dict,
+                     industry: str = "agnostic") -> dict[str, str]:
     """
     For unresolved bullets scoring >= 2, ask Claude to rewrite them to
     mirror the posting's language while preserving facts and outcomes.
     Returns {bullet_id: rewritten_text}.
+
+    When industry="games", uses games_revoicing_persona from the family
+    config if available; falls back to the standard revoicing_persona.
     """
     candidates = [
         b for _, _, _, b in flat
@@ -196,6 +254,12 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
 
     if not candidates:
         return {}
+
+    # Choose the appropriate persona for this build
+    if industry == "games":
+        persona = family.get("games_revoicing_persona") or family["revoicing_persona"]
+    else:
+        persona = family["revoicing_persona"]
 
     bullet_list = "\n".join(
         f'  "{b["id"]}": {b["resolved_text"]}'
@@ -213,7 +277,7 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
         - Match terminology from the posting where it fits naturally
         - Keep each bullet to 1-2 sentences maximum
         - Write in third-person implied (no "I")
-        - Tone and persona: {family["revoicing_persona"]}
+        - Tone and persona: {persona}
 
         JOB POSTING:
         {posting_text}
@@ -225,7 +289,7 @@ def _revoice_bullets(flat: list, scores: dict, posting_text: str,
         No explanation, no markdown fences, just the JSON object.
     """).strip()
 
-    response = client.messages.create(
+    response = _get_client().messages.create(
         model=MODEL,
         max_tokens=2000,
         messages=[{"role": "user", "content": prompt}],
@@ -310,18 +374,27 @@ def _apply_results(selected_companies: list[dict],
 # ---------------------------------------------------------------------------
 
 def revoice_summary(base_summary: str, posting_text: str,
-                    family: dict) -> str:
+                    family: dict,
+                    industry: str = "agnostic") -> str:
     """
     Rewrite the base summary paragraph for a specific posting.
     Preserves factual claims; mirrors posting's framing and keywords.
+
+    When industry="games", uses games_revoicing_persona from the family
+    if available.
     """
+    if industry == "games":
+        persona = family.get("games_revoicing_persona") or family["revoicing_persona"]
+    else:
+        persona = family["revoicing_persona"]
+
     prompt = textwrap.dedent(f"""
         Rewrite the following resume summary paragraph for a specific job
         posting. Mirror the posting's language and emphasis. Keep all
         factual claims. Do not add credentials or experience not present.
         Keep to 3-4 sentences maximum.
 
-        Persona / tone: {family["revoicing_persona"]}
+        Persona / tone: {persona}
 
         JOB POSTING:
         {posting_text}
@@ -332,7 +405,7 @@ def revoice_summary(base_summary: str, posting_text: str,
         Return ONLY the rewritten summary paragraph. No explanation.
     """).strip()
 
-    response = client.messages.create(
+    response = _get_client().messages.create(
         model=MODEL,
         max_tokens=400,
         messages=[{"role": "user", "content": prompt}],

@@ -22,6 +22,7 @@ bullet_selection:
   min_tier: 1
 
   priority_bullets:
+    - kano_anomaly_detection      # Production monitoring system in Prefect/Athena
     - kix_alliance_recsys     # Production RecSys with revenue outcome
     - kix_churn_model         # Model improvement with concrete AUC gains
     - kix_matchmaking_churn   # System diagnosis + redesign
@@ -36,6 +37,13 @@ bullet_selection:
     - kano_etl_performance        # Infrastructure / pipeline performance
     - kix_ab_automation       # Automation of ML reporting pipelines
 
+  # Cross-family promotion: include these bullets for MLE even though they
+  # are not tagged MLE. MLE work depends on solid data infrastructure;
+  # surfacing the recent platform-modernisation win keeps the ML pipeline
+  # context concrete (Athena/Parquet/Iceberg under the model layer).
+  promote_bullets:
+    - kano_etl_performance        # ETL refresh 14h → 1h on partitioned Parquet/Iceberg
+
   exclude_bullets:
     - kano_rshiny_migration       # BI migration, not ML
     - kano_analyst_adoption       # Team enablement, not MLE
@@ -47,6 +55,7 @@ bullet_selection:
     - ea_exec_reporting           # Soft reporting
     - ea_licensing_automation     # Talend/R automation, not ML
     - ea_licensing_models         # Statistical, not ML production
+    - ea_companion_app_analyticon               # Presentation, not MLE
     - ea_companion_app_revenue    # Business outcome without ML framing
     - pretio_mab_reporting        # Reporting, not model engineering
     - pretio_simulation           # Modelling exploration, not production ML
@@ -176,3 +185,60 @@ revoicing_persona: >
   DS work as "production model" work rather than research or analysis.
   Evaluation and governance signals (catching model failures, diagnosing
   cannibalization) are strong differentiators — highlight these explicitly.
+
+# ---------------------------------------------------------------------------
+# GAMES-INDUSTRY REVOICING PERSONA
+# ---------------------------------------------------------------------------
+games_revoicing_persona: >
+  Frame bullets in a live-games ML engineering context. Use game-industry
+  vocabulary: LTO recommendation engines, alliance RecSys, churn models for
+  F2P, player targeting, live ops inference pipelines, model governance in
+  live-service contexts. Emphasize production ML deployed to real player
+  cohorts, model monitoring in live games, and the ability to diagnose when
+  a shipped model erodes game health. Use verbs like: deployed, engineered,
+  automated, scaled, retired.
+
+# ---------------------------------------------------------------------------
+# ASIDE SKILLS — PAGE 2 SIDEBAR
+# ---------------------------------------------------------------------------
+aside_skills:
+  page2:
+    title: "ML Engineering Practice"
+    sections:
+      - id: production_recsys
+        label: "Production Recommendation Systems"
+        keywords: [recommendation, RecSys, alliance, LTO, content, ranking,
+                   targeting, live, production, player, cohort, multiplayer]
+        text: >
+          Built and shipped alliance, LTO, and content rec engines that served
+          live player cohorts at scale in multiplayer mobile games.
+      - id: experimentation_infra
+        label: "Experimentation Infrastructure"
+        keywords: [experimentation, A/B, automated, pipeline, measurement,
+                   decision, trustworthy, experiment, hypothesis, evaluation]
+        text: >
+          Designed and automated A/B test pipelines and ML-eval workflows,
+          cutting decision cycles and expanding trustworthy measurement.
+      - id: model_ops
+        label: "Model Operations"
+        keywords: [migration, pipeline, batch scoring, Jenkins, Domino, MLOps,
+                   orchestration, reproducible, retraining, cost, operations]
+        text: >
+          Migrated ML pipelines and batch scoring jobs off Domino onto Jenkins;
+          enforced reproducible runs, lowered cost, and restored trust in retraining.
+      - id: predictive_delivery
+        label: "Predictive Model Delivery"
+        keywords: [churn, LTV, reacquisition, spend conversion, scheduled,
+                   monitored, pipeline, product, UA, prediction, delivery]
+        text: >
+          Shipped churn, LTV, reacquisition, and spend conversion models
+          consumed by product and UA teams through scheduled, monitored pipelines.
+      - id: model_governance
+        label: "Model Governance"
+        keywords: [cannibalization, LTO, holdout, long-horizon, retirement,
+                   governance, audit, diagnosis, monetization, model evaluation]
+        text: >
+          Diagnosed cannibalization in a deployed LTO rec engine via
+          long-horizon holdouts; led its retirement to prevent downstream
+          monetization erosion.
+    programming_latex: 'Python, SQL, Bash, R'

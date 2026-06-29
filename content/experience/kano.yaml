@@ -12,7 +12,26 @@ roles:
       Hired to modernize the studio's analytics stack by migrating reporting
       and transformation workflows from RShiny to a scalable Python- and
       AWS-based platform.
-
+    summary_variants:
+      DS: >
+        Brought in to rebuild Kano's analytics platform and restore data science
+        capability, including migrating anomaly detection and inherited ML assets
+        to a modern Python, DBT, and AWS stack.
+      DE: >
+        Hired to architect and build Kano's next-generation analytics platform,
+        migrating from RShiny-based ETLs to a scalable DBT-Athena pipeline on
+        partitioned Parquet and Iceberg tables. 
+      AE: >
+        Hired to modernize the studio’s analytics stack by migrating reporting and 
+        transformation workflows from an undocumented, monolithic, spaghetti code 
+        R-based platform to a more scalable Python-SQL based platform.
+      MLE: >
+        Brought in to modernize Kano's analytics and data science stack, including
+        migrating the statistical anomaly detection framework to Python, DBT, and
+        Prefect, and auditing inherited ML models.
+      DA: >
+        Hired to rebuild Kano's reporting platform, migrating RShiny dashboards
+        to AWS Quicksight and enabling analyst self-service on a modern stack.
     bullets:
       - id: kano_dbt
         text: >
@@ -42,15 +61,23 @@ roles:
                    analytical parity, analytics engineering]
         tier: 2
 
-      - id: kano_anomaly_detection
+      - id: kano_prefect
         text: >
-          Migrated anomaly detection and extended its coverage to
-          irregular-cadence live-ops events, improving the reliability of
-          live-ops data.
-        families: [AE, DE, DS]
-        keywords: [anomaly detection, live-ops, data quality, monitoring,
-                   data reliability, game analytics]
+          Replaced fragile cron-scheduled shell scripts with Prefect workflows,
+          improving orchestration, observability, and analytics stack maintainability.
+        families: [DE, AE, DA]
+        keywords: [Prefect, orchestration, workflow, migration, scheduling, ETL]
         tier: 2
+        variants:
+          AE: >
+            Migrated ad hoc cron and shell-script analytics jobs to Prefect, creating a
+            more reliable orchestration layer for reporting, ETL, and analytics workflows.
+          DE: >
+            Modernized legacy cron-based ETL scheduling by migrating shell-script workflows
+            to Prefect, improving orchestration, monitoring, retries, and long-term maintainability.
+          DA: >
+            Replaced fragile cron-scheduled shell scripts with Prefect workflows,
+            improving orchestration, observability, and analytics stack maintainability.
 
       - id: kano_rshiny_migration
         text: >
@@ -101,13 +128,120 @@ roles:
         keywords: [ETL, Athena, Parquet, Iceberg, DBT, SQL, cost reduction,
                    performance, EC2, data latency]
         tier: 1
+        category: outcome
+      - id: kano_etl_r_to_python_migration
+        text: >
+          Executed R-to-Python migration of legacy ETL pipelines inherited from a
+          single-author codebase characterised by undocumented, non-modular scripts
+          exceeding 10,000 lines; applied LLM-assisted code translation selectively
+          where script structure permitted, and manually refactored the remainder
+          using deep bilingual R and Python expertise — the combination of skills
+          that made the migration viable at all.
+        families: [DE, AE, DS]
+        keywords: [R, Python, ETL, migration, legacy codebase, refactoring,
+                  LLM-assisted development, AI tooling, code translation,
+                  technical debt, bilingual, R to Python]
+        tier: 2
+        variants:
+          DA: >
+            Preserved full analytical parity across a complex R-to-Python ETL
+            migration, manually validating migrated pipelines inherited from an
+            undocumented, monolithic codebase using bilingual R and Python
+            proficiency — ensuring stakeholders could trust reporting outputs
+            throughout the transition.
+          DE: >
+            Migrated a legacy R ETL codebase to Python, navigating undocumented,
+            monolithic scripts exceeding 10,000 lines that exceeded LLM context
+            limits; applied AI-assisted translation where script structure permitted
+            and manually refactored the remainder, leveraging bilingual R and Python
+            proficiency to deliver the full migration without analytical regression.
+          AE: >
+            Translated a non-modular, single-author R ETL codebase into Python,
+            applying LLM-assisted code translation selectively on tractable modules
+            while manually refactoring scripts too large and unstructured for AI
+            tooling; deep bilingual R and Python expertise was the critical enabler
+            that made the migration viable.
+          DS: >
+            Leveraged LLM-assisted code translation and bilingual R/Python expertise
+            to migrate legacy ETL pipelines from R to Python, navigating an
+            undocumented codebase with 10,000+ line scripts that exceeded LLM
+            context limits — applying AI tooling selectively and completing the
+            remainder through manual refactoring.
 
+      - id: kano_etl_migration_ai_assisted
+        text: >
+          Applied LLM-assisted code translation selectively where feasible.
+        families: [DE, AE, DA]
+        keywords: [R, Python, migration, refactoring, RShiny, monolithic codebase,
+                   LLM-assisted, code translation, bilingual]
+        tier: 2
+        variants:
+          DA: >
+            Selectively applied LLM-assisted code translation to speed up migration.
+          AE: >
+            Selectively applied LLM-assisted R-to-Python code translation on a large
+            portion of ETLs to speed up migration.
+
+      - id: kano_iceberg_migration
+        text: >
+          Migrated parquet table ETLs into partitioned Apache Iceberg tables, added
+          DBT-Athena to the new platform to better model, scale, and optimize
+          transformations done originally in R scripts too large, old and unstructured
+          for Gemini to handle.
+        families: [DE, AE, DA]
+        keywords: [Parquet, Apache Iceberg, DBT, Athena, ETL, SQL, migration,
+                   partitioned tables, data modelling, transformation, platform]
+        tier: 2
+        category: work
+        sub_bullets:
+          - id: kano_etl_performance_dbt
+            text: >
+              DBT models reduced numerous redundancies, and improved turnaround time, and .
+            families: [DA, DE, AE]
+          - id: kano_etl_migration_continuity
+            text: >
+              Preserved seamless service delivery and data continuity across migration.
+            families: [DA, DE, AE]
+          - id: kano_etl_performance_iceberg
+            text: >
+              Using Partitioned Iceberg tables allowed for more incremental updates, improving
+              monthly EC2 and Athena savings (23%) and report turnaround time (13x).
+            families: [DA, DE, AE]
+  
       - id: kano_analyst_adoption
         text: >
           Improved analyst adoption of the new stack by showcasing workflows,
           onboarding teammates, and standardizing how reporting was produced
           and maintained.
-        families: [DA, AE, DE]
+        families: [AM, AE, DE]
         keywords: [onboarding, documentation, standardization, collaboration,
                    reporting, team enablement]
         tier: 2
+        category: outcome
+
+      - id: kano_anomaly_detection
+        text: >
+          Migrated the analytical-event anomaly detection framework off
+          R into Python, and extended coverage to irregular-cadence
+          events that the prior framework dropped, by folding their known
+          cadence into the standard error calculation so they alert against
+          the right baseline.
+        families: [DS, MLE, AE, DE]
+        keywords: [anomaly detection, statistical monitoring, Python, DBT,
+                   Prefect, AWS Athena, Quicksight, RShiny migration,
+                   irregular cadence, standard error, time series,
+                   production monitoring]
+        tier: 1
+
+      - id: kano_legacy_dsm_review
+        text: >
+          Audited inherited data science assets — decision-tree and
+          random-forest churn and behaviour models trained on poorly
+          sampled data — and recommended against migrating them, citing
+          disuse and predictive power that was both underwhelming and
+          misleading against current event definitions.
+        families: [DS, MLE]
+        keywords: [model audit, model governance, decision trees, random
+                   forests, sampling bias, predictive validity, technical
+                   debt]
+        tier: 3

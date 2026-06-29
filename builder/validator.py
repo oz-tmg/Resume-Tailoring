@@ -18,7 +18,13 @@ from pathlib import Path
 from builder.loader import (load_family, load_all_experience,
                             load_skills, load_summaries)
 
+# Standard job-family IDs
 FAMILY_IDS = {"DA", "AE", "DE", "DS", "MLE", "ECON"}
+
+# Non-family variant keys that are valid in the variants block.
+# GAMES: industry-specific rewrite used when --industry games is passed.
+# AM:    Analytics Manager variant (people-management framing, manual select).
+EXTRA_VARIANT_KEYS = {"GAMES", "AM"}
 FAMILIES   = ["data_analyst", "analytics_engineer", "data_engineer",
               "data_scientist", "ml_engineer", "economist"]
 
@@ -34,7 +40,17 @@ def validate_all(root: Path) -> bool:
     skills     = load_skills(root / "content" / "skills.yaml")
     summaries  = load_summaries(root / "content" / "summaries.yaml")
 
-    bullet_ids = set(experience["by_id"].keys())
+    # Collect both top-level bullet IDs and sub-bullet IDs so family file
+    # references can target either level (e.g. priority/exclude a sub-bullet
+    # like ea_companion_app_analyticon without also pulling its parent).
+    bullet_ids: set[str] = set(experience["by_id"].keys())
+    for company in experience["companies"]:
+        for role in company["roles"]:
+            for bullet in role["bullets"]:
+                for sub in bullet.get("sub_bullets", []):
+                    if "id" in sub:
+                        bullet_ids.add(sub["id"])
+
     role_ids   = {
         role["id"]
         for company in experience["companies"]
@@ -67,12 +83,15 @@ def validate_all(root: Path) -> bool:
                 else:
                     seen_ids[bid] = role["id"]
 
-    # Validate variants use legal family IDs and well-formed alternates
+    # Validate variants use legal family IDs or known extra keys (e.g. GAMES, AM)
+    # and that multi-variant alternates are well-formed.
+    valid_variant_keys = FAMILY_IDS | EXTRA_VARIANT_KEYS
     for bid, bullet in experience["by_id"].items():
         for vfam, ventry in bullet.get("variants", {}).items():
-            if vfam not in FAMILY_IDS:
+            if vfam not in valid_variant_keys:
                 errors.append(
-                    f"Bullet '{bid}' has variant for unknown family '{vfam}'"
+                    f"Bullet '{bid}' has variant for unknown key '{vfam}' "
+                    f"(expected one of: {', '.join(sorted(valid_variant_keys))})"
                 )
             # Multi-variant (list) form: each alternate needs id + text,
             # ids must be unique, and at most one may be flagged default.
@@ -159,6 +178,14 @@ def validate_all(root: Path) -> bool:
             if bid not in bullet_ids:
                 warnings.append(
                     f"[{label}] exclude_bullets references "
+                    f"unknown bullet '{bid}'"
+                )
+
+        # bullet ids in promote_bullets exist (cross-family promotion)
+        for bid in bs.get("promote_bullets", []):
+            if bid not in bullet_ids:
+                warnings.append(
+                    f"[{label}] promote_bullets references "
                     f"unknown bullet '{bid}'"
                 )
 

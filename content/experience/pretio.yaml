@@ -13,6 +13,24 @@ roles:
       ad-serving algorithms to foster brand loyalty and incentivize engagement.
       Responsible for statistical research on algorithm and reward performance,
       ad-hoc analysis, and automating data reports for the sales team.
+    summary_variants:
+      DS: >
+        Built probabilistic conversion models and drove adoption of Thompson
+        Sampling over Epsilon Greedy for a reward-based ad-serving platform,
+        improving identification of top-performing campaigns.
+      DA: >
+        Owned statistical research and ad-hoc analysis for a reward-based
+        ad-network startup, extracting MAB exploration data and automating
+        performance reporting for the sales team.
+      MLE: >
+        Applied Bayesian MAB algorithms and probabilistic modelling at a
+        reward-based ad-tech startup — driving the adoption of Thompson
+        Sampling over Epsilon Greedy and building conversion prediction models
+        in R.
+      ECON: >
+        Applied Bayesian MAB theory (Thompson Sampling vs Epsilon Greedy) and
+        probabilistic conversion modelling to optimize a reward-based ad-serving
+        platform, with simulation-based evidence guiding algorithm changes.
 
     bullets:
       - id: pretio_thompson_sampling
@@ -24,6 +42,12 @@ roles:
         keywords: [Thompson Sampling, Epsilon Greedy, multi-armed bandit,
                    Bayesian, optimization, ad-serving, recommendation]
         tier: 1
+        variants:
+          GAMES: >
+            Drove adoption of Thompson Sampling over Epsilon Greedy for a
+            reward-based ad-serving platform, demonstrating faster identification
+            of top-performing ads — directly applicable to live-ops content
+            recommendation and in-game offer targeting in F2P games.
 
       - id: pretio_mab_reporting
         text: >
@@ -44,6 +68,12 @@ roles:
         keywords: [probability model, R, conversion prediction, segmentation,
                    simulation, ad tech, modelling]
         tier: 1
+        variants:
+          GAMES: >
+            Built a probabilistic conversion model in R for a reward-based
+            ad platform — predicting ad conversion likelihood to surface
+            segmentation opportunities and simulate algorithm changes, with
+            direct analogues to F2P offer targeting and LTO personalization.
 
       - id: pretio_simulation
         text: >

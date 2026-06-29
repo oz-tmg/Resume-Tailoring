@@ -25,6 +25,25 @@ personal:
   blog_url: https://alexoswald.wordpress.com/2025/02/23/companion-apps-in-games/
   blog_display: alexoswald.wordpress.com
 
+  # Work authorization / relocation signal — now encoded in the header
+  # location field rather than as a standalone note. Drive it from the
+  # build command line:
+  #
+  #   make ae           # → "Victoria, BC."                        (default)
+  #   make ae LOC=relocate
+  #                     # → "Victoria, BC · Open to Relocation (Vancouver)"
+  #   make ae LOC=relocate CITY=Toronto
+  #                     # → "Victoria, BC · Open to Relocation (Toronto)"
+  #   make ae LOC=us
+  #                     # → "Victoria, BC · US Citizen & Canadian PR · Open to Relocation (Seattle)"
+  #   make ae LOC=us CITY="San Francisco"
+  #                     # → "Victoria, BC · US Citizen & Canadian PR · Open to Relocation (San Francisco)"
+  #
+  # See builder/renderer.py::_compose_header_location for the full spec.
+  # The previous `work_authorization` block (a standalone "Can work in..."
+  # note) has been retired in favour of this; the header location now
+  # carries the recruiter-relevant signal in a single, scannable line.
+
 # Cover letter defaults — overridden per posting via overrides.yaml
 cover_letter:
   recipient: Hiring Manager

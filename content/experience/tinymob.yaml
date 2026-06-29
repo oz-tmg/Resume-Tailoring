@@ -12,6 +12,20 @@ roles:
       Brought on as a data analyst to conduct KPI reporting and data gathering
       to investigate the studio's engagement and monetization difficulties in
       its first game, Tiny Realms.
+    summary_variants:
+      DS: >
+        First industry role — applied churn analysis, player segmentation, and
+        game economy diagnosis to identify retention and monetization root causes
+        in a live F2P mobile game.
+      DA: >
+        Early-career analyst role focused on KPI reporting, player retention
+        analysis, and monetization diagnosis for TinyMob's first mobile game,
+        Tiny Realms.
+      ECON: >
+        Applied behavioral and economic analysis (free-rider dynamics, paywall
+        cannibalization, segmentation) to diagnose the monetization failures
+        of a live F2P mobile game — first industry application of economics
+        training.
 
     bullets:
       - id: tinymob_kpi_monitoring
@@ -53,6 +67,12 @@ roles:
         keywords: [churn analysis, retention, D7, segmentation, cohort
                    analysis, gameplay balance, product analytics]
         tier: 1
+        variants:
+          GAMES: >
+            Identified a player segment with elevated early churn, attributed
+            it to a gameplay balance issue, and collaborated with game design
+            on targeted fixes — improving D7 retention from 11.3% to 14.2%
+            in the affected cohort of TinyMob's first F2P mobile game.
 
       - id: tinymob_paywall_cannibalisation
         text: >
@@ -63,6 +83,12 @@ roles:
         keywords: [monetization, paywall, cannibalization, revenue analysis,
                    product analytics, game design]
         tier: 1
+        variants:
+          GAMES: >
+            Discovered that a specific game mode was cannibalizing revenue by
+            undermining Tiny Realms' soft paywall mechanic — identified the
+            interaction through player behavior analysis and drove design
+            changes that restored monetization performance.
 
       - id: tinymob_free_rider
         text: >
@@ -72,3 +98,10 @@ roles:
         keywords: [free-rider, monetization, game economics, behavioral
                    analysis, product diagnosis]
         tier: 1
+        variants:
+          GAMES: >
+            Diagnosed the root cause of Tiny Realms' monetization failure: a
+            structural free-rider dynamic in the game's co-op economy where
+            players could benefit from others' spending without converting
+            themselves — identified through player behavior analysis and
+            economic reasoning about in-game incentive design.

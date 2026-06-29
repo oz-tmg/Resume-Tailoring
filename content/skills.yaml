@@ -33,12 +33,14 @@ data_science:
     tier: 1
     families: [DS, ECON, DA]
     keywords: [causal inference, propensity score matching, quasi-experimental,
-               difference-in-differences]
+               difference-in-differences, coarsened exact matching, CEM,
+               kernel matching, observational studies]
   - name: Predictive Modelling
     tier: 1
     families: [DS, MLE]
     keywords: [predictive modelling, supervised learning, regression,
-               classification]
+               classification, XGBoost, gradient boosting, SVM, support
+               vector machines, decision trees, random forests]
   - name: Churn Prediction
     tier: 1
     families: [DS, MLE, DA]
@@ -130,6 +132,18 @@ data_engineering:
       tier: 3
       families: [DE]
       keywords: [Redis, cache, NoSQL]
+    - name: Neo4j
+      tier: 3
+      families: [DE]
+      keywords: [Neo4j, graph database, Cypher]
+    - name: Amazon Neptune
+      tier: 3
+      families: [DE]
+      keywords: [Amazon Neptune, AWS, graph database]
+    - name: Teradata
+      tier: 3
+      families: [DE]
+      keywords: [Teradata, MPP, data warehouse]
 
   data_processing:
     - name: Apache Spark (PySpark, SparklyR)
@@ -168,6 +182,10 @@ data_engineering:
       tier: 2
       families: [DE, AE, MLE]
       keywords: [Jenkins, CI/CD, pipeline]
+    - name: Astronomer
+      tier: 3
+      families: [DE, MLE]
+      keywords: [Astronomer, managed Airflow, orchestration]
 
   ml_ops:
     - name: MLflow
@@ -183,7 +201,7 @@ data_engineering:
       keywords: [Tableau, BI, dashboards, visualization]
     - name: Looker
       tier: 2
-      families: [DA, AE]
+      families: [DA, AE, DE]
       keywords: [Looker, LookML, BI, dashboards]
     - name: Amplitude
       tier: 2
@@ -203,7 +221,7 @@ data_engineering:
       keywords: [RMarkdown, R, reporting]
     - name: Jupyter Notebooks
       tier: 2
-      families: [DS, MLE, DA]
+      families: [DS, MLE, DA, AE, DE]
       keywords: [Jupyter, notebooks, Python]
     - name: Hex
       tier: 2
@@ -217,7 +235,7 @@ data_engineering:
   hosting_and_infrastructure:
     - name: Docker
       tier: 2
-      families: [DE, MLE, AE]
+      families: [DE, MLE, AE, DS]
       keywords: [Docker, containers, containerization]
     - name: AWS ECS & EC2
       tier: 2

@@ -2,6 +2,14 @@
 # These are used as the starting point for Claude to personalize per posting.
 # Each summary is written in the voice appropriate for that hiring audience.
 # Variables available for Jinja2 templating: {{ years_experience }}
+#
+# games_text: games-industry-focused variant. Used when --industry games is
+#   passed to the build. Uses game-industry vernacular (F2P, live ops, DAU,
+#   LTV, meta, monetization, engagement loops, etc.) and explicitly calls
+#   out the games background as a feature rather than framing it neutrally.
+#
+# games_revoicing_persona: used by the Claude API revoicing stage when
+#   --industry games is set. Tells Claude to use game-industry language.
 
 summaries:
 
@@ -13,6 +21,12 @@ summaries:
       reporting, and translating data into business decisions. Use verbs like:
       designed, built, delivered, identified, presented, monitored, automated.
       Avoid heavy ML/engineering jargon — focus on outcomes and accessibility.
+    games_revoicing_persona: >
+      Emphasize clarity of insight within a live-games context. Use game-industry
+      vernacular where it fits naturally: DAU, WAU, retention cohorts, engagement
+      loops, monetization funnels, live ops KPIs, F2P economy. Use verbs like:
+      designed, surfaced, tracked, automated, delivered. Lead with player-impact
+      framing — not generic "digital product" language.
     text: >
       Customer-focused Senior Data Analyst with 10 years of experience turning
       complex data into clear, actionable insights that drive product, growth,
@@ -21,6 +35,14 @@ summaries:
       to define KPIs, build reliable reporting, and deliver analysis that
       changes how teams work. Hands-on with Python, R, SQL, Tableau, Looker,
       Amplitude, and the full modern analytics stack.
+    games_text: >
+      Senior Data Analyst with 10 years of experience in live games and F2P
+      digital products, turning player behavior data into clear, actionable
+      insight that drives engagement, retention, and monetization decisions.
+      Proven track record partnering with product, live ops, and leadership
+      teams to define KPIs, build reliable reporting, and deliver analysis that
+      changes how studios work. Hands-on with Python, R, SQL, Tableau, Looker,
+      Amplitude, and the full modern games analytics stack.
 
   analytics_engineer:
     id: AE
@@ -31,6 +53,12 @@ summaries:
       self-service. Use verbs like: modelled, built, migrated, standardized,
       optimized, enabled. Highlight dbt, Snowflake, and the analytics
       engineering craft specifically.
+    games_revoicing_persona: >
+      Emphasize analytics engineering in a live-games context. Use game-industry
+      vocabulary where appropriate: telemetry pipelines, event schemas, player
+      funnel modelling, live ops data, session and monetization events. Frame
+      the work around enabling game teams to make faster decisions from reliable
+      data. Use verbs like: modelled, built, migrated, standardized, enabled.
     text: >
       Analytics Engineer with 10 years of experience building the data
       infrastructure that powers reliable reporting, experimentation, and
@@ -40,6 +68,16 @@ summaries:
       and enabling analyst self-service. Equally comfortable in Python, R,
       and SQL, with a product mindset that keeps engineering work grounded
       in business outcomes.
+    games_text: >
+      Analytics Engineer with 10 years of experience building the data
+      infrastructure that powers reporting, experimentation, and machine
+      learning across live games and F2P digital products. Deep hands-on
+      expertise in dbt, Snowflake, Airflow, and Prefect — with a strong track
+      record of migrating legacy telemetry and reporting pipelines onto modern
+      stacks, cutting latency, reducing costs, and enabling game teams to
+      self-serve reliable data. Equally comfortable in Python, R, and SQL,
+      with a live-ops mindset that keeps platform work grounded in player
+      and studio outcomes.
 
   data_engineer:
     id: DE
@@ -49,6 +87,13 @@ summaries:
       engineering. Use verbs like: built, engineered, architected, deployed,
       orchestrated, migrated. Lead with cost savings, latency improvements,
       and system robustness. Minimize soft stakeholder language.
+    games_revoicing_persona: >
+      Emphasize reliability, scale, and pipeline engineering in a live-games
+      context. Use game-industry vocabulary where appropriate: telemetry
+      pipelines, event ingestion, player data at scale, live ops data delivery,
+      session and monetization event schemas. Lead with concrete wins — cost
+      reduction, latency improvement, platform stability for game teams.
+      Use verbs like: built, engineered, architected, deployed, migrated.
     text: >
       Data Engineer with 10 years of experience designing and operating
       scalable data pipelines, warehousing solutions, and ETL infrastructure
@@ -57,6 +102,15 @@ summaries:
       and scaling data platforms to serve analytics and ML workloads. Hands-on
       with dbt, Snowflake, Airflow, Prefect, Spark, Redshift, S3, Athena,
       Parquet, and Iceberg. Grounded in Python, SQL, and Bash.
+    games_text: >
+      Data Engineer with 10 years of experience designing and operating
+      scalable data pipelines, warehousing, and ETL infrastructure for live
+      games and F2P digital products. Strong track record of migrating legacy
+      telemetry and reporting stacks onto modern cloud-native platforms —
+      cutting costs, reducing latency, and scaling infrastructure to serve
+      analytics and ML workloads at game-studio scale. Hands-on with dbt,
+      Snowflake, Airflow, Prefect, Spark, Redshift, S3, Athena, Parquet,
+      and Iceberg. Grounded in Python, SQL, and Bash.
 
   data_scientist:
     id: DS
@@ -66,6 +120,13 @@ summaries:
       inference, and translating model outputs into product decisions. Balance
       technical depth with business impact. Use verbs like: developed, modelled,
       evaluated, designed, quantified, deployed, diagnosed.
+    games_revoicing_persona: >
+      Emphasize the full DS lifecycle in a live-games context. Use game-industry
+      vernacular naturally: F2P, live ops, engagement loops, DAU retention,
+      meta progression, LTO systems, player segmentation, monetization funnels,
+      churn win-back, matchmaking. Frame experimentation and modelling in terms
+      of player impact and game health, not generic "digital products" language.
+      Use verbs like: developed, modelled, designed, deployed, diagnosed.
     text: >
       Customer-focused Senior Data Scientist with 10 years of experience using
       experimentation, causal inference, predictive modelling, and
@@ -75,6 +136,17 @@ summaries:
       success metrics, build scalable analytics and ML workflows, and translate
       complex results into decisions. Hands-on with Python, R, SQL, AWS, dbt,
       Airflow, Prefect, and more.
+    games_text: >
+      Senior Data Scientist with 10 years of experience in live games and F2P
+      digital products, using experimentation, causal inference, predictive
+      modelling, and recommendation systems to improve player engagement,
+      retention, and monetization. Strong record of partnering with product,
+      live ops, and engineering teams to define success metrics, build scalable
+      ML workflows, and translate model outputs into decisions that ship. Deep
+      background in churn modelling, LTO recommendation, alliance matching,
+      A/B infrastructure, and player segmentation — all built and deployed in
+      production live-service environments. Hands-on with Python, R, SQL, AWS,
+      dbt, Airflow, and Prefect.
 
   ml_engineer:
     id: MLE
@@ -84,6 +156,13 @@ summaries:
       production systems. Use verbs like: deployed, built, engineered,
       automated, optimized, scaled. Highlight MLOps, model evaluation
       frameworks, and system reliability. Minimize pure analytics framing.
+    games_revoicing_persona: >
+      Emphasize production ML systems in a live-games context. Use game-industry
+      vocabulary: LTO recommendation engines, alliance RecSys, churn models
+      for F2P, player targeting, live ops inference pipelines, model monitoring
+      in live services. Frame deployment, monitoring, and model governance in
+      terms of player impact and studio risk tolerance. Use verbs like:
+      deployed, engineered, automated, scaled, retired.
     text: >
       ML Engineer and Data Scientist with 10 years of experience building,
       deploying, and maintaining machine learning systems in production
@@ -93,6 +172,16 @@ summaries:
       platforms. Proficient in Python, R, SQL, Spark, Jenkins, Docker, and
       AWS. Brings a rigorous evaluation mindset: diagnosing when models cause
       harm as readily as when they create value.
+    games_text: >
+      ML Engineer and Data Scientist with 10 years of experience building,
+      deploying, and maintaining machine learning systems in live F2P games.
+      Deep background in recommendation engines (alliance, LTO, content),
+      churn and reacquisition models, and A/B experimentation infrastructure —
+      with hands-on experience migrating ML pipelines onto scalable, cost-
+      efficient platforms. Proficient in Python, R, SQL, Spark, Jenkins,
+      Docker, and AWS. Brings a rigorous evaluation mindset grounded in
+      live-service reality: diagnosing when a model erodes game health as
+      readily as recognizing when it creates player value.
 
   economist:
     id: ECON
@@ -104,6 +193,14 @@ summaries:
       published. Connect work to economic concepts: incentives, market design,
       valuation, welfare, externalities. Academic or research framing is
       appropriate here.
+    games_revoicing_persona: >
+      Emphasize causal reasoning and experimental design in the context of
+      games and interactive digital markets. Use economic framing — incentive
+      design, mechanism design, player welfare, market structure — but connect
+      it to live-games realities: F2P economies, engagement mechanics,
+      in-game market design, LTV valuation, and experimental design in live
+      services. Academic framing is appropriate; game-industry vernacular
+      signals domain depth.
     text: >
       Applied Economist and Senior Data Scientist with 10 years of experience
       applying causal inference, experimental design, and behavioural
@@ -113,4 +210,14 @@ summaries:
       design. Industry experience spans A/B experimentation, propensity score
       methods, valuation modelling, and incentive design — translating
       economic reasoning into product and investment decisions across gaming
+      and ad tech.
+    games_text: >
+      Applied Economist and Senior Data Scientist with 10 years of experience
+      applying causal inference, experimental design, and behavioural economics
+      to live games and F2P digital markets. Graduate training in auction
+      theory, game theory, and experimental economics (University of Victoria,
+      M.A.), with published research in mechanism design. Industry experience
+      spans A/B experimentation in live services, propensity score methods,
+      in-game market valuation, and incentive design — translating economic
+      reasoning into player experience and investment decisions across games
       and ad tech.
